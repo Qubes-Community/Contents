@@ -1,4 +1,4 @@
-# Community-Discussions #
+# Qubes-Community #
 Here you can find the Community guide's, doc's, & wiki's. Furthermore you can also raise feedback discussions in the issue tracker.
 
 ### Caution before use ###
