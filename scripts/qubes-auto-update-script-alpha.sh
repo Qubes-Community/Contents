@@ -77,7 +77,7 @@ wait
 #qvm-run fedora-26 'xterm -e sudo dnf update --refresh'
 #qvm-run fedora-26 'xterm -e sudo dnf update --enablerepo=qubes-vm-*-current-testing --refresh'
 wait
-#qvm-shutdown fedora-26 #Needed to avoid maximizing CPU/RAM usage, which is not only undesireable, but will also halt the script.
+#qvm-shutdown fedora-26 #Needed if qvm-start is used.
 wait
 echo -ne "$(tput setaf 4)(#$(tput setaf 6)#   $(tput setaf 4)) $(tput setaf 6)Fedora-26 update has finished.$(tput setaf 9)\n"
 wait
@@ -85,13 +85,13 @@ wait
 
 ##Default Qubes debian template.
 ##To enable Qubes debian current-testing equivalent, edit debian $ /etc/apt/sources.list.d/qubes-*.list
-#qvm-start debian-9 #Needed to avoid premature qvm-run shutdown.
+#qvm-start debian-9 #Needed to avoid premature qvm-run shutdown, important here.
 wait
 #qvm-run debian-9 'xterm -e sudo apt-get update'
 wait
 #qvm-run debian-9 'xterm -e sudo apt-get dist-upgrade'
 wait
-#qvm-shutdown debian-9 #Needed to avoid maximizing CPU/RAM usage, which is not only undesireable, but will also halt the script.
+#qvm-shutdown debian-9 #Needed if qvm-start is used.
 wait
 echo -ne "$(tput setaf 4)(##$(tput setaf 6)#  $(tput setaf 4)) $(tput setaf 6)Debian-9 update has finished.$(tput setaf 9)\n"
 wait
@@ -100,13 +100,13 @@ wait
 
 ##Default Qubes Whonix-WS.
 ##To enable Qubes debian current-testing equivalent, edit debian $ /etc/apt/sources.list.d/qubes-*.list
-#qvm-start whonix-ws #Needed to avoid premature qvm-run shutdown.
+#qvm-start whonix-ws #Needed to avoid premature qvm-run shutdown, important here.
 wait
 #qvm-run whonix-ws 'xterm -e sudo apt-get update'
 wait
 #qvm-run whonix-ws 'xterm -e sudo apt-get dist-upgrade'
 wait
-#qvm-shutdown whonix-ws #Needed to avoid maximizing CPU/RAM usage, which is not only undesireable, but will also halt the script.
+#qvm-shutdown whonix-ws #Needed if qvm-start is used.
 wait
 echo -ne "$(tput setaf 4)(###$(tput setaf 6)# $(tput setaf 4)) $(tput setaf 6)Whonix-WS update has finished.$(tput setaf 9)\n"
 wait
@@ -114,13 +114,13 @@ wait
 
 ##Default Qubes Whonix-GW. Keep both commands enabled.
 ##To enable Qubes debian current-testing equivalent, edit debian $ /etc/apt/sources.list.d/qubes-*.list
-#qvm-start whonix-gw #Needed to avoid premature qvm-run shutdown.
+#qvm-start whonix-gw #Needed to avoid premature qvm-run shutdown, important here.
 wait
 #qvm-run whonix-gw 'xterm -e sudo apt-get update'
 wait
 #qvm-run whonix-gw 'xterm -e sudo apt-get dist-upgrade'
 wait
-#qvm-shutdown whonix-gw #Needed to avoid maximizing CPU/RAM usage, which is not only undesireable, but will also halt the script.
+#qvm-shutdown whonix-gw #Needed if qvm-start is used.
 wait
 echo -ne "$(tput setaf 4)(####$(tput setaf 6)#$(tput setaf 4)) $(tput setaf 6)Whonix-GW update has finished.$(tput setaf 9)\n"
 wait
