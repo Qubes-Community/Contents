@@ -1,0 +1,37 @@
+#!/bin/bash
+# qubes-create-minimal-sys-vms
+# Script to setup sys-net / sys-firewall / sys-usb based on a fedora-26.minimal template
+# See also: https://www.qubes-os.org/doc/templates/fedora-minimal/
+#
+# Disclaimer: 
+# all scripts in the Qubes-Community docs have to be treated as alpha or beta status
+# Do not use this scripts if you don't understand what the script is doing in each step
+# If you have questions and comment, feel free to comment (and improve this script)
+#
+# Comments:
+# After this script has been run, you should have a new Template t-sys which can be used as template for your sys-VMs
+# To change the templates: shutdown or kill the sys-vms and then use qvm-prefs to set the new template
+# qvm-kill sys-usb && qvm-prefs --set sys-usb template t-sys
+# qvm-kill sys-firewall && qvm-prefs --set sys-firewall template t-sys
+# qvm-kill sys-net && qvm-prefs --set sys-net template t-sys
+
+# Install default minimal template in dom0
+sudo qubes-dom0-update qubes-template-fedora-26-minimal
+
+# Clone template to keep the original template
+qvm-clone fedora-26-minimal t-sys
+
+# Update all packages in the minimal template
+qvm-run --auto --user root t-sys "xterm -hold -e 'dnf upgrade'"
+
+# Install some basic applications, which are helpfull for troubleshooting
+qvm-run --auto --user root t-sys "xterm -hold -e 'dnf -y install gnome-terminal terminus-fonts less vim-minimal nano dejavu-sans-fontsl sudo pciutils psmisc gnome-keyring usbutils'"
+
+# Install special Qubes-packages for the sys-vms
+qvm-run --auto --user root t-sys "xterm -hold -e 'dnf -y install qubes-core-agent-qrexec qubes-core-agent-systemd qubes-core-agent-passwordless-root polkit qubes-core-agent-nautilus qubes-core-agent-networking qubes-core-agent-network-manager network-manager-applet  notification-daemon  qubes-core-agent-dom0-updates qubes-usb-proxy  pulseaudio-qubes NetworkManager-wwan NetworkManager NetworkManager-wifi'"
+
+# Install USB proxy package from the testing repositories
+qvm-run --auto --user root t-sys "xterm -hold -e 'dnf -y install --enablerepo=qubes-vm-*-current-testing qubes-input-proxy-sender'"
+
+# Install Linux Firmware
+dnf -y install linux-firmware 
