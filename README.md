@@ -10,7 +10,7 @@ The centralized and all published decentralized github wiki's can be found here.
 List currently in construction.
 
 ### Community project's
-These are extensive works which incorporate multiple of inter-connected scripts and coding, long list of identical works, problems which also may require their own issue tracking lists, as well as a larger collaboration of community developers. Community project's hold a repository on their own.
+These are extensive works which incorporate multiple of inter-connected scripts and coding, problems which also may require their own issue tracking lists, as well as a larger collaboration of community developers. Community project's hold a repository on their own.
 List currently in construction.
 
 ### Community guide's
