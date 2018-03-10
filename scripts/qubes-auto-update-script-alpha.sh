@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #Title description
 ##Unofficial Qubes Maintenance Updater (uQMU).
