@@ -9,6 +9,10 @@ List currently in construction.
 The centralized and all published decentralized github wiki's can be found here. 
 List currently in construction.
 
+### Community project's
+These are extensive works which incorporate multiple of inter-connected scripts and coding, which also may require their own issue tracking, as well as a larger collaboration of community developers.
+List currently in construction.
+
 ### Community guide's
 Guides are not doc's which has the potential to reach the official Qubes doc's page. Instead guides are meant for more pure community oirentated how-to's. For example how to style your system to make it look better, or suggestions for how you can help contribute to the Qubes Community. 
 List currently in construction.
