@@ -18,16 +18,16 @@ Click on the links, read the supporting information if desired, reach a conclusi
 
 Are you concerned about potential manufacturer [hardware backdoors](https://libreboot.org/faq.html#intel)?
 
-[Yes](/doc/hardware-tree/#concerned)  
-[No](/doc/hardware-tree/#unconcerned)
+[Yes](/guides/hardware-tree/#concerned)  
+[No](/guides/hardware-tree/#unconcerned)
 
 ### Concerned ###
 
 Are you concerned about [blobs](https://www.coreboot.org/Binary_situation) being used to initialize hardware?
 
-[Yes](/doc/hardware-tree/#init)  
-[No](/doc/hardware-tree/#mecleaner)  
-[No, but I want AMD](/doc/hardware-tree/#amd)
+[Yes](/guides/hardware-tree/#init)  
+[No](/guides/hardware-tree/#mecleaner)  
+[No, but I want AMD](/guides/hardware-tree/#amd)
 
 ### Init ###
 
@@ -35,8 +35,8 @@ Nearly all R4.0 capable systems require at least a CPU microcode blob, and often
 However, there are still some options when it comes to running the [proprietary, unaudited code](https://www.coreboot.org/Intel_Management_Engine#Freedom_and_security_issues) for hardware initialization.
 Do you want:
 
-[AMD](/doc/hardware-tree/#amd)  
-[Intel](/doc/hardware-tree/#intel)
+[AMD](/guides/hardware-tree/#amd)  
+[Intel](/guides/hardware-tree/#intel)
 
 ### AMD ###
 
@@ -46,8 +46,8 @@ In theory there is an option to partially disable it, but no motherboard/BIOS ma
 
 Form factor?
 
-[Laptop](/doc/hardware-tree/#amd-laptop)  
-[Desktop](/doc/hardware-tree/#amd-desktop)
+[Laptop](/guides/hardware-tree/#amd-laptop)  
+[Desktop](/guides/hardware-tree/#amd-desktop)
 
 ### AMD Laptop ###
 
@@ -65,15 +65,15 @@ Unfortunately, all R4.0 capable Intel hardware requires use of at least the [BUP
 [Weaknesses](https://mobile.twitter.com/rootkovska/status/938458875522666497) have been found in this proprietary, non-owner-controlled code.
 There are some ways to restrict Intel ME after the initial BUP.
 
-[Commercial](/doc/hardware-tree/#intel-commercial)  
-[DIY](/doc/hardware-tree/#intel-diy)
+[Commercial](/guides/hardware-tree/#intel-commercial)  
+[DIY](/guides/hardware-tree/#intel-diy)
 
 ### Intel Commercial ###
 
 These vendors have systems available that partially disable Intel ME after the initial hardware initialization: System76, Purism, Dell.
 Implementations vary, so research the vendors.
 Prefer ones that use Coreboot instead of closed-source, [proprietary](https://www.kb.cert.org/vuls/id/758382) [UEFI firmware](https://www.securityweek.com/researchers-find-several-uefi-vulnerabilities).
-Search the [HCL](/doc/hcl) for a compatible system.
+Search the [HCL](https://www.qubes-os.org/hcl/) for a compatible system.
 [Search the mailing list](https://www.mail-archive.com/qubes-users@googlegroups.com/) for additional reports.
 
 ### Intel DIY ###
@@ -81,8 +81,8 @@ Search the [HCL](/doc/hcl) for a compatible system.
 Closed-source, proprietary UEFI firmware has its own [set](https://www.kb.cert.org/vuls/id/758382) of [vulnerabilities](https://www.securityweek.com/researchers-find-several-uefi-vulnerabilities).
 Do these concern you?
 
-[Yes](/doc/hardware-tree/#coreboot)  
-[No](/doc/hardware-tree/#mecleaner)
+[Yes](/guides/hardware-tree/#coreboot)  
+[No](/guides/hardware-tree/#mecleaner)
 
 ### Coreboot ###
 
@@ -93,13 +93,13 @@ Flash your system with Coreboot, including [ME_Cleaner](https://github.com/corna
 
 ### MECleaner ###
 
-Search the [HCL](/doc/hcl) for a compatible system.
+Search the [HCL](https://www.qubes-os.org/hcl/) for a compatible system.
 [Search the mailing list](https://www.mail-archive.com/qubes-users@googlegroups.com/) for additional reports.
 Follow the instructions [here](https://github.com/corna/me_cleaner) to partially disable Intel ME.
 
 ### Unconcerned ###
 
-Search the [HCL](/doc/hcl) for an R4.0 compatible system.
+Search the [HCL](https://www.qubes-os.org/hcl/) for an R4.0 compatible system.
 [Search the mailing list](https://www.mail-archive.com/qubes-users@googlegroups.com/) for additional reports.
 If selecting a desktop, you may also want to include and use a third party NIC in an expansion slot instead of the onboard Ethernet.
 This will help avoid overt network communications from onboard management.
