@@ -2,7 +2,7 @@
 Here you can find the Community guide's, doc's, & wiki's. Furthermore you can also raise feedback discussions in the issue tracker.
 
 ### Caution before use ###
-We, as in any Qubes-Community users, collaborators, members and owners, expect that anyone using anything produced, uploaded, adviced or otherwise, that comes out of the Qubes Community, to be meet with a healthy amount of skepticism. Please be careful about running any scripts, following wiki's, doc's or guide's, which you don't understand what do. We take no responsibility for any damage or losses. We do however wish to keep the quality, reliability, as well as security and privacy, at the best quality possible, but we are not accountable for not meeting our goals.   
+We, as in any Qubes-Community users, collaborators, members and owners, expect that anyone using anything produced, uploaded, adviced or otherwise, that comes out of the Qubes Community, to be meet with a healthy amount of skepticism. Please be careful about running any scripts, following wiki's, doc's or guide's, which you don't understand what do. We take no responsibility for any damage or losses. We do however wish to keep the reliability, as well as security and privacy, at the best quality possible, but we are not accountable for not meeting our goals.   
 
 <br />
 
