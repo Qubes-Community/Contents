@@ -43,11 +43,7 @@ These are extensive works which incorporate multiple of inter-connected scripts 
 
 ### Community guide's ###
 Guides are not doc's which has the potential to reach the official Qubes doc's page. Instead guides are meant for more pure community oirentated how-to's. For example how to style your system to make it look better, or suggestions for how you can help contribute to the Qubes Community. 
-<ul>
-<li>-</li>
-<li>-</li>
-<li>-</li>
-<li>-</li>
-</ul>
+
+ - [Hardware Selection](/guides/hardware-tree.md)
 
 <br />
