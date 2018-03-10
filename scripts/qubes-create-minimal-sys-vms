@@ -34,4 +34,4 @@ qvm-run --auto --user root t-sys "xterm -hold -e 'dnf -y install qubes-core-agen
 qvm-run --auto --user root t-sys "xterm -hold -e 'dnf -y install --enablerepo=qubes-vm-*-current-testing qubes-input-proxy-sender'"
 
 # Install Linux Firmware
-dnf -y install linux-firmware 
+qvm-run --auto --user root t-sys "xterm -hold -e 'dnf -y install linux-firmware'"
