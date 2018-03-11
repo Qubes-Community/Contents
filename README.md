@@ -50,7 +50,7 @@ These are extensive works which incorporate multiple of inter-connected scripts 
 - [Qubes-NAS](https://github.com/Qubes-Community/Qubes-NAS) - Securing your NAS systems. Project is fresh and require hands to speed it up.
 - [QubesTV](https://github.com/Qubes-Community/QubesTV) - Securing your SmartTV. Project development has started, extra hands are welcome.
 
-More projects to come as volunteers start them up. A project must go beyond the complexity of a script/guide, and involve complexity of inter-connected scripts, issue tracking, long-term development and updates, or other reasons that justifies it to become project.
+More projects to come as volunteers start them up. A project must go beyond the complexity of a script/guide, and involve complexity of inter-connected scripts, issue tracking, long-term development and updates, or other reasons that justifies it to become a project.
 
 <br />
 
