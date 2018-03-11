@@ -30,6 +30,11 @@ The centralized and all published decentralized github wiki's can be found here.
 
 <br />
 
+### Helpful guides from other sites/platforms ###
+- [Qubes 4 - Installing Win7](https://github.com/QubesOS/qubes-issues/issues/3585)
+
+<br />
+
 ### Commuinity Script's ###
 Here you can find the community scripts. Their states will be listed, put into three categories, these are Alpha, Beta, & Stable. Alpha state means it's untested, not finished, or requires reviews. All scripts will always start out as Alpha state. Stable means it's been tested, reviewed, and is deemed safe to use, however, the above disclaimer at the top of this page still applies. Beta is somewhere in-between, it's getting there, but is not deemed quite stable yet either.  
 
