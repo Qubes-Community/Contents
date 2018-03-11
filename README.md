@@ -32,7 +32,9 @@ Here you can find the community scripts. Their states will be listed, put into t
 - [Qubes - A collection of small, but handy scripts]() - Coming soon.
 - [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms) - Alpha state
 - [Qubes - Easy dom0 to AppVM screenshotting]() - Coming soon.
+- [Qubes - Easy volume control]() - Coming soon.
 - [Qubes 4 - Full system update](/scripts/qubes-auto-update-script-alpha.sh) - Alpha state
+
 
 
 <br />
@@ -51,5 +53,6 @@ More projects to come as volunteers start them up. A project must go beyond the 
 Guides are not doc's which has the potential to reach the official Qubes doc's page. Instead guides are meant for more pure community oirentated how-to's. For example how to style your system to make it look better, or suggestions for how you can help contribute to the Qubes Community. 
 
  - [Hardware Selection](/guides/hardware-tree.md)
+ - [Qubes Styling - XFCE4 w/ Launchers]() - Coming soon.
 
 <br />
