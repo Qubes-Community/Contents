@@ -31,7 +31,7 @@ Here you can find the community scripts. Their states will be listed, put into t
 
 - [Qubes - A collection of small, but handy scripts]() - Coming soon.
 - [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
-- [Qubes - Easy dom0 to AppVM screenshotting](/scripts/)
+- [Qubes - Easy dom0 to AppVM screenshotting](/scripts/qubes-screenshot-scripts)
 - [Qubes - Easy volume control]() - Coming soon.
 - [Qubes 4 - Full system update](/scripts/qubes-auto-update-script-alpha.sh)
 
