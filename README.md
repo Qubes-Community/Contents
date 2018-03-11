@@ -46,9 +46,10 @@ Here you can find the community scripts. Their states will be listed, put into t
 
 ### Community project's ###
 These are extensive works which incorporate multiple of inter-connected scripts and coding, problems which also may require their own issue tracking lists, as well as a larger collaboration of community developers. Community project's hold a repository on their own.
-- [Qubes A.I. ](/Qubes-Community/Qubes-A.I.) - Offline & Open Source, initially Voice Control only. Project is fresh and require hands to speed it up.
-- [Qubes-NAS](/Qubes-Community/Qubes-NAS) - Securing your NAS systems. Project is fresh and require hands to speed it up.
-- [QubesTV](/Qubes-Community/QubesTV) - Securing your SmartTV. Project development has started, extra hands are welcome.
+- [Qubes A.I. ](https://github.com/Qubes-Community/Qubes-A.I.) - Offline & Open Source, initially Voice Control only. Project is fresh and require hands to speed it up.
+- [Qubes-NAS](https://github.com/Qubes-Community/Qubes-NAS) - Securing your NAS systems. Project is fresh and require hands to speed it up.
+- [QubesTV](https://github.com/Qubes-Community/QubesTV) - Securing your SmartTV. Project development has started, extra hands are welcome.
+- More projects to come as volunteers start them up. A project must go beyond the complexity of a script/guide.
 <br />
 
 ### Community guide's ###
