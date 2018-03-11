@@ -1,5 +1,5 @@
 ### Qubes sound control scripts
-Here you may find various of different kinds of Qubes sound control. Some work in other *nix operation systems, but others are Qubes specific, for example volume control of specific AppVM's. (More will be uploded later).
+Here you may find various of different kinds of Qubes sound control. Some work in other *nix operation systems as well, but others are Qubes specific, for example volume control of specific AppVM's. (More will be uploded later).
 
 
 ### Caution before use ###
