@@ -30,7 +30,7 @@ The centralized and all published decentralized github wiki's can be found here.
 
 <br />
 
-### Community collection of helpful guides from other sites/platforms ###
+### Community external guide collection ###
 - [Qubes 4 - Installing Win7](https://github.com/QubesOS/qubes-issues/issues/3585) - GitHub issue
 
 <br />
