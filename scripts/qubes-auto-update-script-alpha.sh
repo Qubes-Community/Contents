@@ -84,12 +84,17 @@ wait
 
 
 ##Default Qubes debian template.
-##To enable Qubes debian current-testing equivalent, edit debian $ /etc/apt/sources.list.d/qubes-*.list
 #qvm-start debian-9 #Needed to avoid premature qvm-run shutdown, important here.
+wait
+#qvm-run whonix-gw 'xterm -e sudo apt-get check' #Can be enabled to check dependencies and cache-checks.
 wait
 #qvm-run debian-9 'xterm -e sudo apt-get update'
 wait
 #qvm-run debian-9 'xterm -e sudo apt-get dist-upgrade'
+wait
+#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing'
+wait
+#qvm-run whonix-gw 'xterm -e sudo apt-get dist-upgrade -t *-testing'
 wait
 #qvm-shutdown debian-9 #Needed if qvm-start is used.
 wait
@@ -99,12 +104,17 @@ wait
 
 
 ##Default Qubes Whonix-WS.
-##To enable Qubes debian current-testing equivalent, edit debian $ /etc/apt/sources.list.d/qubes-*.list
 #qvm-start whonix-ws #Needed to avoid premature qvm-run shutdown, important here.
+wait
+#qvm-run whonix-gw 'xterm -e sudo apt-get check' #Can be enabled to check dependencies and cache-checks.
 wait
 #qvm-run whonix-ws 'xterm -e sudo apt-get update'
 wait
 #qvm-run whonix-ws 'xterm -e sudo apt-get dist-upgrade'
+wait
+#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing'
+wait
+#qvm-run whonix-gw 'xterm -e sudo apt-get dist-upgrade -t *-testing'
 wait
 #qvm-shutdown whonix-ws #Needed if qvm-start is used.
 wait
@@ -113,12 +123,17 @@ wait
 
 
 ##Default Qubes Whonix-GW. Keep both commands enabled.
-##To enable Qubes debian current-testing equivalent, edit debian $ /etc/apt/sources.list.d/qubes-*.list
 #qvm-start whonix-gw #Needed to avoid premature qvm-run shutdown, important here.
+wait
+#qvm-run whonix-gw 'xterm -e sudo apt-get check' #Can be enabled to check dependencies and cache-checks.
 wait
 #qvm-run whonix-gw 'xterm -e sudo apt-get update'
 wait
 #qvm-run whonix-gw 'xterm -e sudo apt-get dist-upgrade'
+wait
+#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing'
+wait
+#qvm-run whonix-gw 'xterm -e sudo apt-get dist-upgrade -t *-testing'
 wait
 #qvm-shutdown whonix-gw #Needed if qvm-start is used.
 wait
