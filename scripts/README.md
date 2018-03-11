@@ -1,8 +1,4 @@
 
-### Screenshot scripts ###
-Here you have different choices, inspect and find one that matches your needs.
-
-
 
 ### Caution before use ###
 
