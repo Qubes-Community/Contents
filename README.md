@@ -10,23 +10,14 @@ This site is run by volunteers. The Qubes OS Project is not affiliated with this
 
 ### Community doc's ###
 All doc's here have the potential to one day become an official Qubes doc. Be mindful that they are still not perfect, and you must be careful when using them.
-<ul>
-<li>-</li>
-<li>-</li>
-<li>-</li>
-<li>-</li>
-</ul>
+- Once Community doc's has been processed, they will appear on this list.
 
 <br />
 
 ### Commuinity wiki's ###
 The centralized and all published decentralized github wiki's can be found here. 
-<ul>
-<li>-</li>
-<li>-</li>
-<li>-</li>
-<li>-</li>
-</ul>
+- [Qubes Community Wiki]() - Coming soon.
+- Feel free to request for your Qubes wiki on helping Qubes related issues, to be linked here.
 
 <br />
 
