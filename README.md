@@ -39,7 +39,7 @@ The centralized and all published decentralized github wiki's can be found here.
 Here you can find the community scripts. Their states will be listed, put into three categories, these are Alpha, Beta, & Stable. Alpha state means it's untested, not finished, or requires reviews. All scripts will always start out as Alpha state. Stable means it's been tested, reviewed, and is deemed safe to use, however, the above disclaimer at the top of this page still applies. Beta is somewhere in-between, it's getting there, but is not deemed quite stable yet either.  
 
 - [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms) - Alpha state
-- [Qubes - Easy dom0 to AppVM screenshot management]() - Coming soon.
+- [Qubes - Easy dom0 to AppVM screenshotting]() - Coming soon.
 - [Qubes 4 - Full system update](/scripts/qubes-auto-update-script-alpha.sh) - Alpha state
 - [A collection of small, but handy scripts]() - Coming soon.
 
