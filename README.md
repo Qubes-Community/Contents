@@ -30,6 +30,15 @@ The centralized and all published decentralized github wiki's can be found here.
 
 <br />
 
+### Commuinity Script's ###
+Here you can find the community scripts. Their states will be listed, put into three categories. Alpha, Beta, Stable. Alpha state means it's untested, not finished, or requires heavy reviews. Stable means it's been tested, reviewed, and is deemed safe to use, however, the above disclaimer at the top of this page still applies. Beta is somewhere in-between, it's getting there, but is not deemed quite stable yet either.  
+
+- [Qubes 4 dom0/domU full system update script](/scripts/qubes-auto-update-script-alpha.sh) Alpha state (Polish & reviews)
+- [Qubes script to create minimal sys-vm's](/scripts/qubes-create-minimal-sys-vms) - Alpha state (Polish & reviews)
+
+
+<br />
+
 ### Community project's ###
 These are extensive works which incorporate multiple of inter-connected scripts and coding, problems which also may require their own issue tracking lists, as well as a larger collaboration of community developers. Community project's hold a repository on their own.
 <ul>
