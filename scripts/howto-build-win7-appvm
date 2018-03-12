@@ -2,7 +2,7 @@
 # Warning: this is not a script which can be copy & pasted.
 # It is meant as a guide which steps must be completed to get a win7 HVM working
 # It will also cover how to install Qubes Windows Tools and fix networking
-# Initial author: [799]
+# Initial author: [799] - https://github.com/one7two99
 # Date: 12.Mar 2018
 
 # See also: https://www.qubes-os.org/doc/hvm/
