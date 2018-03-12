@@ -1,0 +1,106 @@
+# This Howto describes all steps to create a windows 7 HVM starting from a windows 7 ISO
+# Warning: this is not a script which can be copy & pasted.
+# It is meant as a guide which steps must be completed to get a win7 HVM working
+# It will also cover how to install Qubes Windows Tools and fix networking
+# Initial author: [799]
+# Date: 12.Mar 2018
+
+# See also: https://www.qubes-os.org/doc/hvm/
+# See also: https://www.qubes-os.org/doc/windows-appvms/
+ 
+# copy Windows-Installation ISO to an AppVM
+ 
+# Create new AppVM
+qvm-create win7 --class StandaloneVM --property virt_mode=hvm --property kernel="" --property memory=4096 --property maxmem=4096 --property debug=True --label blue
+qvm-features win7 video-model cirrus
+ 
+# Enlarge available diskspace in the new AppVM via Qubes Settings:
+# Private storage max. size: 40960MiB
+# System storage max. size: 40960MiB
+ 
+# Start AppVM with Installation-ISO
+qvm-start win7 --cdrom=<APPVM>:/home/user/win7.iso
+ 
+# Run through the Installer
+ 
+# Check Qubes-Settings of the Windows VM and note down IP / Netmask / Gateway
+# optionally: Setup manual IP-Adress within the windows VM
+ 
+# Disable Hybernation (cmd as Administrator)
+powercfg -h off
+ 
+# Disable Login as user
+netplwiz
+# [ ] Users must enter a username and password to use this computer
+ 
+# Apply all windows Updates which will take several reboots
+# Hint: make sure to search for updates again, even if windows claims to be on the latest version
+# It will take several reboots to get to the actual patch level
+  
+# Install other applications as needed Chocolatey
+choco install -y adobereader jre8 firefoxesr googlechrome notepadplusplus emacs vlc putty winscp rdm libreoffice calibre flashplayerplugin 7zip git paint.net gimp keepass thunderbird
+ 
+# Backup VM in dom0, prior to installing Qubes Windows Tools
+# In this example the backup will be stored in my Backup-VM (my-backup) to the folder /home/user/backup
+# You can also use an external storage device here
+# Hint: make sure to have enough space available
+qvm-backup --verbose win7 --encrypt --compress --dest-vm my-backup /home/user/backup
+ 
+# Install Qubes Windows Tools
+# Download qubes-windows-tools from Qubes 3.2 repository
+wget https://ftp.qubes-os.org/repo/yum/r3.2/current-testing/dom0/fc23/rpm/qubes-windows-tools-3.2.2-3.x86_64.rpm
+# move the rpm file to dom0, run in dom0
+qvm-run --pass-io my-untrusted 'cat /home/user/Download/qubes-windows-tools-3.2.2-3.x86_64.rpm' > qubes-windows-tools-3.2.2-3.x86_64.rpm
+# Verify rpm package
+rpm -K qubes-windows-tools-3.2.2-3.x86_64.rpm
+# Install rpm-package
+rpm -ivh qubes-windows-tools-3.2.2-3.x86_64.rpm
+# Qubes Windows Tools ISO will be located at /usr/lib/qubes/qubes-windows-tools.iso
+# Start windows VM with attached Qubes Windows Tools
+qvm-start win8 --install-windows-tools
+# Complete Qubes Tools installation, do not restart when prompted to do so but start after the installation has been completed.
+# Run the first installation with the default setup options.
+ 
+# Shutdown and restart the windows VM to finish installation of Qubes Windows Tools
+ 
+# Disable debug mode to get seamless mode working.
+qvm-prefs --set win7 debug False
+ 
+# Test seamless mode 
+qvm-run --auto win7 explorer.exe
+ 
+# Windows will show a yellow warning in the network icon located in the windows taskbar, even when a connection is available.
+# Open Properties of LAN-Card
+# Where you would normale configure IP-setting, choose Configure, which will open up Hardware Setttings window of your LAN-adapter
+# Choose 2nd Tab ("Advanced") and disable "IP4 Checksum Offload"
+# Go back to IP setting, disable IPv6 and configure a static IP for IPv4 using the IP which is shown for the HVM in Qubes Manager
+# Reboot, change should be persistent and the warning sign should be gone.
+ 
+# Fix Networking after intalling Qubes Windows Tools
+# Link 1: https://github.com/QubesOS/qubes-issues/issues/3585
+# Check DNS Settings in of your Linux AppVMs
+cat /etc/resolv.conf
+# nameserver 10.139.1.1
+# nameserver 10.139.1.2
+# Check the IP-settings of your windows AppVM via QubesSetting or in dom0
+# write down IP-adress, subnetmask (255.255.255.255 and gateway=
+qvm-ls -n
+# Disable the "Qubes Network Setup" service via CMD as Administrator in the win-AppVM:
+# make sure to add a space after the equal sign
+sc config "QubesNetworkSetup" start= disabled
+# Go to your LAN-Card and edit its network properties
+# Right click on Network Icon in the taskbar / Open Network and Sharing Center / Change Adapter Settings
+# Right click on LAN-adapter > Properties:
+# Disable IPv6
+# Configure IPv4 via Properties with the settings you have noted before, Example:
+# Use the following IP address:
+#   IP address: 10.137.0.17
+#   Subnet mask: 255.255.255.255
+#   Default Gateway: 10.137.0.6
+# Use the following DNS server addresses:
+#   Preferred DNS server: 10.139.1.1
+#   Alternate DNS server: 10.139.1.2
+# Ignore Warning ("The default gateway is not on the same network segment (subnet) that is defined by the IP
+# address and subnet mask. Do you want to save this configuration")
+# Click: Yes
+# Recommendation: Reboot Windows AppVM
