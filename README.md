@@ -30,8 +30,9 @@ The centralized and all published decentralized github wiki's can be found here.
 Here you can find the community scripts. Their states will be listed, put into three categories, these are Alpha, Beta, & Stable. Alpha state means it's untested, not finished, or requires reviews. All scripts will always start out as Alpha state. Stable means it's been tested, reviewed, and is deemed safe to use, however, the above disclaimer at the top of this page still applies. Beta is somewhere in-between, it's getting there, but is not deemed quite stable yet either.  
 
 - [Qubes - A collection of small, but handy scripts]() 
-  - Coming soon.
+  - Here you find our collection of smaller scripts, which are too small or too unqiue to be listed on this main page. There might be something useful in here though, so feel free to take a look once in a while as our collection grows and expands.
 - [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
+  - This script is helpful to help set up a minimal template and turn it into a small appVM for sys-net and sys-firewall. 
 - [Qubes - Easy dom0 to AppVM screenshotting](/scripts/qubes-screenshot-scripts)
   - A collection of community screenshot scripts to handle the dom0 screenshot issue.
 - [Qubes - Easy sound volume control](/scripts/qubes-sound-control-scripts) 
