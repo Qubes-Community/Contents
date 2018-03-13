@@ -33,6 +33,7 @@ Here you can find the community scripts. Their states will be listed, put into t
 - [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
 - [Qubes - Easy dom0 to AppVM screenshotting](/scripts/qubes-screenshot-scripts)
 - [Qubes - Easy volume control]() - Coming soon.
+- [Qubes - Win7 install - Guide/Script](/scripts/howto-build-win7-appvm)
 - [Qubes 4 - Full system update](/scripts/qubes-auto-update-script-alpha.sh)
 
 
