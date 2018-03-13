@@ -68,3 +68,13 @@ Guides are not doc's which has the potential to reach the official Qubes doc's p
  - [Qubes Styling - XFCE4 w/ Launchers]() - Coming soon.
 
 <br />
+
+
+### Qubes server's - Guides & Scripts ###
+Here you can find guides as well as scripts to a Qubes server of various types and sorts.
+- [Qubes-A.I. ](https://github.com/Qubes-Community/Qubes-A.I.) - Is a Qubes project, however may in  the future serve as a private hosted A.I. system, for example in your home, acting as a server through encrypted channels to your various mobile devides. This is a very long-term project, which needs developers to succeed.
+- [Qubes-NAS](https://github.com/Qubes-Community/Qubes-NAS) - is a Qubes project, however is referenced here as well for the holistic overview.
+- Qubes-Wire() - Using the open source client Wire, with the open source server, set as a Qubes server, the potential here is possibly big. Further experimentaton needs to be done, however it's looking good for now.
+
+
+
