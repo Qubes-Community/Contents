@@ -18,20 +18,20 @@ Credits and special thanks for icons goes to deleket @ deviantart.
 
 ### Community doc's ###
 All doc's here have the potential to one day become an official Qubes doc. Be mindful that they are still not perfect, and you must be careful when using them.
-- Once Community doc's has been processed, they will appear on this list.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> <img src="/github-resources/review-icons/Gear-01.png" width="16"> Once Community doc's has been processed, they will appear on this list.
 
 <br />
 
 
 ### Commuinity wiki's ###
 The centralized and all published decentralized github wiki's can be found here. 
-- [Qubes Community Wiki]() - Coming soon.
-- Feel free to request for your Qubes wiki on helping Qubes related issues, to be linked here.
+- <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Qubes Community Wiki]() - Coming soon.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> Feel free to request for your Qubes wiki on helping Qubes related issues, to be linked here.
 
 <br />
 
 ### Community external guide collection ###
-- [Qubes 4 - Installing Win7](https://github.com/QubesOS/qubes-issues/issues/3585) - GitHub issue
+- <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Qubes 4 - Installing Win7](https://github.com/QubesOS/qubes-issues/issues/3585) - GitHub issue
 
 <br />
 
@@ -47,9 +47,9 @@ Read flow - Sorted after Qubes versions, and within Qubes versions after ABC. Wh
   - Here you find our collection of smaller scripts, which are too small or too unqiue to be listed on this main page. There might be something useful in here though, so feel free to take a look once in a while as our collection grows and expands.
 - <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
   - This script is helpful to help set up a minimal template and turn it into a small appVM for sys-net and sys-firewall. The script can be modified to include other similar use-cases as well.
-- [Qubes - Easy dom0 to AppVM screenshotting](/scripts/qubes-screenshot-scripts)
+- <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Qubes - Easy dom0 to AppVM screenshotting](/scripts/qubes-screenshot-scripts)
   - A collection of community screenshot scripts to handle the dom0 screenshot issue.
-- [Qubes - Easy sound volume control](/scripts/qubes-sound-control-scripts) 
+- <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Qubes - Easy sound volume control](/scripts/qubes-sound-control-scripts) 
   - Here you can find our growing collection of sound control scripts. 
   - They're typical ideal to keybind.
 - [Qubes - Move files to dom0](/scripts/qvm-copy-to-dom0)
@@ -67,7 +67,7 @@ Read flow - Sorted after Qubes versions, and within Qubes versions after ABC. Wh
 These are extensive works which incorporate multiple of inter-connected scripts and coding, problems which also may require their own issue tracking lists, as well as a larger collaboration of community developers. Community project's hold a repository on their own.
 - <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-A.I. ](https://github.com/Qubes-Community/Qubes-A.I.) - Offline & Open Source, initially Voice Control only. Project is fresh and require hands to speed it up.
 - <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-NAS](https://github.com/Qubes-Community/Qubes-NAS) - Securing your NAS systems. Project is fresh and require hands to speed it up.
-- <img src="/github-resources/review-icons/Gear-01.png" width="16"> [QubesTV](https://github.com/Qubes-Community/QubesTV) - Securing your SmartTV. Project development has started, extra hands are welcome.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> <img src="/github-resources/review-icons/Gear-01.png" width="16"> [QubesTV](https://github.com/Qubes-Community/QubesTV) - Securing your SmartTV. Project development has started, extra hands are welcome.
 
 More projects to come as volunteers start them up. A project must go beyond the complexity of a script/guide, and involve complexity of inter-connected scripts, issue tracking, long-term development and updates, or other reasons that justifies it to become a project.
 
@@ -77,7 +77,7 @@ More projects to come as volunteers start them up. A project must go beyond the 
 Guides are not doc's which has the potential to reach the official Qubes doc's page. Instead guides are meant for more pure community oirentated how-to's. For example how to style your system to make it look better, or suggestions for how you can help contribute to the Qubes Community. 
 
  - [Hardware Selection](/guides/hardware-tree.md)
- - [Qubes Styling - XFCE4 w/ Launchers]() - Coming soon.
+ - <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes Styling - XFCE4 w/ Launchers]()
 
 <br />
 
