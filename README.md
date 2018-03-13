@@ -14,7 +14,6 @@ All doc's here have the potential to one day become an official Qubes doc. Be mi
 
 <br />
 
-![](/scripts/temp-testing-icon.png = 16x16)
 
 ### Commuinity wiki's ###
 The centralized and all published decentralized github wiki's can be found here. 
