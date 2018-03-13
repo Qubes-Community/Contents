@@ -43,7 +43,7 @@ Here you can find the community scripts. Currently there is no review system in 
 
 Read flow - Sorted after Qubes versions, and within Qubes versions after ABC. When no Qubes version is listed, then the script is considered to work with any current official supported Qubes system.
 
-- [Qubes - A collection of small, but handy scripts]() 
+- <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Qubes - A collection of small, but handy scripts]() 
   - Here you find our collection of smaller scripts, which are too small or too unqiue to be listed on this main page. There might be something useful in here though, so feel free to take a look once in a while as our collection grows and expands.
 - <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
   - This script is helpful to help set up a minimal template and turn it into a small appVM for sys-net and sys-firewall. The script can be modified to include other similar use-cases as well.
