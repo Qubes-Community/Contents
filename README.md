@@ -52,11 +52,11 @@ Read flow - Sorted after Qubes versions, and within Qubes versions after ABC. Wh
 - <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Qubes - Easy sound volume control](/scripts/qubes-sound-control-scripts) 
   - Here you can find our growing collection of sound control scripts. 
   - They're typical ideal to keybind.
-- [Qubes - Move files to dom0](/scripts/qvm-copy-to-dom0)
+- <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes - Move files to dom0](/scripts/qvm-copy-to-dom0)
   - Moving files to dom0 is dangerous and discouraged, but if you must then here is a script to ease the process. If you know what you're doing, then this might be helpful.
 - <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes 4 - Universal Update Script](/scripts/qubes-auto-update-script-alpha.sh)
   - This script can update dom0 and all templates in a single click or keybind, starting from one end, automatically working itself through all your templaes and dom0 updates. The -y attribute option is not included, because it's seen as dangerous to auto-accept new updates without review, so it's expected for users to manually accept new updates. The script will continue automatically if no new updates are found. It can be modified to include extra templates, as well as changing between stable and current-testing. This script is also intended to ensure syncronization and avoid the fedora 48 hour cache issues, as well as to help keep repositories aligned across the whole Qubes system.
-- <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Qubes 4 - Win7 install - Guide/Script](/scripts/howto-build-win7-appvm)
+- <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes 4 - Win7 install - Guide/Script](/scripts/howto-build-win7-appvm)
   - This script is designed to be a part guide, part script. Essentially it guides you through the commands to create a new Win7 VM. Please use the script as it was intended as a mixed guide/script.
 
 
@@ -76,7 +76,7 @@ More projects to come as volunteers start them up. A project must go beyond the 
 ### Community guide's ###
 Guides are not doc's which has the potential to reach the official Qubes doc's page. Instead guides are meant for more pure community oirentated how-to's. For example how to style your system to make it look better, or suggestions for how you can help contribute to the Qubes Community. 
 
- - [Hardware Selection](/guides/hardware-tree.md)
+ - <img src="/github-resources/review-icons/User New-01.png" width="16"> [Hardware Selection](/guides/hardware-tree.md)
  - <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes Styling - XFCE4 w/ Launchers]()
 
 <br />
