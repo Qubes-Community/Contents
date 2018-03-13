@@ -1,5 +1,7 @@
 # Qubes-Community #
-Here you can find the Community guide's, doc's, & wiki's. Furthermore you can also raise feedback discussions in the issue tracker.
+Here you can find the Community guide's, doc's, & wiki's. Furthermore you can also raise feedback discussions in the issue tracker. Keep in mind everything on Qubes Community is unofficial.
+
+If you haven't already, then it may be worthwhile to check the official Qubes doc's first, found [here](https://www.qubes-os.org/doc/).
 
 
 ### Caution before use ###
@@ -13,6 +15,10 @@ Finished <img src="/github-resources/review-icons/Button Check-01.png" width="16
 Work in progress <img src="/github-resources/review-icons/Gear-01.png" width="16"> | Looking for developers <img src="/github-resources/review-icons/User New-01.png" width="16"> | Dangerous, don't use! <img src="/github-resources/review-icons/Button Close-01.png" width="16">
 
 _Credits and special thanks for icons goes to deleket @ deviantart._
+
+<br />
+
+
 
 <br />
 
