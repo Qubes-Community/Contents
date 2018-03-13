@@ -27,7 +27,7 @@ The centralized and all published decentralized github wiki's can be found here.
 <br />
 
 ### Commuinity Script's ###
-Here you can find the community scripts. Their states will be listed, put into three categories, these are Alpha, Beta, & Stable. Alpha state means it's untested, not finished, or requires reviews. All scripts will always start out as Alpha state. Stable means it's been tested, reviewed, and is deemed safe to use, however, the above disclaimer at the top of this page still applies. Beta is somewhere in-between, it's getting there, but is not deemed quite stable yet either.  
+Here you can find the community scripts. Currently there is no review system in place for scripts. Be extra cautious before you run any of them. In time we plan to review and/or improve the quality of all the listed scripts.
 
 - [Qubes - A collection of small, but handy scripts]() 
   - Here you find our collection of smaller scripts, which are too small or too unqiue to be listed on this main page. There might be something useful in here though, so feel free to take a look once in a while as our collection grows and expands.
@@ -40,10 +40,10 @@ Here you can find the community scripts. Their states will be listed, put into t
   - They're typical ideal to keybind.
 - [Qubes - Move files to dom0](/scripts/qvm-copy-to-dom0)
   - Moving files to dom0 is dangerous and discouraged, but if you must then here is a script to ease the process. If you know what you're doing, then this might be helpful.
-- [Qubes - Win7 install - Guide/Script](/scripts/howto-build-win7-appvm)
-  - This script is designed to be a part guide, part script. Essentially it guides you through the commands to create a new Win7 VM. Please use the script as it was intended as a mixed guide/script.
 - [Qubes 4 - Full system update](/scripts/qubes-auto-update-script-alpha.sh)
-  - This script can update dom0 and all templates in a single click or keybind, starting from one end, automatically working itself through all your templaes and dom0 updates. The -y attribute option is not included, because it's seen as dangerous to auto-accept new updates without review, so it's expected for users to manually accept new updates. The script will continue automatically if no new updates are found. It can be modified to include extra templates, as well as changing between stable and current-testing. This script is also intended to ensure syncronization and avoid the fedora 48 hour cache issues, as well as to help keep repositories aligned across the whole Qubes system. 
+  - This script can update dom0 and all templates in a single click or keybind, starting from one end, automatically working itself through all your templaes and dom0 updates. The -y attribute option is not included, because it's seen as dangerous to auto-accept new updates without review, so it's expected for users to manually accept new updates. The script will continue automatically if no new updates are found. It can be modified to include extra templates, as well as changing between stable and current-testing. This script is also intended to ensure syncronization and avoid the fedora 48 hour cache issues, as well as to help keep repositories aligned across the whole Qubes system.
+- [Qubes 4 - Win7 install - Guide/Script](/scripts/howto-build-win7-appvm)
+  - This script is designed to be a part guide, part script. Essentially it guides you through the commands to create a new Win7 VM. Please use the script as it was intended as a mixed guide/script.
 
 
 
