@@ -31,8 +31,8 @@ Here you can find the community scripts. Their states will be listed, put into t
 
 - [Qubes - A collection of small, but handy scripts]() - Coming soon.
 - [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
-- [Qubes - Easy dom0 to AppVM screenshotting](/scripts/qubes-screenshot-scripts)
-- [Qubes - Easy volume control]() - Coming soon.
+- [Qubes - Easy dom0 to AppVM screenshotting](/scripts/qubes-screenshot-scripts) - A collection of community screenshot scripts to handle the dom0 screenshot issue.
+- [Qubes - Easy sound volume control](/scripts/qubes-sound-control-scripts) - Here you can find our growing collection of sound control scripts. They're typical ideal to keybind.
 - [Qubes - Move files to dom0](/scripts/qvm-copy-to-dom0) - Moving files to dom0 is dangerous and discouraged, but if you must then here is a script to ease the process. If you know what you're doing, then this might be helpful.
 - [Qubes - Win7 install - Guide/Script](/scripts/howto-build-win7-appvm)
 - [Qubes 4 - Full system update](/scripts/qubes-auto-update-script-alpha.sh)
