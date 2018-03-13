@@ -12,7 +12,7 @@ Finished <img src="/github-resources/review-icons/Button Check-01.png" width="16
 
 Work in progress <img src="/github-resources/review-icons/Gear-01.png" width="16"> | Looking for developers <img src="/github-resources/review-icons/User New-01.png" width="16"> | Dangerous, don't use! <img src="/github-resources/review-icons/Button Close-01.png" width="16">
 
-Credits and special thanks for icons goes to deleket @ deviantart.
+_Credits and special thanks for icons goes to deleket @ deviantart._
 
 <br />
 
