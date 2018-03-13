@@ -29,6 +29,8 @@ The centralized and all published decentralized github wiki's can be found here.
 ### Commuinity Script's ###
 Here you can find the community scripts. Currently there is no review system in place for scripts. Be extra cautious before you run any of them. In time we plan to review and/or improve the quality of all the listed scripts.
 
+Read flow - Sorted after Qubes versions, and within Qubes versions after ABC. When no Qubes version is listed, then the script is considered to work with any current official supported Qubes system.
+
 - [Qubes - A collection of small, but handy scripts]() 
   - Here you find our collection of smaller scripts, which are too small or too unqiue to be listed on this main page. There might be something useful in here though, so feel free to take a look once in a while as our collection grows and expands.
 - [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
