@@ -1,3 +1,5 @@
+#### Contributing without knowing git
+
 A shortcoming of the official [qubes-doc](https://www.qubes-os.org/doc/) is that basic git knowledge is [required](https://www.qubes-os.org/doc/doc-guidelines/) to contribute: concepts like forking a repository or understanding pull requests have to be mastered, as well as synchronizing a forked repository with upstream for subsequent contributions.
 
 Qubes users who don't want to learn git for a reason or another, or who don't feel confident submitting a pull request (PR), can simply create an issue in this github community page ("Issues" tab above) with any content they deem fit: documentation (new or improvements), suggestions, fixes,  one-liners, ... 
