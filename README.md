@@ -8,6 +8,7 @@ and privacy, at the best quality possible, but we are not accountable for not me
 
 This site is run by volunteers. The Qubes OS Project is not affiliated with this site and does not endorse the content of any of these pages.
 
+
 ### Infographics ###
 Some icons replace other icons in a logical flow, for example finished can be used instead of sub-collection, if all sub-scripts are deemed finished. 
 
@@ -16,8 +17,6 @@ Finished <img src="/github-resources/review-icons/Button Check-01.png" width="16
 Sub-collection <img src="/github-resources/review-icons/Button Info-01.png" width="16"> | Work in progress <img src="/github-resources/review-icons/Gear-01.png" width="16"> | Looking for developers <img src="/github-resources/review-icons/User New-01.png" width="16"> | Dangerous, don't use! <img src="/github-resources/review-icons/Button Close-01.png" width="16">
 
 _Credits and special thanks for icons goes to deleket @ deviantart._
-
-<br />
 
 ### Review system ###
 To be announced.
