@@ -22,7 +22,12 @@ _Credits and special thanks for icons goes to deleket @ deviantart._
 
 ### Community doc's ###
 All doc's here have the potential to one day become an official Qubes doc. Be mindful that they are still not perfect, and you must be careful when using them.
-- <img src="/github-resources/review-icons/User New-01.png" width="16"> <img src="/github-resources/review-icons/Gear-01.png" width="16"> Once Community doc's has been processed, they will appear on this list.
+- <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Qubes Community Wiki](Official accepted Community doc's)
+  - Right now this list-page is empty as we're only just starting out and has not forwarded any Community docs for official review.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> <img src="/github-resources/review-icons/Gear-01.png" width="16"> Community released doc's
+  - Work in progress, drafted Community doc's which are taking substantial time, will be listed here on current page.
+  - Finished and accepted Community doc's which has become Official Qubes doc's, are moved to the official accepted community doc's sub-collection folder.
+
 
 <br />
 
