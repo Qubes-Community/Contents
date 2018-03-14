@@ -10,17 +10,14 @@ We, as in any Qubes-Community users, collaborators, members and owners, expect t
 This site is run by volunteers. The Qubes OS Project is not affiliated with this site and does not endorse the content of any of these pages.
 
 ### Infographics ###
-Finished <img src="/github-resources/review-icons/Button Check-01.png" width="16"> | Updated <img src="/github-resources/review-icons/Button Refresh-01.png" width="16"> | Review(s) are needed <img src="/github-resources/review-icons/Button Help-01.png" width="16"> | Development Paused <img src="/github-resources/review-icons/Button Pause-01.png" width="16">
-
-Work in progress <img src="/github-resources/review-icons/Gear-01.png" width="16"> | Looking for developers <img src="/github-resources/review-icons/User New-01.png" width="16"> | Dangerous, don't use! <img src="/github-resources/review-icons/Button Close-01.png" width="16">
+Finished <img src="/github-resources/review-icons/Button Check-01.png" width="16"> | Updated, check date <img src="/github-resources/review-icons/Button Refresh-01.png" width="16"> | Review(s) are needed <img src="/github-resources/review-icons/Button Help-01.png" width="16"> | Development Paused <img src="/github-resources/review-icons/Button Pause-01.png" width="16">
+ 	
+Sub-collection <img src="/github-resources/review-icons/Button Info-01.png" width="16"> | Work in progress <img src="/github-resources/review-icons/Gear-01.png" width="16"> | Looking for developers <img src="/github-resources/review-icons/User New-01.png" width="16"> | Dangerous, don't use! <img src="/github-resources/review-icons/Button Close-01.png" width="16">
 
 _Credits and special thanks for icons goes to deleket @ deviantart._
 
 <br />
 
-
-
-<br />
 
 ### Community doc's ###
 All doc's here have the potential to one day become an official Qubes doc. Be mindful that they are still not perfect, and you must be careful when using them.
@@ -49,7 +46,7 @@ Here you can find the community scripts. Currently there is no review system in 
 
 Read flow - Sorted after Qubes versions, and within Qubes versions after ABC. When no Qubes version is listed, then the script is considered to work with any current official supported Qubes system.
 
-- <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Qubes - A collection of small, but handy scripts]() 
+- <img src="/github-resources/review-icons/Button Info-01.png" width="16"> [Qubes - A collection of small, but handy scripts](/scripts/qubes-a-small-but-handy-script-collection) 
   - Here you find our collection of smaller scripts, which are too small or too unqiue to be listed on this main page. There might be something useful in here though, so feel free to take a look once in a while as our collection grows and expands.
 - <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
   - This script is helpful to help set up a minimal template and turn it into a small appVM for sys-net and sys-firewall. The script can be modified to include other similar use-cases as well.
