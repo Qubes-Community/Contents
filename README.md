@@ -76,9 +76,19 @@ Here you can find the community scripts. Currently there is no review system in 
 
 ### Community project's ###
 These are extensive works which incorporate multiple of inter-connected scripts and coding, problems which also may require their own issue tracking lists, as well as a larger collaboration of community developers. Community project's hold a repository on their own.
-- <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-A.I. ](https://github.com/Qubes-Community/Qubes-A.I.) - Offline & Open Source, initially Voice Control only. Project is fresh and require hands to speed it up.
-- <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-NAS](https://github.com/Qubes-Community/Qubes-NAS) - Securing your NAS systems. Project is fresh and require hands to speed it up.
-- <img src="/github-resources/review-icons/User New-01.png" width="16"> <img src="/github-resources/review-icons/Gear-01.png" width="16"> [QubesTV](https://github.com/Qubes-Community/QubesTV) - Securing your SmartTV. Project development has started, extra hands are welcome.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-A.I. ](https://github.com/Qubes-Community/Qubes-A.I.) 
+  - Offline & Open Source. Keeping your privacy and security as maximum priority.
+  - Initially Voice Control only, open A.I.'s are not quite as freely available yet as voice control is.
+  - Initially local only, but will eventually be possible to tunnel securely via encryption and private host.
+  - Project is fresh and require hands to speed it up.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-NAS](https://github.com/Qubes-Community/Qubes-NAS) 
+  - Securing your NAS systems with a home-based server system.
+  - Initially the project will be local, but will eventually focus on becoming an internet based NAS server.
+  - Project is fresh and require hands to speed it up.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> <img src="/github-resources/review-icons/Gear-01.png" width="16"> [QubesTV](https://github.com/Qubes-Community/QubesTV) 
+  - Securing your SmartTV from microphones, web-cams, voice-control, internet connections, with QubesTV.
+  - Almost no binaries are installed, this project relies heavily on easy to review scripts. The few binaries needed are reliable, for example pulseaudio-utils.
+  - Project development has started, extra hands are welcome.
 
 More projects to come as volunteers start them up. A project must go beyond the complexity of a script/guide, and involve complexity of inter-connected scripts, issue tracking, long-term development and updates, or other reasons that justifies it to become a project.
 
