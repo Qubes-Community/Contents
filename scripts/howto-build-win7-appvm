@@ -15,10 +15,10 @@ qvm-create win7 --class StandaloneVM --property virt_mode=hvm --property kernel=
 qvm-features win7 video-model cirrus
  
 # Enlarge available diskspace in the new AppVM:
-# Private storage max. size: 40960MiB
+# System storage max. size:
 qvm-volume extend win7:root 40GB
-# System storage max. size: 40960MiB
-qvm-volume extend win7:private 40GB
+# Private storage max. size: 
+qvm-volume extend win7:private 20GB
  
 # Start AppVM with Installation-ISO
 qvm-start win7 --cdrom=<APPVM>:/home/user/win7.iso
