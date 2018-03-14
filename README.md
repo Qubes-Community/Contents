@@ -50,16 +50,23 @@ Here you can find the community scripts. Currently there is no review system in 
   - A simple but potentially essential script to standardize your backup processes.
   - May further be used, i.e. to put a timer on the script to perform automatically.
 - <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
-  - This script is helpful to help set up a minimal template and turn it into a small appVM for sys-net and sys-firewall. The script can be modified to include other similar use-cases as well.
+  - This script is helpful to help set up a minimal template and turn it into a small appVM for sys-net and sys-firewall. 
+  - The script can be modified to include other similar use-cases as well.
+  - Useful if setting up a new fresh Qubes system, or if you're unsure how to do minimal VM's.
 - <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Qubes - Easy dom0 to AppVM screenshotting](/scripts/qubes-screenshot-scripts)
   - A collection of community screenshot scripts to handle the dom0 screenshot issue.
 - <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Qubes - Easy sound volume control](/scripts/qubes-sound-control-scripts) 
   - Here you can find our growing collection of sound control scripts. 
   - They're typical ideal to keybind.
 - <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes - Move files to dom0](/scripts/qvm-copy-to-dom0)
-  - Moving files to dom0 is dangerous and discouraged, but if you must then here is a script to ease the process. If you know what you're doing, then this might be helpful.
+  - Moving files to dom0 is dangerous and discouraged, but if you must then here is a script to ease the process. 
+  - If you know what you're doing, then this might be helpful.
 - <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes 4 - Universal Update Script](/scripts/qubes-auto-update-script-alpha.sh)
-  - This script can update dom0 and all templates in a single click or keybind, starting from one end, automatically working itself through all your templaes and dom0 updates. The -y attribute option is not included, because it's seen as dangerous to auto-accept new updates without review, so it's expected for users to manually accept new updates. The script will continue automatically if no new updates are found. It can be modified to include extra templates, as well as changing between stable and current-testing. This script is also intended to ensure syncronization and avoid the fedora 48 hour cache issues, as well as to help keep repositories aligned across the whole Qubes system.
+  - This script can update dom0 and all templates in a single click or keybind, starting from one end, automatically working itself through all your templaes and dom0 updates. 
+  - The '-y' attribute option is not included, because it's seen as dangerous to auto-accept new updates without review, so it's expected for users to manually accept new updates. 
+  - The script will continue automatically if no new updates are found. 
+  - It can be modified to include extra templates, as well as changing between stable and current-testing. 
+  - This script is also intended to ensure syncronization and avoid the fedora 48 hour cache issues, as well as to help keep repositories aligned across the whole Qubes system.
 - <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes 4 - Win7 install - Guide/Script](/scripts/howto-build-win7-appvm)
   - This script is designed to be a part guide, part script. Essentially it guides you through the commands to create a new Win7 VM. Please use the script as it was intended as a mixed guide/script.
 
@@ -81,16 +88,31 @@ More projects to come as volunteers start them up. A project must go beyond the 
 Guides are not doc's which has the potential to reach the official Qubes doc's page. Instead guides are meant for more pure community oirentated how-to's. For example how to style your system to make it look better, or suggestions for how you can help contribute to the Qubes Community. 
 
  - <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Hardware Selection](/guides/hardware-tree.md)
+   - A decision tree that helps selecting proper hardware for Qubes OS.
+   - Be mindful that these are suggestive solutions, which helps narrowing down the options. Please research and double-check any outputs in the final selection.
  - <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Qubes Styling - XFCE4 w/ Launchers]()
+   - Suggestion and inspiration on how to make Qubes look better and more stylish.
+   - Guide how to be minimalistic and do it securely, and still make it look good.
+   - Picture illustrations are included.
+   - Coming soon.
 
 <br />
 
 
 ### Qubes server's - Guides & Scripts ###
 Here you can find guides as well as scripts to a Qubes server of various types and sorts.
-- <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-A.I.-server ](https://github.com/Qubes-Community/Qubes-A.I.) - Is a Qubes Community project. It is listed here as a dublicate due to its double role as a project, as well as a server. It may in the future serve as a private hosted A.I. system, for example in your home, acting as a server through encrypted channels to your various mobile devices. This is a very long-term project, which needs developers to succeed.
-- <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-NAS-server](https://github.com/Qubes-Community/Qubes-NAS) - is a Qubes Community project. It is listed here as a dublicate due to its double role as a project, as well as a server. It may in the future serve as a private hosted NAS system, for example in your home, acting as a server through encrypted channelse to your various modbile devices. This is a future project, which might not be too far off, but also not too soon. It needs developers to speed it up.
-- <img src="/github-resources/review-icons/Gear-01.png" width="16"> Qubes-Wire-Chat-server() - Using the open source client Wire, with the open source server, set as a Qubes server, the potential here is possibly big for secure chat systems. Further experimentaton needs to be done, however it's looking good for now. This is the most near-term Qubes server setups to be finished among the known works.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-A.I.-server ](https://github.com/Qubes-Community/Qubes-A.I.) 
+  - Is a Qubes Community project. It is listed here as a dublicate due to its double project/server role. 
+  - It may in the future serve as a private hosted A.I. system, for example in your home, acting as a server through encrypted channels to your various mobile devices. 
+  - This is a very long-term project, which needs developers to succeed.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> [Qubes-NAS-server](https://github.com/Qubes-Community/Qubes-NAS) 
+  - is a Qubes Community project. It is listed here as a dublicate due to its double project/server role. 
+  - It may in the future serve as a private hosted NAS system, for example in your home, acting as a server through encrypted channelse to your various modbile devices. 
+  - This is a future project, which might not be too far off, but also not too soon. It needs developers to speed it up.
+- <img src="/github-resources/review-icons/Gear-01.png" width="16"> Qubes-Wire-Chat-server() 
+  - Using the open source client Wire, with the open source server, set as a Qubes server. 
+  - The potential here is possibly big for secure chat systems. Further experimentaton needs to be done, however it's looking good for now. 
+  - This is the most near-term Qubes server setups to be finished among the known works.
 
 
 
