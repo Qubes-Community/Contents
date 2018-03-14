@@ -17,8 +17,10 @@ Sub-collection <img src="/github-resources/review-icons/Button Info-01.png" widt
 
 _Credits and special thanks for icons goes to deleket @ deviantart._
 
-<br />
+### Review system ###
+To be announced.
 
+<br />
 
 ### Community doc's ###
 All doc's here have the potential to one day become an official Qubes doc. Be mindful that they are still not perfect, and you must be careful when using them.
