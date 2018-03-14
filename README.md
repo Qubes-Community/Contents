@@ -19,6 +19,10 @@ _Credits and special thanks for icons goes to deleket @ deviantart._
 
 <br />
 
+### Review system ###
+To be announced.
+
+<br />
 
 ### Community doc's ###
 All doc's here have the potential to one day become an officially Qubes doc. Be mindful that they are still not perfect, and you must be careful when using them.
