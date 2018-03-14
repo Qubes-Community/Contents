@@ -109,7 +109,7 @@ Here you can find guides as well as scripts to a Qubes server of various types a
   - is a Qubes Community project. It is listed here as a dublicate due to its double project/server role. 
   - It may in the future serve as a private hosted NAS system, for example in your home, acting as a server through encrypted channelse to your various modbile devices. 
   - This is a future project, which might not be too far off, but also not too soon. It needs developers to speed it up.
-- <img src="/github-resources/review-icons/Gear-01.png" width="16"> Qubes-Wire-Chat-server(/scripts/qubes-wire-chat-server) 
+- <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Qubes-Wire-Chat-server](/scripts/qubes-wire-chat-server) 
   - Using the open source client Wire, with the open source server, set as a Qubes server. 
   - The potential here is possibly big for secure chat systems. Further experimentaton needs to be done, however it's looking good for now. 
   - This is the most near-term Qubes server setups to be finished among the known works.
