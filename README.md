@@ -8,7 +8,6 @@ and privacy, at the best quality possible, but we are not accountable for not me
 
 This site is run by volunteers. The Qubes OS Project is not affiliated with this site and does not endorse the content of any of these pages.
 
-
 ### Infographics ###
 Some icons replace other icons in a logical flow, for example finished can be used instead of sub-collection, if all sub-scripts are deemed finished. 
 
@@ -18,18 +17,12 @@ Sub-collection <img src="/github-resources/review-icons/Button Info-01.png" widt
 
 _Credits and special thanks for icons goes to deleket @ deviantart._
 
-### Review system ###
-To be announced.
-
 <br />
 
+
 ### Community doc's ###
-All doc's here have the potential to one day become an officially Qubes doc. Be mindful that they are still not perfect, and you must be careful when using them.
-- <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Official accepted Community doc's]() 
-  - Right now this list-page is empty as we're only just starting out and has not forwarded any Community docs for official review.
-- <img src="/github-resources/review-icons/User New-01.png" width="16"> <img src="/github-resources/review-icons/Gear-01.png" width="16"> Community released doc's 
-  - Work in progress, drafted Community doc's which are taking substantial time, will be listed here on current page.
-  - Finished and accepted Community doc's which has become Official Qubes doc's, are moved to the official accepted community doc's sub-collection folder. 
+All doc's here have the potential to one day become an official Qubes doc. Be mindful that they are still not perfect, and you must be careful when using them.
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> <img src="/github-resources/review-icons/Gear-01.png" width="16"> Once Community doc's has been processed, they will appear on this list.
 
 <br />
 
@@ -42,7 +35,9 @@ The centralized and all published decentralized github wiki's can be found here.
 <br />
 
 ### Community external guide collection ###
-- <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Qubes 4 - Installing Win7](https://github.com/QubesOS/qubes-issues/issues/3585) - GitHub issue
+- <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Qubes 4 - Installing Win7](https://github.com/QubesOS/qubes-issues/issues/3585) - Official GitHub issue
+- <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes Network Server](https://github.com/Rudd-O/qubes-network-server) - Third party GitHub repository.
+
 
 <br />
 
