@@ -1,15 +1,16 @@
 # Qubes-Community #
-Here you can find the Community guide's, doc's, & wiki's. Furthermore you can also raise feedback discussions in the issue tracker. Keep in mind everything on Qubes Community is unofficial.
-
-If you haven't already, then it may be worthwhile to check the official Qubes doc's first, found [here](https://www.qubes-os.org/doc/).
+Here you can find the Community guide's, doc's, & wiki's. Furthermore you can also raise feedback discussions in the issue tracker. Keep in mind everything on Qubes Community is unofficial. If you haven't already, then it may be worthwhile to check the official Qubes doc's first, found [here](https://www.qubes-os.org/doc/).
 
 
 ### Caution before use ###
-We, as in any Qubes-Community users, collaborators, members and owners, expect that anyone using anything produced, uploaded, adviced or otherwise, that comes out of the Qubes Community, to be met with a healthy amount of skepticism. Please be careful about running any scripts, following wiki's, doc's or guide's, which you don't understand what do. We take no responsibility for any damage or losses. We do however wish to keep the reliability, as well as security and privacy, at the best quality possible, but we are not accountable for not meeting our goals.
+We, as in any Qubes-Community users, collaborators, members and owners, expect that anyone using anything produced, uploaded, adviced or otherwise, that comes out of the Qubes Community, to be met with a healthy amount of skepticism. Please be careful about running any scripts, following wiki's, doc's or guide's, which you don't understand what do. We take no responsibility for any damage or losses. We do however wish to keep the reliability, as well as security  
+and privacy, at the best quality possible, but we are not accountable for not meeting our goals.
 
 This site is run by volunteers. The Qubes OS Project is not affiliated with this site and does not endorse the content of any of these pages.
 
 ### Infographics ###
+Some icons replace other icons in a logical flow, for example finished can be used instead of sub-collection, if all sub-scripts are deemed finished. 
+
 Finished <img src="/github-resources/review-icons/Button Check-01.png" width="16"> | Updated, check date <img src="/github-resources/review-icons/Button Refresh-01.png" width="16"> | Review(s) are needed <img src="/github-resources/review-icons/Button Help-01.png" width="16"> | Development Paused <img src="/github-resources/review-icons/Button Pause-01.png" width="16">
  	
 Sub-collection <img src="/github-resources/review-icons/Button Info-01.png" width="16"> | Work in progress <img src="/github-resources/review-icons/Gear-01.png" width="16"> | Looking for developers <img src="/github-resources/review-icons/User New-01.png" width="16"> | Dangerous, don't use! <img src="/github-resources/review-icons/Button Close-01.png" width="16">
@@ -40,7 +41,6 @@ The centralized and all published decentralized github wiki's can be found here.
 
 
 
-
 ### Commuinity Script's ###
 Here you can find the community scripts. Currently there is no review system in place for scripts. Be extra cautious before you run any of them. In time we plan to review and/or improve the quality of all the listed scripts.
 
@@ -48,6 +48,9 @@ Read flow - Sorted after Qubes versions, and within Qubes versions after ABC. Wh
 
 - <img src="/github-resources/review-icons/Button Info-01.png" width="16"> [Qubes - A collection of small, but handy scripts](/scripts/qubes-a-small-but-handy-script-collection) 
   - Here you find our collection of smaller scripts, which are too small or too unqiue to be listed on this main page. There might be something useful in here though, so feel free to take a look once in a while as our collection grows and expands.
+- <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes - Backup to AppVM script](/master/scripts/qvm-backup-to-appvm)
+  - A simple but potentially essential script to standardize your backup processes.
+  - May further be used, i.e. to put a timer on the script to perform automatically.
 - <img src="/github-resources/review-icons/Button Help-01.png" width="16"> [Qubes - Create minimal sys-vm](/scripts/qubes-create-minimal-sys-vms)
   - This script is helpful to help set up a minimal template and turn it into a small appVM for sys-net and sys-firewall. The script can be modified to include other similar use-cases as well.
 - <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Qubes - Easy dom0 to AppVM screenshotting](/scripts/qubes-screenshot-scripts)
