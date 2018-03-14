@@ -26,7 +26,7 @@ To be announced.
 All doc's here have the potential to one day become an official Qubes doc. Be mindful that they are still not perfect, and you must be careful when using them.
 - <img src="/github-resources/review-icons/Button Check-01.png" width="16"> [Official accepted Community doc's]()
   - Right now this list-page is empty as we're only just starting out and has not forwarded any Community docs for official review.
-- <img src="/github-resources/review-icons/User New-01.png" width="16"> <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Placeholder example of a Community released doc]()
+- <img src="/github-resources/review-icons/User New-01.png" width="16"> [Placeholder example of a Community released doc]()
   - Work in progress, drafted Community doc's which are taking substantial time, will be listed here on current page.
   - Finished and accepted Community doc's which has become Official Qubes doc's, are moved to the official accepted community doc's sub-collection folder.
 
