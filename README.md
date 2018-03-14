@@ -104,6 +104,9 @@ More projects to come as volunteers start them up. A project must go beyond the 
 ### Community guide's ###
 Guides are not doc's which has the potential to reach the official Qubes doc's page. Instead guides are meant for more pure community oirentated how-to's. For example how to style your system to make it look better, or suggestions for how you can help contribute to the Qubes Community. 
 
+ - <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Application recommendations for Qubes]()
+   - Generally apps which make sense on Qubes, as well as mostly free and open source.
+   - Coming soon.
  - <img src="/github-resources/review-icons/Gear-01.png" width="16"> [Hardware Selection](/guides/hardware-tree.md)
    - A decision tree that helps selecting proper hardware for Qubes OS.
    - Be mindful that these are suggestive solutions, which helps narrowing down the options. Please research and double-check any outputs in the final selection.
