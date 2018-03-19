@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #Title description
-##Unofficial Qubes Maintenance Updater (uQMU).
+##Unofficial, Qubes Universal Update Script (uQUS).
 
 #>>>>WARNING!<<<<
 ##Please read the script carefully, do not run if you do not know what it does.
@@ -41,8 +41,7 @@
 ##This warning meesage can be disabled with a #. It includes essential warning for new users
 ##not aware of the pitfalls of scripts. Its highly recommended that new users study how the
 ##script works, it's not very complicated, but also not straight simple either.
-zenity --width="420" --height="200" --title="Welcome to uQMU!" --info --text='This script allows you to easily keep Qubes 4 in a good state with proper update maintenance.\n\n\- Warning! Please read the comments inside the script carefully before running this script.\n\n- The script is out-of-the-box safety locked, you need to edit the "#" to enable features. Quick Backup and Reboot prompt are by default enabled, as you will notice when you click "ok" below, however requires an address path and target BackupVM. Please decline the next two prompts, and then edit the script for your needs.\n\n Please do not use Quick Backup before you manually adjusted it to your needs inside the script.' 2> /dev/null
-wait
+zenity --width="420" --height="200" --title="Welcome to uQUS!" --info --text='This script allows you to easily keep Qubes 4 in a good state with proper update maintenance.\n\n\- Warning! Please read the comments inside the script carefully before running this script.\n\n- The script is out-of-the-box safety locked, you need to edit the "#" to enable features. Quick Backup and Reboot prompt are by default enabled, as you will notice when you click "ok" below, however requires an address path and target BackupVM. Please decline the next two prompts, and then edit the script for your needs.\n\n Please do not use Quick Backup before you manually adjusted it to your needs inside the script.' 2> /dev/null
 
 
 #Quick Backup Redundancy
@@ -53,14 +52,14 @@ wait
 ##only exclude system dom0 & default templates. However a proper path/src-VM is still required.
 ##Remember to put the backup externally, so that you can access it if the system does not boot.
 ##Partial credit for this section rhss6-2011 @ https://ubuntuforums.org/showthread.php?t=2239195
-ans=$(zenity --width="420" --height="200" --title="Welcome to uQMU!" --question --text='Must have sufficient free RAM to run the uQMU.\n\nPllease select if you want to perform a pre-selected AppVM backup. To execute a backup profile, or specific inclusion/exclusion of VMs, can be modified and standardized within the script.' --ok-label="Yes" --cancel-label="No" 2> /dev/null
+qubes-backup=
+ans=$(zenity --width="420" --height="200" --title="Welcome to uQUS!" --question --text='Must have sufficient free RAM to run the uQUS.\n\nPllease select if you want to perform a pre-selected AppVM backup. To execute a backup profile, or specific inclusion/exclusion of VMs, can be modified and standardized within the script.' --ok-label="Yes" --cancel-label="No" 2> /dev/null
 if [ $? = 0 ] ; then
 command=$(xterm -e 'sudo qvm-backup -d add-VM-name-here "/home/user/" -x fedora-26 -x debian-9 -x whonix-ws -x whonix-gw -x sys-net -x sys-firewall -x sys-usb -x sys-whonix -x fedora-26-dvm -x whonix-ws-dvm -x anon-whonix')
 else
 command=$()
 fi
 )
-wait
 
 
 ##Qubes dom0 updates
@@ -68,7 +67,6 @@ wait
 #xterm -e 'sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing --clean'
 wait
 echo -ne "$(tput setaf 4)($(tput setaf 6)#    $(tput setaf 4)) $(tput setaf 6)Dom0 update has finished.$(tput setaf 9)\n"
-wait
 
 
 ##Default Qubes fedora template - Only enable one repository, and keep the same type across all templates/dom0.
@@ -80,76 +78,60 @@ wait
 #qvm-shutdown fedora-26 #Needed if qvm-start is used.
 wait
 echo -ne "$(tput setaf 4)(#$(tput setaf 6)#   $(tput setaf 4)) $(tput setaf 6)Fedora-26 update has finished.$(tput setaf 9)\n"
-wait
 
 
 ##Default Qubes debian template.
 #qvm-start debian-9 #Needed to avoid premature qvm-run shutdown, important here.
 wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get check' #Can be enabled to check dependencies and cache-checks.
+#qvm-run whonix-gw 'xterm -e sudo apt-get check' #Can optionally be enabled to check dependencies and cache-checks.
 wait
-#qvm-run debian-9 'xterm -e sudo apt-get update'
+#qvm-run debian-9 'xterm -e sudo apt-get update; xterm -e sudo apt-get dist-upgrade'
 wait
-#qvm-run debian-9 'xterm -e sudo apt-get dist-upgrade'
-wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing'
-wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get dist-upgrade -t *-testing'
+#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing; xterm -e sudo apt-get dist-upgrade -t *-testing'
 wait
 #qvm-shutdown debian-9 #Needed if qvm-start is used.
 wait
 echo -ne "$(tput setaf 4)(##$(tput setaf 6)#  $(tput setaf 4)) $(tput setaf 6)Debian-9 update has finished.$(tput setaf 9)\n"
-wait
 
 
 
 ##Default Qubes Whonix-WS.
 #qvm-start whonix-ws #Needed to avoid premature qvm-run shutdown, important here.
 wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get check' #Can be enabled to check dependencies and cache-checks.
+#qvm-run whonix-gw 'xterm -e sudo apt-get check' #Can optionally be enabled to check dependencies and cache-checks.
 wait
-#qvm-run whonix-ws 'xterm -e sudo apt-get update'
+#qvm-run whonix-ws 'xterm -e sudo apt-get update; xterm -e sudo apt-get dist-upgrade'
 wait
-#qvm-run whonix-ws 'xterm -e sudo apt-get dist-upgrade'
-wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing'
-wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get dist-upgrade -t *-testing'
+#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing; xterm -e sudo apt-get dist-upgrade -t *-testing'
 wait
 #qvm-shutdown whonix-ws #Needed if qvm-start is used.
 wait
 echo -ne "$(tput setaf 4)(###$(tput setaf 6)# $(tput setaf 4)) $(tput setaf 6)Whonix-WS update has finished.$(tput setaf 9)\n"
-wait
 
 
 ##Default Qubes Whonix-GW. Keep both commands enabled.
 #qvm-start whonix-gw #Needed to avoid premature qvm-run shutdown, important here.
 wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get check' #Can be enabled to check dependencies and cache-checks.
+#qvm-run whonix-gw 'xterm -e sudo apt-get check' #Can optionally be enabled to check dependencies and cache-checks.
 wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get update'
+#qvm-run whonix-gw 'xterm -e sudo apt-get update; xterm -e sudo apt-get dist-upgrade'
 wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get dist-upgrade'
-wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing'
-wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get dist-upgrade -t *-testing'
+#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing; xterm -e sudo apt-get dist-upgrade -t *-testing'
 wait
 #qvm-shutdown whonix-gw #Needed if qvm-start is used.
 wait
 echo -ne "$(tput setaf 4)(####$(tput setaf 6)#$(tput setaf 4)) $(tput setaf 6)Whonix-GW update has finished.$(tput setaf 9)\n"
 wait
 
-echo -ne "$(tput setaf 4)(#####) $(tput setaf 6)The uQMU script has finished.\n"
+echo -ne "$(tput setaf 4)(#####) $(tput setaf 6)The uQUS script has finished.\n"
 echo -ne '\n'$(tput setaf 9)
-wait
 
 #qvm-shutdown sys-whonix #Optional.
 #wait
 
 ##Conclusion: Question message, whether to restart or not. Copied logic, credit goes
 ##to rhss6-2011 @ https://ubuntuforums.org/showthread.php?t=2239195
-ans=$(zenity --width="420" --height="200" --title="uQMU has reached its conclusion." --question --text='The update-script has successfully reached its conflusion.\n\n- Click "Yes" to perform a full system restart.\n\n- Click "No" if no restart is required or you wish to restart manually later.' --ok-label="Yes" --cancel-label="No" 2> /dev/null
+ans=$(zenity --width="420" --height="200" --title="uQUS has reached its conclusion." --question --text='The update-script has successfully reached its conflusion.\n\n- Click "Yes" to perform a full system restart.\n\n- Click "No" if no restart is required or you wish to restart manually later.\n\n- Normal template updates? It is recommended to restart VMs.\n- Qubes OS updates? It is recommended to perofmr a full system re-start.' --ok-label="Yes" --cancel-label="No" 2> /dev/null
 if [ $? = 0 ] ; then
 command=$(xterm -e shutdown -h now) #use 'reboot -h now' instead of shutdown if you want the 'Yes' button to perform a reboot.
 else
