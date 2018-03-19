@@ -52,10 +52,10 @@ zenity --width="420" --height="200" --title="Welcome to uQUS!" --info --text='Th
 ##only exclude system dom0 & default templates. However a proper path/src-VM is still required.
 ##Remember to put the backup externally, so that you can access it if the system does not boot.
 ##Partial credit for this section rhss6-2011 @ https://ubuntuforums.org/showthread.php?t=2239195
-qubes-backup=
+qubes-backup='sudo qvm-backup -d add-VM-name-here "/home/user/" -x fedora-26 -x debian-9 -x whonix-ws -x whonix-gw -x sys-net -x sys-firewall -x sys-usb -x sys-whonix -x fedora-26-dvm -x whonix-ws-dvm -x anon-whonix'
 ans=$(zenity --width="420" --height="200" --title="Welcome to uQUS!" --question --text='Must have sufficient free RAM to run the uQUS.\n\nPllease select if you want to perform a pre-selected AppVM backup. To execute a backup profile, or specific inclusion/exclusion of VMs, can be modified and standardized within the script.' --ok-label="Yes" --cancel-label="No" 2> /dev/null
 if [ $? = 0 ] ; then
-command=$(xterm -e 'sudo qvm-backup -d add-VM-name-here "/home/user/" -x fedora-26 -x debian-9 -x whonix-ws -x whonix-gw -x sys-net -x sys-firewall -x sys-usb -x sys-whonix -x fedora-26-dvm -x whonix-ws-dvm -x anon-whonix')
+command=$(xterm -e $qubes-backup)
 else
 command=$()
 fi
