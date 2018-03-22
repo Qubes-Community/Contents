@@ -14,7 +14,6 @@
 - toggle-fullscreen-scripts
 - screenshot-scripts
 
-
 **`server/`** - using Qubes OS as a server
 
-- see README.md
+- see server/README.md
