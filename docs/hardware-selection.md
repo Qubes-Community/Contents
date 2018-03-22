@@ -1,11 +1,3 @@
----
-layout: doc
-title: Hardware Selection Tree
-permalink: /guides/hardware-tree/
-redirect_from:
-- /en/guides/hardware-tree/
----
-
 # Hardware Selection Tree #
 
 Selecting the appropriate hardware for Qubes R4.0 can be a complex choice.
