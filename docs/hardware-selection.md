@@ -4,7 +4,7 @@ Selecting the appropriate hardware for Qubes R4.0 can be a complex choice.
 This document aims to simplify that.
 Click on the links, read the supporting information if desired, reach a conclusion.
 
-**Note** Qubes does not endorse any of the manufacturers or methods listed.
+**Note** Qubes OS does not endorse any of the manufacturers or methods listed.
 
 ### Start here ###
 
@@ -82,6 +82,8 @@ Cross reference [Coreboot](https://www.coreboot.org/Supported_Motherboards) capa
 See also the [board freedom index](https://www.coreboot.org/Board_freedom_levels).
 [Search the mailing list](https://www.mail-archive.com/qubes-users@googlegroups.com/) for additional reports.
 Flash your system with Coreboot, including [ME_Cleaner](https://github.com/corna/me_cleaner).
+
+[Heads](http://osresearch.net/) also offers some interesting capabilities beyond Coreboot, but has a smaller list of [supported boards](https://github.com/osresearch/heads/tree/master/boards).
 
 ### MECleaner ###
 
