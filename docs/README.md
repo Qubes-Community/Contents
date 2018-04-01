@@ -1,7 +1,7 @@
 #### User-contributed documentation and links to third party docs
 
 - `hardware/`
-    - [Tips on choosing the right hardware](hardware-selection.md)
+    - [Tips on choosing the right hardware](hardware/hardware-selection.md)
 
 - `configuration/`
     - improve power management: https://github.com/taradiddles/qubes-os/tree/master/powermgnt
