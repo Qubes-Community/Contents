@@ -6,3 +6,6 @@
 - `configuration/`
     - improve power management: https://github.com/taradiddles/qubes-os/tree/master/powermgnt
     - use Qubes OS as a server: https://github.com/Rudd-O/qubes-network-server
+
+- `misc/`
+    - Qubes cheat sheet (3.2) : https://github.com/Jeeppler/qubes-cheatsheet
