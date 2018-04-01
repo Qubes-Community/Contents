@@ -1,6 +1,7 @@
 # qvm-* commands bash auto completion
 
-# Copy this file to /etc/bash_completion.d/qvm.sh
+# copy this file to /etc/bash_completion.d/qvm.sh
+# make sure 'bash-completion' is installed (sudo qubes-dom0-update bash-completion)
 
 # credit: https://www.mail-archive.com/qubes-users@googlegroups.com/msg20088.html
 
@@ -12,7 +13,7 @@ _qvm()
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	case ${state} in
 		running|halted|paused)
-			vms=$(qvm-ls --raw-data | grep -i "${state}" | cut -f1 -d"|")
+			vms=$(qvm-ls --raw-data | grep -i "|${state}|" | cut -f1 -d"|")
 			;;
 		"")
 			vms=$(qvm-ls --raw-list)
