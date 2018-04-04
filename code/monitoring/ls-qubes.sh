@@ -15,7 +15,7 @@
 #
 # Initial version 03.04.18 by https://github.com/one7two99
 # 
-ram_sum="("$(xl list | awk '{print $3}' | tail -n +2 | paste -s -d+ -)")/1000"
-ram_sum=$(bc <<< "scale=1;$ram_sum")
-qubes_sum=$(xl list 2> /dev/null | tail -n +2 | wc -l)
-echo $qubes_sum"Q|"$ram_sum"G"
+xl list | awk '
+	BEGIN { mem=0; qubes=0; }
+	/ [0-9]+ +[0-9]+ +[0-9]+ / { mem+=$3; qubes++; }
+	END { printf("%dQ|%.1fG\n", qubes, mem/1000); }'
