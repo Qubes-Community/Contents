@@ -1,13 +1,5 @@
 ### User-contributed code (scripts, programs, ...)
 
-Note: linking to contributors' public pages (github, gitlab, plain web page, ...) is preferred over hosting (otherwise contributors have to submit PRs to update their *own* code because of the lack of granular write privileges on github - this is cumbersome and requires reviewer time to ack PRs).
-
-
-**`dom0/`** - things meant to be run in dom0
-
-- qvm-copy-to-dom0: copy files to dom0 (moving files to dom0 is dangerous and discouraged though)
-- R4-universal-update-script.sh: unattented template update (whonix, ...)
-
 **`multimedia/`**
 
 - sound-control-scripts: toggle, volume up, volume down, ...
@@ -17,7 +9,6 @@ Note: linking to contributors' public pages (github, gitlab, plain web page, ...
 - toggle-fullscreen-scripts
 - screenshot-scripts
 - bash autocompletion script for `qvm-*` commands in dom0
+- ls-qubes.sh: outputs the nb. of running qubes + total memory used; the output can be fed into a panel text applet (see comments in the scripts).
 
-**`server/`** - using Qubes OS as a server
-
-- see server/README.md
+**`update-scripts`**: various scripts to automate VM updates
