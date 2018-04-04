@@ -1,0 +1,22 @@
+
+# when adding new docs, try to stick to the official qubes-doc folders (if possible).
+
+about
+basics_dev
+basics_user
+building
+common-tasks
+configuration
+customization
+debugging
+hardware
+installing
+managing-os
+privacy
+reference
+releases
+security
+security-info
+services
+system
+troubleshooting
