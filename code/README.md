@@ -7,7 +7,6 @@ Note: linking to contributors' public pages (github, gitlab, plain web page, ...
 
 - qvm-copy-to-dom0: copy files to dom0 (moving files to dom0 is dangerous and discouraged though)
 - R4-universal-update-script.sh: unattented template update (whonix, ...)
-- bash autocompletion script for `qvm-*` commands in dom0
 
 **`multimedia/`**
 
@@ -17,6 +16,7 @@ Note: linking to contributors' public pages (github, gitlab, plain web page, ...
 
 - toggle-fullscreen-scripts
 - screenshot-scripts
+- bash autocompletion script for `qvm-*` commands in dom0
 
 **`server/`** - using Qubes OS as a server
 
