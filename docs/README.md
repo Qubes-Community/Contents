@@ -1,7 +1,7 @@
 #### User-contributed documentation and links to third party docs
 
 `common-tasks`
-- copying-files-to-dom0.md: how to copy files (and sparse files) from a VM to dom0
+- [how to copy files (and sparse files) from a VM to dom0](common-tasks/copying-files-to-dom0.md)
 
 `configuration`
 - improve power management: https://github.com/taradiddles/qubes-os/tree/master/powermgnt
