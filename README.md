@@ -1,4 +1,4 @@
-*For more information about the project, content and contributing, see [this page](https://qubes-community.github.io/).*
+**For more information about the project, content and contributing, see [this page](https://qubes-community.github.io/).**
 
 This repository hosts user-contributed documentation and code/resources. Please see the README.md files in the `docs/` and `code/` folders for more information.
 
