@@ -13,5 +13,8 @@
 `hardware`
 - [tips on choosing the right hardware](hardware/hardware-selection.md)
 
+`localization`
+- [how to use multiple keyboard layouts](localization/keyboard-multiple-layouts.md)
+
 `misc`
 - Qubes cheat sheet (3.2) : https://github.com/Jeeppler/qubes-cheatsheet
