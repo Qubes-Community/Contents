@@ -282,6 +282,8 @@ parseFile: invalid data checksum"
    Enter to open Submenu, Escape to switch back.
    F6 saves config to /home/user/coreboot/.config
    F9 quits config menu
+   
+   FIXME: needs more information about which options to choose and how to import the Blobs
 
 2) build coreboot using 7 from total 8 cores on my W540 (adapt this to your possibilities)
    ```
