@@ -10,16 +10,16 @@ Click on the links, read the supporting information if desired, reach a conclusi
 
 Are you concerned about potential manufacturer [hardware backdoors](https://libreboot.org/faq.html#intel)?
 
-[Yes](/guides/hardware-tree/#concerned)  
-[No](/guides/hardware-tree/#unconcerned)
+[Yes](/docs/hardware/hardware-selection.md/#concerned)  
+[No](/docs/hardware/hardware-selection.md/#unconcerned)
 
 ### Concerned ###
 
 Are you concerned about [blobs](https://www.coreboot.org/Binary_situation) being used to initialize hardware?
 
-[Yes](/guides/hardware-tree/#init)  
-[No](/guides/hardware-tree/#mecleaner)  
-[No, but I want AMD](/guides/hardware-tree/#amd)
+[Yes](/docs/hardware/hardware-selection.md/#init)  
+[No](/docs/hardware/hardware-selection.md/#mecleaner)  
+[No, but I want AMD](/docs/hardware/hardware-selection.md/#amd)
 
 ### Init ###
 
@@ -27,8 +27,8 @@ Nearly all R4.0 capable systems require at least a CPU microcode blob, and often
 However, there are still some options when it comes to running the [proprietary, unaudited code](https://www.coreboot.org/Intel_Management_Engine#Freedom_and_security_issues) for hardware initialization.
 Do you want:
 
-[AMD](/guides/hardware-tree/#amd)  
-[Intel](/guides/hardware-tree/#intel)
+[AMD](/docs/hardware/hardware-selection.md/#amd)  
+[Intel](/docs/hardware/hardware-selection.md/#intel)
 
 ### AMD ###
 
@@ -38,8 +38,8 @@ In theory there is an option to partially disable it, but no motherboard/BIOS ma
 
 Form factor?
 
-[Laptop](/guides/hardware-tree/#amd-laptop)  
-[Desktop](/guides/hardware-tree/#amd-desktop)
+[Laptop](/docs/hardware/hardware-selection.md/#amd-laptop)  
+[Desktop](/docs/hardware/hardware-selection.md/#amd-desktop)
 
 ### AMD Laptop ###
 
@@ -57,8 +57,8 @@ Unfortunately, all R4.0 capable Intel hardware requires use of at least the [BUP
 [Weaknesses](https://mobile.twitter.com/rootkovska/status/938458875522666497) have been found in this proprietary, non-owner-controlled code.
 There are some ways to restrict Intel ME after the initial BUP.
 
-[Commercial](/guides/hardware-tree/#intel-commercial)  
-[DIY](/guides/hardware-tree/#intel-diy)
+[Commercial](/docs/hardware/hardware-selection.md/#intel-commercial)  
+[DIY](/docs/hardware/hardware-selection.md/#intel-diy)
 
 ### Intel Commercial ###
 
@@ -73,8 +73,8 @@ Search the [HCL](https://www.qubes-os.org/hcl/) for a compatible system.
 Closed-source, proprietary UEFI firmware has its own [set](https://www.kb.cert.org/vuls/id/758382) of [vulnerabilities](https://www.securityweek.com/researchers-find-several-uefi-vulnerabilities).
 Do these concern you?
 
-[Yes](/guides/hardware-tree/#coreboot)  
-[No](/guides/hardware-tree/#mecleaner)
+[Yes](/docs/hardware/hardware-selection.md/#coreboot)  
+[No](/docs/hardware/hardware-selection.md/#mecleaner)
 
 ### Coreboot ###
 
