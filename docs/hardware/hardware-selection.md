@@ -95,7 +95,7 @@ Follow the instructions [here](https://github.com/corna/me_cleaner) to partially
 
 Search the [HCL](https://www.qubes-os.org/hcl/) for an R4.0 compatible system.
 [Search the mailing list](https://www.mail-archive.com/qubes-users@googlegroups.com/) for additional reports.
-If selecting a desktop, you may also want to include and use a third party NIC in an expansion slot instead of the onboard Ethernet.
+If selecting a desktop, you may also want to include and use a third party NIC in an expansion slot or USB instead of the onboard Ethernet.
 This will help avoid overt network communications from onboard management.
 This is often not an option in laptops with manufacturer firmware due to the use of NIC whitelists, but you can use a USB based ethernet or wifi adapter instead.
 <br>
