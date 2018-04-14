@@ -174,7 +174,7 @@ complete -F _qvm-vms-all-vmfeatures qvm-features
 
 #----- arg1: vm(all) ; arg2: vm tags -----
 _qvm-vms-all-vmtags() {
-	case "${COMP_CWORD}" in
+	case "$(_get-cword ${COMP_CWORD})" in
 		1) _complete-vms "" ;;
 		2) _complete-vmprops "$(_get-first-word)" "tags";;
 	esac
