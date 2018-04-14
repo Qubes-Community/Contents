@@ -10,6 +10,9 @@
 `coreboot`
 - [install coreboot on a Thinkpad x230](coreboot/x230.md)
 
+`customization`
+- [change DPI scaling in dom0 and VMs](customization/dpi-scaling.md)
+
 `hardware`
 - [tips on choosing the right hardware](hardware/hardware-selection.md)
 
