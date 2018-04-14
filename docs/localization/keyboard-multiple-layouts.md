@@ -22,9 +22,11 @@ To automatically run the `setxkbmap` command when the VM starts, add a `/etc/xdg
 [Desktop Entry]
 Name=Configure multiple keyboard layouts
 Exec=setxkbmap -layout "us,bg(phonetic)" -option "grp:shifts_toggle"
-Terminal=false
+Terminal=true
 Type=Application
 ~~~
+
+Note: without `Terminal=true` the setxkbmap settings aren't applied for some reason, until one runs `setxkbmap` without options in a terminal. It is thus normal to notice a terminal flicker at startup.
 
 If you prefer to have a per-vm setup rather than per-template, create a `/rw/config/setxkbmap.desktop` with the same content as above and add the following line to `/rw/config/rc.local`:
 
