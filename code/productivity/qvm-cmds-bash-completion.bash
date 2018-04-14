@@ -45,7 +45,7 @@ _complete-vms() {
 	local cur="${COMP_WORDS[COMP_CWORD]}"
 	case "${state}" in
 		runtrans)
-			vms=$(qvm-ls --raw-data | grep -i "|\(Running\|Transient\)|" | cut -f1 -d"|")
+			vms=$(qvm-ls --raw-data | grep -i "|\(running\|transient\)|" | cut -f1 -d"|")
 			;;
 		running|halted|paused)
 			vms=$(qvm-ls --raw-data | grep -i "|${state}|" | cut -f1 -d"|")
