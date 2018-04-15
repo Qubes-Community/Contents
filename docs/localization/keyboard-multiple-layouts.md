@@ -26,7 +26,7 @@ Terminal=true
 Type=Application
 ~~~
 
-Note: without `Terminal=true` the setxkbmap settings aren't applied for some reason, until one runs `setxkbmap` without options in a terminal. It is thus normal to notice a terminal flicker at startup.
+Note: for some reason, with `Terminal=false` the setxkbmap settings aren't applied until one runs `setxkbmap` without options in a terminal. Setting `Terminal=true` works around this problem, but you will notice a terminal flicker at startup.
 
 If you prefer to have a per-vm setup rather than per-template, create a `/rw/config/setxkbmap.desktop` with the same content as above and add the following line to `/rw/config/rc.local`:
 
@@ -49,3 +49,5 @@ Alternative setups
 - Once Qubes OS gains support for keyboard layout propagation from dom0 to VMs (see [this official issue](https://github.com/QubesOS/qubes-issues/issues/1396)) the desktop environment's keyboard layout switcher (eg. Xfce Keyboard Layout switcher) could be used instead of `setxkbmap`.  It is not clear however if this solution won't have the same issues as above.
 - Change the layout in dom0 with `localectl`: it's a no-go as it requires a reboot
 
+
+`Contributors: @taraddidles`
