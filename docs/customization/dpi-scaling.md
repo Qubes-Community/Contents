@@ -12,6 +12,8 @@ The simplest way to set dpi scaling in dom0 is to use the desktop environment's 
 - Xfce: Qubes Menu → System Tools → Appearance → Fonts tab: Custom DPI setting: `xxx`
 - KDE: Qubes Menu → System Settings → Font → Force font dpi: `xxx`
 
+Replace `xxx` accordingly with a number that is a multiple of 6 as numbers that aren't sometimes result in annoying rounding errors that cause adjacent bitmap font sizes to not increment and decrement linearly.
+
 
 VMs
 ---
@@ -24,7 +26,7 @@ Get the current value of `Xft.dpi`:
 xrdb -query | grep Xft.dpi
 ~~~
 
-Test with a different dpi value: in a terminal issue the following command and then start an application to check that the menus/fonts' size is increased/decreased (replace '144' accordingly with a number that is a multiple of 6 as numbers that aren't sometimes result in annoying rounding errors that cause adjacent bitmap font sizes to not increment and decrement linearly):
+Test with a different dpi value: in a terminal issue the following command and then start an application to check that the menus/fonts' size is increased/decreased (replace '144' accordingly with a number that is a multiple of 6):
 
 ~~~
 echo Xft.dpi: 144 | xrdb -merge
@@ -36,7 +38,7 @@ Once you found a value that fits your setup you'll likely want to permanently se
 - or, add `Xft.dpi: xxx` to `$HOME/.Xresources` in each AppVM.
 
 
-Note for R3.2: the `Xft.dpi` resource should work but if you have issues you may want to try the following (replace `2` and `0.75` accordingly):
+Note for Qubes 3.2: the `Xft.dpi` resource should work but if you have issues you may want to try the following (replace `2` and `0.75` accordingly):
 
 ~~~
 gsettings set org.gnome.desktop.interface scaling-factor 2
@@ -47,7 +49,7 @@ gsettings set org.gnome.desktop.interface text-scaling-factor 0.75
 Resources
 ---------
 
-Related official issue: https://github.com/QubesOS/qubes-issues/issues/1951
-
+- Related official issue: https://github.com/QubesOS/qubes-issues/issues/1951
+- Mozilla DPI-related Font Size Issues on Unix: https://www-archive.mozilla.org/unix/dpi.html
 
 `Contributors: @taradiddles`
