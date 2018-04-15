@@ -4,15 +4,15 @@
 
 # idea from https://www.mail-archive.com/qubes-users@googlegroups.com/msg20088.html
 
-# taraddidles - apr 2018
+# @taradiddles - apr 2018 - GPL
 
 
 
 # COMPLETION FUNCTIONS
 # ====================
 
-# Output the relative position of COMP_CWORD when words beginning with '-' are ignored
-# Note: this logic is flawed when using option arguments (eg. -s blah).
+# Output the relative position of COMP_CWORD with option words ignored
+# Note: This logic is flawed when using option arguments (eg. -s blah).
 #       Unfortunately there is now way to solve this except parsing every
 #       known option for a given qvm-* command
 _get-cword() {
@@ -25,8 +25,8 @@ _get-cword() {
 	echo ${index}
 }
 
-# Output the first element in COMP_WORDS that doesn't begin with '-'
-# Note: this logic is flawed when using option arguments (eg. -s blah).
+# Output the relative position of COMP_CWORD with option words ignored
+# Note: This logic is flawed when using option arguments (eg. -s blah).
 #       Unfortunately there is now way to solve this except parsing every
 #       known option for a given qvm-* command
 _get-first-word() {
