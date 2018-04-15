@@ -50,4 +50,4 @@ Alternative setups
 - Change the layout in dom0 with `localectl`: it's a no-go as it requires a reboot
 
 
-`Contributors: @taraddidles`
+`Contributors: @taradiddles`
