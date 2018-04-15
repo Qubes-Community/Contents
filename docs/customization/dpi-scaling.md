@@ -50,4 +50,4 @@ Resources
 Related official issue: https://github.com/QubesOS/qubes-issues/issues/1951
 
 
-`Contributors: @taraddidles`
+`Contributors: @taradiddles`
