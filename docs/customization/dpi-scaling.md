@@ -12,7 +12,7 @@ The simplest way to set dpi scaling in dom0 is to use the desktop environment's 
 - Xfce: Qubes Menu → System Tools → Appearance → Fonts tab: Custom DPI setting: `xxx`
 - KDE: Qubes Menu → System Settings → Font → Force font dpi: `xxx`
 
-Replace `xxx` accordingly with a number that is a multiple of 6 as numbers that aren't sometimes result in annoying rounding errors that cause adjacent bitmap font sizes to not increment and decrement linearly.
+Replace `xxx` with a number that fits your setup and is a multiple of 6, as numbers that aren't sometimes result in annoying rounding errors that cause adjacent bitmap font sizes to not increment and decrement linearly.
 
 
 VMs
@@ -26,7 +26,7 @@ Get the current value of `Xft.dpi`:
 xrdb -query | grep Xft.dpi
 ~~~
 
-Test with a different dpi value: in a terminal issue the following command and then start an application to check that the menus/fonts' size is increased/decreased (replace '144' accordingly with a number that is a multiple of 6):
+Test with a different dpi value: in a terminal issue the following command and then start an application to check that the menus/fonts' size is increased/decreased; replace '144' with the value set in dom0 (it's possible to set a different value in VMs though):
 
 ~~~
 echo Xft.dpi: 144 | xrdb -merge
