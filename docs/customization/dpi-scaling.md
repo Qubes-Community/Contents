@@ -18,7 +18,7 @@ Replace `xxx` with a number that fits your setup and is a multiple of 6, as numb
 VMs
 ---
 
-The procedure for setting DPI scaling is different depending on whether Gnome settings daemon is running or not:
+The procedure for setting DPI scaling is different depending on whether gnome settings daemon is running or not:
 
 - if the daemon is stopped/not installed, applications honor the `Xft.dpi` [X resource](https://en.wikipedia.org/wiki/X_resources) which we can then use for scaling.
 - if the daemon is running (`/usr/libexec/gsd-xsettings` process in Fedora), applications are prevented from using the `Xft.dpi` resource and `dconf` values have to set.
@@ -34,7 +34,7 @@ Notes:
        You may do so temporarily with the `xrdb -merge` command, or permanently in a `Xresources` file (see section below).
 
 
-### VMs without Gnome settings daemon ###
+### VMs without gnome settings daemon ###
 
 Get the current value of `Xft.dpi`:
 
@@ -54,7 +54,7 @@ Once you found a value that fits your setup you'll likely want to permanently se
 - or, add `Xft.dpi: xxx` to `$HOME/.Xresources` in each AppVM.
 
 
-### VMs with Gnome settings daemon ###
+### VMs with gnome settings daemon ###
 
 We'll set the `scaling-factor` and `text-scaling-factor` dconf values in the `org.gnome.desktop.interface` schema.
 
@@ -91,7 +91,7 @@ text-scaling-factor=0.75
 
 Then run `dconf update`.
 
-For more information on setting system-wide dconf see [this page](https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en).
+For more information on setting system-wide dconf values see [this page](https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en).
 
 
 Resources
