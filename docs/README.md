@@ -6,12 +6,14 @@
 `configuration`
 - improve power management: https://github.com/taradiddles/qubes-os/tree/master/powermgnt
 - use Qubes OS as a server: https://github.com/Rudd-O/qubes-network-server
+- VM hardening (fend off malware at VM startup): https://github.com/tasket/Qubes-VM-hardening
 
 `coreboot`
 - [install coreboot on a Thinkpad x230](coreboot/x230.md)
 
 `customization`
 - [change DPI scaling in dom0 and VMs](customization/dpi-scaling.md)
+
 
 `hardware`
 - [tips on choosing the right hardware](hardware/hardware-selection.md)
