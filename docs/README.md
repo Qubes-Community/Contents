@@ -23,4 +23,4 @@
 - [how to use multiple keyboard layouts](localization/keyboard-multiple-layouts.md)
 
 `misc`
-- Qubes cheat sheet (3.2) : https://github.com/Jeeppler/qubes-cheatsheet
+- ![](/_res/l.png) [Qubes 3.2 cheat sheet](https://github.com/Jeeppler/qubes-cheatsheet)
