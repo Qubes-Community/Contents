@@ -1,15 +1,15 @@
 #### User-contributed code and links ![](/_res/l.png) to third party resources ####
 
+**`OS-administration`**
+- ![](/_res/l.png) [do-snapshot.py](https://github.com/tasket/Qubes-scripts/blob/master/do-snapshot.py): keeps a rotating collection of Btrfs snapshots for root fs ([readme](https://github.com/tasket/Qubes-scripts#do-snapshotpy))
+- ![](/_res/l.png) [qubes-multi-update](https://github.com/tasket/Qubes-scripts/blob/master/qubes-multi-update): updates multiple template, standalone VMs and dom0 ([readme](https://github.com/tasket/Qubes-scripts#qubes-multi-update))
+- R4-universal-update-script.sh: bash script to automate VM updates
+
 **`monitoring`**
 - ls-qubes.sh: outputs the nb. of running qubes + total memory used; the output can be fed into a panel text applet (see comments in the script).
 
 **`multimedia`**
 - sound-control-scripts: toggle, volume up, volume down, ...
-
-**`OS-administration`**
-- ![](/_res/l.png) [do-snapshot.py](https://github.com/tasket/Qubes-scripts/blob/master/do-snapshot.py): keeps a rotating collection of Btrfs snapshots for root fs ([readme](https://github.com/tasket/Qubes-scripts#do-snapshotpy))
-- ![](/_res/l.png) [qubes-multi-update](https://github.com/tasket/Qubes-scripts/blob/master/qubes-multi-update): updates multiple template, standalone VMs and dom0 ([readme](https://github.com/tasket/Qubes-scripts#qubes-multi-update))
-- R4-universal-update-script.sh: bash script to automate VM updates
 
 **`productivity`**
 - toggle-fullscreen-scripts
