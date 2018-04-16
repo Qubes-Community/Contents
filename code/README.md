@@ -1,4 +1,4 @@
-#### User-contributed code and links ![](/_res/l.png) to third party resources ####
+#### User-contributed code and links (![](/_res/l.png) icon) to third party resources ####
 
 **`OS-administration`**
 - ![](/_res/l.png) [do-snapshot.py](https://github.com/tasket/Qubes-scripts/blob/master/do-snapshot.py): keeps a rotating collection of Btrfs snapshots for root fs ([readme](https://github.com/tasket/Qubes-scripts#do-snapshotpy))
