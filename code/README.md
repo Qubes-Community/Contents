@@ -6,7 +6,7 @@
 **`multimedia`**
 - sound-control-scripts: toggle, volume up, volume down, ...
 
-**`OS-administration`**:
+**`OS-administration`**
 - https://github.com/tasket/Qubes-scripts/blob/master/qubes-multi-update: updates multiple template, standalone VMs and dom0 ([readme](https://github.com/tasket/Qubes-scripts#qubes-multi-update))
 - R4-universal-update-script.sh: bash script to automate VM updates
 - https://github.com/tasket/Qubes-scripts/blob/master/do-snapshot.py: Keeps a rotating collection of Btrfs snapshots for root fs ([readme](https://github.com/tasket/Qubes-scripts#do-snapshotpy))
@@ -16,5 +16,5 @@
 - screenshot-scripts
 - bash autocompletion script for `qvm-*` commands in dom0
 
-**`misc`**:
+**`misc`**
 - https://github.com/tasket/Qubes-scripts/blob/master/halt-vm-by-window: shutdown a Qubes VM associated with the currently active window ([readme](https://github.com/tasket/Qubes-scripts#halt-vm-by-window))
