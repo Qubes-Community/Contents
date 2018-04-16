@@ -18,19 +18,19 @@ Replace `xxx` with a number that fits your setup and is a multiple of 6, as numb
 VMs
 ---
 
-The procedure for setting DPI scaling depends on the presence of the `/usr/libexec/gsd-xsettings` daemon from the `gnome-settings-daemon` package:
+The procedure for setting DPI scaling depends on the presence of the `/usr/libexec/gsd-xsettings` daemon, usually provided by the `gnome-settings-daemon` package:
 
-- without `/usr/libexec/gsd-xsettings` running, applications honor the Xft.dpi` [X resource](https://en.wikipedia.org/wiki/X_resources)
+- without `/usr/libexec/gsd-xsettings` running, applications honor the Xft.dpi` [X resource](https://en.wikipedia.org/wiki/X_resources), which we can use for scaling.
 - with `/usr/libexec/gsd-xsettings` running, applications are prevented from using the `Xft.dpi` Xresource so gnome specific commands have to used.
 
 Notes:
-- the official `fedora-xx` template has `gnome-settings-daemon` installed by default but `fedora-xx-minimal` doesn't.
-- when testing DPI scaling with `xterm` (or more generally any glib apps) you must use a xft font:
-   - for xterm, ctrl-right click in the terminal's windows and select TrueType fonts (make sure you have such fonts installed !)
-   - or, set the `faceName` Xresource (eg. `XTerm*faceName: DejaVu Sans Mono:size=14:antialias=true`) either with `xrdb -merge` or in a `Xresources` file (see below).
+- the official `fedora-xx` template has `gnome-settings-daemon` installed by default while the `fedora-xx-minimal` template doesn't.
+- DPI scaling with `xterm` (or any glib apps) requires the use of a xft font:
+   - for `xterm`, ctrl-right click in the terminal's windows and select 'TrueType Fonts' (make sure you have such fonts installed).
+   - or more generally, set the `faceName` Xresource (eg. `XTerm*faceName: DejaVu Sans Mono:size=14:antialias=true`). You may do so temporarilt with the `xrdb -merge` command, or permanently in a `Xresources` file (see section below).
 
 
-### VMs without gnome-settings-daemon (eg. 'fedora-xx-minimal' template) ###
+### VMs without gnome-settings-daemon ###
 
 Get the current value of `Xft.dpi`:
 
@@ -44,13 +44,13 @@ Test with a different dpi value: in a terminal issue the following command and t
 echo Xft.dpi: 144 | xrdb -merge
 ~~~
 
-Once you found a value that fits your setup you'll likely want to permanently set the dpi Xresource. You can do so on a per-template or per-VM basis:
+Once you found a value that fits your setup you'll likely want to permanently set the `Xft.dpi` resource. You can do so on a per-template or per-VM basis:
 
 - add (or modify) `Xft.dpi: xxx` in the TemplateVM's Xresource file (`/etc/X11/Xresources` or `/etc/X11/Xresources/x11-common` for whonix-ws-template).
 - or, add `Xft.dpi: xxx` to `$HOME/.Xresources` in each AppVM.
 
 
-### VMs with gnome-settings-daemon installed (eg. 'fedora-xx' template) ###
+### VMs with gnome-settings-daemon ### 
 
 
 Use the `gsettings` command (replace `2` and `0.75` to suit your needs ; the first value must be an integer though):
