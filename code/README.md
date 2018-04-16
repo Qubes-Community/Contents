@@ -1,4 +1,4 @@
-#### User-contributed code and links to third party resources ####
+#### User-contributed code and links ![](/_res/l.png) to third party resources ####
 
 **`monitoring`**
 - ls-qubes.sh: outputs the nb. of running qubes + total memory used; the output can be fed into a panel text applet (see comments in the script).

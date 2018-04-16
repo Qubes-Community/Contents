@@ -1,4 +1,4 @@
-#### User-contributed documentation and links to third party docs ####
+#### User-contributed documentation and links ![](/_res/l.png) to third party docs ####
 
 `common-tasks`
 - [how to copy files (and sparse files) from a VM to dom0](common-tasks/copying-files-to-dom0.md)
