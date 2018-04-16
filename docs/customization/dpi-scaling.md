@@ -18,7 +18,19 @@ Replace `xxx` with a number that fits your setup and is a multiple of 6, as numb
 VMs
 ---
 
-We'll make use of the `Xft.dpi` [X resource](https://en.wikipedia.org/wiki/X_resources) in VMs. Most toolkits and applications honor it so it is the prefered way to set dpi scaling instead of using toolkit-specific features.
+The procedure for setting DPI scaling depends on the presence of the `/usr/libexec/gsd-xsettings` daemon from the `gnome-settings-daemon` package:
+
+- without `/usr/libexec/gsd-xsettings` running, applications honor the Xft.dpi` [X resource](https://en.wikipedia.org/wiki/X_resources)
+- with `/usr/libexec/gsd-xsettings` running, applications are prevented from using the `Xft.dpi` Xresource so gnome specific commands have to used.
+
+Notes:
+- the official `fedora-xx` template has `gnome-settings-daemon` installed by default but `fedora-xx-minimal` doesn't.
+- when testing DPI scaling with `xterm` (or more generally any glib apps) you must use a xft font:
+   - for xterm, ctrl-right click in the terminal's windows and select TrueType fonts (make sure you have such fonts installed !)
+   - or, set the `faceName` Xresource (eg. `XTerm*faceName: DejaVu Sans Mono:size=14:antialias=true`) either with `xrdb -merge` or in a `Xresources` file (see below).
+
+
+### VMs without gnome-settings-daemon (eg. 'fedora-xx-minimal' template) ###
 
 Get the current value of `Xft.dpi`:
 
@@ -38,7 +50,10 @@ Once you found a value that fits your setup you'll likely want to permanently se
 - or, add `Xft.dpi: xxx` to `$HOME/.Xresources` in each AppVM.
 
 
-Note for Qubes 3.2: the `Xft.dpi` resource should work but if you have issues you may want to try the following (replace `2` and `0.75` accordingly):
+### VMs with gnome-settings-daemon installed (eg. 'fedora-xx' template) ###
+
+
+Use the `gsettings` command (replace `2` and `0.75` to suit your needs ; the first value must be an integer though):
 
 ~~~
 gsettings set org.gnome.desktop.interface scaling-factor 2
@@ -48,7 +63,7 @@ gsettings set org.gnome.desktop.interface text-scaling-factor 0.75
 
 Resources
 ---------
-
+- ARCH Linux HiDPI page: https://wiki.archlinux.org/index.php/HiDPI
 - Related official issue: https://github.com/QubesOS/qubes-issues/issues/1951
 - Mozilla DPI-related Font Size Issues on Unix: https://www-archive.mozilla.org/unix/dpi.html
 
