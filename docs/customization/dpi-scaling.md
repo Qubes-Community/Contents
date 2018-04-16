@@ -1,7 +1,7 @@
 DPI scaling
 ===========
 
-Qubes OS passes on dom0's screen resolution to VMs (this can be seen in the output of `xrandr`) but doesn't pass on dom0's dpi value. Recent distributions have automatic scaling depending on the screen's resolution (eg. in fedora if the vertical resolution is greater than 1200px) but for a variety of reasons one may have to set a custom dpi scaling value.
+Qubes OS passes on dom0's screen resolution to VMs (this can be seen in the output of `xrandr`) but doesn't pass on dom0's dpi value. Recent distributions have automatic scaling depending on the screen's resolution (eg. in fedora if the screen resolution is at least 192dpi and the screen height is greater than 1200 pixels) but for a variety of reasons one may have to set a custom dpi scaling value.
 
 
 Dom0
@@ -20,7 +20,7 @@ VMs
 
 The procedure for setting DPI scaling depends on the presence of the `/usr/libexec/gsd-xsettings` daemon, usually provided by the `gnome-settings-daemon` package:
 
-- without `/usr/libexec/gsd-xsettings` running, applications honor the `Xft.dpi` [X resource](https://en.wikipedia.org/wiki/X_resources), which we can use for scaling.
+- without `/usr/libexec/gsd-xsettings` running, applications honor the `Xft.dpi` [X resource](https://en.wikipedia.org/wiki/X_resources), which we can then use for scaling.
 - with `/usr/libexec/gsd-xsettings` running, applications are prevented from using the `Xft.dpi` resource so gnome specific commands have to used.
 
 Notes:
@@ -56,19 +56,49 @@ Once you found a value that fits your setup you'll likely want to permanently se
 
 ### VMs with gsd-xsettings ### 
 
+We'll set the `scaling-factor` and `text-scaling-factor` dconf values in the `org.gnome.desktop.interface` schema.
 
-Use the `gsettings` command (replace `2` and `0.75` to suit your needs ; the first value must be an integer though):
+Get the current values (if any):
+
+~~~
+gsettings get org.gnome.desktop.interface scaling-factor
+gsettings get org.gnome.desktop.interface text-scaling-factor
+~~~
+
+Test with different values; notes:
+- windows and menu/fonts should be resized dynamically
+- when running the commands below the values will be automatically written to `$HOME/.config/dconf/user`
+- replace `2` and `0.75` to suit your needs (`scaling-factor` **must** be an integer though)
 
 ~~~
 gsettings set org.gnome.desktop.interface scaling-factor 2
 gsettings set org.gnome.desktop.interface text-scaling-factor 0.75
 ~~~
 
+If `gsd-xsettings` is running but nothing happens, examine the output of `dconf dump /`. If needed, reset any `xsettings` override:
+
+~~~
+gsettings reset org.gnome.settings-daemon.plugins.xsettings overrides
+~~~
+
+To store the dconf settings system-wide - eg. when customizing templateVMs - copy the following text into `/etc/dconf/db/local.d/dpi` (replace `2` and `0.75` with your values):
+
+~~~
+[org/gnome/desktop/interface]
+scaling-factor=uint32 2
+text-scaling-factor=0.75
+~~~
+
+Then run `dconf update`.
+
+For more information on setting system-wide dconf see [this page](https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en).
+
 
 Resources
 ---------
-- ARCH Linux HiDPI page: https://wiki.archlinux.org/index.php/HiDPI
-- Related official issue: https://github.com/QubesOS/qubes-issues/issues/1951
+- ARCH Linux HiDPI wiki page: https://wiki.archlinux.org/index.php/HiDPI
+- Gnome HiDPI wiki page: https://wiki.gnome.org/HowDoI/HiDpi
 - Mozilla DPI-related Font Size Issues on Unix: https://www-archive.mozilla.org/unix/dpi.html
+- Related official issue: https://github.com/QubesOS/qubes-issues/issues/1951
 
 `Contributors: @taradiddles`
