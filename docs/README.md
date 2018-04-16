@@ -1,13 +1,14 @@
-#### User-contributed documentation and links to third party docs
+#### User-contributed documentation and links to third party docs ####
 
 `common-tasks`
 - [how to copy files (and sparse files) from a VM to dom0](common-tasks/copying-files-to-dom0.md)
 
 `configuration`
-- improve power management: https://github.com/taradiddles/qubes-os/tree/master/powermgnt
 - use Qubes OS as a server: https://github.com/Rudd-O/qubes-network-server
+- use Qubes OS as a smartTV: https://github.com/Aekez/QubesTV
 - VM hardening (fend off malware at VM startup): https://github.com/tasket/Qubes-VM-hardening
 - VPN configuration: https://github.com/tasket/Qubes-vpn-support
+- improve power management: https://github.com/taradiddles/qubes-os/tree/master/powermgnt
 
 `coreboot`
 - [install coreboot on a Thinkpad x230](coreboot/x230.md)
