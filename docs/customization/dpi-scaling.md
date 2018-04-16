@@ -27,7 +27,11 @@ Notes:
 - the official `fedora-xx` template has `gnome-settings-daemon` installed by default while the `fedora-xx-minimal` template doesn't.
 - DPI scaling with `xterm` (or any glib apps) requires the use of a xft font:
    - for `xterm`, ctrl - right click in the terminal's windows and select 'TrueType Fonts' (make sure you have such fonts installed).
-   - or more generally, set the `faceName` Xresource, eg. `XTerm*faceName: DejaVu Sans Mono:size=14:antialias=true`. You may do so temporarily with the `xrdb -merge` command, or permanently in a `Xresources` file (see section below).
+   - or more generally, set the `faceName` Xresource, eg.:
+   
+       `*faceName: DejaVu Sans Mono:size=14:antialias=true`
+   
+       You may do so temporarily with the `xrdb -merge` command, or permanently in a `Xresources` file (see section below).
 
 
 ### VMs without gsd-xsettings ###
