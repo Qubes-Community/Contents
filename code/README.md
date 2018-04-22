@@ -2,7 +2,7 @@
 
 **`OS-administration`**
 - ![](/_res/l.png) [do-snapshot.py](https://github.com/tasket/Qubes-scripts/blob/master/do-snapshot.py): keeps a rotating collection of Btrfs snapshots for root fs ([readme](https://github.com/tasket/Qubes-scripts#do-snapshotpy))
-- ![](/_res/l.png) [qubes4-multi-update](https://github.com/tasket/Qubes-scripts/blob/master/qubes4-multi-update): updates multiple template, standalone VMs and dom0 ([readme](https://github.com/tasket/Qubes-scripts#qubes4-multi-update))
+- ![](/_res/l.png) [qubes4-multi-update](https://github.com/tasket/Qubes-scripts/blob/master/qubes4-multi-update): updates multiple template, standalone VMs and dom0 in R4.0 ([readme](https://github.com/tasket/Qubes-scripts#qubes4-multi-update))
 - R4-universal-update-script.sh: bash script to automate VM updates
 - ![](/_res/l.png) [findpref](https://github.com/tasket/Qubes-scripts/blob/master/findpref): find all VMs that match a pref value and optionally set new values for them ([readme](https://github.com/tasket/Qubes-scripts#findpref))
 
