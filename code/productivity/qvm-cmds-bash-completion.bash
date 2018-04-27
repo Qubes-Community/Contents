@@ -14,7 +14,7 @@
 
 # Output the relative position of COMP_CWORD with option words ignored
 # Note: This logic is flawed when using option arguments (eg. -s blah).
-#       Unfortunately there is now way to solve this except parsing every
+#       Unfortunately there is no way to solve this except parsing every
 #       known option for a given qvm-* command
 _get-cword() {
 	local index=0
@@ -28,7 +28,7 @@ _get-cword() {
 
 # Output the relative position of COMP_CWORD with option words ignored
 # Note: This logic is flawed when using option arguments (eg. -s blah).
-#       Unfortunately there is now way to solve this except parsing every
+#       Unfortunately there is no way to solve this except parsing every
 #       known option for a given qvm-* command
 _get-first-word() {
 	local i
