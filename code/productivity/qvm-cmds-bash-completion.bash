@@ -3,6 +3,7 @@
 # Copy this file to /etc/bash_completion.d/qvm.bash
 
 # idea from https://www.mail-archive.com/qubes-users@googlegroups.com/msg20088.html
+#  credit to haaber for the original PoC !
 
 # @taradiddles - apr 2018 - GPL
 
