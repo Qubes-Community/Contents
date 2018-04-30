@@ -16,6 +16,7 @@
 - toggle-fullscreen-scripts
 - screenshot-scripts
 - bash autocompletion script for `qvm-*` commands in dom0
+- ![](/_res/l.png) [qvm-screenshot-tool](https://github.com/evadogstar/qvm-screenshot-tool)
 
 **`misc`**
 - ![](/_res/l.png) [halt-vm-by-window](https://github.com/tasket/Qubes-scripts/blob/master/halt-vm-by-window): shutdown a Qubes VM associated with the currently active window ([readme](https://github.com/tasket/Qubes-scripts#halt-vm-by-window))
