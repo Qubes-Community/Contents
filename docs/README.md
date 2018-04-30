@@ -24,3 +24,4 @@
 
 `misc`
 - ![](/_res/l.png) [Qubes 3.2 cheat sheet](https://github.com/Jeeppler/qubes-cheatsheet)
+- [infrequently asked questions](misc/iaq.md)
