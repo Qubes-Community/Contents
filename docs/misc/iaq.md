@@ -7,7 +7,7 @@ Set `xpti=false` option in Xen command line (xen.gz option in grub, or options= 
 
 ### What is a good IDE for Qubes?
 
-QtCreator
+QtCreator.
 
 ### What is the process flow when starting an AppVM under Qubes R4.x?
 
@@ -35,6 +35,10 @@ qvm-features VMNAME linux-stubdom ''
 ### How can I contribute to developing Qubes Windows Tools for R4.0?
 
 See [this post](https://www.mail-archive.com/qubes-devel@googlegroups.com/msg02808.html) and thread.
+
+### What are some undocumented QWT registry keys?
+
+MaxFPS, UseDirtyBits.
 
 ### Where are VM log files kept?
 
@@ -95,6 +99,34 @@ Alternatively you can add swap with a file inside the vm but it's a bit ugly:
 dd if=/dev/zero of=swapfile bs=1M count=1000
 mkswap swapfile
 swapon swapfile
+~~~
+
+### Slow VM startup
+
+Use tools like 'systemd-analyze blame' as your guide.
+
+Another service that shows up with significant time is wpa_supplicant. 
+You can have it start only for network VMs by creating `/lib/systemd/system/wpa_supplicant.service.d/20_netvms` with the following:
+~~~
+[Unit]
+ConditionPathExists=/var/run/qubes/this-is-netvm
+~~~
+
+### Manually install Whonix 14 templates
+
+~~~
+sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-template-whonix-gw-14
+qvm-create sys-whonix-14 --class AppVM --template whonix-gw-14 --label black
+qvm-prefs sys-whonix-14 provides_network True
+
+sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-template-whonix-ws-14
+qvm-features whonix-ws-14 whonix-ws 1
+qvm-create whonix-ws-dvm-14 --class AppVM --template whonix-ws-14 --label
+green
+qvm-features whonix-ws-dvm-14 appmenus-dispvm 1
+qvm-prefs whonix-ws-dvm-14 template_for_dispvms true
+qvm-prefs whonix-ws-dvm-14 netvm sys-whonix-14
+qvm-prefs whonix-ws-dvm-14 default_dispvm whonix-ws-dvm-14
 ~~~
 
 
