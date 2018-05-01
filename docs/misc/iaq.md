@@ -128,6 +128,11 @@ qvm-prefs whonix-ws-dvm-14 netvm sys-whonix-14
 qvm-prefs whonix-ws-dvm-14 default_dispvm whonix-ws-dvm-14
 ~~~
 
+### Xen passthrough compatible video cards
+
+- https://en.wikipedia.org/wiki/List_of_IOMMU-supporting_hardware#AMD
+- http://www.overclock.net/t/1307834/xen-vga-passthrough-compatible-graphics-adapters
+- https://wiki.xenproject.org/wiki/Xen_VGA_Passthrough_Tested_Adapters#ATI.2FAMD_display_adapters
 
 
 *Thanks to all mailing list contributors, from where most of these came.*
