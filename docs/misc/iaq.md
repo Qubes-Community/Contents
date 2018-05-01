@@ -121,8 +121,7 @@ qvm-prefs sys-whonix-14 provides_network True
 
 sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-template-whonix-ws-14
 qvm-features whonix-ws-14 whonix-ws 1
-qvm-create whonix-ws-dvm-14 --class AppVM --template whonix-ws-14 --label
-green
+qvm-create whonix-ws-dvm-14 --class AppVM --template whonix-ws-14 --label green
 qvm-features whonix-ws-dvm-14 appmenus-dispvm 1
 qvm-prefs whonix-ws-dvm-14 template_for_dispvms true
 qvm-prefs whonix-ws-dvm-14 netvm sys-whonix-14
