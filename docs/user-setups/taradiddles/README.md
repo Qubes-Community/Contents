@@ -65,7 +65,7 @@ See https://github.com/taradiddles/qubes-os/tree/master/powermgnt
 Define application shortcuts with Qubes Menu -> System Tools -> Keyboard -> Application Shortcuts; for instance:
 
 - ctrl-alt C: open a calculator in VM untrusted ; shortcut: `qvm-run -q -a untrusted galculator`
-- ctrl-alt X: open a popup windows (script [here](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu-r4) for opening Xterm in a given VM. Screenshot [here](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu.screenshot.jpg)). Shortcut: `popup-appmenu xterm`.
+- ctrl-alt X: open a popup windows to open xterm in a given VM (script [here](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu-r4), screenshot [there](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu.screenshot.jpg)). Shortcut: `popup-appmenu xterm`.
 - ctrl-alt F: ditto, but with firefox
 - ctrl-alt K: open keepassxc in VM vault; shortcut: `qvm-run -q -a vault keepassxc`
 
@@ -120,7 +120,7 @@ Fixes/tweaks:
 
 ### fedora-medium ###
 
-Cloned fedora-minimal and installed the following rpms:
+Cloned fedora-minimal above and installed the following rpms:
 
 ~~~
 tigervnc
@@ -159,7 +159,7 @@ set LANG=en_US.UTF-8 in /etc/locale.conf
 
 ### fedora-heavy ###
 
-Cloned fedora-medium.
+Cloned fedora-medium above.
 
 Installed the following repos:
 
