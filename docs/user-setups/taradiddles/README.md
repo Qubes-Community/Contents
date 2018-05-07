@@ -10,7 +10,7 @@ Lenovo Thinkpad T450s
 TemplateVMs and VMs
 -------------------
 
-(see end of doc for how to configure the templateVMs)
+(see the [TemplateVMs customization](#templatevms-customization) section for how to configure the templateVMs)
 
 ### TemplateVM 'fedora-minimal' ###
 
