@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Configure multiple keyboard layouts
+Exec=setxkbmap -layout "us,bg(phonetic)" -option "grp:shifts_toggle"
+Terminal=true
+Type=Application

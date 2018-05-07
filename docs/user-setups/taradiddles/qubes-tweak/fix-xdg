@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+mkdir -p /etc/xdg/autostart/bkp
+
+IFS="
+"
+
+for i in $(find /etc/xdg/autostart/ -maxdepth 1 -mindepth 1 ! -type d ! -name '0*.desktop'); do
+	cp -au "$i" /etc/xdg/autostart/bkp
+	rm "$i"
+done
+
+
+

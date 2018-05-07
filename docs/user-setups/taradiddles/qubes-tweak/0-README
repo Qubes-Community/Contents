@@ -1,0 +1,5 @@
+ln -s /usr/lib/qubes-tweak/setxkbmap.desktop /etc/xdg/autostart/0-setxkbmap.desktop
+ln -s /usr/lib/qubes-tweak/xresources.desktop /etc/xdg/autostart/0-xresources.desktop
+ln -s /usr/lib/qubes-tweak/solarized.vim2 /usr/share/vim/vim80/colors/solarized.vim
+ln -s /usr/lib/qubes-tweak/Xressource /usr/lib/qubes-tweak/Xresources
+cat /usr/lib/qubes-tweak/vimrc.add.colors >> /etc/vimrc

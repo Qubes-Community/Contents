@@ -29,4 +29,6 @@
 - [infrequently asked questions](misc/iaq.md)
 
 `system`
-- [Understanding and fixing issues with time/clock](system/clock-time.md)
+- [understanding and fixing issues with time/clock](system/clock-time.md)
+
+`user-setups`: [examples of user setups](user-setups/README.md) (templates and VMs used, productivity tips, customizations, ...)
