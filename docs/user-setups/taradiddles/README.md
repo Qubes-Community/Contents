@@ -24,7 +24,7 @@ Custom minimal template for:
 
 Custom default template with libreoffice, thunderbird, ...
 
-- VM 'work': firewalled, ssh to known hosts and to mail server; used for emails/office work and storing non confidential documents.
+- VM 'work': firewalled, ssh to known hosts and to mail server; used for emails/office work, storing non confidential documents, and terminals (with [tmux](https://en.wikipedia.org/wiki/Tmux)).
 - VM 'banking': firewalled, only a few IPs allowed; used only for e-banking
 - VM 'halftrusted': used only for e-shopping
 - VM 'private': not networked; used for opening and storing private documents
@@ -111,11 +111,11 @@ bzip2
 
 Fixes/tweaks:
 - `/usr/lib/qubes-tweak`:
-    - `fix-xdg`: remove autostart stuff in `/etc/xdg/autostart`; this will prevent for instance nm-applet from starting in all VMs while it's only necessary in sys-net.
+    - `fix-xdg`: remove autostart stuff in `/etc/xdg/autostart`; this will prevent for instance nm-applet from starting in all VMs while it's only required in sys-net.
     - `setxkbmap.desktop`: multiple keyboard layouts (see [this doc](https://github.com/Qubes-Community/Contents/blob/master/docs/localization/keyboard-multiple-layouts.md)).
     - `solarized.vim2`, `vimrc.add.colors`: configure vim to use the [solarized](http://ethanschoonover.com/solarized) color scheme.
     - `Xresources` and `xresources.desktop`: load Xresources at boot (can't simply use `/etc/X11/xresources` because `xinit` runs `xrdb -merge` without the preprocessor, which breaks the solarized color scheme definitions.
-- `/etc/profile.d/interactive-commands.sh`: ask before rm/cp/mv'ing files
+- `/etc/profile.d/interactive-commands.sh`: ask before deleting/overwriting files with rm/cp/mv
 
 
 ### fedora-medium ###
