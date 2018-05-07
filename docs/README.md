@@ -31,4 +31,5 @@
 `system`
 - [understanding and fixing issues with time/clock](system/clock-time.md)
 
-`user-setups`: [examples of user setups](user-setups/README.md) (templates and VMs used, productivity tips, customizations, ...)
+`user-setups`
+- [examples of user setups](user-setups/README.md) (templates and VMs used, productivity tips, customizations, ...)
