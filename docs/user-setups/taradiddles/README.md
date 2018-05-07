@@ -16,25 +16,27 @@ TemplateVMs and VMs
 
 Custom minimal template for:
 
-    - VM 'sys-firewall'
-    - VM 'sys-net'
-    - VM 'vault': not networked; used for keepassxc (password manager) and [split gpg](https://www.qubes-os.org/doc/split-gpg/)
+- VM 'sys-firewall'
+- VM 'sys-net'
+- VM 'vault': not networked; used for keepassxc (password manager) and [split gpg](https://www.qubes-os.org/doc/split-gpg/)
 
 ### TemplateVM 'fedora-medium ###
 
 Custom default template with libreoffice, thunderbird, ...
-    - VM 'work': firewalled, ssh to known hosts and to mail server; used for emails/office work and storing non confidential documents.
-    - VM 'banking': firewalled, only a few IPs allowed; used only for e-banking
-    - VM 'halftrusted': used only for e-shopping
-    - VM 'private': not networked; used for opening and storing private documents
+
+- VM 'work': firewalled, ssh to known hosts and to mail server; used for emails/office work and storing non confidential documents.
+- VM 'banking': firewalled, only a few IPs allowed; used only for e-banking
+- VM 'halftrusted': used only for e-shopping
+- VM 'private': not networked; used for opening and storing private documents
 
 ### TemplateVM 'fedora-heavy' ###
 
 Larger custom template with programs from non-fedora repos (multimedia, non free, ...)
-    - VM 'untrusted': not networked; used for opening multimedia files, and content that is thought to be OK. See [this comment](https://github.com/Qubes-Community/Contents/issues/21#issuecomment-385189481) for the rationale behind keeping this VM isolated from Internet.
-    - VM 'sys-usb': firewalled, only 1 IP allowed (playing music from a NAS to a USB soundcard).
-    - dispVM 'dispBrowser': doc / WIP; used for casual browsing. Using with a customized firefox profile with privacy extensions and a custom `user.js` file (adapted from [here](https://github.com/pyllyukko/user.js)).
-    - dispVMs: used for opening content downloaded from unknown/dodgy sources and browsing sites that won't work with the restricted firefox profile of 'dispBrowser'.
+
+- VM 'untrusted': not networked; used for opening multimedia files, and content that is thought to be OK. See [this comment](https://github.com/Qubes-Community/Contents/issues/21#issuecomment-385189481) for the rationale behind keeping this VM isolated from Internet.
+- VM 'sys-usb': firewalled, only 1 IP allowed (playing music from a NAS to a USB soundcard).
+- dispVM 'dispBrowser': doc / WIP; used for casual browsing. Using with a customized firefox profile with privacy extensions and a custom `user.js` file (adapted from [here](https://github.com/pyllyukko/user.js)).
+- dispVMs: used for opening content downloaded from unknown/dodgy sources and browsing sites that won't work with the restricted firefox profile of 'dispBrowser'.
 
 
 DOM0 customization
