@@ -65,7 +65,7 @@ See https://github.com/taradiddles/qubes-os/tree/master/powermgnt
 Define application shortcuts with Qubes Menu -> System Tools -> Keyboard -> Application Shortcuts; for instance:
 
 - ctrl-alt C: open a calculator in VM untrusted (`qvm-run -q -a untrusted galculator`)
-- ctrl-alt X: open a popup windows (script [here](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu-r4) for opening Xterm in a given VM.
+- ctrl-alt X: open a popup windows (script [here](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu-r4) for opening Xterm in a given VM. Screenshot [here](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu.screenshot.jpg)).
 - ctrl-alt F: ditto, but with firefox
 - ctrl-alt K: open keepassxc in VM vault
 
@@ -73,7 +73,7 @@ Define application shortcuts with Qubes Menu -> System Tools -> Keyboard -> Appl
 VMs customization
 -----------------
 
-sys-net: start `nm-applet` with a .desktop file in `$HOME/.config/autostart`
+sys-net: since nm-applet isn't started by default in all VMs (see section below), start it with a .desktop file in `$HOME/.config/autostart` (note: can't use `rc.local` because Xorg isn't started yet when `rc.local` runs).
 
 
 TemplateVMs customization
