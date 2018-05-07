@@ -165,7 +165,7 @@ Installed the following repos:
 
 - Google Chrome
 - rpmfusion-free
-- rpm-fussion-nonfree
+- rpmfusion-nonfree
 
 And installed the following rpms:
 
