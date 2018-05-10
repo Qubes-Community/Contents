@@ -115,6 +115,8 @@ ConditionPathExists=/var/run/qubes/this-is-netvm
 ### Manually install Whonix 14 templates
 
 ~~~
+sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-core-admin-addon-whonix
+
 sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-template-whonix-gw-14
 qvm-create sys-whonix-14 --class AppVM --template whonix-gw-14 --label black
 qvm-prefs sys-whonix-14 provides_network True
