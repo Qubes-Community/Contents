@@ -1,5 +1,7 @@
 #### User-contributed documentation and links (![](/_res/l.png) icon) to third party docs ####
 
+[Infrequently Asked Questions](misc/iaq.md)
+
 `common-tasks`
 - [how to copy files (and sparse files) from a VM to dom0](common-tasks/copying-files-to-dom0.md)
 
