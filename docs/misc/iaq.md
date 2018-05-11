@@ -120,6 +120,7 @@ sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-core-admin-addon-w
 sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-template-whonix-gw-14
 qvm-create sys-whonix-14 --class AppVM --template whonix-gw-14 --label black
 qvm-prefs sys-whonix-14 provides_network True
+qvm-tags whonix-gw-14 a whonix-updatevm
 
 sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-template-whonix-ws-14
 qvm-features whonix-ws-14 whonix-ws 1
@@ -128,6 +129,21 @@ qvm-features whonix-ws-dvm-14 appmenus-dispvm 1
 qvm-prefs whonix-ws-dvm-14 template_for_dispvms true
 qvm-prefs whonix-ws-dvm-14 netvm sys-whonix-14
 qvm-prefs whonix-ws-dvm-14 default_dispvm whonix-ws-dvm-14
+qvm-tags whonix-ws-14 a whonix-updatevm
+~~~
+To use the new `sys-whonix-14` for your UpdateVM, perform the following steps:
+~~~
+qubes-prefs updatevm sys-whonix-14
+~~~
+Then, edit `/etc/qubes-rpc/policy/qubes.UpdatesProxy` and modify the top lines:
+~~~
+$type:TemplateVM $default allow,target=sys-whonix
+$tag:whonix-updatevm $default allow,target=sys-whonix
+~~~
+to become:
+~~~
+$type:TemplateVM $default allow,target=sys-whonix-14
+$tag:whonix-updatevm $default allow,target=sys-whonix-14
 ~~~
 
 ### Xen passthrough compatible video cards
