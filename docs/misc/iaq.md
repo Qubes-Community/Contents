@@ -56,6 +56,10 @@ ConditionPathExists=/var/run/qubes/this-is-netvm
 - http://www.overclock.net/t/1307834/xen-vga-passthrough-compatible-graphics-adapters
 - https://wiki.xenproject.org/wiki/Xen_VGA_Passthrough_Tested_Adapters#ATI.2FAMD_display_adapters
 
+### Where are VM log files kept?
+
+In the `/var/log/libvirst/libxl/`, `/var/log/qubes/` and `/var/log/xen/console/` directories.
+
 ## Development
 
 ### What is a good IDE for Qubes?
@@ -88,10 +92,6 @@ See [this post](https://www.mail-archive.com/qubes-devel@googlegroups.com/msg028
 MaxFPS, UseDirtyBits.
 
 ## Tweaks
-
-### Where are VM log files kept?
-
-In the `/var/log/libvirst/libxl/`, `/var/log/qubes/` and `/var/log/xen/console/` directories.
 
 ### How can I set environment variables for a VM?
 
