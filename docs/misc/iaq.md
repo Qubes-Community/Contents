@@ -1,9 +1,62 @@
 Infrequently Asked Questions
 ============================
 
-### For troubleshooting, how can I disable Xen Meltdown mitigations?
+## Troubleshooting
+
+### How can I disable Xen Meltdown mitigations?
 
 Set `xpti=false` option in Xen command line (xen.gz option in grub, or options= line in xen.cfg for UEFI).
+
+### How can I switch R4.0 stubdomains back to qemu-traditional?
+
+~~~
+qvm-features VMNAME linux-stubdom ''
+~~~
+
+### How can I upgrade everything to testing?
+
+dom0: `sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing --clean` (or --check-only instead for dom0).
+
+fedora: `sudo dnf update --enablerepo=qubes-vm-*-current-testing --refresh`
+
+debian/whonix: `sudo apt-get update -t *-testing && sudo apt-get dist-upgrade -t *-testing`
+
+This way, you don't need to edit any files for debian/whonix to get the testing.
+If you also want to increase reliability further, you can make a dependency/cache check with "sudo apt-get check", which is normally very quick.
+For that, under debian/whonix do: `sudo apt-get check && sudo apt-get update -t *-testing && sudo apt-get dist-upgrade -t *-testing`.
+
+### VM fail to start after hard power off
+
+I realized that some VMs refuse to start after a hard power-off (hold power button for 10s).
+When running `qvm-start test` I get `vm-test-private missing`.
+But this thin volume is actually there.
+Also the volume `vm-test-private-snap` is still present.
+
+Try this in dom0:
+~~~
+sudo pvscan --cache --activate ay
+sudo systemctl restart qubesd
+qvm-start test
+~~~
+
+### Slow VM startup
+
+Use tools like 'systemd-analyze blame' as your guide.
+
+Another service that shows up with significant time is wpa_supplicant. 
+You can have it start only for network VMs by creating `/lib/systemd/system/wpa_supplicant.service.d/20_netvms` with the following:
+~~~
+[Unit]
+ConditionPathExists=/var/run/qubes/this-is-netvm
+~~~
+
+### Xen passthrough compatible video cards
+
+- https://en.wikipedia.org/wiki/List_of_IOMMU-supporting_hardware#AMD
+- http://www.overclock.net/t/1307834/xen-vga-passthrough-compatible-graphics-adapters
+- https://wiki.xenproject.org/wiki/Xen_VGA_Passthrough_Tested_Adapters#ATI.2FAMD_display_adapters
+
+## Development
 
 ### What is a good IDE for Qubes?
 
@@ -26,12 +79,6 @@ QtCreator.
 
 See "source" link [here](https://dev.qubes-os.org/projects/core-admin/en/latest/qubes-vm/qubesvm.html#qubes.vm.qubesvm.QubesVM.start).
 
-### For troubleshooting, how can I switch R4.0 stubdomains back to qemu-traditional?
-
-~~~
-qvm-features VMNAME linux-stubdom ''
-~~~
-
 ### How can I contribute to developing Qubes Windows Tools for R4.0?
 
 See [this post](https://www.mail-archive.com/qubes-devel@googlegroups.com/msg02808.html) and thread.
@@ -40,21 +87,11 @@ See [this post](https://www.mail-archive.com/qubes-devel@googlegroups.com/msg028
 
 MaxFPS, UseDirtyBits.
 
+## Tweaks
+
 ### Where are VM log files kept?
 
 In the `/var/log/libvirst/libxl/`, `/var/log/qubes/` and `/var/log/xen/console/` directories.
-
-### How can I upgrade everything to testing?
-
-dom0: `sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing --clean` (or --check-only instead for dom0).
-
-fedora: `sudo dnf update --enablerepo=qubes-vm-*-current-testing --refresh`
-
-debian/whonix: `sudo apt-get update -t *-testing && sudo apt-get dist-upgrade -t *-testing`
-
-This way, you don't need to edit any files for debian/whonix to get the testing.
-If you also want to increase reliability further, you can make a dependency/cache check with "sudo apt-get check", which is normally very quick.
-For that, under debian/whonix do: `sudo apt-get check && sudo apt-get update -t *-testing && sudo apt-get dist-upgrade -t *-testing`.
 
 ### How can I set environment variables for a VM?
 
@@ -72,20 +109,6 @@ There are two ways to do this now:
 This second way means that sudo no longer works for a normal user. 
 Instead, any root access in the VM must be done from dom0 with a command like `qvm-run -u root vmname command`.
 
-### VM fail to start after hard power off
-
-I realized that some VMs refuse to start after a hard power-off (hold power button for 10s).
-When running `qvm-start test` I get `vm-test-private missing`.
-But this thin volume is actually there.
-Also the volume `vm-test-private-snap` is still present.
-
-Try this in dom0:
-~~~
-sudo pvscan --cache --activate ay
-sudo systemctl restart qubesd
-qvm-start test
-~~~
-
 ### How can I provision a VM with a larger/non-standard swap and /tmp?
 
 Fedora's /tmp uses tmpfs ; it's mounted by systemd at boot time.
@@ -99,17 +122,6 @@ Alternatively you can add swap with a file inside the vm but it's a bit ugly:
 dd if=/dev/zero of=swapfile bs=1M count=1000
 mkswap swapfile
 swapon swapfile
-~~~
-
-### Slow VM startup
-
-Use tools like 'systemd-analyze blame' as your guide.
-
-Another service that shows up with significant time is wpa_supplicant. 
-You can have it start only for network VMs by creating `/lib/systemd/system/wpa_supplicant.service.d/20_netvms` with the following:
-~~~
-[Unit]
-ConditionPathExists=/var/run/qubes/this-is-netvm
 ~~~
 
 ### Manually install Whonix 14 templates
@@ -146,11 +158,6 @@ $type:TemplateVM $default allow,target=sys-whonix-14
 $tag:whonix-updatevm $default allow,target=sys-whonix-14
 ~~~
 
-### Xen passthrough compatible video cards
-
-- https://en.wikipedia.org/wiki/List_of_IOMMU-supporting_hardware#AMD
-- http://www.overclock.net/t/1307834/xen-vga-passthrough-compatible-graphics-adapters
-- https://wiki.xenproject.org/wiki/Xen_VGA_Passthrough_Tested_Adapters#ATI.2FAMD_display_adapters
 
 
 *Thanks to all mailing list contributors, from where most of these came.*
