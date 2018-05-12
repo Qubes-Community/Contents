@@ -4,7 +4,7 @@ Selecting the appropriate hardware for Qubes R4.0 can be a complex choice.
 This document aims to simplify that.
 Click on the links, read the supporting information if desired, reach a conclusion.
 
-You may also want to check [those links](/docs/misc/iaq.md#xen-passthrough-compatible-video-cards) if you plan to use GPU passthrough (more suitable to desktop computers: laptop users will likely have a hard time finding a hardware combination that fits their needs since most of the supported graphics adapters are secondary adapters).
+You may also want to check [these links](/docs/misc/iaq.md#xen-passthrough-compatible-video-cards) if you plan to use GPU passthrough (more suitable to desktop computers: laptop users will likely have a hard time finding a hardware combination that fits their needs since most of the supported graphics adapters are secondary adapters).
 
 **Note** Qubes OS does not endorse any of the manufacturers or methods listed.
 
