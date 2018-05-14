@@ -10,7 +10,6 @@
 - ![](/_res/l.png) [use Qubes OS as a smartTV](https://github.com/Aekez/QubesTV)
 - ![](/_res/l.png) [VM hardening (fend off malware at VM startup)](https://github.com/tasket/Qubes-VM-hardening)
 - ![](/_res/l.png) [VPN configuration](https://github.com/tasket/Qubes-vpn-support)
-- ![](/_res/l.png) [improve power management](https://github.com/taradiddles/qubes-os/tree/master/powermgnt)
 - [Make an HTTP Filtering Proxy](configuration/http-proxy.md)
 - ![](/_res/l.png) [Ansible Qubes](https://github.com/Rudd-O/ansible-qubes) (see Rudd-O's [other repos](https://github.com/Rudd-O?tab=repositories) as well)
 
