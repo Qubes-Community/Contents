@@ -21,9 +21,9 @@ A VM is defined globally as "clockVM", from which other VMs and dom0 will synchr
 qubes-prefs clockvm
 ~~~
 
-By default the clockvm is sys-net. Its clock is synchronized with remote NTP servers automatically by the `systemd-timesyncd` service.
+By default the clockvm is sys-net. The clockVM's clock is synchronized with remote NTP servers automatically by the `systemd-timesyncd` service.
 
-The clockVM is the only VM to have a `/var/run/qubes-service/clocksync` file present. This file is used by various scripts and systemd service definitions to differentiate the clockVM from other VMs, which allows the clockVM to be based on the same template than other VMs.
+The clockVM has the `clocksync` [Qubes service](https://www.qubes-os.org/doc/qubes-service/) enabled (as shown by `qvm-service` or in the Services tab in sys-net Qubes Setting GUI): various scripts and systemd service definitions test for the presence (or absence) of `/var/run/qubes-service/clocksync` to differentiate the clockVM from other VMs, which allows the clockVM to be based on the same template than other VMs.
 
 Clock synchonization in other VMs is done:
 
