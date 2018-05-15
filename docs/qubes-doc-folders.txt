@@ -13,6 +13,7 @@ hardware
 installing
 managing-os
 privacy
+qubes-daily-apps
 qubes-projects
 reference
 releases
