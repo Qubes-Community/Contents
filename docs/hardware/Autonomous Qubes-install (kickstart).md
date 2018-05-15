@@ -1,3 +1,9 @@
+
+
+## Note ##
+This doc is reaching toward completion, however, has some errors that need correction first, as well as missing additions.
+
+
 ## Introduction ##
 The purpose of kickstart files is to install an operation system from start to end with less, or no human interaction at all. A kickstart file is therefore essentially a pre-configuration of any settings you may normally need to adjust during a normal Linux install. Here you may find instructions on how to get started with Qubes OS and kickstart files.
 
