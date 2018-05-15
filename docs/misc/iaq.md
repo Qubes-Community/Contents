@@ -83,6 +83,14 @@ QtCreator.
 
 See "source" link [here](https://dev.qubes-os.org/projects/core-admin/en/latest/qubes-vm/qubesvm.html#qubes.vm.qubesvm.QubesVM.start).
 
+### What is the process flow when opening a link/file in another VM ?
+
+1. in an AppVM ('srcVM') a link - or file - is set to be opened with the graphical "open in VM" or "open in dispVM" extensions (or respectively with the `/usr/bin/qvm-open-in-vm` or `/usr/bin/qvm-open-in-dvm` command line tools)
+2. in src VM, the destination VM is hardcoded to '$dispvm' if dispVMs are used (`/usr/bin/qvm-open-in-dvm` is a simple wrapper to `/usr/bin/qvm-open-in-vm`)
+3. in srcVM, `/usr/lib/qubes/qrexec-client-vm` is called, which in turn executes the `qubes.OpenURL` [RPC service](https://www.qubes-os.org/doc/qrexec3/#qubes-rpc-services) to send the url to dstVM
+4. in dstVM, `/etc/qubes-rpc/qubes.OpenURL` is called upon reception of the `qubes.OpenURL` RPC event above, which validates the url and executes `/usr/bin/qubes-open`
+5. in dstVM, `/usr/bin/qubes-open` executes `xdg-open`, which then opens the url/file with the program registered to handle the associated mime type (for additional info see the [freedesktop specifications](https://www.freedesktop.org/wiki/)).
+
 ### How can I contribute to developing Qubes Windows Tools for R4.0?
 
 See [this post](https://www.mail-archive.com/qubes-devel@googlegroups.com/msg02808.html) and thread.
