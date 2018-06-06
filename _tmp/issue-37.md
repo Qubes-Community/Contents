@@ -35,7 +35,7 @@ The instructions below show how to resize a VM's private volume. For root volume
 
 5. shutdown tempVM
 
-6. in dom0, resize the lvm volume to the **same** size you used at step 4.:
+6. in dom0, resize the lvm volume to the **SAME** size you used at step 4. (specifying a lower size than the underlying filesystem's size would corrupt the filesystem and either destroy some of your data or trigger filesystem exceptions when the filesystem tries to write at a location that doesn't exist):
 
     ~~~
     sudo lvresize -L2G /dev/qubes_dom0/vm-largeVM-private
