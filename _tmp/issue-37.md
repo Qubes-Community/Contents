@@ -16,7 +16,7 @@ The procedure for shrinking a volume on Ext4 and most other filesystems is a bit
 
 The instructions below show how to resize a VM's private volume. For root volumes, swap the `-private` volume suffix with `-root`.
 
-1. backup your data with `qvm-clone` , `qvm-backup`, or your own backup mechanism. Do not rely only on snapshots (yet).
+1. backup your data with `qvm-clone` , `qvm-backup`, or your own backup mechanism. Do not rely only on snapshots (yet)
 2. stop the VM (eg. 'largeVM') whose volume has to be resized
 3. start another VM (eg. 'tempVM') with largeVM's private volume attached:
 
