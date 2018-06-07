@@ -40,6 +40,8 @@
 ##    - If succesful, it removes one of the two major concerns of including the -y attribute, making it easier to use.
 ##4) Investigate whether --clean can be removed or changed from the dom0 update command.
 ##5) Investigate the feasibility of a simple GUI interface to select or de-select script script-options (possibly long-term).
+##6) Fixing the progress bar, and picking the best approach to inform the user.
+##7) A better means to stop the script pre-maturely but safely, because it is a long chain of events to update all VM's.
 
 
 
@@ -47,7 +49,7 @@
 ## This warning meesage can be disabled with a #. It includes essential warning for new users
 ## not aware of the pitfalls of scripts. Its highly recommended that new users study how the
 ## script works, it's not very complicated, but also not straight simple either.
-zenity --width="420" --height="200" --title="Welcome to uQUS!" --info --text='This script allows you to easily keep Qubes 4 in a good state with proper update maintenance.\n\n\- Warning! Please read the comments inside the script carefully before running this script.\n' 2> /dev/null
+zenity --width="420" --height="200" --title="Welcome to UQUS!" --info --text='This script allows you to easily keep Qubes 4 in a good state with proper update maintenance.\n\n\- Warning! Please read the comments inside the script carefully before running this script, and remember to do your routine backups.\n' 2> /dev/null
 
 
 #xterm -e 'sudo qubes-dom0-update --clean'
