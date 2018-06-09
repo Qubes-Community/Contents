@@ -1,13 +1,23 @@
 
 
-## Note ##
+## Note - Doc not finished yet! ##
 This doc is reaching toward completion, however, has some errors that need correction first, as well as missing additions.
+
+To-do:
+- Fix kickstart template, it has a couple of issues, like creating user account creation that does conflict with first-boot, Qubes's initial-setup.
+- Include template variants (for example to illustrate how they are modified, but this is a low-priority to-do).
+- Sorting and including/excluding the proper packages that are recommended or optional (recommended packages are high priority, optional packages are low priority).
+- Completting the sections that mention "may be included in the future" found a few places in the doc.
+- Fixing bad tips, advices or KS-template layouts (proof-reading, requires extra study/read-up (must be done before official Qubes doc PR summit), or help from someone with insight).
+- Fixing poor explanations (proof-reading).
+- Fixing typo's and spelling errors, grammer etc, (proof-reading).
+- Any feedback or contributions, like helping toward finishing the to-do, is very welcome and appreciated.
 
 
 ## Introduction ##
 The purpose of kickstart files is to install an operation system from start to end with less, or no human interaction at all. A kickstart file is therefore essentially a pre-configuration of any settings you may normally need to adjust during a normal Linux install. Here you may find instructions on how to get started with Qubes OS and kickstart files.
 
-In order to avoid confustion, please note that the use of the wording kickstarter template does not refer to Qubes templates, but rather a simple configuration file, which when loaded will semi or fully Autonomously install Qubes (or fedora/redhat/cent). 
+In order to avoid confusion, please note that the use of the wording kickstarter template does not refer to Qubes templates, but rather a simple configuration file, which when loaded will semi or fully Autonomously install Qubes (or fedora/redhat/cent). 
 
 <br />
 
@@ -30,7 +40,7 @@ _The list is not exhausted, there may be other uses not listed here._
   - Scripts can also be used to automate other things, like restoring backups (maybe include a popup confirm message).
   - Kickstart file and all scripts can be put on the installer medium, other on a separate USB/medium. It makes it easier for the user if kept on a single device.
 
-_Once you constructed your kickstart file, using them is faster than via normal install. It may take some time in the beginning to get proper habits and adjusting your personal settings, but consider it a time investment to save time and hassles in the future. Note new Qubes version release distributions may be slightly different, sometimes this may or may not require changes to your kickstart file. Be sure to keep your kickstart file secured, or check it against any changes done by 3rd party sources. However kickstart files are simple enough to quickly review before use, be sure you check everything, packages as well._
+_Once you constructed your kickstart file, using them is be faster than normal Qubes install. It may take some time in the beginning to get proper habits and adjusting your personal settings, but consider it a time investment to save time and hassles in the future. Note new Qubes version release distributions may be slightly different, sometimes this may or may not require changes to your kickstart file. Be sure to keep your kickstart file secured, or check it against any changes done by 3rd party sources. However kickstart files are simple enough to quickly review before use, be sure you check everything, packages as well._
 <br />
 
 
@@ -152,20 +162,24 @@ _List is not finished, will be updated._
   - When making semi kickstart files, be mindful of which settings that need to be disabled in order for the kickstart file to properly halt. 
 <br />
 
-## Tips and tricks that may make a difference ##
-- If you're trying to get Qubes installed, for example on a machine without graphics, and you need sys-net and sys-firewall to update and repair dom0, then you may want to insert a network cable that does not require a password. 
+## Qubes kickstart usage: Tips and tricks that may make a difference ##
+- **Graphics issues**
+  - If you're trying to get Qubes installed, for example on a machine without graphics, and you need sys-net and sys-firewall to update and repair dom0, then you may want to insert a network cable that does not require a password. 
   - If you do not have an RJ45 network port, then you can permanently or temporarily move the USB controller into your sys-net. Tell the Qubes installers initial setup at first boot, to make sys-net include sys-usb, so that sys-net holds your USB controllers. This way you can find your, or buy, a cheap USB to RJ45 network converter.
   - Instructions on how to enable password based networking without graphic drivers are possible, like wireless networking. But in its current form is not included in this doc. It may however be included in the future.
-- Instructions on how to securely download updates on a different computer and install via USB or other mediums is possible. May be included in the future. 
-- Five different easy ways to get terminal on an empty system, to identity drive order/numbers.
+- **Updating Qubes offline (without network)**
+  - Instructions on how to securely download updates on a different computer and install via USB or other mediums is possible. May be included in the future. 
+- **Reaching dom0 Terminal**
+  - Five different easy ways to get terminal on an empty system, to identity drive order/numbers.
   - Let the Qubes installer boot normally. When or if it fails, switch to tty2 or tty3 to get terminal. If this does not work (it may sometimes not be reachable on a failed boot), then proceed to next point below.
   - Put the number `3` after `quiet` in the boot Linux boot parameters. This boots the system into a non-graphical dom0 terminal (similar effect to using tty#).
   - Boot from the Qubes installer, pick troubleshoot, and then the option to rescue an existing Qubes system (even if there is no Qubes system installed). When requested to pick between 4-5 options, kick the skip to shell (if you only need to do `lsblk` for disk information, then this is sufficient), or continue into existing Qubes dom0 if you need it for other extra reasons.
   - Use a Live boot from a different distro, however unlike the above, this does not load most or all Qubes sub-systems, and also risks exposing dom0. This is the least desired method.
     - Preferably use another Linux distro you trust. For example Fedora live, the distro which dom0 is based on.
     - The Qubes Live (Alpha) medium may also work, however this is currently untested. Using any of the first 3 options above should be sufficient.
-
-<br />
+    
+## Qubes booting: Tips and tricks that may make a difference ##
+General issues with Qubes booting or installing issues can be found here [found here](https://github.com/Qubes-Community/Contents/blob/master/docs/hardware/Boot-or-install-issue-compendium.md). Be mindful that you may, or may not, need to combine these two docs (depending on if you got multiple boot/install problems). For example you may need to fix the booting issues, but the kickstart file may still be helpful if you encounter some types of install issues, or graphic-boot issues during the installer (where graphics can be fixed later, once succeeding in text-mode install).
 
 
 ## Insight, guides, and other external resources ##
@@ -187,9 +201,6 @@ https://groups.google.com/forum/#!msg/qubes-users/-9qRHSkwfy8/CCx08nnTVEAJ
 
 <br />
 
-## Kickstart files are sometimes controversial in culture ##
-Some label them for advanced users only (being too difficult to use), while others label them for noobs, or newbs, only. The beliefs, or statements, are contradictionary to each others. In reality though, kickstart files can be useful for anyone, whether made for someone who is not very skilled with computers, or useful for someone who is an advanced computer user. So it is best to keep it that way, kickstart files are useful tools that everyone can use in some way or another, don't let silly culture conjuncture influence what you use, if it is useful to you. Furthermore, anyone who have the skill level to install and use Qubes on their own, can probably also build and use their own kickstart files. They're not as scary as they might seem at first. 
-<br />
 
 ## Consideration before submitting updates to this doc ##
 This doc is originally submitted by the fully independent volunteer group, Qubes Community Collaboration (QCC). You're naturally free to submit improvements of this doc to the Qubes OS staff for review on your own , but you can also choose to go through our channels at https://github.com/Qubes-Community/Contents/issues if you would like to improve the doc through the community collaboration. Feel free to start up an issue at QCC to discuss this doc and how to proceed. This potentially saves the Qubes OS staff time and resources, while still preserving transparency, and it helps improving doc PR summits further when worked out, improved, and shaped by a community. If its your first time submitting to GitHub but you would like to be independent, then we at QCC still encourage you get some GitHub experience through our channels first, before submitting anything official Qubes OS on your own. Credit to author(s) will always be preserved.
