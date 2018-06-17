@@ -28,19 +28,21 @@ The instructions below show how to resize a Linux VM's private volume. For root 
 
     Alternatively, you could setup a loop device in dom0 associated to largeVM's private volume and attach it to a running VM but this is outside the scope of this document (see `losetup` and `qvm-block`).
 
-4. in tempVM, resize the attached volume (for instance to 2 GB):
+4. in tempVM, resize the attached volume:
 
     ~~~
     sudo e2fsck -f /dev/xvdi
-    sudo resize2fs /dev/xvdi 2G
+    sudo resize2fs /dev/xvdi <newsize>
     ~~~
+
+    (eg. `<newsize>` = `2G` ; see `man resize2fs` for allowed formats).
 
 5. shutdown tempVM
 
 6. in dom0, resize the lvm volume to the **SAME** size you used at step 4. (specifying a lower size than the underlying filesystem's size **will corrupt** the filesystem and either destroy some of your data or trigger filesystem exceptions when the filesystem tries to write at a location that doesn't exist):
 
     ~~~
-    sudo lvresize -L2G /dev/qubes_dom0/vm-largeVM-private
+    sudo lvresize -L<newsize> /dev/qubes_dom0/vm-largeVM-private
     ~~~
 
 
