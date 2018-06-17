@@ -1,9 +1,9 @@
-Shrinking volumes of Linux VMs
-==============================
+Shrinking volumes
+=================
 
-The procedure for shrinking a volume on Ext4 and most other filesystems is a bit convoluted because online shrinking isn't supported, and we don't want to process any untrusted data in dom0 for security reasons. **This operation is dangerous and this is why it isn't available in standard Qubes tools. If you have enough disk space, the recommended approach is to create a new VM with a smaller disk and move the data.**
+The procedure for shrinking a volume on Ext4 and most other filesystems is bit convoluted because online shrinking isn't supported and we don't want to process any untrusted data in dom0 for security reasons.
 
-However, the approach above has two caveats:
+**Shrinking volumes is dangerous** and this is why it isn't available in standard Qubes tools. If you have enough disk space, the recommended approach is to create a new VM with a smaller disk and move the data. However, this approach has two caveats:
 
 - it requires copying data, which can take a while
 - it is limited to the private volume of VMs based on TemplateVMs
@@ -16,7 +16,7 @@ Qubes 4.0 (root and private volumes)
 
 Qubes 4.0 uses *thin* LVM storage: only the data present on a volume uses disk space, free space isn't allocated physically. If your only concern is disk space, you may simply be careful with how much data you store in a given volume and avoid having to shrink a volume (use `sudo lvs` in dom0 and compare the `LSize` vs `Data%` fields to find out about real disk usage).
 
-The instructions below show how to resize a VM's private volume. For root volumes, swap the `-private` volume suffix with `-root`.
+The instructions below show how to resize a Linux VM's private volume. For root volumes, swap the `-private` volume suffix with `-root`. For other OSes (eg. MS Windows) you'll have to use the OS' specific tools to resize the volume at step 4 instead of `resize2fs`, and to be careful to specify the right shrinked size at step 6.
 
 1. backup your data with `qvm-clone` , `qvm-backup`, or your own backup mechanism. Do not rely only on snapshots (yet)
 2. stop the VM (eg. 'largeVM') whose volume has to be resized
@@ -37,17 +37,16 @@ The instructions below show how to resize a VM's private volume. For root volume
 
 5. shutdown tempVM
 
-6. in dom0, resize the lvm volume to the **SAME** size you used at step 4. (specifying a lower size than the underlying filesystem's size would corrupt the filesystem and either destroy some of your data or trigger filesystem exceptions when the filesystem tries to write at a location that doesn't exist):
+6. in dom0, resize the lvm volume to the **SAME** size you used at step 4. (specifying a lower size than the underlying filesystem's size **will corrupt** the filesystem and either destroy some of your data or trigger filesystem exceptions when the filesystem tries to write at a location that doesn't exist):
 
     ~~~
     sudo lvresize -L2G /dev/qubes_dom0/vm-largeVM-private
     ~~~
 
-The procedure is the same for other OSes (eg. MS Windows) but you'll have to use OS specific tools to resize the volume at step 4. and to be careful to specify the right shrinked size at step 6.
 
 
-Qubes 3.2 (private image)
--------------------------
+Qubes 3.2 (Linux VMs, private image only)
+-----------------------------------------
 
 First you need to start VM without `/rw` mounted. One possibility is to interrupt its normal startup by adding the `rd.break` kernel option:
 
@@ -78,7 +77,9 @@ Now you can resize the image:
 truncate -s <new-desired-size> /var/lib/qubes/appvms/<vm-name>/private.img
 ~~~
 
-**It is critical to use the same (or bigger for some safety margin) size in truncate call compared to resize2fs call. Otherwise you will lose your data!**  Then reset kernel options back to default:
+It is **critical** to use the same (or bigger for some safety margin) size in truncate call compared to the `resize2fs` call. Otherwise **you will lose your data!**. 
+
+Then reset kernel options back to default:
 
 ~~~
 qvm-prefs -s <vm-name> kernelopts default
