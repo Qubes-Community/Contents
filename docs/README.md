@@ -12,6 +12,7 @@
 - ![](/_res/l.png) [VPN configuration](https://github.com/tasket/Qubes-vpn-support)
 - [Make an HTTP Filtering Proxy](configuration/http-proxy.md)
 - ![](/_res/l.png) [Ansible Qubes](https://github.com/Rudd-O/ansible-qubes) (see Rudd-O's [other repos](https://github.com/Rudd-O?tab=repositories) as well)
+- [shrink VM volumes](configuration/shrink-volumes.md)
 
 `coreboot`
 - [install coreboot on a Thinkpad x230](coreboot/x230.md)
