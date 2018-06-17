@@ -1,4 +1,4 @@
-My setup of Qubeslows 
+My setup of Qubes
 =================
 this document will describe my Qubes Setup and what I did to improve the Qubes experience so that Qubes will become my daily main operating system
 
