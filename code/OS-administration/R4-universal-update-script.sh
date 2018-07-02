@@ -21,6 +21,7 @@
 # /// Special settings \\\
 #toggle-shutdown-sys-whonix='qvm-shutdown sys-whonix --wait' # Enable/Disable this second-last command at bottom of script.
 
+
 # /// Testing Updates \\\
 ## Removing or inserting the hash-# sign on below lines will disable/enable Qubes testing updates.
 ## If using testing repositories, make sure you keep all domains (Dom0 and DomUs') in sync.
@@ -68,149 +69,187 @@ debian_based_template_3='whonix-gw'
 # It is therefore very easy to copy/paste to create more slots, and modify extra numbers.
 
 # Fedora/Fedora-minimal/CentOS-based update slot #1
+if [ "$fedora_based_template_1" ]; then
 qvm-start "$fedora_based_template_1" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_1" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_1" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_1" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_1" --wait #Needed if qvm-start is used.
+fi
 
 # Fedora/Fedora-minimal/CentOS-based update slot #2
+if [ "$fedora_based_template_2" ]; then
 qvm-start "$fedora_based_template_2" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_2" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_2" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_2" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_2" --wait #Needed if qvm-start is used.
+fi
 
 # Fedora/Fedora-minimal/CentOS-based update slot #3
+if [ "$fedora_based_template_3" ]; then
 qvm-start "$fedora_based_template_3" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_3" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_3" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_3" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_3" --wait #Needed if qvm-start is used.
+fi
 
 # Fedora/Fedora-minimal/CentOS-based update slot #4
+if [ "$fedora_based_template_4" ]; then
 qvm-start "$fedora_based_template_4" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_4" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_4" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_4" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_4" --wait #Needed if qvm-start is used.
+fi
 
 # Fedora/Fedora-minimal/CentOS-based update slot #5
+if [ "$fedora_based_template_5" ]; then
 qvm-start "$fedora_based_template_5" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_5" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_5" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_5" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_5" --wait #Needed if qvm-start is used.
+fi
 
 # Fedora/Fedora-minimal/CentOS-based update slot #6
+if [ "$fedora_based_template_6" ]; then
 qvm-start "$fedora_based_template_6" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_6" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_6" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_6" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_6" --wait #Needed if qvm-start is used.
+fi
 
 # Fedora/Fedora-minimal/CentOS-based update slot #7
+if [ "$fedora_based_template_7" ]; then
 qvm-start "$fedora_based_template_7" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_7" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_7" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_7" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_7" --wait #Needed if qvm-start is used.
+fi
 
 # Fedora/Fedora-minimal/CentOS-based update slot #8
+if [ "$fedora_based_template_8" ]; then
 qvm-start "$fedora_based_template_8" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_8" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_8" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_8" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_8" --wait #Needed if qvm-start is used.
+fi
 
 # Fedora/Fedora-minimal/CentOS-based update slot #9
+if [ "$fedora_based_template_9" ]; then
 qvm-start "$fedora_based_template_9" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_9" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_9" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_9" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_9" --wait #Needed if qvm-start is used.
+fi
 
 # Fedora/Fedora-minimal/CentOS-based update slot #10
+if [ "$fedora_based_template_10" ]; then
 qvm-start "$fedora_based_template_10" #Needed to avoid premature qvm-run shutdown.
 qvm-run "$fedora_based_template_10" 'xterm -e sudo dnf update '$fedora_testing' --refresh'
 qvm-run "$fedora_based_template_10" 'xterm -e sudo dnf upgrade '$fedora_testing''
 #qvm-run "$fedora_based_template_10" 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$fedora_based_template_10" --wait #Needed if qvm-start is used.
-
+fi
 
 # <<< !!! Switching from Fedora-based to Debian-based updates !!! >>> 
 
 
 # Debian/Whonix-based update slot #1
+if [ "$debian_based_template_1" ]; then
 qvm-start "$debian_based_template_1" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_1" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_1" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_1" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_1" --wait #Needed if qvm-start is used.
+fi
 
 # Debian/Whonix-based update slot #2
+if [ "$debian_based_template_2" ]; then
 qvm-start "$debian_based_template_2" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_2" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_2" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_2" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_2" --wait #Needed if qvm-start is used.
+fi
 
 # Debian/Whonix-based update slot #3
+if [ "$debian_based_template_3" ]; then
 qvm-start "$debian_based_template_3" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_3" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_3" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_3" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_3" --wait #Needed if qvm-start is used.
+fi
 
 # Debian/Whonix-based update slot #4
+if [ "$debian_based_template_4" ]; then
 qvm-start "$debian_based_template_4" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_4" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_4" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_4" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_4" --wait #Needed if qvm-start is used.
+fi
 
 # Debian/Whonix-based update slot #5
+if [ "$debian_based_template_5" ]; then
 qvm-start "$debian_based_template_5" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_5" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_5" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_5" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_5" --wait #Needed if qvm-start is used.
+fi
 
 # Debian/Whonix-based update slot #6
+if [ "$debian_based_template_6" ]; then
 qvm-start "$debian_based_template_6" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_6" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_6" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_6" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_6" --wait #Needed if qvm-start is used.
+fi
 
 # Debian/Whonix-based update slot #7
+if [ "$debian_based_template_7" ]; then
 qvm-start "$debian_based_template_7" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_7" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_7" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_7" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_7" --wait #Needed if qvm-start is used.
+fi
 
 # Debian/Whonix-based update slot #8
+if [ "$debian_based_template_8" ]; then
 qvm-start "$debian_based_template_8" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_8" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_8" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_8" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_8" --wait #Needed if qvm-start is used.
+fi
 
 # Debian/Whonix-based update slot #9
+if [ "$debian_based_template_9" ]; then
 qvm-start "$debian_based_template_9" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_9" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_9" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_9" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_9" --wait #Needed if qvm-start is used.
+fi
 
 # Debian/Whonix-based update slot #10
+if [ "$debian_based_template_10" ]; then
 qvm-start "$debian_based_template_10" #Needed to avoid premature qvm-run shutdown, important here.
 qvm-run "$debian_based_template_10" "xterm -e sudo apt-get update '$debian_testing'"
 qvm-run "$debian_based_template_10" "xterm -e sudo apt-get dist-upgrade '$debian_testing'"
 #qvm-run "$debian_based_template_10" 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 qvm-shutdown "$debian_based_template_10" --wait #Needed if qvm-start is used.
-
+fi
 
 $(toggle-shutdown-sys-whonix)
 
