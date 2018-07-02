@@ -123,7 +123,7 @@ wait
 
 ##Conclusion: Question message, whether to restart or not.
 ##For this part of the Script logic, credit goes to rhss6-2011 @ https://ubuntuforums.org/showthread.php?t=2239195
-ans=$(zenity --width="420" --height="200" --title="uQUS has reached its conclusion." --question --text='The update-script has successfully reached its conflusion.\n\n- Click "Yes" to perform a full system restart.\n\n- Click "No" if no restart is required or you wish to restart manually later.\n\n- Normal template updates? It is recommended to restart VMs.\n- Qubes OS updates? It is recommended to perofmr a full system re-start.' --ok-label="Yes" --cancel-label="No" 2> /dev/null
+ans=$(zenity --width="420" --height="200" --title="uQUS has reached its conclusion." --question --text='The update-script has successfully reached its conflusion.\n\n- Click "Yes" to perform a full system restart.\n\n- Click "No" if no restart is required or you wish to restart manually later.\n\n- It is recommended to minimum restart all AppVMs aftere template updates.\n- If dom0 Qubes OS updates were involved, then it is highly recommended to perform a full system re-start.\n- It may not always clear-cut when a full system restart is needed or not, to be safe just restart the full system.' --ok-label="Yes" --cancel-label="No" 2> /dev/null
 if [ $? = 0 ] ; then
 command=$(xterm -e shutdown -h now) #use 'reboot -h now' instead of shutdown if you want the 'Yes' button to perform a reboot.
 else
