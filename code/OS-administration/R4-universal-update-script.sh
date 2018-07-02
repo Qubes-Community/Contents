@@ -38,7 +38,7 @@
 ##3) If feasible, presenting the logs for each update, saved in a dated folder for every time script is run.
 ##    - If feasible, reporting errors and logs to the user during or after the update has finished.
 ##    - If succesful, it removes one of the two major concerns of including the -y attribute, making it easier to use.
-##4) Investigate whether --clean can be removed or changed from the dom0 update command.
+##4) - (Done) Investigate whether --clean can be removed or changed from the dom0 update command.
 ##5) Investigate the feasibility of a simple GUI interface to select or de-select script script-options (possibly long-term).
 ##6) Fixing the progress bar, and picking the best approach to inform the user.
 ##7) A better means to stop the script pre-maturely but safely, because it is a long chain of events to update all VM's.
@@ -52,45 +52,55 @@
 zenity --width="420" --height="200" --title="Welcome to UQUS!" --info --text='This script allows you to easily keep Qubes 4 in a good state with proper update maintenance.\n\n\- Warning! Please read the comments inside the script carefully before running this script, and remember to do your routine backups.\n' 2> /dev/null
 
 
-#xterm -e 'sudo qubes-dom0-update --clean'
-#xterm -e 'sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing --clean'
+xterm -e 'sudo qubes-dom0-update --refresh'
+#xterm -e 'sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing --refresh'
 wait
-echo -ne "$(tput setaf 4)($(tput setaf 6)#    $(tput setaf 4)) $(tput setaf 6)Dom0 update has finished.$(tput setaf 9)\n"
-
-
-qvm-start fedora-26 #Needed to avoid premature qvm-run shutdown.
-wait
-qvm-run fedora-26 'xterm -e sudo dnf update --refresh'
-wait
-#qvm-run fedora-26 'xterm -e sudo dnf update --enablerepo=qubes-vm-*-current-testing --refresh'
+#echo -ne "$(tput setaf 4)($(tput setaf 6)#    $(tput setaf 4)) $(tput setaf 6)Dom0 update has finished.$(tput setaf 9)\n"
 #wait
-qvm-shutdown fedora-26 #Needed if qvm-start is used.
-wait
-echo -ne "$(tput setaf 4)(#$(tput setaf 6)#   $(tput setaf 4)) $(tput setaf 6)Fedora-26 update has finished.$(tput setaf 9)\n"
 
+qvm-start fedora-28 #Needed to avoid premature qvm-run shutdown.
+wait
+qvm-run fedora-28 'xterm -e sudo dnf update --refresh'
+wait
+qvm-run fedora-28 'xterm -e sudo dnf upgrade'
+wait
+#qvm-run fedora-28 'xterm -e sudo dnf update --enablerepo=qubes-vm-*-current-testing --refresh'
+#wait
+#qvm-run fedora-28 'xterm -e sudo dnf upgrade --enablerepo=qubes-vm-*-current-testing'
+#wait
+#qvm-run fedora-28 'xterm -e sudo dnf autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
+#wait
+qvm-shutdown fedora-28 #Needed if qvm-start is used.
+wait
+#echo -ne "$(tput setaf 4)(#$(tput setaf 6)#   $(tput setaf 4)) $(tput setaf 6)Fedora-28 update has finished.$(tput setaf 9)\n"
+#wait
 
 qvm-start debian-9 #Needed to avoid premature qvm-run shutdown, important here.
 wait
 qvm-run debian-9 'xterm -e sudo apt-get update; xterm -e sudo apt-get dist-upgrade'
 wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing; xterm -e sudo apt-get dist-upgrade -t *-testing'
+#qvm-run debian-9 'xterm -e sudo apt-get update -t *-testing; xterm -e sudo apt-get dist-upgrade -t *-testing'
 #wait
+#qvm-run debian-9 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
+wait
 qvm-shutdown debian-9 #Needed if qvm-start is used.
 wait
-echo -ne "$(tput setaf 4)(##$(tput setaf 6)#  $(tput setaf 4)) $(tput setaf 6)Debian-9 update has finished.$(tput setaf 9)\n"
-
+#echo -ne "$(tput setaf 4)(##$(tput setaf 6)#  $(tput setaf 4)) $(tput setaf 6)Debian-9 update has finished.$(tput setaf 9)\n"
+#wait
 
 
 qvm-start whonix-ws #Needed to avoid premature qvm-run shutdown, important here.
 wait
 qvm-run whonix-ws 'xterm -e sudo apt-get update; xterm -e sudo apt-get dist-upgrade'
 wait
-#qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing; xterm -e sudo apt-get dist-upgrade -t *-testing'
+#qvm-run whonix-ws 'xterm -e sudo apt-get update -t *-testing; xterm -e sudo apt-get dist-upgrade -t *-testing'
+#wait
+#qvm-run whonix-ws 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
 #wait
 qvm-shutdown whonix-ws #Needed if qvm-start is used.
 wait
-echo -ne "$(tput setaf 4)(###$(tput setaf 6)# $(tput setaf 4)) $(tput setaf 6)Whonix-WS update has finished.$(tput setaf 9)\n"
-
+#echo -ne "$(tput setaf 4)(###$(tput setaf 6)# $(tput setaf 4)) $(tput setaf 6)Whonix-WS update has finished.$(tput setaf 9)\n"
+#wait
 
 qvm-start whonix-gw #Needed to avoid premature qvm-run shutdown, important here.
 wait
@@ -98,13 +108,15 @@ qvm-run whonix-gw 'xterm -e sudo apt-get update; xterm -e sudo apt-get dist-upgr
 wait
 #qvm-run whonix-gw 'xterm -e sudo apt-get update -t *-testing; xterm -e sudo apt-get dist-upgrade -t *-testing'
 #wait
+#qvm-run whonix-gw 'xterm -e sudo apt autoremove' # Remember you are asked to confirm for a reason, it may not always be a good to autoremove.
+#wait
 qvm-shutdown whonix-gw #Needed if qvm-start is used.
 wait
-echo -ne "$(tput setaf 4)(####$(tput setaf 6)#$(tput setaf 4)) $(tput setaf 6)Whonix-GW update has finished.$(tput setaf 9)\n"
-wait
+#echo -ne "$(tput setaf 4)(####$(tput setaf 6)#$(tput setaf 4)) $(tput setaf 6)Whonix-GW update has finished.$(tput setaf 9)\n"
+#wait
 
-echo -ne "$(tput setaf 4)(#####) $(tput setaf 6)The uQUS script has finished.\n"
-echo -ne '\n'$(tput setaf 9)
+#echo -ne "$(tput setaf 4)(#####) $(tput setaf 6)The uQUS script has finished.\n"
+#echo -ne '\n'$(tput setaf 9)
 
 #qvm-shutdown sys-whonix #Optional.
 #wait
