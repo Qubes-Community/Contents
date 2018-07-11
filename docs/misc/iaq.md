@@ -13,7 +13,7 @@ Set `xpti=false` option in Xen command line (xen.gz option in grub, or options= 
 qvm-features VMNAME linux-stubdom ''
 ~~~
 
-### How can I upgrade everything to testing?
+### How can I upgrade to testing?
 
 dom0: `sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing --clean` (or --check-only instead for dom0).
 
@@ -24,6 +24,24 @@ debian/whonix: `sudo apt-get update -t *-testing && sudo apt-get dist-upgrade -t
 This way, you don't need to edit any files for debian/whonix to get the testing.
 If you also want to increase reliability further, you can make a dependency/cache check with "sudo apt-get check", which is normally very quick.
 For that, under debian/whonix do: `sudo apt-get check && sudo apt-get update -t *-testing && sudo apt-get dist-upgrade -t *-testing`.
+
+### How can I upgrade dom0, templates, and standalones?
+
+Make a dom0 script with the following:
+
+~~~
+#!/bin/sh
+
+for domain in $(qvm-ls --fields NAME,CLASS | \
+    awk '($2 == "TemplateVM" || $2 == "StandaloneVM") {print $1}'); do
+    qvm-run --service $domain qubes.InstallUpdatesGUI
+done
+
+sudo qubes-dom0-update
+~~~
+
+From https://gist.github.com/JimmyAx/818bcf11a14e85531516ef999c8c5765.
+See also the scripts listed under [`OS-administration`](https://github.com/Qubes-Community/Contents/tree/master/code).
 
 ### VM fail to start after hard power off
 
@@ -131,6 +149,25 @@ dd if=/dev/zero of=swapfile bs=1M count=1000
 mkswap swapfile
 swapon swapfile
 ~~~
+
+### How do I change display resolution on a Linux HVM?
+
+You only get one resolution at a time.
+In the HVM's `/etc/X11/xorg.conf`, in Subsection "Display" for Depth 24, make a single mode like this:
+
+~~~
+...
+    Subsection "Display"
+        Viewport 0 0
+        Depth 24
+        Modes "1200x800"
+    EndSubSection
+EndSection
+~~~
+
+Only some modes will work. check wikipedia. if your host display is
+1080p(1920x1080), then an hvm at 1440x900 works well. if its more than that, might
+as well do 1080p in the hvm.
 
 ### Manually install Whonix 14 templates
 
