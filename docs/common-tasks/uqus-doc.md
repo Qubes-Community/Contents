@@ -13,10 +13,7 @@ it may also be useful for Qubes 3.2. (Currently need 3.2. testers).
 UQUS will automatically find your TemplateVM's and StandaloneVM's containing the primary template OS name. 
 For example, any TemplateVM or standaloneVM containing the word "fedora", "debian", or "whonix", will 
 update separately in order to make up for their differences in the update process. 
-  - It is normally possible to update all TemplateVM and StandaloneVM's irregardless of their VM names, please see 
-  the limitations section below as for why UQUS has this minor limiation. It is deemed a minor limitation because 
-  templates normally always include their OS name in the VM-name anyway, however steps are taken to allow user different
-  choices to overcome this issue, should you have given your TemplateVM or StandaloneVM a unique name.
+  - It is possible to autonomously update all TemplateVM and StandaloneVM's irregardless of their VM names with a different script (and in part what UQUS's autonomous detection is based on), however please see the limitations section below as for why UQUS has this minor limiation. It is deemed a minor limitation because templates normally always include their OS name in the VM-name anyway, however steps are taken to allow user different choices to overcome this issue, should you have given your TemplateVM or StandaloneVM a unique name.
 
 <br />
 
