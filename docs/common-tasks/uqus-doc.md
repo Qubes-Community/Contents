@@ -62,7 +62,7 @@ The central output window has multiple of different benifits, as following:
 ### 6) Feature: UQUS seeks and provides high flexibility to settings and prefferences.
 A persistent goal is to make UQUS allow easy and effortless user modifications - as far possible. UQUS may be further updated in the 
 future in order to get as close to this goal as possible. Setting modications include:
-- Script is written so that it is easy to perform modifications, but simple and more advanced ones.
+- Script is written so that it is easoer to perform modifications, both simple and more advanced ones.
 - Script is written so that it is easy to change or add more autonomouse filters, i.e. to include different search parameters.
 - Script is written to allow manaual update/upgrade/autoremove, in case the VM-name is not matching the search-parameters.
 - Script is written to allow easy change of colors/fonts and change messages.
