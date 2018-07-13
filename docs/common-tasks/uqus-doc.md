@@ -55,6 +55,7 @@ The central output window has multiple of different benifits, as following:
 - Output from the central log-window is also moved to the LogVM.
   - This happens when UQUS finishes, or if any different script-command fails mid-way.
 - Central window includes basic UQUS information, including how to stop the script (i.e. running `kill -9 pid) and also includes the scripts current PID number so you don't need to go looking for it yourself.
+  - In the future keybinds may be included to pause or stop UQUS, which can be modified to different keys in the script.
 
 <br />
 
