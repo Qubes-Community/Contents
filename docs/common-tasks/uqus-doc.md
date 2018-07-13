@@ -48,10 +48,11 @@ some months into the future, however it is a major goal, and is therefore includ
 
 ### 5) Feature: Central log-window output for awareness of how UQUS is progressing.
 The central output window has multiple of different benifits, as following:
-- Shows which TemplateVM and StandaloneVM is being updated.
+- Shows live which TemplateVM and StandaloneVM is being updated.
+- Shows which commands are in current-time being executed.
 - Shows how far the UQUS update script has progressed.
-- The central log-window is written so it is made easy to read and keep track of.
-- Output from the central log-window is like the logs from individual TemplateVM's and StandaloneVM's, also send to the LogVM.
+- Written so it is made easy to read and keep track of the log-window progressive content.
+- Output from the central log-window is also moved to the LogVM.
   - This happens when UQUS finishes, or if any different script-command fails mid-way.
 - Central window includes basic UQUS information, including how to stop the script (i.e. running `kill -9 pid) and also includes the scripts current PID number so you don't need to go looking for it yourself.
 
