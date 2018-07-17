@@ -20,6 +20,9 @@ Xft.hinting: true
 URxvt*scrollBar:			False
 XTerm*scrollBar:			False
 
+! https://bugzilla.redhat.com/show_bug.cgi?id=1577159
+XTerm*termName:				xterm-256color
+
 URxvt.clipboard.autocopy:		True
 XTerm*selectToClipboard:		True
 
