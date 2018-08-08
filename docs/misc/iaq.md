@@ -119,6 +119,10 @@ MaxFPS, UseDirtyBits.
 
 ## Tweaks
 
+### Disable auto-maximize when dragging window to top of screen in XFCE
+
+Uncheck System Tools > Window Manager Tweaks > Accessibility > Automatically tile windows when moving toward the screen edge.
+
 ### How can I set environment variables for a VM?
 
 Either add to `/etc/environment` or create `~/.envsrc` and set a variable there, then create `.xsessionrc` and source `~/.envsrc`.
