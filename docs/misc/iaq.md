@@ -175,6 +175,9 @@ as well do 1080p in the hvm.
 
 ### Manually install Whonix 14 templates
 
+Note: See the [official documentation](https://www.whonix.org/wiki/Qubes/Install) for supported installation methods.
+There should be no need to complete the following procedure manually any more.
+
 ~~~
 sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-core-admin-addon-whonix
 
