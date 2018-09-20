@@ -15,25 +15,60 @@ VMs can read the system's timezone value from dom0 through the [QubesDB](https:/
 
 ### Clock synchronization ###
 
-A VM is defined globally as "clockVM", from which other VMs and dom0 will synchronize their clock with. The following command in dom0 shows which VM is defined:
+#### "ClockVM" ####
+
+One of the VMs is defined globally as "clockVM", from which other VMs and dom0 will synchronize their clock with. The following command in dom0 shows which VM has this role:
 
 ~~~
 qubes-prefs clockvm
 ~~~
 
-By default the clockvm is sys-net. The clockVM's clock is synchronized with remote NTP servers automatically by the `systemd-timesyncd` service.
+By default the clockVM is sys-net. Its clock is synchronized with remote NTP servers automatically by the `systemd-timesyncd` service.
 
-The clockVM has the `clocksync` [Qubes service](https://www.qubes-os.org/doc/qubes-service/) enabled (as shown by `qvm-service` or in the Services tab in sys-net Qubes Setting GUI): various scripts and systemd service definitions test for the presence (or absence) of `/var/run/qubes-service/clocksync` to differentiate the clockVM from other VMs, which allows the clockVM to be based on the same template than other VMs.
+The clockVM has the `clocksync` [Qubes service](https://www.qubes-os.org/doc/qubes-service/) enabled (as shown by `qvm-service` or in the Services tab in sys-net Qubes Setting GUI). This allows various scripts and systemd service definitions to test for the presence (or lack thereof) of `/var/run/qubes-service/clocksync` to differentiate the clockVM from other VMs. This in turn allows the clockVM to be based on the same template that other VMs use.
 
-Clock synchonization in other VMs is done:
+#### VMs (other than ClockVM) ####
 
-- at boot time, by the `qubes-sync-time` service
-- after suspend, by `/etc/qubes/suspend-post.d/qvm-sync-clock.sh`
-- every 6 hours, by the `qubes-sync-time.timer` systemd timer
+Clock synchonization happens:
+
+- at boot time (`qubes-sync-time` systemd service)
+- after suspend (`/etc/qubes/suspend-post.d/qvm-sync-clock.sh`)
+- every 6 hours (`qubes-sync-time.timer` systemd timer)
 
 Those scripts run `/usr/bin/qvm-sync-clock` which uses the `qubes.GetDate` [RPC](https://www.qubes-os.org/doc/qrexec3/#qubes-rpc-services) call to obtain the date from the clockVM  and run `/usr/lib/qubes/qubes-sync-clock` to validate the data received and set the date.
 
-Clock synchonization in dom0 is done by the `/etc/cron.d/qubes-sync-clock.cron` cron job run every hour, which calls `/usr/bin/qvm-sync-clock` (despite scripts having the same filename in dom0 and VMs, they are different, but the end result is the same: `qubes.GetDate` RPC call, innput validation, and setting the date).
+#### Dom0 ####
+
+Clock synchonization in dom0 is done by the `/etc/cron.d/qubes-sync-clock.cron` cron job every hour, which calls `/usr/bin/qvm-sync-clock`. Note that despite having the same name the `qvm-sync-clock` script in dom0 is different from the one installed in VMs; however it performs the same actions - using the `qubes.GetDate` RPC call, input validation and setting the date.
+
+
+Tweaking time synchronization defaults
+--------------------------------------
+
+### VMs ###
+
+(Re)setting the clock every 6 hours might not be accurate enough for some software. There are basically two ways to improve it:
+
+- disable the timer and run a ntp client; that is the best solution for time accuracy but it increases the attack surface considerably.
+- change the definition of the systemd timer so that it's run more frequently.
+
+The latter is simply a matter of putting the following definition in `/etc/systemd/system/qubes-sync-time.timer`:
+
+~~~
+[Timer]
+OnUnitActiveSec=10min
+~~~
+
+Doing so overrides the relevant definitions in `/usr/lib/systemd/system/qubes-sync-time.timer` and prevents the changes from being overwritten by the next `qubes-core-agent-systemd` package upgrade.
+
+To test, reload the definitions with `sudo systemctl daemon-reload` and check the timers' status with `systemctl list-timers`.
+
+If you want those changes to stick after a reboot, apply them in the TemplateVM you're using for your AppVM; alternatively you could put the systemd definition file in to your AppVM's `/rw/config` folder and use the `/rw/config/rc.local` script to copy the definition file to `/etc/systemd/system/qubes-sync-time.timer` and issue a `systemctl daemon-reload` command.
+
+
+### Dom0 ###
+
+Simply change the cron "frequency" in `/etc/cron.d/qubes-sync-clock.cron`. This might not survive updates of the `qubes-core-dom0-linux` package though. If that's the case, one could add a cron job that runs `qvm-sync-clock` more often, in addition to the original `/etc/cron.d/qubes-sync-clock.cron` cron job.
 
 
 Debugging problems
