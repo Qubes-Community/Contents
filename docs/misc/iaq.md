@@ -74,6 +74,14 @@ ConditionPathExists=/var/run/qubes/this-is-netvm
 - http://www.overclock.net/t/1307834/xen-vga-passthrough-compatible-graphics-adapters
 - https://wiki.xenproject.org/wiki/Xen_VGA_Passthrough_Tested_Adapters#ATI.2FAMD_display_adapters
 
+### Discrete nVidia GPU support ###
+
+This will definitely vary by system, but some have managed to use onboard Intel graphics for Qubes and still permit function of their separate nVidia card by editing their xen.cfg with:
+
+- Removed nouveau.modeset=0
+- Added kernel param: acpi_osi=!
+- Changed iommu support from iommu=no-igfx to iommu=on
+
 ### Where are VM log files kept?
 
 In the `/var/log/libvirst/libxl/`, `/var/log/qubes/` and `/var/log/xen/console/` directories.
@@ -154,6 +162,78 @@ mkswap swapfile
 swapon swapfile
 ~~~
 
+### How do I attach an `.img` file to a Qube?
+
+    # a file cannot be attached if it is in directory /var/lib/qubes/appvms, so create a link first
+    ln /var/lib/qubes/appvms/$1/private.img /home/user/private.img
+    LOOPDEV=`sudo losetup -f`
+    sudo losetup $LOOPDEV /home/user/private.img
+    qvm-block attach -o frontend-dev=xvds -o read-only=true backupvm dom0:$(basename "$LOOPDEV")
+
+[backup happens here]
+
+    qvm-block detach backupvm dom0:$(basename "$LOOPDEV")
+    sudo losetup -d $LOOPDEV
+    rm /home/user/private.img
+
+See https://groups.google.com/d/msg/qubes-users/LLSo_3oWXJI/0clWN0BUBgAJ for more details.
+
+### How can I permanently attach a block device to an HVM? ###
+
+In 3.2 you can just edit the conf file under /var/lib/qubes.
+
+In 4.0:
+Have a look at
+https://dev.qubes-os.org/projects/core-admin/en/latest/libvirt.html
+
+You want to add a new device: use normal Xen configuration.
+https://libvirt.org/formatdomain.html#elementsDisks will help.
+Use the phy driver, and specify the source as /dev/sdX, and target dev on your qube.
+
+The libvirt page explains how to create a custom specification for a qube, and where to put the files.
+The basic specification is created from a template file - on my system it's at /usr/share/qubes/templates/libvirt/xen.xml.
+(The documentation is a little out of step here.)
+If you look at that file you can see how the configuration for your qubes is constructed.
+
+What we want to do is to modify the settings for qube foo so that /dev/sdb on dom0 will appear at /dev/xvde in foo.
+
+Create a new file in dom0 at:
+```
+/etc/qubes/templates/libvirt/by-name/foo.xml
+```
+The contents are:
+```
+{% extends 'libvirt/xen.xml' %}
+{% block devices %}
+    {{ super() }}
+        <disk type='block' device='disk' >
+            <driver name='phy' />
+            <source dev='/dev/sdb' />
+            <target dev='xvde' />
+        </disk>
+{% endblock %}
+```
+
+The "extends" statement tells the system that it will be modifying the definition in libvirt/xen.xml.
+The "super()" imports the specification for block devices from that file.
+Then we define a new disk device - the syntax here is quite obvious and follows the reference in libvirt.org.
+
+Now when you boot foo, Qubes will pick up this file, and attach /dev/sdb to the foo qube, where it will appear as /dev/xvde. 
+You can put an entry in to /etc/fstab so that the /dev/xvde device will be automatically mounted where you will. 
+
+### How can I "sparsify" an existing volume? ###
+
+Use the `fallocate` command. It has a way to deallocate zero blocks in-place so you probably won't need to use issue lvm commands directly:
+
+`sudo fallocate --dig-holes /dev/mapper/qubes_dom0-vm--untrusted--private`
+
+This method can also be used on .img files (for Qubes installations that use them). 
+
+### In Qubes 3.2, how do I remove old entries from "Move/copy to other AppVM"? ###
+
+The rogue entries are stored in ~/.config/qvm-mru-filecopy in the qube you are trying to copy from.
+You can just edit that file to remove them from the list.
+
 ### How do I change display resolution on a Linux HVM?
 
 You only get one resolution at a time.
@@ -172,6 +252,10 @@ EndSection
 Only some modes will work. check wikipedia. if your host display is
 1080p(1920x1080), then an hvm at 1440x900 works well. if its more than that, might
 as well do 1080p in the hvm.
+
+### How can I get Bluetooth audio working? ###
+
+Either use a 3.5mm jack to BT adapter, or see [this](https://m7i.org/tips/qubes-VM-bluetooth-audio/).
 
 ### Manually install Whonix 14 templates
 
