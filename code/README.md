@@ -23,3 +23,4 @@
 
 **`misc`**
 - ![](/_res/l.png) [halt-vm-by-window](https://github.com/tasket/Qubes-scripts/blob/master/halt-vm-by-window): shutdown a Qubes VM associated with the currently active window ([readme](https://github.com/tasket/Qubes-scripts#halt-vm-by-window))
+- ![](/_res/l.png) [Traffic Analysis](http://zrubi.hu/en/2017/traffic-analysis-qubes/): see too his other Qubes blog posts
