@@ -122,4 +122,4 @@ Further considerations/caveats of dispVMs:
 - Obviously, using dispVMs (whether random or "semi-permanent") for `dstVM` means that any change - saved bookmarks, application preferences, add-on update, ... - is lost at poweroff. Saving changes persistently requires updating the VM's templateVM, which may be cumbersome.
 - inter-VM bookmark management might be eased with tools like [buku](https://github.com/jarun/Buku) (available in Fedora 28 repo - `dnf install buku`).
 
-`Contributors/Credits: @Aekez, @raffaeleflorio, [Micah Lee](https://micahflee.com/2016/06/qubes-tip-opening-links-in-your-preferred-appvm/), @taradiddles`
+`Contributors/Credits:` @Aekez, @raffaeleflorio, [Micah Lee](https://micahflee.com/2016/06/qubes-tip-opening-links-in-your-preferred-appvm/), @taradiddles
