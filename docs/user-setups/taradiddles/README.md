@@ -33,11 +33,15 @@ Custom default template with libreoffice, thunderbird, ...
 
 Larger custom template with programs from non-fedora repos (multimedia, non free, ...)
 
-- VM 'untrusted': not networked; used for opening multimedia files, and content that is thought to be OK. See [this comment](https://github.com/Qubes-Community/Contents/issues/21#issuecomment-385189481) for the rationale behind keeping this VM isolated from Internet.
+- VM 'untrusted': firewalled, only a few IPs allowed (eg. nextcloud server, ...); used for opening multimedia files, and content that is thought to be OK. See [this comment](https://github.com/Qubes-Community/Contents/issues/21#issuecomment-385189481) for the rationale behind keeping this VM without full Internet access.
 - VM 'sys-usb': firewalled, only 1 IP allowed (playing music from a NAS to a USB soundcard).
 - dispVM 'dispBrowser': doc / WIP; used for casual browsing. Using with a customized firefox profile with privacy extensions and a custom `user.js` file (adapted from [here](https://github.com/pyllyukko/user.js)).
-- dispVMs: used for opening content downloaded from unknown/dodgy sources and browsing sites that won't work with the restricted firefox profile of 'dispBrowser'.
+- dispVMs: used for opening content downloaded from unknown/dodgy sources as well as browsing sites that won't work with the restricted firefox profile of 'dispBrowser'.
 
+### Other VMs ###
+
+- a few Windows 7 VMs without network for CAD/3D drawing, programing controllers with a Windows-only toolkit, ... ; 
+- a StandaloneVM based on fedora with third-party drivers installed for a networked printer. Firewalled to allow only the network printer's IP.
 
 DOM0 customization
 ------------------
@@ -107,6 +111,8 @@ rsync
 qubes-gpg-split
 qubes-core-agent-nautilus
 bzip2
+encfs
+openssl
 ~~~
 
 Fixes/tweaks:
@@ -129,7 +135,6 @@ thunderbird
 tmux
 proxychains
 nfs-utils
-encfs
 gimp
 libreoffice-calc libreoffice-writer libreoffice-draw libreoffice-impress
 units
