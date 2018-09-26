@@ -1,4 +1,4 @@
-How to open links/files in other VMs
+How to open URLs/files in other VMs
 ====================================
 
 This document shows how to automatically open files/attachments/URLs in another VM, with or without user confirmation. This setup particularly suits "locked down" setups with restrictive firewalls like VMs dedicated to emails.
