@@ -4,6 +4,7 @@
 
 `common-tasks`
 - [how to copy files (and sparse files) from a VM to dom0](common-tasks/copying-files-to-dom0.md)
+- [how to open URLs in another VM](common-tasks/opening-urls-in-vms.md)
 
 `configuration`
 - ![](/_res/l.png) [use Qubes 3.2 OS as a network server](https://github.com/Rudd-O/qubes-network-server)
