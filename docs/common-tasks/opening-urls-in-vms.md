@@ -12,22 +12,29 @@ Naming convention:
 Configuring dom0 RPC permissions
 --------------------------------
 
-There are quite a few approaches that one can choose to open files and URLs in other VMs, however the mechanism is the same for all of them: they involve the `qubes.OpenInVM` and `qubes.OpenURL` [RPC services](https://www.qubes-os.org/doc/qrexec3/#qubes-rpc-services), usually through the use of the `qvm-open-in-vm` and `qvm-open-in-dvm` shell scripts in `srcVM`.
+There are different approaches to open files and URLs in other VMs but they all involve the `qubes.OpenInVM` and `qubes.OpenURL` [RPC services](https://www.qubes-os.org/doc/qrexec3/#qubes-rpc-services), usually through the use of the `qvm-open-in-vm` and `qvm-open-in-dvm` shell scripts in `srcVM`.
 
-One can configure Qubes's [RPC policies](https://www.qubes-os.org/doc/rpc-policy/) to fine tune when/if a user confirmation/selection window pops up depending on the RPC service and the names of `srcVM` and `dstVM`.
-
-If one wants to automatically select different destination VMs - eg. depending on the site's level of trust, URL/file type, ... - *without* user confirmation - then some logic must exist in `srcVM`, either in the form of a custom wrapper to the `qvm-open-in-vm` script, or a specific application add-on.
+Depending on the RPC service, `srcVM` and optionally `dstVM` Qubes RPC policies can be configured to allow, deny, or popup a list of available destination VMs. See the [official documentation](https://www.qubes-os.org/doc/rpc-policy/).
+In the case that `allow` is configured (ie. no popup dialog) *and* that different destination VMs should be used depending on the URL/file (site's level of trust, protocol, file [MIME](https://en.wikipedia.org/wiki/Media_type) type, ...), then some logic must exist in `srcVM`, either in the form of a custom wrapper to the `qvm-open-in-vm` script, or a specific application add-on.
 
 
 Configuring `srcVM`
 -------------------
 
-The subsections below list various approaches, each with their pros and cons.
+The subsections below list various approaches. 
+
+
+### Inter-VM - copy/paste and file copy ###
+
+That approach is obvious, but is the most simple one and doesn't require any configuration.
+
+- URLs: [copy/paste](https://www.qubes-os.org/doc/copy-paste/) the link in `dstVM`'s browser.
+- Files: [copy](https://www.qubes-os.org/doc/copying-files/) the file to `dstVM` and open it from there.
 
 
 ### Command-line ###
 
-Save for copy/pasting URLs between VMs, the most basic - and less convenient - approach is to open files or URLs like so:
+Another obvious and basic approach - but less convenient - is to open files or URLs in a terminal in `srcVM`:
 
 ~~~
 qvm-open-in-vm dstVM http://example.com
@@ -46,7 +53,7 @@ Note: `qvm-open-in-dvm` is actually a wrapper to `qvm-open-in-vm`.
 
 ### Per application setup ###
 
-Most applications provide a way to select a given program to use for specific URL/file (mime) types. We can thus use that feature to select the `qvm-open-in-{vm,dvm}` scripts instead of the default application programs.
+Most applications provide a way to select a given program to use for specific URL/file (MIME) types. We can thus use that feature to select the `qvm-open-in-{vm,dvm}` scripts instead of the default application programs.
 
 The subsections below show how to configure popular applications.
 
@@ -72,7 +79,7 @@ qvm-open-in-vm dstVM "$@"
 
 #### Firefox, Chrome/Chromium ####
 
-Those browsers have an option to define programs associated to a file (Mime) type ; those are pretty straightforward to configure so it's outside the scope of this document.
+Those browsers have an option to define programs associated to a file (MIME) type ; those are pretty straightforward to configure so it's outside the scope of this document.
 
 An alternative is to use Raffaele Florio's [qubes-url-redirector](https://github.com/raffaeleflorio/qubes-url-redirector) add-on which provides: links can be opened with a context menu and the add-on has a settings page embedded in the browser to customize its default behavior, with support for whitelist regexes. This provides a lot of flexibility without the hassle of having to write custom shell wrappers to `qvm-open-in-vm`.
 
