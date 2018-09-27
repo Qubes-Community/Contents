@@ -1,11 +1,7 @@
 How to open URLs/files in other VMs
 ====================================
 
-This document shows how to automatically open files/attachments/URLs in another VM, with or without user confirmation. This setup particularly suits "locked down" setups with restrictive firewalls like VMs dedicated to emails.
-
-There are quite a few approaches that one can choose to open files, each with their pros and cons. However the mechanism is the same for all of them: they use the `qubes.OpenInVM` and `qubes.OpenURL` [RPC services](https://www.qubes-os.org/doc/qrexec3/#qubes-rpc-services) (usually through the use of the `qvm-open-in-vm` and `qvm-open-in-dvm` scripts).
-
-In case dom0 permissions (see section below) allow opening URLs/files in the destination VM without user confirmation but different destination VMs have to be used (eg. depending on the site's level of trust, URL/file type, ...), a custom wrapper to the `qvm-open-in-vm` script can be used to select a specific destination VM based on the file/URL type.
+This document shows various approaches on how to automatically open files/attachments/URLs in another VM, with or without user confirmation. This setup particularly suits "locked down" setups with restrictive firewalls like VMs dedicated to emails.
 
 Naming convention:
 
@@ -16,11 +12,18 @@ Naming convention:
 Configuring dom0 RPC permissions
 --------------------------------
 
-When using `qvm-open-in-{vm,dvm}` scripts (which in turn use the `qubes.OpenInVM` and `qubes.OpenURL` RPC calls), one may choose if/when a user confirmation dialog should pop up, depending on the RPC call and the `srcVM` / `dstVM` combo. See the [official doc](https://www.qubes-os.org/doc/rpc-policy/) for the proper syntax.
+There are quite a few approaches that one can choose to open file, however the mechanism is the same for all of them: they use the `qubes.OpenInVM` and `qubes.OpenURL` [RPC services](https://www.qubes-os.org/doc/qrexec3/#qubes-rpc-services), usually through the use of the `qvm-open-in-vm` and `qvm-open-in-dvm` shell scripts.
+
+One may configure when/if a user confirmation dialog should pop up when `qubes.OpenInVM` and `qubes.OpenURL` RPC calls are used, depending on the RPC call and the `srcVM` / `dstVM` combo. See the [official doc](https://www.qubes-os.org/doc/rpc-policy/) for the proper syntax.
+
+If one wants to automatically select different destination VMs - eg. depending on the site's level of trust, URL/file type, ... - *without* user confirmation - then some logic must exist in `srcVM`, either in the form of a custom wrapper to the `qvm-open-in-vm` script, or a specific application add-on.
 
 
 Configuring `srcVM`
 -------------------
+
+The subsections below list various approaches, each with their pros and cons.
+
 
 ### Command-line ###
 
