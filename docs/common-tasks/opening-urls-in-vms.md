@@ -12,9 +12,9 @@ Naming convention:
 Configuring dom0 RPC permissions
 --------------------------------
 
-There are quite a few approaches that one can choose to open file, however the mechanism is the same for all of them: they use the `qubes.OpenInVM` and `qubes.OpenURL` [RPC services](https://www.qubes-os.org/doc/qrexec3/#qubes-rpc-services), usually through the use of the `qvm-open-in-vm` and `qvm-open-in-dvm` shell scripts.
+There are quite a few approaches that one can choose to open files and URLs in other VMs, however the mechanism is the same for all of them: they involve the `qubes.OpenInVM` and `qubes.OpenURL` [RPC services](https://www.qubes-os.org/doc/qrexec3/#qubes-rpc-services), usually through the use of the `qvm-open-in-vm` and `qvm-open-in-dvm` shell scripts in `srcVM`.
 
-One may configure when/if a user confirmation dialog should pop up when `qubes.OpenInVM` and `qubes.OpenURL` RPC calls are used, depending on the RPC call and the `srcVM` / `dstVM` combo. See the [official doc](https://www.qubes-os.org/doc/rpc-policy/) for the proper syntax.
+One can configure Qubes's [RPC policies](https://www.qubes-os.org/doc/rpc-policy/) to fine tune when/if a user confirmation/selection window pops up depending on the RPC service and the names of `srcVM` and `dstVM`.
 
 If one wants to automatically select different destination VMs - eg. depending on the site's level of trust, URL/file type, ... - *without* user confirmation - then some logic must exist in `srcVM`, either in the form of a custom wrapper to the `qvm-open-in-vm` script, or a specific application add-on.
 
@@ -46,14 +46,14 @@ Note: `qvm-open-in-dvm` is actually a wrapper to `qvm-open-in-vm`.
 
 ### Per application setup ###
 
-Most applications provide a way to configure what program to use depending on URL/file (mime) types. Stepping up from the command line approach, a better solution would be to configure each application to use the `qvm-open-in-{vm,dvm}` scripts. 
+Most applications provide a way to select a given program to use for specific URL/file (mime) types. We can thus use that feature to select the `qvm-open-in-{vm,dvm}` scripts instead of the default application programs.
 
-The subsections below give additional info on how to configure popular applications.
+The subsections below show how to configure popular applications.
 
 
 #### Thunderbird ####
 
-In the case of Thunderbird, one has to define actions for opening attachements (see the [mozilla doc](http://kb.mozillazine.org/Actions_for_attachment_file_types), mainly section "Download Actions" settings"). Changing the way http and https URLs are opened requires tweaking config options though (see [this mozilla doc](http://kb.mozillazine.org/Changing_the_web_browser_invoked_by_Thunderbird)). Those changes can be made in Thunderbird's config editor, or by adding the following to `$HOME/.thunderbird/user.js` like so:
+With Thunderbird one has to define actions for opening attachements (see the [mozilla doc](http://kb.mozillazine.org/Actions_for_attachment_file_types), mainly section "Download Actions" settings"). Changing the way http and https URLs are opened requires tweaking config options though (see [this mozilla doc](http://kb.mozillazine.org/Changing_the_web_browser_invoked_by_Thunderbird)). Those changes can be made in Thunderbird's config editor, or by adding the following to `$HOME/.thunderbird/user.js` like so:
 
 ~~~
 user_pref("network.protocol-handler.warn-external.http", true);
@@ -62,7 +62,7 @@ user_pref("network.protocol-handler.warn-external.https", true);
 user_pref("network.protocol-handler.expose-all", true);
 ~~~
 
-Thunderbird will then ask which program to use the next time a link is opened. If `dstVM` should be a regular dispVM, choose `qvm-open-in-dvm`. Otherwise you'll have to create a wrapper since arguments cannot be passed to the program in Thunderbird's dialog. For instance, put the following in `$HOME/bin/thunderbird-url`, make it executable, and choose that script:
+Thunderbird will then ask which program to use the next time a link is opened. If `dstVM` is a standard dispVM, choose `qvm-open-in-dvm`. Otherwise you'll have to create a wrapper to `qvm-open-in-vm` since arguments cannot be passed to the program in Thunderbird's dialog. For instance, put the following in `$HOME/bin/thunderbird-url`, make it executable, and select that script when asked which program to use:
 
 ~~~
 #!/bin/sh
@@ -72,9 +72,11 @@ qvm-open-in-vm dstVM "$@"
 
 #### Firefox, Chrome/Chromium ####
 
-Those browsers offer an option to define programs associated to a file (Mime) type but a flexible alternative is to use Raffaele Florio's [qubes-url-redirector](https://github.com/raffaeleflorio/qubes-url-redirector) add-on: links can be opened with a context menu and the add-on has a settings page embedded in the browser to customize its default behavior, with support for whitelist regexes.
+Those browsers have an option to define programs associated to a file (Mime) type ; those are pretty straightforward to configure so it's outside the scope of this document.
 
-The qubes-url-redirector add-on will likely be included officialy in the next Qubes release (see [this](https://github.com/QubesOS/qubes-issues/issues/3152) issue), easing concerns about installing third-party software. The addon may also support Thunderbird in the future.
+An alternative is to use Raffaele Florio's [qubes-url-redirector](https://github.com/raffaeleflorio/qubes-url-redirector) add-on which provides: links can be opened with a context menu and the add-on has a settings page embedded in the browser to customize its default behavior, with support for whitelist regexes. This provides a lot of flexibility without the hassle of having to write custom shell wrappers to `qvm-open-in-vm`.
+
+Note: the qubes-url-redirector add-on will likely be included officialy in the next Qubes release (see [this](https://github.com/QubesOS/qubes-issues/issues/3152) issue), easing concerns about installing third-party software. The addon may also support Thunderbird in the future.
 
 
 #### Vi ####
@@ -88,9 +90,9 @@ let g:netrw_browsex_viewer = 'qvm-open-in-vm dstVM'
 
 ### Application independent setup ###
 
-The section above relied on configuring *each* application; while it provides a good amount of flexibility, it is time consuming and might be overkill when the same action/program should be used by all the applications in `srcVM`.
+The section above relied on configuring *each* application; while it provides a good amount of flexibility, it is time consuming when the same action/program should be used by *all* the applications in `srcVM`.
 
-Providing that the applications adhere to the freedesktop standard, defining a global action is straightforward:
+Providing that the application adheres to the [freedesktop](https://en.wikipedia.org/wiki/Freedesktop.org) standard, defining a global action is straightforward:
 
 - put the following in `~/.local/share/applications/browser_vm.desktop`
 
@@ -113,7 +115,7 @@ The same can be done with any Mime type (see `man xdg-mime` and `xdg-settings`).
 Note again that `qvm-open-in-vm dstVM` can be replaced by a user written wrapper with custom logic for selecting a specific dstVM depending on the URL/file type, site level of trust, ...
 
 
-**Caveat**: if dom0 default permissions are set to allow without user confirmation applications can leak data through the URL name despite `srcVM`'s restrictive firewall (you may notice that an URL has been open in `dstVM` but it would be too late).
+**Caveat**: if dom0 default permissions are set to allow without user confirmation applications can leak data through URLs despite `srcVM`'s restrictive firewall (you may notice that an URL has been open in `dstVM` but it would be too late).
 
 
 "Semi-permanent" named dispVMs
