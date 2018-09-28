@@ -22,9 +22,9 @@ A very powerful and convenient RPC policy rule is `ask`: in that case a dialog w
 
 It is impossible to overstate how flexible this is and how much security it can add to one's workflow: while opening things in dispVMs is the most secure approach the problem is starting a dispVM for *each* URL/file takes far too much time and resources, leading people to open files/URLs in persistent VMs instead.
 
-With the `ask` policy the VM selection dialog allows one to either start any new dispVM (not only default dispVMs but any other type of dispVM configured - see section "Considerations on dispVMs" below) or send the URL/file to an already running (disp)VM. So the first time an URL/file is open the (disp)VM will start if it wasn't running. The next time another URL/file is sent, there's no need start a new dispVM, one can instead select the already running (disp)VM. It is also possible to choose 'cancel' in the dialog and nothing will launch.
+The `ask` policy's VM selection dialog allows one to start any type of VM or dispVM (see section "Considerations on dispVMs" below), or send the URL/file to an already running (disp)VM. The first time an URL/file is open the (disp)VM will start if it wasn't running. The next time another URL/file is sent, there's no need start a new (disp)VM, one can instead select the already running (disp)VM. It is also possible to choose 'cancel' in the dialog and nothing will launch.
 
-This setup makes it possible to control if and on which network (eg. "clearnet", TOR, VPN) an URL is requested - always.
+This setup makes it possible to control if and on which network (eg. "clearnet", TOR, VPN) an URL is requested - always. It also effectively mitigates the long starting times of dispVMs.
 
 Note: when using the `ask` policy, the destination VM specified in `srcVM` by `qvm-open-in-vm` is ignored if no `allow` match exists for that given `srcVM`/`dstVM` combo.
 
@@ -62,13 +62,13 @@ Considerations on dispVMs
 
 ### Re-using dispVMs ###
 
-In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files). This effectively mitigates the long starting times of dispVMs, at the price of a loss in compartmentalization. It is thus up to the user to manage the lifecycle of a dispVM, killing it when necessary when a clean state is required.
+In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files) to avoid having to wait insane amounts of time for dispVMs to start. Howecer this comes at the price of a loss in compartmentalization. It is thus up to the user to carefully pick destination VMs and to manage the lifecycle of dispVMs, killing it/them when necessary when a clean state is required.
 
 ### Managing changes ###
 
-When opening and modifying a document in a dispVM the content is sent back to `srcVM` when the dispVM closes, before the dispVM's private volume is wiped. Other changes that were made to the VM are thus discarded - eg. updated add-on, tweaked browser preferences, ... ; The following ideas show how to cope with "deliberate" changes:
+When opening and modifying a document in a dispVM the content is sent back to `srcVM` when the dispVM's process (eg. LibreOffice) closes. The the dispVM's private volume is then wiped and any change that was made to the VM are discarded - eg. automatically updated add-ons, blacklists, tweaked browser preferences, ... ; The following ideas show how to cope with those "deliberate" changes:
 
-- inter-VM copy/paste is probably the easiest way to synchronize text between the (disp)VM and `srcVM` (or another dedicated secure VM like the oft-used 'vault' VM). Eg.:
+- inter-VM copy/paste is probably the easiest way to synchronize small amount of data in text form from the dispVM to `srcVM` (or to another dedicated VM like the oft-used 'vault'). Eg.:
    - passwords: copy/paste from/to KeepassX (or one of its forks).
    - bookmarks: copy/paste from/to a plain text file, or an html file (like most browsers can export/import), or a dedicated bookmark manager like [buku](https://github.com/jarun/Buku) (command line manager, available in Fedora 28 repo - `dnf install buku`).
 - other content/changes will have to be copied, usually to the (disp)VM templateVM. Care must be taken not to replicate compromised files: working with a freshly started (disp)VM and performing only the required update actions before synchronizing files with the templateVM is a good idea.
@@ -148,7 +148,12 @@ Those browsers have an option to define programs associated to a file (MIME) typ
 
 An alternative is to use Raffaele Florio's [qubes-url-redirector](https://github.com/raffaeleflorio/qubes-url-redirector) add-on, which provides a lot of flexibility when opening links without the hassle of having to write custom shell wrappers to `qvm-open-in-vm`. For instance links can be opened with a context menu and the add-on's default behavior can be configured, even with whitelist regexes.
 
-Note: the qubes-url-redirector add-on will likely be included officialy in the next Qubes release (see [this](https://github.com/QubesOS/qubes-issues/issues/3152) issue). The addon may also support Thunderbird in the future.
+Notes:
+- the qubes-url-redirector add-on will likely be included officialy in Qubes (see [this](https://github.com/QubesOS/qubes-issues/issues/3152) issue).
+- the add-on can actually be used with applications other than firefox/chrome/chromium, the only requirement is that URLs open in a browser in `srcVM`. It works like so:
+   - the application in `srcVM` opens an URL in the default browser in `srcVM` (eg. firefox)
+   - firefox starts on `srcVM`, the add-on processes the URL and according to its configuration "sends" the URL to the destination VM with `qubes.OpenURL`
+   - the URL opens in the destination VM's browser
 
 
 #### Thunderbird ####
@@ -169,7 +174,6 @@ Thunderbird will then ask which program to use the next time a link is opened. I
 #!/bin/sh
 qvm-open-in-vm dstVM "$@"
 ~~~
-
 
 #### Vi ####
 
