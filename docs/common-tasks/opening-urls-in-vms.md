@@ -1,9 +1,7 @@
 How to open URLs/files in other VMs
 ===================================
 
-This document describes how to open URLs and files in another VM. This setup particularly suits "secure" offline or firewalled VMs.
-
-Configuration samples are given throughout the document to show how to setup a flexible and powerful workflow, mitigating the long starting time and resource usage of dispVMs that often results in users not using them.
+Qubes' philosophy is to assume you are already compromised and to partition your work / data in a way that even if all your VMs are compromised the attack would still not be able to extract (any) information. This document describes how to implement such compartmentalization when opening URLs and files from "secure" offline or firewalled VMs. Configuration samples throughout this document show how to setup a flexible and powerful workflow, mitigating the long starting time and resource usage of dispVMs that unfortunately often results in users not taking advantage of them.
 
 Naming convention:
 
@@ -62,19 +60,18 @@ $anyvm $anyvm ask
 Considerations on dispVMs
 -------------------------
 
-### Security policy of the 'ask' RPC ###
+### Re-using dispVMs ###
 
 In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files). This effectively mitigates the the long starting times of dispVMs, at the price of a loss in compartmentalization. It is thus up to the user to manage the lifecycle of a dispVM, killing it when necessary when a a clean state is required.
 
 ### Managing changes ###
 
-When opening and modifying a document in a dispVM, the content is "sent" back to `srcVM` once that dispVM closes. However other changes made to the VM's private volume are lost - eg. updated add-on, tweaked browser preferences, ... ; The following ideas show how to cope with those:
+When opening and modifying a document in a dispVM, the content is sent back to `srcVM` when the dispVM closes, before the dispVM's private volume is wiped, nuking any other changes that were made to the VM - eg. updated add-on, tweaked browser preferences, ... ; The following ideas show how to cope with those "deliberate" changes:
 
 - inter-VM copy/paste is probably the easiest way to synchronize text between the (disp)VM and `srcVM` (or another dedicated secure VM like the oft-used 'vault' VM). Eg.:
    - passwords: copy/paste from/to KeepassX (or one of its forks).
    - bookmarks: copy/paste from/to a plain text file, or an html file (like most browsers can export/import), or a dedicated bookmark manager like [buku](https://github.com/jarun/Buku) (command line manager, available in Fedora 28 repo - `dnf install buku`).
 - other content/changes will have to be copied, usually to the (disp)VM templateVM. Care must be taken not to replicate compromised files: working with a freshly started (disp)VM and performing only the required update actions before synchronizing files with the templateVM is a good idea.
-
 
 ### Using "named" dispVMs ###
 
@@ -87,7 +84,6 @@ qvm-create -C DispVM -t fedora-28-dvm -l red dstVM
 ~~~
 
 This VM works like a regular VM, with the difference that its private disk is wiped after it's powered off. However it doesn't "auto power off" like random dispVMs so it's up to the user to power off (and optionaly restart) the VM when he/she deems necessary.
-
 
 ### Sample real-world workflow ###
 
@@ -157,9 +153,9 @@ Note: the qubes-url-redirector add-on will likely be included officialy in the n
 
 #### Thunderbird ####
 
-Opening attachements: "actions" must be defined for opening attachements; see [this document](http://kb.mozillazine.org/Actions_for_attachment_file_types), section "Download Actions" settings".
+**Opening attachements**: "actions" must be defined, see section "Download Actions" settings" in [this document](http://kb.mozillazine.org/Actions_for_attachment_file_types).
 
-Opening URLs: changing the way http and https URLs are opened requires tweaking configuration options; see [this](http://kb.mozillazine.org/Changing_the_web_browser_invoked_by_Thunderbird) and [this](http://kb.mozillazine.org/Network.protocol-handler.expose-all) document for more information. Those changes can be made in Thunderbird's built-in config editor, or by adding the following lines to `$HOME/.thunderbird/user.js`:
+**Opening URLs**: changing the way http and https URLs are opened requires tweaking configuration options; see [this](http://kb.mozillazine.org/Changing_the_web_browser_invoked_by_Thunderbird) and [this](http://kb.mozillazine.org/Network.protocol-handler.expose-all) document for more information. Those changes can be made in Thunderbird's built-in config editor, or by adding the following lines to `$HOME/.thunderbird/user.js`:
 
 ~~~
 user_pref("network.protocol-handler.warn-external.http", true);
