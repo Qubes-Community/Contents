@@ -199,7 +199,7 @@ This approach is obvious and is the simplest one:
 
 ---
 
-`Contributors`: @Aekez, @taradiddles
+`Contributors`: @SvenSemmler, @Aekez, @taradiddles
 
 `Credits:` @raffaeleflorio, [Micah Lee](https://micahflee.com/2016/06/qubes-tip-opening-links-in-your-preferred-appvm/)
 
