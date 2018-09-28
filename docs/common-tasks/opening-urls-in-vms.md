@@ -62,11 +62,11 @@ Considerations on dispVMs
 
 ### Re-using dispVMs ###
 
-In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files). This effectively mitigates the the long starting times of dispVMs, at the price of a loss in compartmentalization. It is thus up to the user to manage the lifecycle of a dispVM, killing it when necessary when a a clean state is required.
+In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files). This effectively mitigates the long starting times of dispVMs, at the price of a loss in compartmentalization. It is thus up to the user to manage the lifecycle of a dispVM, killing it when necessary when a clean state is required.
 
 ### Managing changes ###
 
-When opening and modifying a document in a dispVM, the content is sent back to `srcVM` when the dispVM closes, before the dispVM's private volume is wiped, nuking any other changes that were made to the VM - eg. updated add-on, tweaked browser preferences, ... ; The following ideas show how to cope with those "deliberate" changes:
+When opening and modifying a document in a dispVM the content is sent back to `srcVM` when the dispVM closes, before the dispVM's private volume is wiped. Other changes that were made to the VM are thus discarded - eg. updated add-on, tweaked browser preferences, ... ; The following ideas show how to cope with "deliberate" changes:
 
 - inter-VM copy/paste is probably the easiest way to synchronize text between the (disp)VM and `srcVM` (or another dedicated secure VM like the oft-used 'vault' VM). Eg.:
    - passwords: copy/paste from/to KeepassX (or one of its forks).
@@ -77,7 +77,7 @@ When opening and modifying a document in a dispVM, the content is sent back to `
 
 As of Qubes R4.0, it is impossible to "name" a dispVM: opening a URL/file in a standard dispVMs will always start a VM with a 'dispXXXX' name (eg. 'disp1234').
 
-If for some reason a user needs to have use a dispVM with a given name - which is for instance handy for 'allow' RPC policies - he/she can do like so (replace `fedora-28-dvm` with the dvm template you want to use):
+If for some reason a user needs to have use a dispVM with a given name - which is for instance handy when using `allow` RPC policies - he/she can do like so (replace `fedora-28-dvm` with the dvm template you want to use):
 
 ~~~
 qvm-create -C DispVM -t fedora-28-dvm -l red dstVM
@@ -179,7 +179,7 @@ Opening URLs: put the following in `$HOME/.vimrc`:
 let g:netrw_browsex_viewer = 'qvm-open-in-vm dstVM'
 ~~~
 
-Typing `gx` when the cursor is over an URL will then open it in `dstVM`.
+Typing `gx` when the cursor is over an URL will then open it in `dstVM` (or will trigger a dialog if `ask` policy is configured, ignoring the `dstVM` argument).
 
 
 ### Inter-VM copy/paste and file copy ###
