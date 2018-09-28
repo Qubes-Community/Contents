@@ -1,7 +1,7 @@
 How to open URLs/files in other VMs
 ===================================
 
-Qubes' philosophy is to assume you are already compromised and to partition your work / data in a way that even if all your VMs are compromised the attack would still not be able to extract (any) information. This document describes how to implement such compartmentalization when opening URLs and files from "secure" offline or firewalled VMs. Configuration samples throughout this document show how to setup a flexible and powerful workflow, mitigating the long starting time and resource usage of dispVMs that unfortunately often results in users not taking advantage of them.
+Qubes' philosophy is to assume you are already compromised and to partition your work / data in a way that even if all your VMs are compromised an attacker would not be able to extract any information. This document describes how to implement such compartmentalization when opening URLs and files from "secure" offline or firewalled VMs. Configuration samples throughout this document show how to setup a flexible and powerful workflow, mitigating the long starting time and resource usage of dispVMs that unfortunately often results in users not taking advantage of them.
 
 Naming convention:
 
@@ -22,7 +22,7 @@ A very powerful and convenient RPC policy rule is `ask`: in that case a dialog w
 
 It is impossible to overstate how flexible this is and how much security it can add to one's workflow: while opening things in dispVMs is the most secure approach the problem is starting a dispVM for *each* URL/file takes far too much time and resources, leading people to open files/URLs in persistent VMs instead.
 
-The `ask` policy's VM selection dialog allows one to start any type of VM or dispVM (see section "Considerations on dispVMs" below), or send the URL/file to an already running (disp)VM. The first time an URL/file is open the (disp)VM will start if it wasn't running. The next time another URL/file is sent, there's no need start a new (disp)VM, one can instead select the already running (disp)VM. It is also possible to choose 'cancel' in the dialog and nothing will launch.
+The `ask` policy's VM selection dialog allows one to start any type of VM or dispVM (see section "Considerations on dispVMs" below), or send the URL/file to an already running (disp)VM. The first time an URL/file is opened the (disp)VM will start if it wasn't running. The next time another URL/file is sent, there's no need start a new (disp)VM, one can instead select the already running (disp)VM. It is also possible to choose 'cancel' in the dialog and nothing will launch.
 
 This setup makes it possible to control if and on which network (eg. "clearnet", TOR, VPN) an URL is requested - always. It also effectively mitigates the long starting times of dispVMs.
 
@@ -98,7 +98,7 @@ Disposable VMs are based on the following templates:
 - dvm-online (minimal with firefox only)
 - dvm-anon (whonix workstation)
 
-AppVMs are highly specialized: vault (offline), documents (offline), media (offline), dev (firewalled), email (firewalled). Those is where information lives. But files do not get opened nor worked on there ... only on instances of dvm-offline.
+AppVMs are highly specialized: vault (offline), documents (offline), media (offline), email (firewalled). Those is where information lives. But files do not get opened nor worked on there ... only on instances of dvm-offline.
 
 
 Configuring `srcVM`
