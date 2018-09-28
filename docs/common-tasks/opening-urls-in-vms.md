@@ -197,25 +197,6 @@ This approach is obvious and is the simplest one:
 - Files: [copy](https://www.qubes-os.org/doc/copying-files/) the file to `dstVM` (provided that `qubes.Filecopy` RPC service's policy allows it - it does by default), and open it from there.
 
 
-### Command-line ###
-
-Another obvious and basic approach - but less convenient - is to open files or URLs in a terminal in `srcVM`:
-
-~~~
-qvm-open-in-vm dstVM http://example.com
-qvm-open-in-vm dstVM word.doc
-~~~
-
-Or, if opening in random dispVMs:
-
-~~~
-qvm-open-in-dvm http://example.com
-qvm-open-in-dvm word.doc
-~~~
-
-Note: `qvm-open-in-dvm` is actually a wrapper to `qvm-open-in-vm`.
-
-
 ---
 
 `Contributors`: @Aekez, @taradiddles
