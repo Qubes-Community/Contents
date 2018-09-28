@@ -66,12 +66,15 @@ In the section above we've seen how using the 'ask' RPC policy allowed us to sta
 
 ### Managing changes ###
 
-When opening and modifying a document in a dispVM the content is sent back to `srcVM` when the dispVM's process (eg. LibreOffice) closes. The the dispVM's private volume is then wiped and any change that was made to the VM are discarded - eg. automatically updated add-ons, blacklists, tweaked browser preferences, ... ; The following ideas show how to cope with those "deliberate" changes:
+When opening and modifying a document in a dispVM the content is sent back to `srcVM` when the dispVM's process (eg. LibreOffice) closes. The dispVM's private volume is then wiped and any change that was made to the VM are discarded - eg. automatically updated add-ons, blacklists, tweaked browser preferences, ... ; The following ideas show how to cope with those "deliberate" changes:
 
-- inter-VM copy/paste is probably the easiest way to synchronize small amount of data in text form from the dispVM to `srcVM` (or to another dedicated VM like the oft-used 'vault'). Eg.:
+- inter-VM copy/paste is probably the easiest way to synchronize small amounts of data in text form from the dispVM to `srcVM` (or to another dedicated VM like the oft-used 'vault' VM). Eg.:
    - passwords: copy/paste from/to KeepassX (or one of its forks).
-   - bookmarks: copy/paste from/to a plain text file, or an html file (like most browsers can export/import), or a dedicated bookmark manager like [buku](https://github.com/jarun/Buku) (command line manager, available in Fedora 28 repo - `dnf install buku`).
-- other content/changes will have to be copied, usually to the (disp)VM templateVM. Care must be taken not to replicate compromised files: working with a freshly started (disp)VM and performing only the required update actions before synchronizing files with the templateVM is a good idea.
+   - bookmarks: copy/paste from/to
+      - a plain text file
+      - or an html bookmark file (most browsers can export/import such file)
+      - or a dedicated bookmark manager like [buku](https://github.com/jarun/Buku) (command line manager, available in Fedora 28 repo - `dnf install buku`).
+- other content/changes will have to be copied, usually to the dispVM templateVM. Care must be taken not to replicate compromised files: working with a freshly started dispVM and performing only the required update actions before synchronizing files with the templateVM is a good idea.
 
 ### Using "named" dispVMs ###
 
