@@ -35,10 +35,11 @@ vim-common
 ```
 
 Template of:
-- sys-net
-- sys-usb
-- sys-sd
-- sys-firewall
+- fedora-28-mini-dvm: template for DispVMs
+- sys-net: DispVM based on fedora-28-mini-dvm
+- sys-usb: DispVM based on fedora-28-mini-dvm
+- sys-sd: DispVM based on fedora-28-mini-dvm
+- sys-firewall: DispVM based on fedora-28-mini-dvm
 - vault: offline; password manager; totp generation
 - *VMs used as split-{gpg,ssh} backend (e.g. work-keys)*: offline; management of a minimal set of (sub)keys
 - *VMs used as data container (e.g. backup)*: offline
@@ -60,7 +61,7 @@ mozilla-privacy-badger
 ```
 
 Template of:
-- dvm-net: template for dispVMs
+- dvm-net: template for DispVMs
 - dispNet: DispVM based on dvm-net
 - *VMs that needs a minimal Firefox and/or Thunderbird (e.g. work)*: firewalled; qubes-url-redirector; custom Firefox preferences
 
