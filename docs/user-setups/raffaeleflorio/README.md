@@ -44,9 +44,9 @@ Template of:
 - *VMs used as data container (e.g. backup)*: offline
 
 Notes:
-[split gpg](https://www.qubes-os.org/doc/split-gpg/)
-[split gpg advanced setup](https://www.qubes-os.org/doc/split-gpg/#advanced-using-split-gpg-with-subkeys)
-[split ssh](https://github.com/henn/qubes-app-split-ssh
+- [split gpg](https://www.qubes-os.org/doc/split-gpg/)
+- [split gpg advanced setup](https://www.qubes-os.org/doc/split-gpg/#advanced-using-split-gpg-with-subkeys)
+- [split ssh](https://github.com/henn/qubes-app-split-ssh)
 
 ### TemplateVM fedora-28-net
 A clone of fedora-28-mini with:
@@ -62,11 +62,11 @@ mozilla-privacy-badger
 Template of:
 - dvm-net: template for dispVMs
 - dispNet: DispVM based on dvm-net
-- *VMs that needs a minimal Firefox and/or Thunderbird (e.g. work)*: firewalled; qubes-url-redirector; custom Firefox
+- *VMs that needs a minimal Firefox and/or Thunderbird (e.g. work)*: firewalled; qubes-url-redirector; custom Firefox preferences
 
 Notes:
-[qubes-url-redirector](https://github.com/raffaeleflorio/qubes-url-redirector)
-[Qubes community docs about link/files opening](https://github.com/Qubes-Community/Contents/blob/master/docs/common-tasks/opening-urls-in-vms.md)
+- [qubes-url-redirector](https://github.com/raffaeleflorio/qubes-url-redirector)
+- [Qubes community docs about link/files opening](https://github.com/Qubes-Community/Contents/blob/master/docs/common-tasks/opening-urls-in-vms.md)
 
 ### TemplateVM fedora-28-heavy
 A clone of fedora-28-net with:
@@ -107,8 +107,8 @@ Template of:
 - dvm-anon
 
 Notes:
-[Whonix info 1](https://www.qubes-os.org/doc/whonix)
-[Whonix info 2](https://www.whonix.org/wiki/Qubes)
+- [Whonix info 1](https://www.qubes-os.org/doc/whonix)
+- [Whonix info 2](https://www.whonix.org/wiki/Qubes)
 
 ### TemplateVM whonix-gw-14
 - sys-whonix
