@@ -2,11 +2,11 @@
 :toc-title:
 :toclevels: 99
 
-# Table of Contents
+# Infrequently Asked Questions
+
+
 toc::[]
 
-Infrequently Asked Questions
-============================
 
 ## Troubleshooting
 
