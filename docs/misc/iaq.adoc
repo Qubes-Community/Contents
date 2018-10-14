@@ -132,6 +132,27 @@ See [this post](https://www.mail-archive.com/qubes-devel@googlegroups.com/msg028
 
 MaxFPS, UseDirtyBits.
 
+### How can I build an ISO from existing packages without having to compile them all?
+
+```
+gpg --fetch-keys https://keys.qubes-os.org/keys/qubes-developers-keys.asc
+git clone https://github.com/QubesOS/qubes-builder.git
+cd qubes-builder
+git verify-commit HEAD || echo DANGER DANGER HIGH VOLTAGE
+cp example-configs/qubes-os-r4.0.conf builder.conf
+variables='DISTS_VM= USE_QUBES_REPO_VERSION=4.0 USE_QUBES_REPO_TESTING=1 INSTALLER_KICKSTART=/tmp/qubes-installer/conf/travis-iso-full.ks'
+make $variables COMPONENTS='installer-qubes-os builder-rpm' get-sources
+make $variables COMPONENTS=intel-microcode get-sources qubes clean-rpms
+[Customize as desired here]
+sudo chroot chroot-fc25 dnf -y install dnf-yum
+make $variables COMPONENTS= iso
+```
+
+If any step fails due to a download error, just rerun it.
+If you wish to customize the kernel or another package, include it (e.g. `linux-kernel`) in `COMPONENTS` to actually include that package on the image.
+You may also need to either adjust `qubes-src/installer-qubes-os/conf/comps-qubes.xml` (kernel -> kernel-latest), or build the package as "kernel" not "kernel-latest" (edit `suffix` file in the linux-kernel sources).
+Make sure `audit=0` is not present in kernelopts / `/proc/cmdline`.
+
 ## Tweaks
 
 ### Disable auto-maximize when dragging window to top of screen in XFCE
