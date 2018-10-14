@@ -1,5 +1,12 @@
-Infrequently Asked Questions
-============================
+:toc: macro
+:toc-title:
+:toclevels: 99
+
+# Infrequently Asked Questions
+
+
+toc::[]
+
 
 ## Troubleshooting
 
@@ -9,9 +16,9 @@ Set `xpti=false` option in Xen command line (xen.gz option in grub, or options= 
 
 ### How can I switch R4.0 stubdomains back to qemu-traditional?
 
-~~~
+```
 qvm-features VMNAME linux-stubdom ''
-~~~
+```
 
 ### How can I upgrade to testing?
 
@@ -29,7 +36,7 @@ For that, under debian/whonix do: `sudo apt-get check && sudo apt-get update -t 
 
 Make a dom0 script with the following:
 
-~~~
+```
 #!/bin/sh
 
 for domain in $(qvm-ls --fields NAME,CLASS | \
@@ -38,7 +45,7 @@ for domain in $(qvm-ls --fields NAME,CLASS | \
 done
 
 sudo qubes-dom0-update
-~~~
+```
 
 From https://gist.github.com/JimmyAx/818bcf11a14e85531516ef999c8c5765.
 See also the scripts listed under [`OS-administration`](https://github.com/Qubes-Community/Contents/tree/master/code).
@@ -51,11 +58,11 @@ But this thin volume is actually there.
 Also the volume `vm-test-private-snap` is still present.
 
 Try this in dom0:
-~~~
+```
 sudo pvscan --cache --activate ay
 sudo systemctl restart qubesd
 qvm-start test
-~~~
+```
 
 ### Slow VM startup
 
@@ -63,10 +70,10 @@ Use tools like 'systemd-analyze blame' as your guide.
 
 Another service that shows up with significant time is wpa_supplicant. 
 You can have it start only for network VMs by creating `/lib/systemd/system/wpa_supplicant.service.d/20_netvms` with the following:
-~~~
+```
 [Unit]
 ConditionPathExists=/var/run/qubes/this-is-netvm
-~~~
+```
 
 ### Xen passthrough compatible video cards
 
@@ -125,6 +132,27 @@ See [this post](https://www.mail-archive.com/qubes-devel@googlegroups.com/msg028
 
 MaxFPS, UseDirtyBits.
 
+### How can I build an ISO from existing packages without having to compile them all?
+
+```
+gpg --fetch-keys https://keys.qubes-os.org/keys/qubes-developers-keys.asc
+git clone https://github.com/QubesOS/qubes-builder.git
+cd qubes-builder
+git verify-commit HEAD || echo DANGER DANGER HIGH VOLTAGE
+cp example-configs/qubes-os-r4.0.conf builder.conf
+variables='DISTS_VM= USE_QUBES_REPO_VERSION=4.0 USE_QUBES_REPO_TESTING=1 INSTALLER_KICKSTART=/tmp/qubes-installer/conf/travis-iso-full.ks'
+make $variables COMPONENTS='installer-qubes-os builder-rpm' get-sources
+make $variables COMPONENTS=intel-microcode get-sources qubes clean-rpms
+[Customize as desired here]
+sudo chroot chroot-fc25 dnf -y install dnf-yum
+make $variables COMPONENTS= iso
+```
+
+If any step fails due to a download error, just rerun it.
+If you wish to customize the kernel or another package, include it (e.g. `linux-kernel`) in `COMPONENTS` to actually include that package on the image.
+You may also need to either adjust `qubes-src/installer-qubes-os/conf/comps-qubes.xml` (kernel -> kernel-latest), or build the package as "kernel" not "kernel-latest" (edit `suffix` file in the linux-kernel sources).
+Make sure `audit=0` is not present in kernelopts / `/proc/cmdline`.
+
 ## Tweaks
 
 ### Disable auto-maximize when dragging window to top of screen in XFCE
@@ -156,14 +184,15 @@ Alternatively you can increase the size afterwards with `mount -o remount,size=5
 If you need to have a disk based tmp you'll have to mask the systemd unit (`systemctl mask tmp.mount`) and put a fstab entry for /tmp.
 
 Alternatively you can add swap with a file inside the vm but it's a bit ugly:
-~~~
+```
 dd if=/dev/zero of=swapfile bs=1M count=1000
 mkswap swapfile
 swapon swapfile
-~~~
+```
 
 ### How do I attach an `.img` file to a Qube?
 
+```
     # a file cannot be attached if it is in directory /var/lib/qubes/appvms, so create a link first
     ln /var/lib/qubes/appvms/$1/private.img /home/user/private.img
     LOOPDEV=`sudo losetup -f`
@@ -175,6 +204,7 @@ swapon swapfile
     qvm-block detach backupvm dom0:$(basename "$LOOPDEV")
     sudo losetup -d $LOOPDEV
     rm /home/user/private.img
+```
 
 See https://groups.google.com/d/msg/qubes-users/LLSo_3oWXJI/0clWN0BUBgAJ for more details.
 
@@ -239,7 +269,7 @@ You can just edit that file to remove them from the list.
 You only get one resolution at a time.
 In the HVM's `/etc/X11/xorg.conf`, in Subsection "Display" for Depth 24, make a single mode like this:
 
-~~~
+```
 ...
     Subsection "Display"
         Viewport 0 0
@@ -247,7 +277,7 @@ In the HVM's `/etc/X11/xorg.conf`, in Subsection "Display" for Depth 24, make a 
         Modes "1200x800"
     EndSubSection
 EndSection
-~~~
+```
 
 Only some modes will work. check wikipedia. if your host display is
 1080p(1920x1080), then an hvm at 1440x900 works well. if its more than that, might
@@ -262,7 +292,7 @@ Either use a 3.5mm jack to BT adapter, or see [this](https://m7i.org/tips/qubes-
 Note: See the [official documentation](https://www.whonix.org/wiki/Qubes/Install) for supported installation methods.
 There should be no need to complete the following procedure manually any more.
 
-~~~
+```
 sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-core-admin-addon-whonix
 
 sudo qubes-dom0-update --enablerepo=qubes-dom0-unstable qubes-template-whonix-gw-14
@@ -278,21 +308,21 @@ qvm-prefs whonix-ws-dvm-14 template_for_dispvms true
 qvm-prefs whonix-ws-dvm-14 netvm sys-whonix-14
 qvm-prefs whonix-ws-dvm-14 default_dispvm whonix-ws-dvm-14
 qvm-tags whonix-ws-14 a whonix-updatevm
-~~~
+```
 To use the new `sys-whonix-14` for your UpdateVM, perform the following steps:
-~~~
+```
 qubes-prefs updatevm sys-whonix-14
-~~~
+```
 Then, edit `/etc/qubes-rpc/policy/qubes.UpdatesProxy` and modify the top lines:
-~~~
+```
 $type:TemplateVM $default allow,target=sys-whonix
 $tag:whonix-updatevm $default allow,target=sys-whonix
-~~~
+```
 to become:
-~~~
+```
 $type:TemplateVM $default allow,target=sys-whonix-14
 $tag:whonix-updatevm $default allow,target=sys-whonix-14
-~~~
+```
 
 
 

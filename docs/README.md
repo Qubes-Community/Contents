@@ -1,6 +1,6 @@
 #### User-contributed documentation and links (![](/_res/l.png) icon) to third party docs ####
 
-[Infrequently Asked Questions](misc/iaq.md)
+[Infrequently Asked Questions](misc/iaq.adoc)
 
 `common-tasks`
 - [how to copy files (and sparse files) from a VM to dom0](common-tasks/copying-files-to-dom0.md)
@@ -29,7 +29,7 @@
 
 `misc`
 - ![](/_res/l.png) [Qubes 3.2 cheat sheet](https://github.com/Jeeppler/qubes-cheatsheet)
-- [infrequently asked questions](misc/iaq.md)
+- [infrequently asked questions](misc/iaq.adoc)
 
 `system`
 - [understanding and fixing issues with time/clock](system/clock-time.md)
