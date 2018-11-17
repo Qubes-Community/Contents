@@ -48,7 +48,7 @@ vim-common
 | sys-firewall | DispVM based on fedora-28-mini-dvm | 300-500 | online |
 | vault | Password manager and totp generation | 300-400 | offline |
 | * | split-{gpg,ssh} backend (e.g. work-keys) with minimal set of (sub)keys | 300-400 | offline |
-| * | Data container (e.g. backup)| 300-400 | offline |
+| * | Data container (e.g. backup)| 300-400 | offline/firewalled |
 
 Notes:
 - [split gpg](https://www.qubes-os.org/doc/split-gpg/)
