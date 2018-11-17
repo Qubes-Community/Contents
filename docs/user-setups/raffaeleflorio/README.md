@@ -38,16 +38,16 @@ vim-common
 ```
 
 TemplateBasedVMs table:
-|Name|Description|RAM Usage|Networking|
-|---|---|---|---|
-|fedora-28-mini-dvm|Template for DispVMs|default|offline|
-|sys-net|DispVM based on fedora-28-mini-dvm|300MB-500MB|online|
-|sys-usb|DispVM based on fedora-28-mini-dvm|300MB-500MB|offline|
-|sys-sd|DispVM based on fedora-28-mini-dvm|300MB-500MB|offline|
-|sys-firewall|DispVM based on fedora-28-mini-dvm|300MB-500MB|online|
-|vault|Password manager and totp generation|300MB-400MB|offline|
-|*|split-{gpg,ssh} backend (e.g. work-keys) with minimal set of (sub)keys|300MB-400MB|offline|
-|*|Data container (e.g. backup)|300MB-400MB|offline|
+| Name | Description | RAM Usage | Networking |
+| --- | --- | --- | --- |
+| fedora-28-mini-dvm | Template for DispVMs | default | offline |
+| sys-net | DispVM based on fedora-28-mini-dvm | 300MB-500MB | online |
+| sys-usb | DispVM based on fedora-28-mini-dvm | 300MB-500MB | offline |
+| sys-sd | DispVM based on fedora-28-mini-dvm | 300MB-500MB | offline |
+| sys-firewall | DispVM based on fedora-28-mini-dvm | 300MB-500MB | online |
+| vault | Password manager and totp generation | 300MB-400MB | offline |
+|*| split-{gpg,ssh} backend (e.g. work-keys) with minimal set of (sub)keys | 300MB-400MB | offline |
+|*| Data container (e.g. backup)| 300MB-400MB | offline |
 
 Notes:
 - [split gpg](https://www.qubes-os.org/doc/split-gpg/)
@@ -66,11 +66,11 @@ mozilla-privacy-badger
 ```
 
 TemplateBasedVMs table:
-|Name|Description|RAM Usage|Networking|
-|---|---|---|---|
-|dvm-net|Template for DispVMs, generally used for browsing|400MB-1000MB|online|
-|dispNet|DispVM based on dvm-net|400MB-1000MB|online|
-|*|Custom Firefox with qubes-url-redirector and/or Thunderbird (e.g. work)|300MB-700MB|firewalled|
+| Name | Description | RAM Usage | Networking |
+| --- | --- | --- | --- |
+| dvm-net | Template for DispVMs, generally used for browsing | 400MB-1000MB | online |
+| dispNet | DispVM based on dvm-net | 400MB-1000MB | online |
+|*| Custom Firefox with qubes-url-redirector and/or Thunderbird (e.g. work)| 300MB-700MB | firewalled |
 
 Notes:
 - [qubes-url-redirector](https://github.com/raffaeleflorio/qubes-url-redirector)
@@ -105,12 +105,12 @@ python2-jwt
 ```
 
 TemplateBasedVMs table:
-|Name|Description|RAM Usage|Networking|
-|---|---|---|---|
-|dvm-heavy-offline|Template for DispVMs. Used to handle every file in every other VMs|400MB-1000MB|offline|
-|dispHeavyOffline|DispVM based on dvm-heavy-offline|400MB-1000MB|offline|
-|dvm-heavy-online|Template for DispVMs|400MB-1000MB|online|
-|dispHeavyOnline|DispVM based on dvm-heavy-online|400MB-1000MB|online|
+| Name | Description | RAM Usage | Networking |
+| --- | --- | --- | --- |
+| dvm-heavy-offline | Template for DispVMs. Used to handle every file in every other VMs | 400MB-1000MB | offline |
+| dispHeavyOffline | DispVM based on dvm-heavy-offline | 400MB-1000MB | offline |
+| dvm-heavy-online | Template for DispVMs | 400MB-1000MB | online |
+| dispHeavyOnline | DispVM based on dvm-heavy-online | 400MB-1000MB | online |
 
 ### TemplateVM fedora-28-media
 A clone of fedora-28-heavy with:
@@ -122,16 +122,16 @@ fuse-exfat
 *eventually other rpmfusion packages*
 ```
 TemplateBasedVMs table:
-|Name|Description|RAM Usage|Networking|
-|---|---|---|---|
-|dvm-media-offline|Template for DispVMs|400MB-1500MB|offline|
-|dvm-media-online|Template for DispVMs|400MB-1500MB|online|
+| Name | Description | RAM Usage | Networking |
+| --- | --- | --- | --- |
+| dvm-media-offline | Template for DispVMs | 400MB-1500MB | offline |
+| dvm-media-online | Template for DispVMs | 400MB-1500MB | online |
 
 ### TemplateVM whonix-ws-14
 TemplateBasedVMs table:
-|Name|Description|RAM Usage|Networking|
-|---|---|---|---|
-|dvm-anon|Template for DispVMs|400MB-1000MB|online|
+| Name | Description | RAM Usage | Networking |
+| --- | --- | --- | --- |
+| dvm-anon | Template for DispVMs | 400MB-1000MB | online |
 
 Notes:
 - [Whonix info 1](https://www.qubes-os.org/doc/whonix)
@@ -139,6 +139,6 @@ Notes:
 
 ### TemplateVM whonix-gw-14
 TemplateBasedVMs table:
-|Name|Description|RAM Usage|Networking|
-|---|---|---|---|
-|sys-whonix|Whonix gateway|500MB-800MB|online|
+| Name | Description | RAM Usage | Networking |
+| --- | --- | --- | --- |
+| sys-whonix | Whonix gateway | 500MB-800MB | online |
