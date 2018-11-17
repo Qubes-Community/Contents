@@ -38,6 +38,7 @@ vim-common
 ```
 
 ####TemplateBasedVMs table
+
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | fedora-28-mini-dvm | Template for DispVMs | default | offline |
@@ -66,6 +67,7 @@ mozilla-privacy-badger
 ```
 
 ####TemplateBasedVMs table
+
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | dvm-net | Template for DispVMs, generally used for browsing | 400MB-1000MB | online |
@@ -105,6 +107,7 @@ python2-jwt
 ```
 
 ####TemplateBasedVMs table
+
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | dvm-heavy-offline | Template for DispVMs. Used to handle every file in every other VMs | 400MB-1000MB | offline |
@@ -121,7 +124,8 @@ ffmpeg
 fuse-exfat
 *eventually other rpmfusion packages*
 ```
-TemplateBasedVMs table
+####TemplateBasedVMs table
+
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | dvm-media-offline | Template for DispVMs | 400MB-1500MB | offline |
@@ -129,6 +133,7 @@ TemplateBasedVMs table
 
 ### TemplateVM whonix-ws-14
 ####TemplateBasedVMs table
+
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | dvm-anon | Template for DispVMs | 400MB-1000MB | online |
@@ -139,6 +144,7 @@ Notes:
 
 ### TemplateVM whonix-gw-14
 ####TemplateBasedVMs table
+
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | sys-whonix | Whonix gateway | 500MB-800MB | online |
