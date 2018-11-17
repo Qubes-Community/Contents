@@ -37,7 +37,7 @@ oathtool
 vim-common
 ```
 
-####TemplateBasedVMs table
+#### TemplateBasedVMs table
 
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
@@ -66,7 +66,7 @@ mozilla-https-everywhere
 mozilla-privacy-badger
 ```
 
-####TemplateBasedVMs table
+#### TemplateBasedVMs table
 
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
@@ -106,7 +106,7 @@ chromium
 python2-jwt
 ```
 
-####TemplateBasedVMs table
+#### TemplateBasedVMs table
 
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
@@ -124,7 +124,7 @@ ffmpeg
 fuse-exfat
 *eventually other rpmfusion packages*
 ```
-####TemplateBasedVMs table
+#### TemplateBasedVMs table
 
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
@@ -132,7 +132,7 @@ fuse-exfat
 | dvm-media-online | Template for DispVMs | 400MB-1500MB | online |
 
 ### TemplateVM whonix-ws-14
-####TemplateBasedVMs table
+#### TemplateBasedVMs table
 
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
@@ -143,7 +143,7 @@ Notes:
 - [Whonix info 2](https://www.whonix.org/wiki/Qubes)
 
 ### TemplateVM whonix-gw-14
-####TemplateBasedVMs table
+#### TemplateBasedVMs table
 
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
