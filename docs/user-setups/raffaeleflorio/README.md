@@ -37,7 +37,7 @@ oathtool
 vim-common
 ```
 
-TemplateBasedVMs table:
+####TemplateBasedVMs table
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | fedora-28-mini-dvm | Template for DispVMs | default | offline |
@@ -46,8 +46,8 @@ TemplateBasedVMs table:
 | sys-sd | DispVM based on fedora-28-mini-dvm | 300MB-500MB | offline |
 | sys-firewall | DispVM based on fedora-28-mini-dvm | 300MB-500MB | online |
 | vault | Password manager and totp generation | 300MB-400MB | offline |
-|*| split-{gpg,ssh} backend (e.g. work-keys) with minimal set of (sub)keys | 300MB-400MB | offline |
-|*| Data container (e.g. backup)| 300MB-400MB | offline |
+| * | split-{gpg,ssh} backend (e.g. work-keys) with minimal set of (sub)keys | 300MB-400MB | offline |
+| * | Data container (e.g. backup)| 300MB-400MB | offline |
 
 Notes:
 - [split gpg](https://www.qubes-os.org/doc/split-gpg/)
@@ -65,7 +65,7 @@ mozilla-https-everywhere
 mozilla-privacy-badger
 ```
 
-TemplateBasedVMs table:
+####TemplateBasedVMs table
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | dvm-net | Template for DispVMs, generally used for browsing | 400MB-1000MB | online |
@@ -104,7 +104,7 @@ chromium
 python2-jwt
 ```
 
-TemplateBasedVMs table:
+####TemplateBasedVMs table
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | dvm-heavy-offline | Template for DispVMs. Used to handle every file in every other VMs | 400MB-1000MB | offline |
@@ -121,14 +121,14 @@ ffmpeg
 fuse-exfat
 *eventually other rpmfusion packages*
 ```
-TemplateBasedVMs table:
+TemplateBasedVMs table
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | dvm-media-offline | Template for DispVMs | 400MB-1500MB | offline |
 | dvm-media-online | Template for DispVMs | 400MB-1500MB | online |
 
 ### TemplateVM whonix-ws-14
-TemplateBasedVMs table:
+####TemplateBasedVMs table
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | dvm-anon | Template for DispVMs | 400MB-1000MB | online |
@@ -138,7 +138,7 @@ Notes:
 - [Whonix info 2](https://www.whonix.org/wiki/Qubes)
 
 ### TemplateVM whonix-gw-14
-TemplateBasedVMs table:
+####TemplateBasedVMs table
 | Name | Description | RAM Usage | Networking |
 | --- | --- | --- | --- |
 | sys-whonix | Whonix gateway | 500MB-800MB | online |
