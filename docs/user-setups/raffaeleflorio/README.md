@@ -1,5 +1,8 @@
 # User setup / @raffaeleflorio
 
+## Dom0
+I installed in Dom0 [luks-2fa-dracut](https://github.com/raffaeleflorio/luks-2fa-dracut).
+
 ## TemplateVMs and VMs
 The following TemplateVMs are really generic. I didn't include any specialized TemplateVMs (e.g. those used for development).
 
@@ -34,15 +37,18 @@ oathtool
 vim-common
 ```
 
-Template of:
-- fedora-28-mini-dvm: template for DispVMs
-- sys-net: DispVM based on fedora-28-mini-dvm
-- sys-usb: DispVM based on fedora-28-mini-dvm
-- sys-sd: DispVM based on fedora-28-mini-dvm
-- sys-firewall: DispVM based on fedora-28-mini-dvm
-- vault: offline; password manager; totp generation
-- *VMs used as split-{gpg,ssh} backend (e.g. work-keys)*: offline; management of a minimal set of (sub)keys
-- *VMs used as data container (e.g. backup)*: offline
+#### TemplateBasedVMs table
+
+| Name | Description | RAM Usage (in MB) | Networking |
+| --- | --- | --- | --- |
+| fedora-28-mini-dvm | Template for DispVMs | default | offline |
+| sys-net | DispVM based on fedora-28-mini-dvm | 300-500 | online |
+| sys-usb | DispVM based on fedora-28-mini-dvm | 300-500 | offline |
+| sys-sd | DispVM based on fedora-28-mini-dvm | 300-500 | offline |
+| sys-firewall | DispVM based on fedora-28-mini-dvm | 300-500 | online |
+| vault | Password manager and totp generation | 300-400 | offline |
+| * | split-{gpg,ssh} backend (e.g. work-keys) with minimal set of (sub)keys | 300-400 | offline |
+| * | Data container (e.g. backup)| 300-400 | offline/firewalled |
 
 Notes:
 - [split gpg](https://www.qubes-os.org/doc/split-gpg/)
@@ -60,10 +66,13 @@ mozilla-https-everywhere
 mozilla-privacy-badger
 ```
 
-Template of:
-- dvm-net: template for DispVMs
-- dispNet: DispVM based on dvm-net
-- *VMs that needs a minimal Firefox and/or Thunderbird (e.g. work)*: firewalled; qubes-url-redirector; custom Firefox preferences
+#### TemplateBasedVMs table
+
+| Name | Description | RAM Usage (in MB) | Networking |
+| --- | --- | --- | --- |
+| dvm-net | Template for DispVMs, generally used for browsing | 400-1000 | online |
+| dispNet | DispVM based on dvm-net | 400-1000 | online |
+| * | Custom Firefox with qubes-url-redirector and/or Thunderbird (e.g. work)| 300-700 | firewalled |
 
 Notes:
 - [qubes-url-redirector](https://github.com/raffaeleflorio/qubes-url-redirector)
@@ -72,7 +81,6 @@ Notes:
 ### TemplateVM fedora-28-heavy
 A clone of fedora-28-net with:
 ```
-vlc
 libreoffice
 gimp
 whois
@@ -98,18 +106,45 @@ chromium
 python2-jwt
 ```
 
-Template of:
-- dvm-heavy-offline: offline; template for DispVMs; used to handle every file in every other VMs
-- dispHeavyOffline: DispVM based on dvm-heavy-offline
-- dvm-heavy-online: template for DispVMs;
-- dispHeavyOnline: DispVM based on dvm-heavy-online
+#### TemplateBasedVMs table
+
+| Name | Description | RAM Usage (in MB) | Networking |
+| --- | --- | --- | --- |
+| dvm-heavy-offline | Template for DispVMs. Handler of every file in every VM | 400-1000 | offline |
+| dispHeavyOffline | DispVM based on dvm-heavy-offline | 400-1000 | offline |
+| dvm-heavy-online | Template for DispVMs | 400-1000 | online |
+| dispHeavyOnline | DispVM based on dvm-heavy-online | 400-1000 | online |
+
+### TemplateVM fedora-28-media
+A clone of fedora-28-heavy with:
+
+```
+vlc
+ffmpeg
+fuse-exfat
+*eventually other rpmfusion packages*
+```
+#### TemplateBasedVMs table
+
+| Name | Description | RAM Usage (in MB) | Networking |
+| --- | --- | --- | --- |
+| dvm-media-offline | Template for DispVMs | 400-1500 | offline |
+| dvm-media-online | Template for DispVMs | 400-1500 | online |
 
 ### TemplateVM whonix-ws-14
-- dvm-anon
+#### TemplateBasedVMs table
+
+| Name | Description | RAM Usage (in MB) | Networking |
+| --- | --- | --- | --- |
+| dvm-anon | Template for DispVMs | 400-1000 | online |
 
 Notes:
 - [Whonix info 1](https://www.qubes-os.org/doc/whonix)
 - [Whonix info 2](https://www.whonix.org/wiki/Qubes)
 
 ### TemplateVM whonix-gw-14
-- sys-whonix
+#### TemplateBasedVMs table
+
+| Name | Description | RAM Usage (in MB) | Networking |
+| --- | --- | --- | --- |
+| sys-whonix | Whonix gateway | 500-800 | online |
