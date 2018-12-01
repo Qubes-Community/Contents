@@ -23,4 +23,5 @@
 
 **`misc`**
 - ![](/_res/l.png) [halt-vm-by-window](https://github.com/tasket/Qubes-scripts/blob/master/halt-vm-by-window): shutdown a Qubes VM associated with the currently active window ([readme](https://github.com/tasket/Qubes-scripts#halt-vm-by-window))
-- ![](/_res/l.png) [Traffic Analysis](http://zrubi.hu/en/2017/traffic-analysis-qubes/): see too his other Qubes blog posts
+- ![](/_res/l.png) [network traffic analysis](http://zrubi.hu/en/2017/traffic-analysis-qubes/) (also see Zrubi's [other Qubes blog posts](http://zrubi.hu/en/category/virtualization/qubes/) !)
+- ![](/_res/l.png) [Ubuntu VMs](http://qubes.3isec.org/): repository with templates and packages to set up Ubuntu VMs
