@@ -96,6 +96,7 @@ _qvm-vms-all-all() {
 	_complete-vms ""
 }
 complete -F _qvm-vms-all-all qvm-backup
+complete -F _qvm-vms-all-all qvm-ls
 
 
 #----- arg1: vm(all) -----
