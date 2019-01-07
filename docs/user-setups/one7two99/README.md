@@ -6,7 +6,7 @@ this document will describe my Qubes Setup and what I did to improve the Qubes e
 I am working for a Berlin based IT Solution Provider.
 Working with Linux and even more with Qubes adds some complexity, as several internal workflows but also customer projects are mainly relying on windows software and operating systems.
 Using Qubes has been a decision as I want to prove that another world is possible and because I want to keep my data as much secure as possible.
-Additionally I Qubes offers protection when working with one device in several customer environments.
+Additionally Qubes offers protection when working with one device in several customer environments.
 
 --------
 # My Hardware
@@ -36,6 +36,54 @@ currently not in use, as the X230 is so versatile and the W540 doesn't run with 
 I have to run a dual boot system as I need to run Windows for specific tasks.
 But as we are able to se virtual desktops, mostly I am connecting to a remote desktop from within my qubes environment.
 
+
+## My currently installed AppVMs and Templates
+### My Disposable AppVMs
+```
+NAME                   STATE    CLASS       LABEL   TEMPLATE               NETVM
+whonix-ws-14-dvm       Halted   AppVM       red     whonix-ws-14           sys-whonix
+my-fedora-28-dvm       Halted   AppVM       red     t-fedora-28-apps       sys-firewall
+```
+### My regular AppVMs
+```
+NAME                   STATE    CLASS       LABEL   TEMPLATE               NETVM
+anon-whonix            Halted   AppVM       red     whonix-ws-14           sys-whonix
+my-bizmail             Halted   AppVM       yellow  t-fedora-28-mail       sys-firewall
+my-browsing            Halted   AppVM       blue    t-fedora-28-apps       sys-vpn
+my-corporate           Halted   AppVM       green   t-fedora-28-work       sys-firewall
+my-multimedia          Halted   AppVM       orange  t-debian-9-multimedia  sys-firewall
+my-privmail            Halted   AppVM       blue    t-fedora-28-mail       sys-firewall
+my-storage-access      Halted   AppVM       gray    t-fedora-28-storage    sys-firewall
+my-storage-datastore   Halted   AppVM       gray    t-fedora-28-storage    sys-firewall
+my-untrusted           Halted   AppVM       orange  t-fedora-28-apps       sys-firewall
+my-vault               Halted   AppVM       black   t-fedora-28-apps       -
+```
+### My Sys-AppVMs
+```
+NAME                   STATE    CLASS       LABEL   TEMPLATE               NETVM
+sys-firewall           Running  AppVM       red     t-fedora-28-sys        sys-net
+sys-net                Running  AppVM       red     t-fedora-28-sys        -
+sys-usb                Running  AppVM       red     t-fedora-28-sys        -
+sys-vpn                Running  AppVM       orange  t-fedora-28-sys        sys-net
+sys-whonix             Halted   AppVM       black   whonix-gw-14           sys-vpn
+```
+### My templates
+```
+NAME                   STATE    CLASS       LABEL   TEMPLATE               NETVM
+debian-9               Halted   TemplateVM  black   -                      -
+fedora-28              Halted   TemplateVM  black   -                      -
+fedora-28-minimal      Halted   TemplateVM  black   -                      -
+t-debian-9-multimedia  Halted   TemplateVM  black   -                      -
+t-fedora-28-apps       Halted   TemplateVM  black   -                      -
+t-fedora-28-mail       Halted   TemplateVM  black   -                      -
+t-fedora-28-storage    Halted   TemplateVM  black   -                      -
+t-fedora-28-sys        Halted   TemplateVM  black   -                      -
+t-fedora-28-vpn        Halted   TemplateVM  black   -                      -
+t-fedora-28-work       Halted   TemplateVM  black   -                      -
+whonix-gw-14           Halted   TemplateVM  black   -                      -
+whonix-ws-14           Halted   TemplateVM  black   -                      -
+```
+
 --------
 # My Templates
 In order to understand how Qubes OS is working and to have a minimal setup I have choosen to use custom build templates, which are all based on fedora-28-minimal templates.
@@ -53,7 +101,7 @@ This allows me to always jump back to cleanest template and rebuild from scratch
 I developed a naming scheme as I have several AppVMs and TemplateVMs:
 - all custom build TemplateVMs start with t-DISTRIBUTION-VERSION-NAME (for example t-fedora-28-apps is a template, whoch is based on fedora 28 minimal and has additional packages for my default (fat) Apps-VMs
 - all system VMs, start with sys- like sys-net, sys-firewall, sys-usb, sys-vpn
-- all other AppVMs, start with my-NAME, for example my-multimedia
+- all other AppVMs, start with my-PURPOSE, for example my-multimedia
 
 ## Custom build templates:
 ### t-debian-9-multimedia
@@ -92,16 +140,15 @@ The whole setup includes 3 AppVMs:
 management of those setup is done via one (!) script which can also build the templates and AppVM.
 
 ### t-fedora-28-sys
-template for my sys-vms
+template for my sys-vms and also for VPN connectivity
+a VPN or ProxyVM which can be used to run all traffic through ExpressVPN.
+This adds a great layer of privacy to qubes as my ISP can't analyse my traffic.
+I have written a howto [How to use ExpressVPN as ProxyVM with Qubes 4](https://github.com/one7two99/my-qubes/blob/master/docs/howto-use-expressvpn-with-qubes.md)
+
  - sys-usb
  - sys-firewall
  - sys-net
-
-### t-fedora-28-vpn
-a ProxyVM which can be used to run all traffic through ExpressVPN.
-This adds a great layer of privacy to qubes as my ISP can't analyse my traffic.
-
-I have written a howto [How to use ExpressVPN as ProxyVM with Qubes 4](https://github.com/one7two99/my-qubes/blob/master/docs/howto-use-expressvpn-with-qubes.md)
+ - sys-vpn
  
 ### t-fedora-28-work
 My work tenmplate which has Vmware Horizon View, Cisco AnyConnect, Firefox and LibreOffice installed.
@@ -109,6 +156,3 @@ My work tenmplate which has Vmware Horizon View, Cisco AnyConnect, Firefox and L
 ### other templates
 the Whonix templates which come preinstalled with Qubes 4
 
---------
-# List of my AppVMs
-to be done
