@@ -91,6 +91,14 @@ text-scaling-factor=0.75
 
 Then run `dconf update`.
 
+Note: the `scaling-factor` and `text-scaling-factor` might already have been set in an AppVM's user profile, in which case they'll override the system-wide ones. To use the system-wide values, reset the user values like so in the AppVM(s):
+
+~~~
+gsettings reset org.gnome.desktop.interface scaling-factor
+gsettings reset org.gnome.desktop.interface text-scaling-factor
+~~~
+
+
 For more information on setting system-wide dconf values see [this page](https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en).
 
 
