@@ -194,7 +194,7 @@ galculator
 fuse-exfat
 unrar
 ffmpeg
-mpv
+mplayer
 qgis-python
 ~~~
 
