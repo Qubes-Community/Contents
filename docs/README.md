@@ -20,7 +20,7 @@
 
 `customization`
 - [change DPI scaling in dom0 and VMs](customization/dpi-scaling.md)
-
+- [setup mirage firewall](customization/mirage-firewall)
 `hardware`
 - [tips on choosing the right hardware](hardware/hardware-selection.md)
 
