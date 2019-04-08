@@ -49,3 +49,19 @@ qvm-run --user root --pass-io --no-gui \
    git clone https://github.com/mirage/qubes-mirage-firewall.git && \'
    cd qubes-mirage-firewall && \
    ./build-with-docker.sh'
+```
+
+Unfortunately the build process ends with:
+```
+Building Firewall...
+error while executing ocamlbuild -use-ocamlfind -classic-display -tags
+                        bin_annot -quiet -Xs _build-solo5-hvt,_build-ukvm
+                        -pkgs mirage config.cmxs
++ mkdir /home/opam/qubes-mirage-firewall/_build
+mkdir: cannot create directory '/home/opam/qubes-mirage-firewall/_build': Permission denied
+Command exited with code 1.
+Failure:
+  Error during command "mkdir /home/opam/qubes-mirage-firewall/_build": Ocamlbuild_pack.My_std.Exit_with_code(10)
+```
+
+... to be continued ... one7two99 @ 08.april.2019
