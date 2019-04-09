@@ -95,3 +95,13 @@ qvm-shutdown --wait $MirageFWAppVM
 # Start Mirage-FW
 qvm-start $MirageFWAppVM
 ```
+
+Deleting the Build-AppVM
+========================
+```
+# The build VM could be deleted if you don't want to keep it
+# but if you want to upgrade Mirage Firewall for Qubes OS,
+# you need to rebuild this VM.
+qvm-shutdown --wait $MirageFW-BuildVM
+qvm-remove --force $MirageFW-BuildVM
+```
