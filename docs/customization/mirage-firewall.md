@@ -15,53 +15,83 @@ compared to the default ("fat") sys-firewall.
 This page is only to write down how to build the mirage firewall for Qubes OS.
 Please make sure to read the above links to understand more about it.
 
+Most information from here has been put together reading the original docs above and following the discussion in the Qubes OS User Mailinglist / Google Groups:
+https://groups.google.com/forum/#!topic/qubes-users/xfnVdd1Plvk
+
+
 Build process on Qubes 4
 ========================
 ```
-# create a new template VM
-qvm-clone fedora-29-minimal t-fedora-29-mirage
+MirageFW-BuildVM=my-mirage-buildvm
+TemplateVM=fedora-29
+MirageFWAppVM=sys-mirage-fw
+
+# create a new VM to build mirage via docker
+qvm-create $MirageFW-BuildVM --class=AppVM --label=red --template=$TemplateVM
 
 # Resize private disk to 10 GB
-qvm-volume extend t-fedora-29-mirage:private 10GB
+qvm-volume resize $MirageFW-BuildVM:private 10GB
 
 # Create a symbolic link to safe docker into the home directory
-qvm-run --auto --user root --pass-io --no-gui \
-  'ln -s /var/lib/docker /home/user/docker'
+qvm-run --auto --pass-io --no-gui $MirageFW-BuildVM \
+  'sudo mkdir /home/user/var_lib_docker && \  
+   sudo ln -s /var/lib/docker /home/user/var_lib_docker'
 
 # Install docker and git
-qvm-run --user root --pass-io --no-gui \
-  'dnf -y install docker git'
-
-# To get networking in the template VM
-qvm-run --auto --user root --pass-io --no-gui \
-  'dnf install qubes-core-agent-networking'
-qvm-shutdown --wait t-fedora-29-mirage
-qvm-prefs t-fedora-29-mirage sys-firewall
-qvm-start t-fedora-29-mirage
+qvm-run --pass-io --no-gui $MirageFW-BuildVM \
+  'sudo dnf -y install docker git'
 
 # Launch docker
-qvm-run --user root --pass-io --no-gui \
-  'systemctl start docker'
+qvm-run --pass-io --no-gui $MirageFW-BuildVM \
+  'sudo systemctl start docker'
 
 # Download and build mirage for qubes
-qvm-run --user root --pass-io --no-gui \
-  'cd /home/user && \
-   git clone https://github.com/mirage/qubes-mirage-firewall.git && \'
+qvm-run --pass-io --no-gui $MirageFW-BuildVM \
+  'git clone https://github.com/mirage/qubes-mirage-firewall.git && \
    cd qubes-mirage-firewall && \
-   ./build-with-docker.sh'
+   git pull origin pull/52/head && \
+   sudo ./build-with-docker.sh'
+
+# Copy the new kernel to dom0
+cd /var/lib/qubes/vm-kernels
+qvm-run --pass-io $MirageFW-BuildVM 'cat qubes-mirage-firewall/mirage-firewall.tar.bz2' | tar xjf -
+
+# create the new mirage firewall
+qvm-create \
+  --property kernel=mirage-firewall \
+  --property kernelopts=None \
+  --property memory=32 \
+  --property maxmem=32 \
+  --property netvm=sys-net \
+  --property provides_network=True \
+  --property vcpus=1 \
+  --property virt_mode=pv \
+  --label=green \
+  --class StandaloneVM \
+  $MirageFWAppVM
 ```
 
-Unfortunately the build process ends with:
+For rebuilds / Updates
+======================
 ```
-Building Firewall...
-error while executing ocamlbuild -use-ocamlfind -classic-display -tags
-                        bin_annot -quiet -Xs _build-solo5-hvt,_build-ukvm
-                        -pkgs mirage config.cmxs
-+ mkdir /home/opam/qubes-mirage-firewall/_build
-mkdir: cannot create directory '/home/opam/qubes-mirage-firewall/_build': Permission denied
-Command exited with code 1.
-Failure:
-  Error during command "mkdir /home/opam/qubes-mirage-firewall/_build": Ocamlbuild_pack.My_std.Exit_with_code(10)
-```
+# delete old build
+qvm-run --pass-io --no-gui $MirageTemplateVM \
+  'rm -Rf /home/user/'
 
-... to be continued ... one7two99 @ 08.april.2019
+# Download and build mirage for qubes
+qvm-run --pass-io --no-gui $MirageTemplateVM \
+  'git fetch https://github.com/mirage/qubes-mirage-firewall.git && \ 
+   cd qubes-mirage-firewall && \
+   # git pull origin pull/52/head && \
+   sudo ./build-with-docker.sh'
+
+# Copy the new kernel to dom0
+cd /var/lib/qubes/vm-kernels
+qvm-run --pass-io $MirageFW-BuildVM 'cat qubes-mirage-firewall/mirage-firewall.tar.bz2' | tar xjf -
+
+# Shutdown Mirage-FW
+qvm-shutdown --wait $MirageFWAppVM
+
+# Start Mirage-FW
+qvm-start $MirageFWAppVM
+```
