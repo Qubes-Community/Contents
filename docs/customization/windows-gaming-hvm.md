@@ -163,7 +163,7 @@ I am able to play games on my windows HVM with very good performances. And safel
 ## Bugs
 
 The AMD GPUs have a bug when used in HVM: each time you will reboot your windows HVM, it will get slower and slower.
-It is because the AMD GPUs is not correctly resetted when you restart your windows HVM.
+It is because the AMD GPU is not correctly reset when you restart your windows HVM.
 
 Two solutions for that:
 - Reboot your computer
