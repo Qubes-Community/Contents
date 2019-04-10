@@ -119,7 +119,7 @@ sudo mv ../stubdom-linux-rootfs /usr/lib/xen/boot/
 ```
 
 
-Note that this will apply the change to all HVMs, so if you have any other HVM with more than 3.5G ram assigned,
+Note that this will apply the change to all HVMs, so if you have any other HVM with more than 3.5 GB ram assigned,
 they will not start without the adapter being passed through.
 Ideally to fix this libvirt should be extended to pass the max-ram-below-4g parameter through to xen,
 and then a calculation added to determine the correct TOLUD based on the total BAR size of the PCI devices
