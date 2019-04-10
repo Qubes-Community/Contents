@@ -52,7 +52,7 @@ In my case, I use:
 Short list of things to do to make the GPU passthrough work:
 
 - In dom0, you edited the file `/etc/default/grub` or `/boot/efi/EFI/qubes/xen.cfg` to allow PCI hiding for your secondary GPU, and regenerated the grub if needed
-- You patched your stubdom-linux-rootfs.gz to allow to have more than 3Go of RAMfor your Windows HVM
+- You patched your stubdom-linux-rootfs.gz to allow to more than 3 GB of RAM for your Windows HVM
 
 ## GRUB modification
 
