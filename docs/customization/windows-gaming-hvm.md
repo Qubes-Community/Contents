@@ -167,6 +167,6 @@ It is because the AMD GPUs is not correctly resetted when you restart your windo
 
 Two solutions for that:
 - Reboot your computer
-- In the windows HVM, use to windows option in the system tray to "safely remove devices", remove your GPU. Restart the HVM.
+- In the windows HVM, use the windows option in the system tray to "safely remove devices", remove your GPU. Restart the HVM.
 
 This bug is referenced somewhere, but lost the link
