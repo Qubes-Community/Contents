@@ -43,7 +43,7 @@ In my case, I use:
 
 - Secondary GPU: AMD RX580
 - Primary GPU: Some Nvidia trash, used for dom0
-- 32Go of RAM. 16Go of RAM will be dedicated for the Windows HVM
+- 32 GB of RAM. 16 GB of RAM will be dedicated for the Windows HVM
 - A fast M.2 disk
 
 
