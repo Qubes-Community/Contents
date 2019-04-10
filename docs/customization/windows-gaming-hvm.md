@@ -57,7 +57,7 @@ Short list of things to do to make the GPU passthrough work:
 ## GRUB modification
 
 You must hide your secondary GPU from dom0.
-To do that, you have to edit the GRUB.
+To do that, you have to edit the GRUB or `xen.cfg` depending on if you use legacy or UEFI boot.
 
 In a dom0 Terminal, type:
 
