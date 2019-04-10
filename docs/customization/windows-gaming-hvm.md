@@ -137,7 +137,7 @@ And check the option for "nostrictreset" for those.
 
 
 
-In some case, you migh need to set the "permissive" flag to true (But I didn't needed that with the RX 580): 
+In some case, you might also need to set the "permissive" flag to true (But I didn't need that with the RX 580): 
 ```
 qvm-pci attach windows-hvm dom0:0a_00.0 -o permissive=True -o no-strict-reset=True
 qvm-pci attach windows-hvm dom0:0a_00.1 -o permissive=True -o no-strict-reset=True
