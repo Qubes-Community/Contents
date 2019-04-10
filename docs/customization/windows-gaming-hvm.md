@@ -22,7 +22,7 @@ Everythings needed is referenced here
 
 You have a functional Windows 7 HVM.
 
-The "how to" for this part can be found on the Qubes OS documentation and here: [Usefull github comment](https://github.com/QubesOS/qubes-issues/issues/3585#issuecomment-453200971).
+The "how to" for this part can be found on the Qubes OS documentation and here: [Useful github comment](https://github.com/QubesOS/qubes-issues/issues/3585#issuecomment-453200971).
 
 However, few tips:
 
