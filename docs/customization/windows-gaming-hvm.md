@@ -13,7 +13,7 @@ This is not officially supported, just some community trial & errors
 
 Everythings needed is referenced here
 
-- [Usefull technical details](https://paste.debian.net/1043341/)
+- [Useful technical details](https://paste.debian.net/1043341/)
 - [Reddit thread of what is needed for GPU passthrough](https://www.reddit.com/r/Qubes/comments/9hp3e7/gpu_passthrough_howto/)
 - [Solution to have more than 3 GB of RAM in the Windows HVM](https://github.com/QubesOS/qubes-issues/issues/4321#issuecomment-423011787)
 - [Some old references](https://www.reddit.com/r/Qubes/comments/66wk4q/gpu_passthrough/)
