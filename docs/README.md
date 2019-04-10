@@ -21,6 +21,7 @@
 `customization`
 - [change DPI scaling in dom0 and VMs](customization/dpi-scaling.md)
 - [setup mirage firewall](customization/mirage-firewall)
+- [windows 7 gaming HVM with GPU passthrough](customization/windows-gaming-hvm.md)
 
 `hardware`
 - [tips on choosing the right hardware](hardware/hardware-selection.md)
