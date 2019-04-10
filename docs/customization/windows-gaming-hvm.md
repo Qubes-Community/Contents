@@ -81,6 +81,8 @@ then regenerate the grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
 
+Or if using UEFI boot, edit `/boot/efi/EFI/qubes/xen.cfg` and add the `rd.qubes.hide_pci=` option to the `kernel=` line.
+
 ## Patching stubdom-linux-rootfs.gz
 
 Follow the instructions here: [https://github.com/QubesOS/qubes-issues/issues/4321#issuecomment-423011787](https://github.com/QubesOS/qubes-issues/issues/4321#issuecomment-423011787)
