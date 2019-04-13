@@ -8,7 +8,7 @@
 # Remove the LVM image from the qvm-block list
 ######################################################
 
-image=${1?Image file is required, exemple "/dev/qubes_dom0/vm-debian-9-tmp-root"}
+image=${1?Image file is required, example "/dev/qubes_dom0/vm-debian-9-tmp-root"}
 dvm=${2?DVM template name is required, example: "fedora-29-dvm"}
 dev=$(basename $(readlink "$image"))
 qubesdb-write /qubes-block-devices/$dev/desc "$image"
