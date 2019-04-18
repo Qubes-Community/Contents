@@ -22,31 +22,33 @@ https://groups.google.com/forum/#!topic/qubes-users/xfnVdd1Plvk
 Build process on Qubes 4
 ========================
 ```
-MirageFW-BuildVM=my-mirage-buildvm
+MirageFWBuildVM=my-mirage-buildvm
 TemplateVM=fedora-29
-MirageFWAppVM=sys-mirage-fw
+MirageFWAppVM=sys-mirage-fw2
 
-# create a new VM to build mirage via docker
-qvm-create $MirageFW-BuildVM --class=AppVM --label=red --template=$TemplateVM
+# create a new VM
+qvm-create $MirageFWBuildVM --class=AppVM --label=red --template=$TemplateVM
+
 
 # Resize private disk to 10 GB
-qvm-volume resize $MirageFW-BuildVM:private 10GB
+qvm-volume resize $MirageFWBuildVM:private 10GB
 
 # Create a symbolic link to safe docker into the home directory
-qvm-run --auto --pass-io --no-gui $MirageFW-BuildVM \
+qvm-run --auto --pass-io --no-gui $MirageFWBuildVM \
   'sudo mkdir /home/user/var_lib_docker && \  
    sudo ln -s /var/lib/docker /home/user/var_lib_docker'
 
-# Install docker and git
-qvm-run --pass-io --no-gui $MirageFW-BuildVM \
-  'sudo dnf -y install docker git'
+# Install docker and git ~2min
+qvm-run --pass-io --no-gui $MirageFWBuildVM \
+  'sudo qvm-sync-clock && \
+   sudo dnf -y install docker git'
 
 # Launch docker
-qvm-run --pass-io --no-gui $MirageFW-BuildVM \
+qvm-run --pass-io --no-gui $MirageFWBuildVM \
   'sudo systemctl start docker'
 
-# Download and build mirage for qubes
-qvm-run --pass-io --no-gui $MirageFW-BuildVM \
+# Download and build mirage for qubes ~11min
+qvm-run --pass-io --no-gui $MirageFWBuildVM \
   'git clone https://github.com/mirage/qubes-mirage-firewall.git && \
    cd qubes-mirage-firewall && \
    git pull origin pull/52/head && \
@@ -54,9 +56,9 @@ qvm-run --pass-io --no-gui $MirageFW-BuildVM \
 
 # Copy the new kernel to dom0
 cd /var/lib/qubes/vm-kernels
-qvm-run --pass-io $MirageFW-BuildVM 'cat qubes-mirage-firewall/mirage-firewall.tar.bz2' | tar xjf -
+qvm-run --pass-io $MirageFWBuildVM 'cat qubes-mirage-firewall/mirage-firewall.tar.bz2' | tar xjf -
 
-# create the new mirage firewall
+# create a new mirage fw appvm
 qvm-create \
   --property kernel=mirage-firewall \
   --property kernelopts=None \
@@ -69,39 +71,8 @@ qvm-create \
   --label=green \
   --class StandaloneVM \
   $MirageFWAppVM
-```
 
-For rebuilds / Updates
-======================
-```
-# delete old build
-qvm-run --pass-io --no-gui $MirageTemplateVM \
-  'rm -Rf /home/user/'
-
-# Download and build mirage for qubes
-qvm-run --pass-io --no-gui $MirageTemplateVM \
-  'git fetch https://github.com/mirage/qubes-mirage-firewall.git && \ 
-   cd qubes-mirage-firewall && \
-   # git pull origin pull/52/head && \
-   sudo ./build-with-docker.sh'
-
-# Copy the new kernel to dom0
-cd /var/lib/qubes/vm-kernels
-qvm-run --pass-io $MirageFW-BuildVM 'cat qubes-mirage-firewall/mirage-firewall.tar.bz2' | tar xjf -
-
-# Shutdown Mirage-FW
-qvm-shutdown --wait $MirageFWAppVM
-
-# Start Mirage-FW
+# Change default NetVM to Mirage FW
 qvm-start $MirageFWAppVM
-```
-
-Deleting the Build-AppVM
-========================
-```
-# The build VM could be deleted if you don't want to keep it
-# but if you want to upgrade Mirage Firewall for Qubes OS,
-# you need to rebuild this VM.
-qvm-shutdown --wait $MirageFW-BuildVM
-qvm-remove --force $MirageFW-BuildVM
+qubes-prefs --set default_netvm $MirageFWAppVM
 ```
