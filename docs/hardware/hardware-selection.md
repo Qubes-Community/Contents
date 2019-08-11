@@ -37,6 +37,7 @@ Do you want:
 If you don't mind older/used hardware, there are some options if you do not want [PSP initialization](https://libreboot.org/faq.html#amd-platform-security-processor-psp).
 All new AMD hardware comes with PSP.
 In theory there is an option to partially disable it, but no motherboard/BIOS manufacturers have made it available yet.
+Please update this if you are aware of any manufacturers that have.
 
 Form factor?
 
@@ -51,7 +52,7 @@ DIY corebooted used [Lenovo G505s](https://www.coreboot.org/Board:lenovo/g505s) 
 
 DIY or commercially available corebooted (or librebooted?) [KCMA-D8](https://www.coreboot.org/Board:asus/kcma-d8)/[KGPE-D16](https://www.coreboot.org/Board:asus/kgpe-d16).
 Vikings is one vendor that appears to sell these.
-If used with Opteron Series 2 processors, no microcode blob is required.
+If used with Opteron Series 2 processors, no microcode blob is required. However, it is still recommended to include current microcode due to vulnerabilities.
 
 ### Intel ###
 
@@ -64,9 +65,9 @@ There are some ways to restrict Intel ME after the initial BUP.
 
 ### Intel Commercial ###
 
-These vendors have systems available that partially disable Intel ME after the initial hardware initialization: System76, Purism, Dell.
+These vendors have systems available that partially disable Intel ME after the initial hardware initialization: Insurgo ([Qubes Certified](https://www.qubes-os.org/news/2019/07/18/insurgo-privacybeast-qubes-certification/)), System76, Purism, Dell.
 Implementations vary, so research the vendors.
-Prefer ones that use Coreboot instead of closed-source, [proprietary](https://www.kb.cert.org/vuls/id/758382) [UEFI firmware](https://www.securityweek.com/researchers-find-several-uefi-vulnerabilities).
+Prefer ones that use Heads or Coreboot instead of closed-source, [proprietary](https://www.kb.cert.org/vuls/id/758382) [UEFI firmware](https://www.securityweek.com/researchers-find-several-uefi-vulnerabilities).
 Search the [HCL](https://www.qubes-os.org/hcl/) for a compatible system.
 [Search the mailing list](https://www.mail-archive.com/qubes-users@googlegroups.com/) for additional reports.
 
@@ -89,17 +90,21 @@ Flash your system with Coreboot, including [ME_Cleaner](https://github.com/corna
 
 ### MECleaner ###
 
+You can partially disable Intel ME while still running vendor UEFI firmware.
 Search the [HCL](https://www.qubes-os.org/hcl/) for a compatible system.
 [Search the mailing list](https://www.mail-archive.com/qubes-users@googlegroups.com/) for additional reports.
-Follow the instructions [here](https://github.com/corna/me_cleaner) to partially disable Intel ME.
+Follow the instructions [here](https://github.com/corna/me_cleaner).
 
 ### Unconcerned ###
 
 Search the [HCL](https://www.qubes-os.org/hcl/) for an R4.0 compatible system.
 [Search the mailing list](https://www.mail-archive.com/qubes-users@googlegroups.com/) for additional reports.
-If selecting a desktop, you may also want to include and use a third party NIC in an expansion slot or USB instead of the onboard Ethernet.
+
+## Additional Notes ##
+If selecting a desktop, you may also want to include and use a third party NIC in an expansion slot instead of the onboard Ethernet.
+This is often not an option in laptops with manufacturer firmware due to the use of NIC whitelists, but you can use a USB based ethernet or wifi adapter instead with either desktop or laptop.
+Optionally, disable DHCP on the subnet(s) your Qubes device connects to.
 This will help avoid overt network communications from onboard management.
-This is often not an option in laptops with manufacturer firmware due to the use of NIC whitelists, but you can use a USB based ethernet or wifi adapter instead.
 <br>
 <br>
 <br>
