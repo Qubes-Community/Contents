@@ -20,7 +20,7 @@
 
 `customization`
 - [change DPI scaling in dom0 and VMs](customization/dpi-scaling.md)
-- [setup mirage firewall](customization/mirage-firewall)
+- [setup mirage firewall](customization/mirage-firewall.md)
 - [windows 7 gaming HVM with GPU passthrough](customization/windows-gaming-hvm.md)
 - [SecBrowser "security-enhanced" browser](customization/secbrowser.md)  
 
