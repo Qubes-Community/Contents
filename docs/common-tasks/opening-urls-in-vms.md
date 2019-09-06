@@ -56,6 +56,8 @@ In the following example, opening URLs in specific VMs is explicitely forbidden 
 @anyvm @anyvm ask
 ~~~
 
+You may also restrict the type of dispVM allowed in the policy by using the `@dispvm:templatename` syntax. See the [official doc](https://www.qubes-os.org/doc/disposablevm/#opening-a-link-in-a-disposablevm-based-on-a-non-default-disposablevm-template-from-a-qube) for further details.
+
 
 Considerations on dispVMs
 -------------------------
