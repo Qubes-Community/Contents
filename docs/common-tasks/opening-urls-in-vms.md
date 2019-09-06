@@ -43,17 +43,17 @@ In the following example, opening URLs in specific VMs is explicitely forbidden 
 `/etc/qubes-rpc/qubes.OpenURL`:
 
 ~~~
-$anyvm vault deny
-$anyvm private deny
-$anyvm banking deny
-$anyvm $dispvm allow
-$anyvm $anyvm ask
+@anyvm vault deny
+@anyvm private deny
+@anyvm banking deny
+@anyvm @dispvm allow
+@anyvm @anyvm ask
 ~~~
 
 `/etc/qubes-rpc/qubes.OpenInVM`:
 
 ~~~
-$anyvm $anyvm ask
+@anyvm @anyvm ask
 ~~~
 
 
