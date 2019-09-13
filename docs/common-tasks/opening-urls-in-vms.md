@@ -38,7 +38,7 @@ If an `allow` policy is configured with a destination other than `$dispvm` it is
 
 ### Sample policy ###
 
-In the following example, opening URLs in specific VMs is explicitely forbidden to prevent mistakenly selecting such VM, opening URLs in regular dispVMs is always allowed, and the default policy is to have the selection dialog pop up for everything else.
+In the following example, opening URLs in specific VMs is explicitely forbidden to prevent mistakenly selecting such VM, opening URLs in regular dispVMs is always allowed (see notes below), and the default policy is to have the selection dialog pop up for everything else with the "dispBrowser" VM preselected.
 
 `/etc/qubes-rpc/qubes.OpenURL`:
 
@@ -47,7 +47,7 @@ In the following example, opening URLs in specific VMs is explicitely forbidden 
 @anyvm private deny
 @anyvm banking deny
 @anyvm @dispvm allow
-@anyvm @anyvm ask
+@anyvm @anyvm ask,default_target=dispBrowser
 ~~~
 
 `/etc/qubes-rpc/qubes.OpenInVM`:
@@ -56,7 +56,10 @@ In the following example, opening URLs in specific VMs is explicitely forbidden 
 @anyvm @anyvm ask
 ~~~
 
-Note: it is possible to further restrict the dispVM by specifying the template it's based on with the `@dispvm:templatename` syntax. See the [official doc](https://www.qubes-os.org/doc/disposablevm/#opening-a-link-in-a-disposablevm-based-on-a-non-default-disposablevm-template-from-a-qube) for further details. 
+Notes about the `@dispvm` syntax:
+
+- it is possible to further restrict the target dispVM by specifying the template it's based on with the `@dispvm:templatename` syntax. See the [official doc](https://www.qubes-os.org/doc/disposablevm/#opening-a-link-in-a-disposablevm-based-on-a-non-default-disposablevm-template-from-a-qube) for further details. 
+- caveat: `@dispvm` means "DisposableVMs based on the default DisposableVM template of the calling VM", not "*any* DisposableVMs". If you were to run `qvm-open-in-vm @dispvm:web https://www.qubes-os.org` with the policy sample above and `web` wasn't the default dvm template for the calling VM, `@anyvm @dispvm allow` wouldn't be matched and you'd be shown the selection dialog window because of the last `ask` line.
 
 
 Considerations on dispVMs
