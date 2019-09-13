@@ -80,8 +80,6 @@ When opening and modifying a document in a dispVM the content is sent back to `s
 
 ### Using "named" dispVMs ###
 
-As of Qubes R4.0, it is impossible to "name" a dispVM: opening a URL/file in a standard dispVMs will always start a VM with a 'dispXXXX' name (eg. 'disp1234').
-
 If for some reason a user needs to have use a dispVM with a given name - which is for instance handy when using `allow` RPC policies - he/she can do like so (replace `fedora-28-dvm` with the dvm template you want to use):
 
 ~~~
