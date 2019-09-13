@@ -67,7 +67,7 @@ Considerations on dispVMs
 
 ### Re-using dispVMs ###
 
-In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files) to avoid having to wait insane amounts of time for dispVMs to start. Howecer this comes at the price of a loss in compartmentalization. It is thus up to the user to carefully pick destination VMs and to manage the lifecycle of dispVMs, killing it/them when necessary when a clean state is required.
+In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files) to avoid having to wait insane amounts of time for dispVMs to start. However this comes at the price of a loss in compartmentalization. It is thus up to the user to carefully pick destination VMs and to manage the lifecycle of dispVMs, killing it/them when necessary when a clean state is required.
 
 ### Managing changes ###
 
