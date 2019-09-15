@@ -38,23 +38,28 @@ If an `allow` policy is configured with a destination other than `$dispvm` it is
 
 ### Sample policy ###
 
-In the following example, opening URLs in specific VMs is explicitely forbidden to prevent mistakenly selecting such VM, opening URLs in regular dispVMs is always allowed, and the default policy is to have the selection dialog pop up for everything else.
+In the following example, opening URLs in specific VMs is explicitely forbidden to prevent mistakenly selecting such VM, opening URLs in regular dispVMs is always allowed (see notes below), and the default policy is to have the selection dialog pop up for everything else with the "dispBrowser" VM preselected.
 
 `/etc/qubes-rpc/qubes.OpenURL`:
 
 ~~~
-$anyvm vault deny
-$anyvm private deny
-$anyvm banking deny
-$anyvm $dispvm allow
-$anyvm $anyvm ask
+@anyvm vault deny
+@anyvm private deny
+@anyvm banking deny
+@anyvm @dispvm allow
+@anyvm @anyvm ask,default_target=dispBrowser
 ~~~
 
 `/etc/qubes-rpc/qubes.OpenInVM`:
 
 ~~~
-$anyvm $anyvm ask
+@anyvm @anyvm ask
 ~~~
+
+Notes about the `@dispvm` syntax:
+
+- it is possible to further restrict the target dispVM by specifying the template it's based on with the `@dispvm:templatename` syntax. See the [official doc](https://www.qubes-os.org/doc/disposablevm/#opening-a-link-in-a-disposablevm-based-on-a-non-default-disposablevm-template-from-a-qube) for further details. 
+- caveat: `@dispvm` means "DisposableVMs based on the default DisposableVM template of the calling VM", not "*any* DisposableVMs". If you were to run `qvm-open-in-vm @dispvm:web https://www.qubes-os.org` with the policy sample above and `web` wasn't the default dvm template for the calling VM, `@anyvm @dispvm allow` wouldn't be matched and you'd be shown the selection dialog window because of the last `ask` line.
 
 
 Considerations on dispVMs
@@ -62,7 +67,7 @@ Considerations on dispVMs
 
 ### Re-using dispVMs ###
 
-In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files) to avoid having to wait insane amounts of time for dispVMs to start. Howecer this comes at the price of a loss in compartmentalization. It is thus up to the user to carefully pick destination VMs and to manage the lifecycle of dispVMs, killing it/them when necessary when a clean state is required.
+In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files) to avoid having to wait insane amounts of time for dispVMs to start. However this comes at the price of a loss in compartmentalization. It is thus up to the user to carefully pick destination VMs and to manage the lifecycle of dispVMs, killing it/them when necessary when a clean state is required.
 
 ### Managing changes ###
 
@@ -77,8 +82,6 @@ When opening and modifying a document in a dispVM the content is sent back to `s
 - other content/changes will have to be copied, usually to the dispVM templateVM. Care must be taken not to replicate compromised files: working with a freshly started dispVM and performing only the required update actions before synchronizing files with the templateVM is a good idea.
 
 ### Using "named" dispVMs ###
-
-As of Qubes R4.0, it is impossible to "name" a dispVM: opening a URL/file in a standard dispVMs will always start a VM with a 'dispXXXX' name (eg. 'disp1234').
 
 If for some reason a user needs to have use a dispVM with a given name - which is for instance handy when using `allow` RPC policies - he/she can do like so (replace `fedora-28-dvm` with the dvm template you want to use):
 
@@ -199,7 +202,7 @@ This approach is obvious and is the simplest one:
 
 ---
 
-`Contributors`: @SvenSemmler, @Aekez, @taradiddles
+`Contributors`: @neowutran, @SvenSemmler, @Aekez, @taradiddles
 
 `Credits:` @raffaeleflorio, [Micah Lee](https://micahflee.com/2016/06/qubes-tip-opening-links-in-your-preferred-appvm/)
 
