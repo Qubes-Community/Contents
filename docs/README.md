@@ -39,6 +39,7 @@
 `system`
 - [understanding and fixing issues with time/clock](system/clock-time.md)
 - [restoring 3.2 templates/standalones to 4.0](system/restore-3.2.md)
+- [connect to a VM console](system/vm-console.md)
 
 `user-setups`
 - [examples of user setups](user-setups/) (templates and VMs used, productivity tips, customizations, ...)
