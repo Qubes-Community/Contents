@@ -17,3 +17,4 @@ Usage: `sudo xl console VMNAME`
 Uses Xenlight to directly access the VM console from dom0. For [security reasons](https://github.com/QubesOS/qubes-vmm-xen/blob/xen-4.8/patch-tools-xenconsole-replace-ESC-char-on-xenconsole-outp.patch) this console is deliberately limited in what it can display.
 
 Line-by-line text will work fine, but if a Curses-style pseudo-graphical-interface comes up the output will be garbled and you will need a tool like [asciinema](https://asciinema.org/) to untangle it.
+You may need to substitute all dots followed by `[`, `]`, `(` or `)` to the ASCII ESC (0x1b) character, a method that could have false positives.
