@@ -58,7 +58,7 @@ inside your path and change their mode bits.
 
        [user@dom0 ~]$ sudo chmod 755 /usr/bin/qmenu-XX
 
-- _Optionally_, copy the default config file:
+- _Optionally_, copy the default config file for visually appealing colors:
 
        [user@dom0 ~]$ qvm-run --pass-io dispXXXX 'cat /home/user/qmenu/qmenu.conf' > /home/user/.config/qmenu.conf
 
@@ -80,6 +80,6 @@ The colors that correspond to the qube label can be adjusted by creating a text 
 ### dmenu ###
 
 In order to customize and configure dmenu, instead of downloading it from the repositories,
-you have to get it from [suckless](https://tools.suckless.org/dmenu/patches/), compile it yourself
+you have to get it from [suckless](https://tools.suckless.org/dmenu/), compile it yourself
 and [copy it to dom0](https://www.qubes-os.org/doc/copy-from-dom0/#copying-to-dom0).
 **However, this way of installing software in dom0 is not advised and can compromise the security of your system!**
