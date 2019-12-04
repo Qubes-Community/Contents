@@ -15,6 +15,7 @@
 - ![](/_res/l.png) [Ansible Qubes](https://github.com/Rudd-O/ansible-qubes) (see Rudd-O's [other repos](https://github.com/Rudd-O?tab=repositories) as well)
 - [shrink VM volumes](configuration/shrink-volumes.md)
 - ![](/_res/l.png) [script to create Windows qubes automatically](https://github.com/crazyqube/qvm-create-windows-qube)
+- [Manage Qubes via dmenu](https://github.com/Qubes-Community/Contents/blob/master/docs/configuration/qmenu.md)
 
 `coreboot`
 - [install coreboot on a Thinkpad x230](coreboot/x230.md)
