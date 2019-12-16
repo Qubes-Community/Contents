@@ -1,8 +1,5 @@
-Manage Qubes via dmenu
+qmenu - Manage Qubes via dmenu
 ==============================
-
-qmenu
------
 
 [qmenu](https://github.com/sine3o14nnae/qmenu/) is a collection of tools that utilize
 [dmenu](https://tools.suckless.org/dmenu/), a dynamic menu for X, to provide you with a drop down menu for Qubes specific tasks.
@@ -58,24 +55,19 @@ inside your path and change their mode bits.
 
        [user@dom0 ~]$ sudo chmod 755 /usr/bin/qmenu-XX
 
-- _Optionally_, copy the default config file for visually appealing colors:
-
-       [user@dom0 ~]$ qvm-run --pass-io dispXXXX 'cat /home/user/qmenu/qmenu.conf' > /home/user/.config/qmenu.conf
-
 Customization
 -------------
 
 ### qmenu ###
 
-The colors that correspond to the qube label can be adjusted by creating a text file called
-`qmenu.conf` in `/home/user/.config/` with the following contents:
+The colors that correspond to a qube label can be adjusted by appending `--{LABEL}=#{HEX VALUE}`
+for any qube label, when executing a qmenu tool.
+
+Try the following example for visually appealing colors:
 
 ~~~
-[LABEL 1]=#[HEX TRIPLET]
-[LABEL 2]=#[HEX TRIPLET]
-...
-[LABEL 8]=#[HEX TRIPLET]
-~~~    
+ --purple=#a020f0 --blue=#4363d8 --gray=#bebebe --green=#3cb44b --yellow=#ffe119 --orange=#f58231 --red=#e6194b --black=#414141
+~~~
 
 ### dmenu ###
 
