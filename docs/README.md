@@ -42,6 +42,7 @@
 - [restoring 3.2 templates/standalones to 4.0](system/restore-3.2.md)
 - [connect to a VM console](system/vm-console.md)
 - [display reminders to make regular backups](system/backup-reminders.md)
+- [mount a VM's private storage volume in another VM](system/vm-image.md)
 
 `user-setups`
 - [examples of user setups](user-setups/) (templates and VMs used, productivity tips, customizations, ...)
