@@ -40,7 +40,7 @@ If an `allow` policy is configured with a destination other than `$dispvm` it is
 
 In the following example, opening URLs in specific VMs is explicitely forbidden to prevent mistakenly selecting such VM, opening URLs in regular dispVMs is always allowed (see notes below), and the default policy is to have the selection dialog pop up for everything else with the "dispBrowser" VM preselected.
 
-`/etc/qubes-rpc/qubes.OpenURL`:
+`/etc/qubes-rpc/policy/qubes.OpenURL`:
 
 ~~~
 @anyvm vault deny
@@ -50,7 +50,7 @@ In the following example, opening URLs in specific VMs is explicitely forbidden 
 @anyvm @anyvm ask,default_target=dispBrowser
 ~~~
 
-`/etc/qubes-rpc/qubes.OpenInVM`:
+`/etc/qubes-rpc/policy/qubes.OpenInVM`:
 
 ~~~
 @anyvm @anyvm ask
