@@ -46,15 +46,14 @@ sed -i 's/#BUILDER_PLUGINS += builder-archlinux/BUILDER_PLUGINS += builder-archl
 # cp -R ~/qubes-gui-agent-linux "$directory/qubes-src/gui-agent-linux"
 # This is really usefull when the template building fail and that you are trying
 # fixes to make it work
-rm -Rf "$directory/qubes-src/gui-agent-linux/"
-cp -R ~/qubes-gui-agent-linux "$directory/qubes-src/gui-agent-linux"
+#rm -Rf "$directory/qubes-src/gui-agent-linux/"
+#cp -R ~/qubes-gui-agent-linux "$directory/qubes-src/gui-agent-linux"
 
 cd "$directory"
 make qubes-vm
 make template
 
-# At this point, the packages and the template have been build and are ready to
-be used.
+# At this point, the packages and the template have been build and are ready to be used.
 # The code below will sign everything with your GPG key then copy the result to another VM
 # The goal is to create a archlinux repository, to update the
 # qubes specific packages using "pacman -Syu".
