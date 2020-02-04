@@ -1,6 +1,6 @@
 #### User-contributed code and links (![](/_res/l.png) icon) to third party resources ####
 
-**Active and prolific authors**
+**Prolific authors**
 - [Tasket](https://github.com/tasket)
 
 **`OS-administration`**
