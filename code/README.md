@@ -1,16 +1,18 @@
 #### User-contributed code and links (![](/_res/l.png) icon) to third party resources ####
 
+**Prolific authors**
+- [Tasket](https://github.com/tasket)
+
 **`OS-administration`**
-- ![](/_res/l.png) [do-snapshot.py](https://github.com/tasket/Qubes-scripts/blob/master/do-snapshot.py): keeps a rotating collection of Btrfs snapshots for root fs ([readme](https://github.com/tasket/Qubes-scripts#do-snapshotpy)), see tasket's [other repos](https://github.com/tasket) as well
 - ![](/_res/l.png) [qubes4-multi-update](https://github.com/tasket/Qubes-scripts/blob/master/qubes4-multi-update): updates multiple template, standalone VMs and dom0 in R4.0 ([readme](https://github.com/tasket/Qubes-scripts#qubes4-multi-update))
-- R4-universal-update-script.sh: bash script to automate VM updates
+- [R4-universal-update-script.sh](/code/OS-administration/R4-universal-update-script.sh): bash script to automate VM updates
 - ![](/_res/l.png) [findpref](https://github.com/tasket/Qubes-scripts/blob/master/findpref): find all VMs that match a pref value and optionally set new values for them ([readme](https://github.com/tasket/Qubes-scripts#findpref))
-- ![](/_res/l.png) [qvm-portfwd-iptables](https://gist.github.com/Joeviocoe/6c4dc0c283f6d6c5b1a3f5af8793292b): port forwarding to allow external connections, see usage notes at bottom 
-- ![](/_res/l.png) [mount_lvm_image.sh](https://github.com/Qubes-Community/Contents/blob/master/code/OS-administration/mount_lvm_image.sh): mount lvm image to a newly created DisposableVM
-- ![](/_res/l.png) [build-archlinux.sh](https://github.com/Qubes-Community/Contents/blob/master/code/OS-administration/build-archlinux.sh): build the archlinux template
+- ![](/_res/l.png) [qvm-portfwd-iptables](https://gist.github.com/fepitre/941d7161ae1150d90e15f778027e3248): port forwarding to allow external connections, see usage notes at bottom 
+- [mount_lvm_image.sh](/code/OS-administration/mount_lvm_image.sh): mount lvm image to a newly created DisposableVM
+- [build-archlinux.sh](/code/OS-administration/build-archlinux.sh): build the archlinux template
  
 **`monitoring`**
-- ls-qubes.sh: outputs the nb. of running qubes + total memory used; the output can be fed into a panel text applet (see comments in the script).
+- [ls-qubes.sh](/code/monitoring/ls-qubes.sh): outputs the nb. of running qubes + total memory used; the output can be fed into a panel text applet (see comments in the script).
 
 **`multimedia`**
 - sound-control-scripts: toggle, volume up, volume down, ...
