@@ -23,7 +23,9 @@
 - bash autocompletion script for `qvm-*` commands in dom0
 - ![](/_res/l.png) [qvm-screenshot-tool](https://github.com/evadogstar/qvm-screenshot-tool)
 - ![](/_res/l.png) [qubes-split-dm-crypt](https://github.com/rustybird/qubes-split-dm-crypt)
+- ![](/_res/l.png) [qcrypt](https://github.com/3hhh/qcrypt)
 - ![](/_res/l.png) [qubes-url-redirector ("Open in Qube")](https://github.com/raffaeleflorio/qubes-url-redirector/)
+- ![](/_res/l.png) [qubes-terminal-hotkeys](https://github.com/3hhh/qubes-terminal-hotkeys)
 
 **`misc`**
 - ![](/_res/l.png) [halt-vm-by-window](https://github.com/tasket/Qubes-scripts/blob/master/halt-vm-by-window): shutdown a Qubes VM associated with the currently active window ([readme](https://github.com/tasket/Qubes-scripts#halt-vm-by-window))
