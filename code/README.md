@@ -10,6 +10,7 @@
 - ![](/_res/l.png) [qvm-portfwd-iptables](https://gist.github.com/fepitre/941d7161ae1150d90e15f778027e3248): port forwarding to allow external connections, see usage notes at bottom 
 - [mount_lvm_image.sh](/code/OS-administration/mount_lvm_image.sh): mount lvm image to a newly created DisposableVM
 - [build-archlinux.sh](/code/OS-administration/build-archlinux.sh): build the archlinux template
+- ![](/_res/l.png) [qvm-create-windows-qube](https://github.com/elliotkillick/qvm-create-windows-qube): Quickly create new Windows qubes. 
  
 **`monitoring`**
 - [ls-qubes.sh](/code/monitoring/ls-qubes.sh): outputs the nb. of running qubes + total memory used; the output can be fed into a panel text applet (see comments in the script).
