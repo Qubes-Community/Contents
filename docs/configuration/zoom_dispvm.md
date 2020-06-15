@@ -51,7 +51,7 @@ By running Zoom alone in a Disposable VM, we can improve the safety of using the
 6. Shutdown the TemplateVM
 	`sudo shutdown now`
 
-## Step 3: Create AppVM and configure it for use as a DispVM
+## Step 3: Create an AppVM for Zoom
 1. Open `Create Qubes VM`.
 2. Name the Qube `videoconferencing-dvm` and label it `red` to indicate the lowest level of trust.
 3. Select `AppVM` as the type of qube to be created. *This is the default.*
