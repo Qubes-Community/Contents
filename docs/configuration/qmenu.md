@@ -1,4 +1,4 @@
-qmenu - Manage Qubes via dmenu
+Manage Qubes via dmenu; qmenu
 ==============================
 
 [qmenu](https://github.com/sine3o14nnae/qmenu/) is a collection of tools that utilize
@@ -9,7 +9,7 @@ adjust your qube preferences, firewall rules, per-qube keyboard layouts, launch 
 
 List of qmenu tools:
 
-- qmenu-al - Launch domU applications.
+- qmenu-am - Launch domU and dom0 applications.
 
 - qmenu-dm - List and manage your connected devices.
 
@@ -31,7 +31,7 @@ Installation
 
 - Install dmenu:
 
-       [user@dom0]$ sudo qubes-dom0-update dmenu
+       [user@dom0 ~]$ sudo qubes-dom0-update dmenu
 
 - Start a disposable qube that is able to connect to the internet. **Do not use this qube for anything else!**
 Then inside this qube; clone the qmenu repository with git:
@@ -49,11 +49,20 @@ Then inside this qube; clone the qmenu repository with git:
 - Finally, decide what qmenu tools you want to use, replace 'XX' accordingly, then copy them to dom0, place them
 inside your path and change their mode bits.
 
-       [user@dom0 ~]$ qvm-run --pass-io dispXXXX 'cat /home/user/qmenu/qmenu-XX' > /tmp/qmenu-XX
+       [user@dom0 ~]$ qvm-run --pass-io --filter-escape-chars --no-color-output dispXXXX 'cat /home/user/qmenu/qmenu-XX' > /tmp/qmenu-XX
 
-       [user@dom0 ~]$ sudo cp /tmp/qmenu-XX /usr/bin/
+       [user@dom0 ~]$ sudo cp /tmp/qmenu-XX /usr/local/bin/
 
-       [user@dom0 ~]$ sudo chmod 755 /usr/bin/qmenu-XX
+       [user@dom0 ~]$ sudo chmod 755 /usr/local/bin/qmenu-XX
+       
+- For `qmenu-vm`, you have to additionally follow the steps below to copy all the files in /home/user/qmenu/lib/qmenu_vm/ to dom0 and place them in /lib/qmenu_vm/.
+
+       [user@dom0 ~]$ mkdir /tmp/qmenu_vm
+
+       [user@dom0 ~]$ for file in fq_keyboard fq_logs fq_pm fqubes_prefs fqvm_appmenus fqvm_clone fqvm_create fqvm_device fqvm_firewall fqvm_pci fqvm_prefs fqvm_remove fqvm_run fqvm_service fqvm_tags fqvm_volume; do qvm-run --pass-io --filter-escape-chars --no-color-output dispXXXX "cat /home/user/qmenu/lib/qmenu_vm/$file" > /tmp/qmenu_vm/$file; done
+
+       [user@dom0 ~]$ sudo cp -r /tmp/qmenu_vm/ /lib/
+
 
 Customization
 -------------
