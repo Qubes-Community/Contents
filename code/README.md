@@ -24,6 +24,7 @@
 - ![](/_res/l.png) [qvm-screenshot-tool](https://github.com/evadogstar/qvm-screenshot-tool)
 - ![](/_res/l.png) [qubes-split-dm-crypt](https://github.com/rustybird/qubes-split-dm-crypt)
 - ![](/_res/l.png) [qcrypt](https://github.com/3hhh/qcrypt)
+- ![](/_res/l.png) [qidle](https://github.com/3hhh/qidle)
 - ![](/_res/l.png) [qubes-url-redirector ("Open in Qube")](https://github.com/raffaeleflorio/qubes-url-redirector/)
 - ![](/_res/l.png) [qubes-terminal-hotkeys](https://github.com/3hhh/qubes-terminal-hotkeys)
 - ![](/_res/l.png) [qubes-conky](https://github.com/3hhh/qubes-conky)
