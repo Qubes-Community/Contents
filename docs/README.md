@@ -16,7 +16,8 @@
 - [shrink VM volumes](configuration/shrink-volumes.md)
 - ![](/_res/l.png) [script to create Windows qubes automatically](https://github.com/elliotkillick/qvm-create-windows-qube)
 - [Manage Qubes via dmenu](configuration/qmenu.md)
-- [Pihole qube (old post, but also work on QubesOS 4.0)](https://blog.tufarolo.eu/how-to-configure-pihole-in-qubesos-proxyvm/) 
+- [Pihole qube (old post, but also work on QubesOS 4.0)](https://blog.tufarolo.eu/how-to-configure-pihole-in-qubesos-proxyvm/)
+- [Newer Pihole qube, with cloudflared or NextDNS servers](https://github.com/92VV3M42d3v8/PiHole/blob/master/PiHole%20Cloudflared)
 
 `coreboot`
 - [install coreboot on a Thinkpad x230](coreboot/x230.md)
