@@ -27,6 +27,7 @@
 - [windows 7 gaming HVM with GPU passthrough](customization/windows-gaming-hvm.md)
 - [SecBrowser "security-enhanced" browser](customization/secbrowser.md)  
 - [Choose deafult terminal settings for a TemplateVM](customization/terminal-defaults.md)  
+- [Screenlockers](customization/screenlockers.md)  
 
 `hardware`
 - [tips on choosing the right hardware](hardware/hardware-selection.md)
