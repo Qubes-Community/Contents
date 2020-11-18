@@ -366,7 +366,7 @@ Check if it returns `ssh-ed25519 <public key string>`
 ## Security Benefits
 
 In the setup described in this guide, even an attacker who manages to gain access to the `ssh-client`  VM will not be able to obtain the user’s private key since it is simply not there. 
-Rather, the private key remains in the `vault` VM, which is extremely unlikely to be compromised, if nothing is ever copied or transferred into it. 
+Rather, the private key remains in the `vault` VM, which is extremely unlikely to be compromised if nothing is ever copied or transferred into it. 
 In order to gain access to the vault VM, the attacker would require the use of, e.g., a general Xen VM escape exploit or a signed, compromised package which is already installed in the TemplateVM upon which the vault VM is based.
 
 ## Further Security tips
