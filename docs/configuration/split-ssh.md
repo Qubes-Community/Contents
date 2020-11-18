@@ -379,7 +379,7 @@ Although the database file is encrpyted with your password, if you haven't taken
 Some tips for securing your keys against a `vault` VM compromise include: 
 * Hide the \*.kdbx file by simply renaming the file extension (e.g. \*.zip). Keep in mind this not likely to stop dedicated adversaries. 
 * Add a second encryption layer (e.g. with VeraCrypt, \*.7z with password).
-
+* Adjust the encrpytion settings in KeePassXC as per the [KeePassXC documentation][KeePassXC User Guide].
 Want more Qubes split magic?
 Check out [Split-GPG][Split-GPG].
 
@@ -393,15 +393,18 @@ Qubes Community: Phil (phl), deeplow, whoami, santorihelix https://qubes-os.disc
 
 
 [CreateBackup]:https://www.qubes-os.org/doc/backup-restore/#creating-a-backup
+[qrexec]: https://www.qubes-os.org/doc/qrexec/
+[update]: https://www.qubes-os.org/doc/software-update-domu/#updating-software-in-templatevms
+[appvm create]: https://www.qubes-os.org/doc/getting-started/#adding-removing-and-listing-qubes
+[PolicyFilesQubesOS]:https://www.qubes-os.org/doc/qrexec/#policy-files
+[Split-GPG]:https://www.qubes-os.org/doc/split-gpg
+
 [KeePassXC]: https://keepassxc.org/project
 [KeePassXCFedoraPackageSource]:https://src.fedoraproject.org/rpms/keepassxc
 [KeePassXC download page]: https://keepassxc.org/download/
 [KeePassXC FAQ]: https://keepassxc.org/docs
-[Hint]:https://xkcd.com/936
-[PolicyFilesQubesOS]:https://www.qubes-os.org/doc/qrexec/#policy-files
-[Split-GPG]:https://www.qubes-os.org/doc/split-gpg
-
-[qrexec]: https://www.qubes-os.org/doc/qrexec/
-[update]: https://www.qubes-os.org/doc/software-update-domu/#updating-software-in-templatevms
-[appvm create]: https://www.qubes-os.org/doc/getting-started/#adding-removing-and-listing-qubes
 [KeePassXC User Guide]: https://keepassxc.org/docs/KeePassXC_UserGuide.html#_database_settings
+
+[Hint]:https://xkcd.com/936
+
+
