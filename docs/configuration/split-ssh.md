@@ -2,6 +2,8 @@
 
 This Qubes setup allows you to keep SSH private keys in a vault VM (`vault`) and SSH Client VM (`ssh-client`) to use them only after being authorized. This is done by using Qubes's [qrexec][qrexec] framework to connect a local SSH Agent socket from an AppVM to the SSH Agent socket within the vault VM. 
 
+   ![diagram](https://raw.githubusercontent.com/santorihelix/qubes-splitssh-diagram/da4c370d3b608f3d0e760cb8241d9ffbecfb69b2/ssh-split3.svg)
+
 ## Overview
 
 1. Make sure the TemplateVM you plan to use is up to date and `nmap` and `ncat` is installed.
@@ -192,7 +194,7 @@ With this configuration you'll be prompted for a password the first time you sta
 
 2. Close the terminal. **Do not shutdown `dom0`.**
 
-### In a SSH Client AppVM terminal
+### In an SSH Client AppVM terminal
 
 Theoretically, you can use any AppVM but to increase security it is advised to create a dedicated AppVM for your SSH connections. Furthermore, you can set different firewall rules for each VM (i.e. for intranet and internet connections) which also provides additional protection.
 
@@ -358,15 +360,8 @@ Check if it returns `error fetching identities: communication with agent failed`
 Check if it returns `ssh-ed25519 <public key string>`
 
 ## (Optional) Backing Up the Configuration
-### System Backup
-Start a system backup as per the [User Documentation][CreateBackup].
-### KeePassXC Database Backup
-You can also only back up your \*.kdbx file.
-
-Depending on your threat model you can:
-* Hide the \*.kdbx file by simply renaming the file extension (e.g. \*.zip)
-* Add an additional security layer by adding a second encryption layer (e.g. VeraCrypt, \*.7z with password)
-* Upload the \*.kdbx to an end-to-end-encrypted email box (e.g. Tutanota, ProtonMail)
+- Start a system backup as per the [User Documentation][CreateBackup].
+- Back up your \*.kdbx file to a somewhere you know to be secure. (e.g. a secure USB device, an end-to-end-encrypted email box. (e.g. Tutanota, ProtonMail))
 
 ## Security Benefits
 
@@ -374,6 +369,14 @@ In the setup described in this guide, even an attacker who manages to gain acces
 Rather, the private key remains in the `vault` VM, which is extremely unlikely to be compromised, if nothing is ever copied or transferred into it. 
 In order to gain access to the vault VM, the attacker would require the use of, e.g., a general Xen VM escape exploit or a signed, compromised package which is already installed in the TemplateVM upon which the vault VM is based.
 
+## Further Security tips
+### Regarding Your SSH Private Key
+
+### Regarding Your KeePassXC Database File
+Although the database file is encrpyted with your password, if you haven't taken any protective measures, it can be bruteforced. 
+Some tips for securing your keys against a `vault` VM compromise include: 
+* Hide the \*.kdbx file by simply renaming the file extension (e.g. \*.zip). Keep in mind this not likely to stop dedicated adversaries. 
+* Add a second encryption layer (e.g. with VeraCrypt, \*.7z with password).
 
 Want more Qubes split magic?
 Check out [Split-GPG][Split-GPG].
