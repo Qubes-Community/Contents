@@ -388,9 +388,6 @@ In order to gain access to the vault VM, the attacker would require the use of, 
 ### Regarding Your SSH Private Key
 * This goes without saying: keep your private keys **private**. 
 * Tinkering with the user permissions is not necessary since it is assumed that an adversary who can find a Xen VM escape exploit is also capable of finding a user to root escalation exploit.
-* Use Yubikey with SSH. Check [yubikey-agent](https://github.com/FiloSottile/yubikey-agent), [yubikey-ssh](https://github.com/jamesog/yubikey-ssh) and the [Yubikey documentation](https://developers.yubico.com/SSH/) for more information.
-
-   ![yubikey diagram](https://raw.githubusercontent.com/santorihelix/qubes-splitssh-diagram/85e9cd09854231816f478159c42d5bce3e339648/split-ssh-keepassxc-yubikey.svg)
 
 ### Regarding Your KeePassXC Database File
 Although the database file is encrpyted with your password, if you haven't taken any protective measures, it can be bruteforced. 
