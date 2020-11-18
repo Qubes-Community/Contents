@@ -350,7 +350,7 @@ If it is, restart your vault VM and do not enter your password when it asks you 
     [user@ssh-client ~]$ ssh-add -L
     ```
 
-3. Allow operation execution
+3. Allow operation execution. (If you don't see the below prompt, check your VM interconnection setup.)
 
     ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/adcd0c408226c24950d2c876a38d2fecad8aacea.png)
 
@@ -366,7 +366,7 @@ If you're getting an error (e.g. `error fetching identities: communication with 
    [user@ssh-client ~]$ ssh-add -L
    ```
 
-6. Allow operation execution
+6. Allow operation execution.  (If you don't see the below prompt, check your VM interconnection setup.)
 
    ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/adcd0c408226c24950d2c876a38d2fecad8aacea.png)
 
