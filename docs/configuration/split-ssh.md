@@ -190,7 +190,7 @@ With this configuration you'll be prompted for a password the first time you sta
 
    - Save and exit.
    
-   **Note:** There are many ways to fine-tune this policy. For more details see [Qubes qrexec documentation][PolicyFilesQubesOS]. 
+   **Note:** There are many ways to fine-tune this policy. For more details see the [Qubes qrexec documentation][PolicyFilesQubesOS]. 
 
 2. Close the terminal. **Do not shutdown `dom0`.**
 
