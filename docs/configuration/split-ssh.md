@@ -340,7 +340,9 @@ Check the [KeePassXC User Guide][KeePassXC User Guide] for more information abou
 
 ## Test Your Configuration
 
-1. Shutdown KeePassXC on your vault VM.
+1. If you're using KeePassXC, shutdown KeePassXC on your vault VM. 
+If not, make sure your private key is not added to the ssh-agent in your vault VM (Check with `ssh-add -L`). 
+If it is, restart your vault VM and do not enter your password when it asks you to.
 
 2. Try fetching your identities on the SSH Client VM. 
 
@@ -352,7 +354,8 @@ Check the [KeePassXC User Guide][KeePassXC User Guide] for more information abou
 
     ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/adcd0c408226c24950d2c876a38d2fecad8aacea.png)
 
-Check if it returns `The agent has no identities.`
+It should return `The agent has no identities.`. 
+If you're getting an error (e.g. `error fetching identities: communication with agent failed`) check your VM interconnection setup.
 
 4. Launch KeePassXC and unlock your database.
 
@@ -367,6 +370,7 @@ Check if it returns `The agent has no identities.`
    ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/adcd0c408226c24950d2c876a38d2fecad8aacea.png)
 
 Check if it returns `ssh-ed25519 <public key string>`
+If you're getting an error (e.g. `error fetching identities: communication with agent failed`) check your VM interconnection setup.
 
 ## (Optional) Backing Up the Configuration
 - Start a system backup as per the [User Documentation][CreateBackup].
