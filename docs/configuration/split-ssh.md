@@ -339,7 +339,7 @@ Theoretically, you can use any AppVM but to increase security it is advised to c
 
 3. Allow operation execution
 
-    ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/a4c234f61064d16820a21e1ddaf305bf959735c1.png)
+    ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/adcd0c408226c24950d2c876a38d2fecad8aacea.png)
 
 Check if it returns `error fetching identities: communication with agent failed`
 
@@ -353,7 +353,7 @@ Check if it returns `error fetching identities: communication with agent failed`
 
 6. Allow operation execution
 
-   ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/a4c234f61064d16820a21e1ddaf305bf959735c1.png)
+   ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/adcd0c408226c24950d2c876a38d2fecad8aacea.png)
 
 Check if it returns `ssh-ed25519 <public key string>`
 
