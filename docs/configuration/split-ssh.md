@@ -390,7 +390,7 @@ Qubes Split SSH (Github: Jason Hennessey - henn) https://github.com/henn/qubes-a
 Using split ssh in QubesOS 4.0 (Kushal Das) https://kushaldas.in/posts/using-split-ssh-in-qubesos-4-0.html <br/>
 Using Split-SSH in Qubes 4 (Denis Zanin) https://deniszanin.com/using-split-ssh-gpg-in-qubes-os/ <br/>
 R.I.S.K.S. https://19hundreds.github.io/risks-workflow/ssh-split-setup <br/>
-----------------------------------
+
 Contributor(s): phl, @invalid-error, @deeplow, @santorihelix
 
 [CreateBackup]:https://www.qubes-os.org/doc/backup-restore/#creating-a-backup
