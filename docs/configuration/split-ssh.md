@@ -33,7 +33,7 @@ To perform a Qubes OS backup please read and follow this guide in the [User Docu
    user@debian-10:~$ sudo apt-get update && sudo apt-get upgrade
    ```
    
-2. Make sure `nmap` and `ncat` is installed in the TemplateVMs you plan to base your AppVMs on.
+2. Make sure `ncat` is installed in the TemplateVMs you plan to base your AppVMs on.
 
    For Fedora templates:<br/>
    ```
