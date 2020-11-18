@@ -1,6 +1,10 @@
 # Qubes Split SSH
 
-This Qubes setup allows you to keep SSH private keys in a vault VM (`vault`) and SSH Client VM (`ssh-client`) to use them only after being authorized. This is done by using Qubes's [qrexec][qrexec] framework to connect a local SSH Agent socket from an AppVM to the SSH Agent socket within the vault VM. 
+Split SSH implements a concept similar to having a smart card with your private SSH keys, except that the role of the “smart card” is played by another Qubes AppVM. 
+This Qubes setup allows you to keep your SSH private keys in a vault VM (`vault`) while using an SSH Client VM (`ssh-client`) to access your remote server. 
+This is done by using Qubes's [qrexec][qrexec] framework to connect a local SSH Agent socket from your SSH Client VM to the SSH Agent socket within the vault VM. 
+This way the compromise of the domain you use to connect to your remote server does not allow the attacker to automatically also steal all your keys. 
+(We should make a rather obvious comment here that the so-often-used passphrases on private keys are pretty meaningless because the attacker can easily set up a simple backdoor which would wait until the user enters the passphrase and steal the key then.)
 
    ![diagram](https://raw.githubusercontent.com/santorihelix/qubes-splitssh-diagram/85e9cd09854231816f478159c42d5bce3e339648/split-ssh2.svg)
 
