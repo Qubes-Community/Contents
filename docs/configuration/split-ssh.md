@@ -372,15 +372,7 @@ In order to gain access to the vault VM, the attacker would require the use of, 
 ## Further Security tips
 ### Regarding Your SSH Private Key
 * This goes without saying but keep your private keys **private**. 
-* Typically you want your the permissions to your key-related files to be
-
-    `.ssh` directory: `700 (drwx------)`<br/>
-    public key (`id_ed25519.pub` file): `644 (-rw-r--r--)`<br/>
-    private key (`id_ed25519`): `600 (-rw-------)`<br/>
-    lastly your home directory should not be writeable by the group or others (at most 755 (drwxr-xr-x)).<br/>
-    
-   But considering how your vault needs to be compromised before these files can even be noticed, this step is meaningless.
-   Since an adversary who can find a Xen VM escape exploit can most probably also find a user to root escalation exploit.
+* Tinkering with the user permissions is not necessary since it is assumed that an adversary who can find a Xen VM escape exploit is also capable of finding a user to root escalation exploit.
 
 ### Regarding Your KeePassXC Database File
 Although the database file is encrpyted with your password, if you haven't taken any protective measures, it can be bruteforced. 
