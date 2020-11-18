@@ -377,7 +377,7 @@ Depending on your threat model you can:
 * Upload the \*.kdbx to an end-to-end-encrypted email box (e.g. Tutanota, ProtonMail)
 
 Want more Qubes split magic?
-Check out [Split-GPG:][Split-GPG].
+Check out [Split-GPG][Split-GPG].
 
 -------------------------------
 
