@@ -309,7 +309,7 @@ Theoretically, you can use any AppVM but to increase security it is advised to c
 
    ![check integration status](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/2ef14b195947d2190306b500298379458d6194da.png)
 
-12. Select your private key in the "SSH Agent" section.
+12. Open the entry you created and select your private key in the "SSH Agent" section.
 
    ![select private key](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/optimized/1X/0d19ae6f3545a154823a8b3f8c89d52f6e0d6b68_2_594x500.png)
 
