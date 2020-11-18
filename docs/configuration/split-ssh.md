@@ -371,6 +371,12 @@ In order to gain access to the vault VM, the attacker would require the use of, 
 
 ## Further Security tips
 ### Regarding Your SSH Private Key
+* This goes without saying but keep your private keys **private**. 
+* Typically you want your the permissions to your key-related files to be
+    `.ssh` directory: `700 (drwx------)`
+    public key (`id_ed25519.pub` file): `644 (-rw-r--r--)`
+    private key (`id_ed25519`): `600 (-rw-------)`
+    lastly your home directory should not be writeable by the group or others (at most 755 (drwxr-xr-x)).
 
 ### Regarding Your KeePassXC Database File
 Although the database file is encrpyted with your password, if you haven't taken any protective measures, it can be bruteforced. 
