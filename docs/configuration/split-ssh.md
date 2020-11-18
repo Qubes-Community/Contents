@@ -2,7 +2,7 @@
 
 This Qubes setup allows you to keep SSH private keys in a vault VM (`vault`) and SSH Client VM (`ssh-client`) to use them only after being authorized. This is done by using Qubes's [qrexec][qrexec] framework to connect a local SSH Agent socket from an AppVM to the SSH Agent socket within the vault VM. 
 
-   ![diagram](https://raw.githubusercontent.com/santorihelix/qubes-splitssh-diagram/da4c370d3b608f3d0e760cb8241d9ffbecfb69b2/ssh-split3.svg)
+   ![diagram](https://raw.githubusercontent.com/santorihelix/qubes-splitssh-diagram/85e9cd09854231816f478159c42d5bce3e339648/split-ssh2.svg)
 
 ## Overview
 
