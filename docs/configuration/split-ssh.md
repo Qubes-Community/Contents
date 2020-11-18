@@ -383,7 +383,7 @@ Some tips for securing your keys against a `vault` VM compromise include:
 Want more Qubes split magic?
 Check out [Split-GPG][Split-GPG].
 
--------------------------------<br/>
+-------------------------------
 This guide has been inspired by:<br/>
 Qubes Split SSH (Github: Jason Hennessey - henn) https://github.com/henn/qubes-app-split-ssh <br/>
 Using split ssh in QubesOS 4.0 (Kushal Das) https://kushaldas.in/posts/using-split-ssh-in-qubesos-4-0.html <br/>
