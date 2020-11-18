@@ -18,7 +18,8 @@ This way the compromise of the domain you use to connect to your remote server d
 
 
 ## Prepare Your System
-0. (Optional) Take a system snapshot before you start tuning your system or do any major installations. To perform a Qubes OS backup please read and follow this guide in the [User Documentation][CreateBackup].
+0. (Optional) Take a system snapshot before you start tuning your system or do any major installations. 
+To perform a Qubes OS backup please read and follow this guide in the [User Documentation][CreateBackup].
 
 1. Make sure the TemplateVM you plan to use is [up to date][update].
 
@@ -58,7 +59,8 @@ This way the compromise of the domain you use to connect to your remote server d
 
 ## [Creating AppVMs][appvm create]
 
-If you’ve installed Qubes OS using the default options, a few qubes including a vault AppVM has been created for you. Skip the first step if you don't wish to create another vault.
+If you’ve installed Qubes OS using the default options, a few qubes including a vault AppVM has been created for you. 
+Skip the first step if you don't wish to create another vault.
 
 1. Create a new vault AppVM (`vault`) based on your chosen template. Set networking to `(none)`.
 
@@ -200,7 +202,8 @@ With this configuration you'll be prompted for a password the first time you sta
 
 ### In an SSH Client AppVM terminal
 
-Theoretically, you can use any AppVM but to increase security it is advised to create a dedicated AppVM for your SSH connections. Furthermore, you can set different firewall rules for each VM (i.e. for intranet and internet connections) which also provides additional protection.
+Theoretically, you can use any AppVM but to increase security it is advised to create a dedicated AppVM for your SSH connections.
+Furthermore, you can set different firewall rules for each VM (i.e. for intranet and internet connections) which also provides additional protection.
 
 1. Edit `/rw/config/rc.local`
 
@@ -254,7 +257,8 @@ Theoretically, you can use any AppVM but to increase security it is advised to c
 
 **Warning:** This part is for setting up *KeePassXC*, not KeePassX or KeePass. See the [KeePassXC FAQ][KeePassXC FAQ].
 
-0. KeePassXC should be installed by default in both Fedora and Debian TemplateVMs. If this changes in the future and you find that it isn't, it can be installed with:
+0. KeePassXC should be installed by default in both Fedora and Debian TemplateVMs. 
+If this changes in the future and you find that it isn't, it can be installed with:
    
    For Fedora templates:<br/>
    ```shell_prompt
@@ -281,7 +285,8 @@ Theoretically, you can use any AppVM but to increase security it is advised to c
 
    ![naming screen](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/0925cd8e469b6194f80b1e46e51d7f137a01dd74.png)
 
-4. Adjust the encryption settings. Check the [KeePassXC User Guide][KeePassXC User Guide] for more information about these settings.
+4. Adjust the encryption settings. 
+Check the [KeePassXC User Guide][KeePassXC User Guide] for more information about these settings.
 
    ![encryption settings](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/optimized/1X/8537b07f453a0950d72cb51b9b5339e0f7bfc3c4_2_690x472.png)
    
@@ -387,6 +392,14 @@ Some tips for securing your keys against a `vault` VM compromise include:
 * Hide the \*.kdbx file by simply renaming the file extension (e.g. \*.zip). Keep in mind this is not likely to stop dedicated adversaries from finding your \*.kdbx file. 
 * Add a second encryption layer (e.g. with VeraCrypt, \*.7z with password).
 * Adjust the encrpytion settings in KeePassXC as per the [KeePassXC documentation][KeePassXC User Guide].
+
+## Current limitations
+
+* It is possible for a malicious VM to hold onto an ssh-agent connection for more than one use. 
+Therefore, if you authorize usage once, assume that a malicious VM could then use it many more times. 
+In this case, though, the SSH Agent should continue to protect your private keys; only usage of it would be available to the malicious VM until it was shut down.
+
+* It doesn’t solve the problem of allowing the user to know what is requested before the operation gets approved.
 
 Want more Qubes split magic?
 Check out [Split-GPG][Split-GPG].
