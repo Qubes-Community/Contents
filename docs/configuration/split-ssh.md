@@ -21,7 +21,7 @@ This way the compromise of the domain you use to connect to your remote server d
 0. (Optional) Take a system snapshot before you start tuning your system or do any major installations. 
 To perform a Qubes OS backup please read and follow this guide in the [User Documentation][CreateBackup].
 
-1. Make sure the TemplateVM you plan to use is [up to date][update].
+1. Make sure the TemplateVMs that you plan to base your AppVMs on are [up to date][update].
 
    For Fedora templates:<br/>
    ```
@@ -33,7 +33,7 @@ To perform a Qubes OS backup please read and follow this guide in the [User Docu
    user@debian-10:~$ sudo apt-get update && sudo apt-get upgrade
    ```
    
-2. Make sure `nmap` and `ncat` is installed in your TemplateVM
+2. Make sure `nmap` and `ncat` is installed in the TemplateVMs you plan to base your AppVMs on.
 
    For Fedora templates:<br/>
    ```
@@ -45,7 +45,7 @@ To perform a Qubes OS backup please read and follow this guide in the [User Docu
    user@debian-10:~$ sudo apt-get install nmap ncat
    ```
    
-3. If you *don't* plan to use KeePassXC, install `ssh-askpass`.
+3. If you *don't* plan to use KeePassXC, install `ssh-askpass` in the TemplateVM you plan to base your vault VM on.
 
    For Fedora templates:<br/>
    ```
@@ -66,7 +66,7 @@ Skip the first step if you don't wish to create another vault.
 
    ![vault creation](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/80fad13c2d72b4f6ac4c03cd30d15ebd2c08a927.png)
    
-2. Create a SSH Client AppVM (`ssh-client`). This VM will be used to make the SSH connection to your remote machine.
+2. Create a SSH Client AppVM (`ssh-client`). This VM will be used to make SSH connections to your remote machine.
 
    ![ssh-client creation](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/ff7c5d239b53906b8d1396381810b291d4364900.png)
 
