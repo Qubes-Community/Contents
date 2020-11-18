@@ -355,7 +355,7 @@ If it is, restart your vault VM and do not enter your password when it asks you 
     ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/adcd0c408226c24950d2c876a38d2fecad8aacea.png)
 
 It should return `The agent has no identities.`. 
-If you're getting an error (e.g. `error fetching identities: communication with agent failed`) check your VM interconnection setup.
+If you're getting an error (e.g. `error fetching identities: communication with agent failed`), make sure your vault VM is running and check your VM interconnection setup.
 
 4. Launch KeePassXC and unlock your database.
 
@@ -370,11 +370,11 @@ If you're getting an error (e.g. `error fetching identities: communication with 
    ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/adcd0c408226c24950d2c876a38d2fecad8aacea.png)
 
 Check if it returns `ssh-ed25519 <public key string>`
-If you're getting an error (e.g. `error fetching identities: communication with agent failed`) check your VM interconnection setup.
+If you're getting an error (e.g. `error fetching identities: communication with agent failed`), make sure your vault VM is running and check your VM interconnection setup.
 
 ## (Optional) Backing Up the Configuration
 - Start a system backup as per the [User Documentation][CreateBackup].
-- Back up your \*.kdbx file to a somewhere you know to be secure. (e.g. a secure USB device, an end-to-end-encrypted email box. (e.g. Tutanota, ProtonMail))
+- Back up your \*.kdbx file to a somewhere you *know* to be secure. (e.g. a secure USB device, an end-to-end-encrypted email box. (e.g. Tutanota, ProtonMail))
 
 ## Security Benefits
 
