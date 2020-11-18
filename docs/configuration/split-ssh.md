@@ -380,6 +380,7 @@ Some tips for securing your keys against a `vault` VM compromise include:
 * Hide the \*.kdbx file by simply renaming the file extension (e.g. \*.zip). Keep in mind this not likely to stop dedicated adversaries. 
 * Add a second encryption layer (e.g. with VeraCrypt, \*.7z with password).
 * Adjust the encrpytion settings in KeePassXC as per the [KeePassXC documentation][KeePassXC User Guide].
+
 Want more Qubes split magic?
 Check out [Split-GPG][Split-GPG].
 
