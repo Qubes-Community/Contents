@@ -295,7 +295,7 @@ Theoretically, you can use any AppVM but to increase security it is advised to c
 
    ![adding keys](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/ff4a1197826ee69740251dbf8204d90b6cf4c6c8.png)
 
-   **Note:** You only need to add the private key (`id_25519` here) but if you want to be able to simply back up both your private and public key (myssh_key.pub) by backing up your KeePassXC database (\*.kdbx file) you can add that too.
+   **Note:** You only need to add the private key (`id_25519` here) but if you want to be able to simply back up both your private and public key (id_25519.pub) by backing up your KeePassXC database (\*.kdbx file) you can add that too.
 
 9. Enable "SSH Agent Integration" within the Application Settings.
 
