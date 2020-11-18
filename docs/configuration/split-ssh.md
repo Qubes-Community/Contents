@@ -373,6 +373,7 @@ In order to gain access to the vault VM, the attacker would require the use of, 
 ### Regarding Your SSH Private Key
 * This goes without saying but keep your private keys **private**. 
 * Typically you want your the permissions to your key-related files to be
+
     `.ssh` directory: `700 (drwx------)`<br/>
     public key (`id_ed25519.pub` file): `644 (-rw-r--r--)`<br/>
     private key (`id_ed25519`): `600 (-rw-------)`<br/>
