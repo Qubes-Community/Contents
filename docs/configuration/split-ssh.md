@@ -331,7 +331,7 @@ Theoretically, you can use any AppVM but to increase security it is advised to c
 
 ## Test Your Configuration
 
-1. Shutdown your vaultVM.
+1. Shutdown KeePassXC on your vault VM.
 
 2. Try fetching your identities on the SSH Client VM. 
 
@@ -343,9 +343,9 @@ Theoretically, you can use any AppVM but to increase security it is advised to c
 
     ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/adcd0c408226c24950d2c876a38d2fecad8aacea.png)
 
-Check if it returns `error fetching identities: communication with agent failed`
+Check if it returns `The agent has no identities.`
 
-4. Start your vaultVM and unlock your KeePassXC database.
+4. Launch KeePassXC and unlock your database.
 
 5. Try fetching your identities on the SSH Client VM. 
 
