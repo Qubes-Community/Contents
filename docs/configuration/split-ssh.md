@@ -139,33 +139,6 @@ With this configuration you'll be prompted for a password the first time you sta
 
 ## Setting Up VM Interconnection
 
-### In the TemplateVM to your vault VM:
-
-1. Create the file `qubes.SshAgent` in `/etc/qubes-rpc`
-
-   - Open the file with e.g. `nano`
-
-     ```shell_prompt
-     [user@fedora-32 ~]$ sudo nano /etc/qubes-rpc/qubes.SshAgent
-     ```
-
-   - Paste the following contents:
-
-     ```shell_prompt
-     #!/bin/sh
-     # Qubes App Split SSH Script
-     
-     # safeguard - Qubes notification bubble for each ssh request
-     notify-send "[`qubesdb-read /name`] SSH agent access from: $QREXEC_REMOTE_DOMAIN"
-     
-     # SSH connection
-     ncat -U $SSH_AUTH_SOCK
-     ```
-
-   - Save and exit.
-
-2. Shutdown the template VM.
-
 ### In `dom0`:
 
 1. Create the file `qubes.SshAgent` in `/etc/qubes-rpc`
@@ -199,6 +172,34 @@ With this configuration you'll be prompted for a password the first time you sta
    **Note:** There are many ways to fine-tune this policy. For more details see the [Qubes qrexec documentation][PolicyFilesQubesOS]. 
 
 2. Close the terminal. **Do not shutdown `dom0`.**
+
+### In the TemplateVM to your vault VM:
+
+1. Create the file `qubes.SshAgent` in `/etc/qubes-rpc`
+
+   - Open the file with e.g. `nano`
+
+     ```shell_prompt
+     [user@fedora-32 ~]$ sudo nano /etc/qubes-rpc/qubes.SshAgent
+     ```
+
+   - Paste the following contents:
+
+     ```shell_prompt
+     #!/bin/sh
+     # Qubes App Split SSH Script
+     
+     # safeguard - Qubes notification bubble for each ssh request
+     notify-send "[`qubesdb-read /name`] SSH agent access from: $QREXEC_REMOTE_DOMAIN"
+     
+     # SSH connection
+     ncat -U $SSH_AUTH_SOCK
+     ```
+
+   - Save and exit.
+
+2. Shutdown the template VM.
+
 
 ### In an SSH Client AppVM terminal
 
