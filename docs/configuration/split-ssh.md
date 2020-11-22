@@ -8,6 +8,12 @@ This way the compromise of the domain you use to connect to your remote server d
 
    ![diagram](https://raw.githubusercontent.com/santorihelix/qubes-splitssh-diagram/b7fb707e860e0de17b759ef09e35ce4a946d26ee/split-ssh5.svg)
 
+## Security Benefits
+
+In the setup described in this guide, even an attacker who manages to gain access to the `ssh-client`  VM will not be able to obtain the user’s private key since it is simply not there. 
+Rather, the private key remains in the `vault` VM, which is extremely unlikely to be compromised if nothing is ever copied or transferred into it. 
+In order to gain access to the vault VM, the attacker would require the use of, e.g., a general Xen VM escape exploit or a signed, compromised package which is already installed in the TemplateVM upon which the vault VM is based.
+
 ## Overview
 
 1. Make sure the TemplateVM you plan to use is up to date.
@@ -104,6 +110,8 @@ If you still want to encrypt your keys you must refer to the [Securing Your Priv
 
 ### In `dom0`:
 
+To control which VM is allowed as a client, which may act as the server and how we want this interaction to happen, we have to write a policy file for qrexec in `dom0`.
+
 1. Create and edit `/etc/qubes-rpc/qubes.SshAgent`.
 
    - Open the file with e.g. `nano`.
@@ -118,7 +126,7 @@ If you still want to encrypt your keys you must refer to the [Securing Your Priv
       ssh-client vault ask
       ```
 
-   - If you want to allow all VMs to connect, add the following line:
+   - If you want all of your VMs to potentially be an `ssh-client` or a `vault`, add the following line:
 
       ```shell_prompt
       @anyvm @anyvm ask
@@ -134,6 +142,8 @@ If you still want to encrypt your keys you must refer to the [Securing Your Priv
 
 
 ### In the Template of Your AppVM `vault`:
+
+We now need to write a small script that handles connection requests from `ssh-client` and forwards them to the SSH agent in your `vault`. As we are using qrexec as communication method we have to place it in a special location and have to name it just as the policy file we just created in `dom0`.
 
 1. Create and edit `/etc/qubes-rpc/qubes.SshAgent`.
 
@@ -158,8 +168,13 @@ If you still want to encrypt your keys you must refer to the [Securing Your Priv
 
 ### In the AppVM `ssh-client`
 
-Theoretically, you can use any AppVM but to increase security it is advised to create a dedicated AppVM for your SSH connections.
-Furthermore, you can set different firewall rules for each VM (i.e. for intranet and internet connections) which also provides additional protection.
+Theoretically, you can use SSH in any AppVM. 
+However, if you are considering split-SSH as an additional security layer it is probably reasonable to also think about which VMs you will be using SSH in.
+For instance, you might want a dedicated `admin` domain for these purposes. 
+Depending on how many systems you plan to access and where they are located, it could also be preferable to have different VMs with different firewall rules for Intranet and Internet administration.
+
+We want to make sure that our `ssh-client` is prepared to use split-ssh right after the VM has started. 
+Therefore, we add a script in `rc.local` (Which will run at VM startup) to listen for responses from `vault` and make SSH use this connection by modifying the user’s `.bashrc`.
 
 1. Edit `/rw/config/rc.local`.
 
@@ -206,14 +221,16 @@ Furthermore, you can set different firewall rules for each VM (i.e. for intranet
 
 ## Securing Your Private Key
 
-Although passwords wouldn't protect you against a full system compromise, it's possible for an adversary to gain read-only access to some of your files (e.g. file shares or offline backups of data) and not be able to modify anything. 
+Although passwords wouldn't protect you against a full system compromise (attacker could place a keylogger), it's possible for an adversary to gain read-only access to some of your files (e.g., file shares or offline backups of data). 
+This becomes even more likely if you plan to also use your data outside of Qubes and not be able to modify anything. 
 Passwords are advisable for mitigating these threats .
+
 You can either use the built-in password utility of your private key combined with a graphical prompt or prefer to use KeePassXC.
 Please note that since `ssh-askpass` prompt is displayed on `vault` VM boot, it is not possible to use both configurations simultaneously.
 
 ### Using the Built-in Password Utility and `ssh-askpass`
 
-1. Add a password to your private key with `ssh-keygen -p`. 
+1. Either add a password to an existing private key with `ssh-keygen -p` or directly create a key pair with a password (enter password when prompted during the creation process, see [above](#setting-up-ssh)).
 Note that the location and name of your private key may differ.
 
    ```
@@ -242,9 +259,11 @@ With this configuration you'll be prompted for entering your password every time
 
 ### Using [KeePassXC][KeePassXC]
 
-**Warning:** This part is for setting up *KeePassXC*, not KeePassX or KeePass. See the [KeePassXC FAQ][KeePassXC FAQ].
+**Note:** This part is for setting up *KeePassXC*, not KeePassX or KeePass. See the [KeePassXC FAQ][KeePassXC FAQ].
 
 KeePassXC should be installed by default in both Fedora and Debian TemplateVMs. If it’s not or you're using another template, you can [install it manually](https://www.qubes-os.org/doc/software-update-domu/#installing-software-in-templatevms).
+
+**A note on managing your Qubes domains:** You might already be using KeePassXC to store your passwords. This guide explains how to set up a new KeePass database and use it exclusively for SSH keys. However, it is also possible to mix your passwords and SSH keys in one big database. Others might have dedicated databases for different kinds of passwords, potentially even in different `vault` VMs. There is no right or wrong here.
 
 1. Add KeepasXC to the Applications menu of the newly created AppVM for ease of access and launch it.
 
@@ -293,13 +312,14 @@ Check the [KeePassXC User Guide][KeePassXC User Guide] for more information abou
 
     ![check integration status](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/2ef14b195947d2190306b500298379458d6194da.png)
 
-12. Open the entry you created and select your private key in the "SSH Agent" section.
+12. Open the entry you created and select your private key in the "SSH Agent" section. 
+Don't forget to also check the first two options.
 
     ![select private key](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/optimized/1X/0d19ae6f3545a154823a8b3f8c89d52f6e0d6b68_2_594x500.png)
 
 #### Testing the KeePassXC Setup
 
-1. Close your KeePassXC database and run `ssh-add -L`. It should return `The agent has no identities.`
+1. Close your KeePassXC database and run `ssh-add -L` in a `vault` VM terminal. It should return `The agent has no identities.`
 
    ```shell_prompt
    [user@vault ~]$ ssh-add -L
@@ -335,36 +355,11 @@ If you're getting an error (e.g. `error fetching identities: communication with 
 
 4. Launch KeePassXC and unlock your database.
 
-5. Try fetching your identities on the SSH Client VM. 
-
-   ```shell_prompt
-   [user@ssh-client ~]$ ssh-add -L
-   ```
-
-6. Allow operation execution.  (If you don't see the below prompt, check your VM interconnection setup.)
-
-   ![operation execution](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/37e62ebb62482d83d878e3481161c72f22ec801c.png)
+5. Repeat steps 1 and 2.
 
 Check if it returns `ssh-ed25519 <public key string>`
 
 If you're getting an error (e.g. `error fetching identities: communication with agent failed`), make sure your vault VM is running and check your VM interconnection setup.
-
-## Security Benefits
-
-In the setup described in this guide, even an attacker who manages to gain access to the `ssh-client`  VM will not be able to obtain the user’s private key since it is simply not there. 
-Rather, the private key remains in the `vault` VM, which is extremely unlikely to be compromised if nothing is ever copied or transferred into it. 
-In order to gain access to the vault VM, the attacker would require the use of, e.g., a general Xen VM escape exploit or a signed, compromised package which is already installed in the TemplateVM upon which the vault VM is based.
-
-## Further Security tips
-### Regarding Your SSH Private Key
-* This goes without saying: keep your private keys **private**. 
-* Tinkering with the user permissions is not necessary since it is assumed that an adversary who can find a Xen VM escape exploit is also capable of finding a user to root escalation exploit.
-
-### Regarding Your KeePassXC Database File
-Although the database file is encrpyted with your password, if you haven't taken any protective measures, it can be bruteforced. 
-Some tips for securing your keys against a `vault` compromise include: 
-* Hide the \*.kdbx file by simply renaming the file extension (e.g. \*.zip). Keep in mind this is not likely to stop dedicated adversaries from finding your \*.kdbx file. 
-* Adjust the encrpytion settings in KeePassXC as per the [KeePassXC documentation][KeePassXC User Guide].
 
 ## Current limitations
 
