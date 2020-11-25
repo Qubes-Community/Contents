@@ -55,6 +55,13 @@ xfconf-query -c xfce4-session -p /general/LockCommand -s "[command to start your
 
 Set an empty command to disable them.
 
+**Important Note**:  
+`xss-lock` continually requests a timeout (the one set via `xset s`) from the X server and if that timeout is hit,
+it executes `xflock4`, which in turn executes your screenlocker.  
+However any bug in `xss-lock` (e.g. [this one](https://bugs.archlinux.org/task/64771) or possibly even just a X server disconnect),
+may cause that trigger to _not_ happen. I.e. do **not** rely on that trigger for anything sensible, but use a keyboard screenlocker
+hotkey instead!
+
 ## Physlock
 
 [physlock](https://github.com/muennich/physlock) is an interesting screenlocker alternative as it simply uses the
