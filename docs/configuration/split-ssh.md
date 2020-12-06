@@ -6,7 +6,7 @@ This is done by using Qubes's [qrexec][qrexec] framework to connect a local SSH 
 This way the compromise of the domain you use to connect to your remote server does not allow the attacker to automatically also steal all your keys. 
 (We should make a rather obvious comment here that the so-often-used passphrases on private keys are pretty meaningless because the attacker can easily set up a simple backdoor which would wait until the user enters the passphrase and steal the key then.)
 
-   ![diagram](https://raw.githubusercontent.com/santorihelix/qubes-splitssh-diagram/main/deeplow-split-ssh.svg)
+   ![diagram](https://raw.githubusercontent.com/santorihelix/qubes-splitssh-diagram/main/split-ssh-keepassxc-8.svg)
 
 ## Security Benefits
 
@@ -24,7 +24,7 @@ In order to gain access to the vault VM, the attacker would require the use of, 
 
 ## Preparing your system
 
-- Make sure the templates you plan to base your AppVMs on are [up-to-date][update].
+Make sure the templates you plan to base your AppVMs on are [up-to-date][update].
 
 ## [Creating AppVMs][appvm create]
 
@@ -225,7 +225,7 @@ Although passwords wouldn't protect you against a full system compromise (attack
 This becomes even more likely if you plan to also use your data outside of Qubes and not be able to modify anything. 
 Passwords are advisable for mitigating these threats .
 
-You can either use the built-in password utility of your private key combined with a graphical prompt or prefer to use KeePassXC.
+You can either [use the built-in password utility](#using-the-built-in-password-utility) of your private key combined with a graphical prompt or prefer to [use KeePassXC](#using-keepassxc).
 Please note that since `ssh-askpass` prompt is displayed on `vault` VM boot, it is not possible to use both configurations simultaneously.
 
 ### Using the Built-in Password Utility and `ssh-askpass`
@@ -300,7 +300,7 @@ Check the [KeePassXC User Guide][KeePassXC User Guide] for more information abou
 
    ![adding keys](https://aws1.discourse-cdn.com/free1/uploads/qubes_os/original/1X/ff4a1197826ee69740251dbf8204d90b6cf4c6c8.png)
 
-   **Note:** Technically, you only need to add the private key (id_25519) for the following steps to work. If you add the public key here, too, you can later on backup your kdbx file and have everything in one place. You can even delete your keys (`id_25519` and `id_25519.pub`) from your file system if you like.
+   **Note:** Technically, you only need to add the private key (`id_25519`) for the following steps to work. If you add the public key here, too, you can later on backup your kdbx file and have everything in one place. You can even delete your keys (`id_25519` and `id_25519.pub`) from your file system if you like.
 
 9. Enable "SSH Agent Integration" within the Application Settings.
 
