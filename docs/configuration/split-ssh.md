@@ -263,7 +263,7 @@ With this configuration you'll be prompted for entering your password every time
 
 KeePassXC should be installed by default in both Fedora and Debian TemplateVMs. If it’s not or you're using another template, you can [install it manually](https://www.qubes-os.org/doc/software-update-domu/#installing-software-in-templatevms).
 
-**A note on managing your Qubes domains:** You might already be using KeePassXC to store your passwords. This guide explains how to set up a new KeePass database and use it exclusively for SSH keys. However, it is also possible to mix your passwords and SSH keys in one big database. Others might have dedicated databases for different kinds of passwords, potentially even in different `vault` VMs. There is no right or wrong here.
+**A note on managing your Qubes domains:** You might already be using KeePassXC to store your passwords. This guide explains how to set up a new KeePass database and use it exclusively for SSH keys. However, it is also possible to mix your passwords and SSH keys in one big database. Others might have dedicated databases for different kinds of passwords, potentially even in different `vault` VMs. There is no right or wrong here. Feel free to skip the first five steps if you want to use an existing database.
 
 1. Add KeepasXC to the Applications menu of the newly created AppVM for ease of access and launch it.
 
