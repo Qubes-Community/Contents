@@ -81,7 +81,7 @@ Do these concern you?
 
 ### Coreboot ###
 
-Cross reference [Coreboot](https://www.coreboot.org/Supported_Motherboards) capable systems with the [HCL](/doc/hcl).
+Cross reference [Coreboot](https://www.coreboot.org/Supported_Motherboards) capable systems with the [HCL](https://www.qubes-os.org/doc/hcl).
 See also the [board freedom index](https://www.coreboot.org/Board_freedom_levels).
 [Search the mailing list](https://www.mail-archive.com/qubes-users@googlegroups.com/) for additional reports.
 Flash your system with Coreboot, including [ME_Cleaner](https://github.com/corna/me_cleaner).

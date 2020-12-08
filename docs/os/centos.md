@@ -19,16 +19,16 @@ To switch, reinstall and uninstall a CentOS TemplateVM that is already installed
 
 #### After Installing
 
-After a fresh install, we recommend to [Update the TemplateVM](/doc/software-update-vm/).
+After a fresh install, we recommend to [Update the TemplateVM](https://www.qubes-os.org/doc/software-update-vm/).
 
 ## Want to contribute?
 
-*   [How can I contribute to the Qubes Project?](/doc/contributing/)
+*   [How can I contribute to the Qubes Project?](https://www.qubes-os.org/doc/contributing/)
 
-*   [Guidelines for Documentation Contributors](/doc/doc-guidelines/)
+*   [Guidelines for Documentation Contributors](https://www.qubes-os.org/doc/doc-guidelines/)
 
-[switch]: /doc/templates/#switching
-[reinstall]: /doc/reinstall-template/
-[uninstall]: /doc/templates/#uninstalling
-[Minimal TemplateVMs]: /doc/templates/minimal/
-[Xfce TemplateVMs]: /doc/templates/xfce/
+[switch]: https://www.qubes-os.org/doc/templates/#switching
+[reinstall]: https://www.qubes-os.org/doc/reinstall-template/
+[uninstall]: https://www.qubes-os.org/doc/templates/#uninstalling
+[Minimal TemplateVMs]: https://www.qubes-os.org/doc/templates/minimal/
+[Xfce TemplateVMs]: https://www.qubes-os.org/doc/templates/xfce/

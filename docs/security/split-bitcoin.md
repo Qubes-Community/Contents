@@ -47,6 +47,6 @@ Important Notes
   traditional physically air-gapped machines, these tools make it very easy to
   copy out public keys.
 
-[inter-VM clipboard]: /doc/copy-paste/
-[inter-VM file copy]: /doc/copying-files/
+[inter-VM clipboard]: https://www.qubes-os.org/doc/copy-paste/
+[inter-VM file copy]: https://www.qubes-os.org/doc/copying-files/
 

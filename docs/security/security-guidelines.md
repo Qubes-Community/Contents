@@ -14,20 +14,20 @@ Security Guidelines
 Without some active and responsible participation of the user, no real security is possible. Running Firefox inside of an AppVM does not automagically make it (or any other app) more secure. 
 Programs themselves remain just as secure [(or insecure)](https://en.wikipedia.org/wiki/Computer_insecurity) on Qubes as on a normal Linux or Windows OS. 
 What drastically changes is the context in which your applications are used. 
-[This context](/doc/qubes-architecture/) is a [responsibility of the user](/security/goals/). 
+[This context](https://www.qubes-os.org/doc/qubes-architecture/) is a [responsibility of the user](https://www.qubes-os.org/security/goals/). 
 But managing security in this context well requires knowledge of some new concepts and procedures. So it is worth stressing some basic items:
 
 Download Verification
 ---------------------
 
-**Verify the authenticity and integrity of your downloads, [particularly the Qubes iso](/security/verifying-signatures/).**
+**Verify the authenticity and integrity of your downloads, [particularly the Qubes iso](https://www.qubes-os.org/security/verifying-signatures/).**
 
 The internet is always a dangerous place. 
 While your connection to the Qubes website and download mirrors is encrypted, meaning that your downloads from here can't be modified by a third party en route, there is always the chance that these websites themselves have been compromised. 
 Signature verification allows us to validate for ourselves that these files were the ones authored and signed by their creators (in this case the Qubes development team). 
 
 Because it's so easy for a hacker who manages to tamper with the downloaded iso files this way to patch in malware, it is of the utmost importance that you **verify the signature of the Qubes iso** you use to install Qubes. 
-See the page on [Verifying Signatures](/security/verifying-signatures/) for more information and a tutorial on how to accomplish this.
+See the page on [Verifying Signatures](https://www.qubes-os.org/security/verifying-signatures/) for more information and a tutorial on how to accomplish this.
 
 Once you have Qubes installed, the standard program installation command for Fedora and Qubes repositories
 
@@ -79,7 +79,7 @@ qubes-hcl-report <userVM>
 
 where \<userVM\> is the name of the VM within which the report will be written (but the report will also be displayed in the Dom0 terminal). If it displays that VT-d is active, you should be able to assign **PCIe devices to an HVM** and **enjoy DMA protection** for your driver domains, so you successfully passed this step.
 
-If VT-d is not active, attempt to activate it by selecting the **VT-d flag** within the BIOS settings. If your processor/BIOS does not allow VT-d activation you still enjoy much better security than alternative systems, but you may be vulnerable to **DMA attacks**. Next time you buy a computer consult our **[HCL (Hardware Compatibility List)](/hcl/)** and possibly contribute to it.
+If VT-d is not active, attempt to activate it by selecting the **VT-d flag** within the BIOS settings. If your processor/BIOS does not allow VT-d activation you still enjoy much better security than alternative systems, but you may be vulnerable to **DMA attacks**. Next time you buy a computer consult our **[HCL (Hardware Compatibility List)](https://www.qubes-os.org/hcl/)** and possibly contribute to it.
 
 Updating Software
 -----------------
@@ -101,21 +101,21 @@ or use the equivalent items in Qubes Manager, which displays an icon when an upd
 Handling Untrusted Files
 ------------------------
 
-When you receive or download any file from an **untrusted source**, do not browse to it with a file manager which has preview enabled. Enabling previews in your file manager gives malware another attack vector. **To disable preview in Nautilus**: Gear (up-right-icon) -\> Preferences -\> Preview (tab) -\> Show thumbnails: Never. Note that this change can be made in a TemplateVM (including the [DispVM template](/doc/dispvm-customization/)) so that future AppVMs created from this TemplateVM will inherit this feature.
+When you receive or download any file from an **untrusted source**, do not browse to it with a file manager which has preview enabled. Enabling previews in your file manager gives malware another attack vector. **To disable preview in Nautilus**: Gear (up-right-icon) -\> Preferences -\> Preview (tab) -\> Show thumbnails: Never. Note that this change can be made in a TemplateVM (including the [DispVM template](https://www.qubes-os.org/doc/dispvm-customization/)) so that future AppVMs created from this TemplateVM will inherit this feature.
 
-Also, **do not open it in trusted VMs**. Rather, open it in a **disposable VM** right-clicking on it. You may even modify it within the disposable VM and then [copy it to other VM](/doc/copying-files/).
+Also, **do not open it in trusted VMs**. Rather, open it in a **disposable VM** right-clicking on it. You may even modify it within the disposable VM and then [copy it to other VM](https://www.qubes-os.org/doc/copying-files/).
 
 Alternatively PDFs may be converted to **trusted PDFs** by right clicking on them. This converts the PDF's text to graphic form, so the disk size these documents take up will increase.
 
 Anti Evil Maid
 --------------
 
-If there is a risk that somebody may gain **physical access** to your computer when you leave it powered down, or if you use Qubes in **dual boot mode**, then you may want to [install AEM](/doc/anti-evil-maid/) (Anti Evil Maid). AEM will inform you of any unauthorized modifications to your BIOS or boot partition. If AEM alerts you of an attack, it is really bad news because **there is no true fix**. If you are really serious about security, you will have to buy a new laptop and install Qubes from a trusted ISO. Buying a used laptop runs a higher risk of tampering and is not an option for a security focused environment.
+If there is a risk that somebody may gain **physical access** to your computer when you leave it powered down, or if you use Qubes in **dual boot mode**, then you may want to [install AEM](https://www.qubes-os.org/doc/anti-evil-maid/) (Anti Evil Maid). AEM will inform you of any unauthorized modifications to your BIOS or boot partition. If AEM alerts you of an attack, it is really bad news because **there is no true fix**. If you are really serious about security, you will have to buy a new laptop and install Qubes from a trusted ISO. Buying a used laptop runs a higher risk of tampering and is not an option for a security focused environment.
 
 Reassigning USB Controllers
 ---------------------------
 
-Before you [assign a USB controller to a VM](/doc/assigning-devices/), check if any **input devices** are included in that controller.
+Before you [assign a USB controller to a VM](https://www.qubes-os.org/doc/assigning-devices/), check if any **input devices** are included in that controller.
 
 Assigning a USB keyboard will **deprive Dom0 VM of a keyboard**. Since a USB controller assignment survives reboot, you may find yourself **unable to access your system**. Most non-Apple laptops have a PS/2 input for keyboard and mouse, so this problem does not exist.
 
@@ -129,19 +129,19 @@ It is preferable to avoid using **Bluetooth** if you travel or do not trust your
 
 Many laptops allow one to disable various hardware (Camera, BT, Mic, etc) **in BIOS**. This might or might not be a dependable way of getting rid of those devices, depending on how much you trust your BIOS vendor.
 
-If the VM will not start after you have assigned a USB controller, look at [this FAQ](/faq/#i-created-a-usbvm-and-assigned-usb-controllers-to-it-now-the-usbvm-wont-boot).
+If the VM will not start after you have assigned a USB controller, look at [this FAQ](https://www.qubes-os.org/faq/#i-created-a-usbvm-and-assigned-usb-controllers-to-it-now-the-usbvm-wont-boot).
 
 
 Creating and Using a USBVM
 --------------------------
 
-See [here](/doc/usb/).
+See [here](https://www.qubes-os.org/doc/usb/).
 
 
 Dom0 Precautions
 ----------------
 
-As explained [here](/getting-started/), dom0 should not be used for any user operations. There are several reasons for this:
+As explained [here](https://www.qubes-os.org/getting-started/), dom0 should not be used for any user operations. There are several reasons for this:
 
 1.  Secure isolation among domUs (i.e., AppVMs, StandaloneVMs, HVMs, etc.) is the *raison d'être* of Qubes. This is the primary reason that we recommend the delegation of all user activities to some number of AppVMs. In the event that any given VM is compromised, only that particular VM is compromised. (TemplateVMs are the exception to this. If a TemplateVM were compromised, then every AppVM based on it might also be compromised. Even in this case, however, the entire system would not necessarily have been compromised, since StandaloneVM(s), HVM(s), and/or multiple TemplateVMs might be in use.) By contrast, if dom0 were ever compromised, the entire system would thereby be compromised.
 2.  Due to the absence of convenience mechanisms in dom0 such as the inter-VM clipboard and inter-VM file copying, it is significantly less convenient to attempt to use dom0 for user operations (e.g., password management) in conjunction with AppVMs than it is to use another dedicated AppVM (e.g., a "vault" VM).
@@ -162,5 +162,5 @@ TemplateBasedVM Directories
    in other directories which *do* persist in this manner, you must make those
    changes in the parent TemplateVM.
    
- * See [here](/doc/templates) for more detail and version specific information.
+ * See [here](https://www.qubes-os.org/doc/templates) for more detail and version specific information.
  

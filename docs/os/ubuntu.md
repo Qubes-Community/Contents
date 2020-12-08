@@ -58,5 +58,5 @@ If you want to help in improving the template, feel free to [contribute][contrib
 
 [IP]: https://www.ubuntu.com/legal/terms-and-policies/intellectual-property-policy  
 [repo]: https://github.com/QubesOS/qubes-builder/blob/master/README.md
-[builder]: /doc/qubes-builder/
-[contrib]: /doc/contributing/
+[builder]: https://www.qubes-os.org/doc/qubes-builder/
+[contrib]: https://www.qubes-os.org/doc/contributing/

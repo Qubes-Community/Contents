@@ -13,10 +13,10 @@ Dark KDE in Dom0
 The following text describes how to change the default light theme to a dark theme. This is just an example, feel free to adjust the appearance to your taste.
 
 The image below shows the default light theme after installation.
-![begin light theme](/attachment/wiki/Dark-Theme/kde-fresh-installed-standard.png)
+![begin light theme](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-fresh-installed-standard.png)
 
 This is the result after applying the steps described here.
-![end result dark theme](/attachment/wiki/Dark-Theme/kde-end-result.png)
+![end result dark theme](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-end-result.png)
 
 1. Change `Workspace Appearance`
 
@@ -24,17 +24,17 @@ This is the result after applying the steps described here.
 
             Qubes Menu -> System Tools -> System Settings -> Workspace Appearance
 
-        ![Workspace Appearance](/attachment/wiki/Dark-Theme/kde-app-appearance-menu-style.png)
+        ![Workspace Appearance](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-app-appearance-menu-style.png)
 
     2. Go to `Desktop Theme`
 
-        ![Desktop Menu](/attachment/wiki/Dark-Theme/kde-appearance-settings-desktop-theme-oxygen.png)
+        ![Desktop Menu](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-appearance-settings-desktop-theme-oxygen.png)
 
     3. Select `Oxygen` and `Apply` the change
 
 2. (Optional) Remove blue glowing task items
 
-    ![blue glowing task bar items](/attachment/wiki/Dark-Theme/kde-taskbar-blue-glowing-border.png)
+    ![blue glowing task bar items](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-taskbar-blue-glowing-border.png)
 
     1. Adjust Oxygen `Details`
 
@@ -44,11 +44,11 @@ This is the result after applying the steps described here.
 
     3. Change `Theme Item -> Task Items` from `Oxygen Task Items` to `Air Task Items`
 
-        ![Change Task items look](/attachment/wiki/Dark-Theme/kde-desktop-theme-details.png)
+        ![Change Task items look](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-desktop-theme-details.png)
 
     4. Apply changes
 
-        ![task bar items blue glowing removed](/attachment/wiki/Dark-Theme/kde-taskbar-blue-glowing-removed.png)
+        ![task bar items blue glowing removed](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-taskbar-blue-glowing-removed.png)
 
 3. Change `Application Appearance`
 
@@ -58,17 +58,17 @@ This is the result after applying the steps described here.
 
     2. Go to `Colors`
 
-        ![colors tab](/attachment/wiki/Dark-Theme/kde-app-appearance-menu-colors.png)
+        ![colors tab](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-app-appearance-menu-colors.png)
 
     3. Select `Obsidian Coast`
 
-        ![set to Obsidian Coast](/attachment/wiki/Dark-Theme/kde-app-appearance-menu-colors-set.png)
+        ![set to Obsidian Coast](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-app-appearance-menu-colors-set.png)
 
     4. Apply Changes
 
             Qubes VM Manager should now look like the image below.
 
-        ![result black Qubes Manager](/attachment/wiki/Dark-Theme/kde-black-qubes-manager.png)
+        ![result black Qubes Manager](https://www.qubes-os.org/attachment/wiki/Dark-Theme/kde-black-qubes-manager.png)
 
 **Note:** Changing the `Window Decorations` from `Plastik for Qubes` will remove the border color and the VM name. The problem with `Plastik for Qubes` is that it does not overwrite the background and text color for Minimize, Maximize and Close buttons. The three buttons are therefore hard to read.
 
@@ -78,10 +78,10 @@ Dark XCFE in Dom0
 The following text describes how to change the default light theme to a dark theme. This is just an example, feel free to adjust the appearance to your taste.
 
 The image below shows the default light theme after installation.
-![begin light theme](/attachment/wiki/Dark-Theme/xfce-fresh-installed.png)
+![begin light theme](https://www.qubes-os.org/attachment/wiki/Dark-Theme/xfce-fresh-installed.png)
 
 This is the result after applying the steps described here.
-![end result dark theme](/attachment/wiki/Dark-Theme/xfce-end-result.png)
+![end result dark theme](https://www.qubes-os.org/attachment/wiki/Dark-Theme/xfce-end-result.png)
 
 1. Change Appearance
 
@@ -89,7 +89,7 @@ This is the result after applying the steps described here.
 
             Qubes Menu -> System Tools -> Appearance
 
-        ![appearance dialog](/attachment/wiki/Dark-Theme/xfce-appearance-dialog.png)
+        ![appearance dialog](https://www.qubes-os.org/attachment/wiki/Dark-Theme/xfce-appearance-dialog.png)
 
     2. Change Style to `Albatross`
 
@@ -101,7 +101,7 @@ This is the result after applying the steps described here.
 
             Qubes Menu -> System Tools -> Appearance
 
-        ![window manager dialog](/attachment/wiki/Dark-Theme/xfce-window-manager-theme.png)
+        ![window manager dialog](https://www.qubes-os.org/attachment/wiki/Dark-Theme/xfce-window-manager-theme.png)
 
     2. Change the Theme in the `Style` Tab (e. g. Defcon-IV). All available themes work.
 
@@ -140,7 +140,7 @@ The advantage of creating a dark themed Template VM is, that each AppVM which is
 
     2. Select `Tweak Tool` and press the `>` button to add it
 
-        ![Application Dialog](/attachment/wiki/Dark-Theme/dialog-add-gnome-tweak-tool.png)
+        ![Application Dialog](https://www.qubes-os.org/attachment/wiki/Dark-Theme/dialog-add-gnome-tweak-tool.png)
 
 5. Enable `Global Dark Theme`
 
@@ -153,7 +153,7 @@ The advantage of creating a dark themed Template VM is, that each AppVM which is
 
     2. Start `Tweak Tool` from the VM application menu and set the `Global Dark Theme` switch to `on`
 
-        ![Global Dark Theme enabled](/attachment/wiki/Dark-Theme/gnome-tweak-tool.png)
+        ![Global Dark Theme enabled](https://www.qubes-os.org/attachment/wiki/Dark-Theme/gnome-tweak-tool.png)
 
 6. *(Optional)* Modify Firefox
 

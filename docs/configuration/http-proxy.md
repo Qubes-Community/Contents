@@ -153,4 +153,4 @@ This guide was initially written by Igor Bukanov in a [message] to the `qubes-de
 
 [archive]: https://groups.google.com/group/qubes-devel/attach/39c95d63fccca12b/proxy.tar.gz?part=0.1
 [message]: https://groups.google.com/d/msg/qubes-devel/UlK8P27UtD4/K6HM_GNdyTkJ
-[mailing list]: /mailing-lists/
+[mailing list]: https://www.qubes-os.org/mailing-lists/

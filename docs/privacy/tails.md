@@ -16,7 +16,7 @@ Despite this, in case that method becomes cumbersome, Tails can be used inside v
 
 To run Tails under Qubes:
 
-1.  Read about [creating and using HVM qubes](/doc/hvm/)
+1.  Read about [creating and using HVM qubes](https://www.qubes-os.org/doc/hvm/)
 
 2.  Download and verify Tails from [https://tails.boum.org](https://tails.boum.org) in a qube, (saved as `/home/user/Downloads/tails.iso` on qube "isoVM" for purposes of this guide).
 
@@ -48,7 +48,7 @@ To run Tails under Qubes:
 7.  Use Tails as normal.
 
 ## Security
-You will probably want to implement [MAC spoofing](/doc/anonymizing-your-mac-address/).
+You will probably want to implement [MAC spoofing](https://www.qubes-os.org/doc/anonymizing-your-mac-address/).
 
 There are added security concerns for Tails users when running it in a virtual machine.
 If you intend to do this, you should read [the warnings](https://tails.boum.org/doc/advanced_topics/virtualization/) from the Tails team about it.
@@ -58,5 +58,5 @@ Depending on your threat model, this might induce too much risk.
 
 ## Troubleshooting
 
-See the [Tails Troubleshooting guide](/doc/tails-troubleshooting/).
+See the [Tails Troubleshooting guide](https://www.qubes-os.org/doc/tails-troubleshooting/).
 

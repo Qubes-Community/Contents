@@ -19,17 +19,17 @@ To switch, reinstall and uninstall a Gentoo TemplateVM that is already installed
 
 #### After Installing
 
-After a fresh install, we recommend to [Update the TemplateVM](/doc/software-update-vm/). We highlight that the template memory/CPU allocation certainly need to be adjusted in some cases. As Gentoo is a *linux source distribution*, the template needs resources to perform updates or installing any packages. By default, each TemplateVM has *2 VCPUs* for *4000 MB Max memory* allocated. If needed, double those values, *4 VCPUs* for *8000 MB Max memory*. For example, it has been observed failing updates or builds with *4 VCPUs* for *4000 MB Max memory* due to out of memory issue. For more general considerations, we refer to the official [Gentoo Handbook].
+After a fresh install, we recommend to [Update the TemplateVM](https://www.qubes-os.org/doc/software-update-vm/). We highlight that the template memory/CPU allocation certainly need to be adjusted in some cases. As Gentoo is a *linux source distribution*, the template needs resources to perform updates or installing any packages. By default, each TemplateVM has *2 VCPUs* for *4000 MB Max memory* allocated. If needed, double those values, *4 VCPUs* for *8000 MB Max memory*. For example, it has been observed failing updates or builds with *4 VCPUs* for *4000 MB Max memory* due to out of memory issue. For more general considerations, we refer to the official [Gentoo Handbook].
 
 ## Want to contribute?
 
-*   [How can I contribute to the Qubes Project?](/doc/contributing/)
+*   [How can I contribute to the Qubes Project?](https://www.qubes-os.org/doc/contributing/)
 
-*   [Guidelines for Documentation Contributors](/doc/doc-guidelines/)
+*   [Guidelines for Documentation Contributors](https://www.qubes-os.org/doc/doc-guidelines/)
 
-[switch]: /doc/templates/#switching
-[reinstall]: /doc/reinstall-template/
-[uninstall]: /doc/templates/#uninstalling
-[Minimal TemplateVMs]: /doc/templates/minimal/
-[Xfce TemplateVMs]: /doc/templates/xfce/
+[switch]: https://www.qubes-os.org/doc/templates/#switching
+[reinstall]: https://www.qubes-os.org/doc/reinstall-template/
+[uninstall]: https://www.qubes-os.org/doc/templates/#uninstalling
+[Minimal TemplateVMs]: https://www.qubes-os.org/doc/templates/minimal/
+[Xfce TemplateVMs]: https://www.qubes-os.org/doc/templates/xfce/
 [Gentoo Handbook]: https://wiki.gentoo.org/wiki/Handbook:AMD64

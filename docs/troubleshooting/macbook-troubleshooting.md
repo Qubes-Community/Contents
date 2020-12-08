@@ -58,7 +58,7 @@ After following the above steps, you should be able to launch sys-net with Wi-Fi
 
 ### Qubes 4.0
 
-For Qubes 4.0, you may have to remove the wireless card from sys-net or replace it, as described in the [PCI Troubleshooting](/doc/pci-troubleshooting/#broadcom-bcm43602-wi-fi-card-causes-system-freeze) guide. 
+For Qubes 4.0, you may have to remove the wireless card from sys-net or replace it, as described in the [PCI Troubleshooting](https://www.qubes-os.org/doc/pci-troubleshooting/#broadcom-bcm43602-wi-fi-card-causes-system-freeze) guide. 
 
 It is a bit tricky to execute, but you may be able to successfully attach a Broadcom BCM43602 to sys-net by executing the `attach` command immediately after starting sys-net. Follow these steps:
 
@@ -161,12 +161,12 @@ You can install Qubes 3.2 on a MacBook Pro Retina, 15 inch, Mid-2015 (MacBookPro
 
 ## Can't boot using GRUB2
 
-After installing Qubes 3.2 on a MacBook Mid-2015, you may be unable to boot using `EFI/qubes/xen.efi` because the [XEN bootloader configuration is broken](/doc/macbook-troubleshooting/#cant-boot-using-xen-bootloader).
+After installing Qubes 3.2 on a MacBook Mid-2015, you may be unable to boot using `EFI/qubes/xen.efi` because the [XEN bootloader configuration is broken](https://www.qubes-os.org/doc/macbook-troubleshooting/#cant-boot-using-xen-bootloader).
 You can't also boot using GRUB2 without XEN support because the GRUB configuration is broken as well. 
 
 To start fixing this issue manually, switch to the console by pressing Fn+CTRL+ALT+F2.
 
-It can be very useful – during troubleshooting – to have a rescue system at hand. It could help you boot Qubes, even without XEN support. This troubleshoot assumes you are performing a [UEFI boot, using rEFInd](/doc/macbook-troubleshooting/#cant-boot-the-installer).
+It can be very useful – during troubleshooting – to have a rescue system at hand. It could help you boot Qubes, even without XEN support. This troubleshoot assumes you are performing a [UEFI boot, using rEFInd](https://www.qubes-os.org/doc/macbook-troubleshooting/#cant-boot-the-installer).
 
 At this point, the GRUB configuration file is using some wrong commands, which are not compatible with grub2-efi
 
@@ -192,7 +192,7 @@ Then press "e", edit `grub.cfg` and boot by pressing Fn+F10.
 
 ## Can't boot using XEN bootloader
 
-You may be unable to boot Qubes 3.2 using `EFI/qubes/xen.efi` on a MacBook Mid-2015 because the XEN bootloader configuration is broken. This issue is accompanied by the GRUB2 configuration being broken as well. After [fixing the GRUB configuration](/doc/macbook-troubleshooting/#cant-boot-using-grub2), follow the following steps to fix the bootloader. This troubleshoot assumes you are performing a [UEFI boot, using rEFInd](/doc/macbook-troubleshooting/#cant-boot-the-installer).
+You may be unable to boot Qubes 3.2 using `EFI/qubes/xen.efi` on a MacBook Mid-2015 because the XEN bootloader configuration is broken. This issue is accompanied by the GRUB2 configuration being broken as well. After [fixing the GRUB configuration](https://www.qubes-os.org/doc/macbook-troubleshooting/#cant-boot-using-grub2), follow the following steps to fix the bootloader. This troubleshoot assumes you are performing a [UEFI boot, using rEFInd](https://www.qubes-os.org/doc/macbook-troubleshooting/#cant-boot-the-installer).
 
 *  Fix grub2 configuration, which uses wrong command for EFI boot
 *  Analyzing `/mnt/sysimage/var/log/anaconda/program.log`, you may find the faulty commands issued by the Anaconda installer.

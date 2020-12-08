@@ -56,10 +56,10 @@ Always obtain a trusted key fingerprint via other channels, and always check any
 
 -----
 
-[qubes-verifying-signatures]: /security/verifying-signatures/
+[qubes-verifying-signatures]: https://www.qubes-os.org/security/verifying-signatures/
 [Signal]: https://whispersystems.org/
 [signal-wikipedia]: https://en.wikipedia.org/wiki/Signal_(software)
 [shortcut]: https://support.whispersystems.org/hc/en-us/articles/216839277-Where-is-Signal-Desktop-on-my-computer-
-[shortcut-desktop]: /doc/managing-appvm-shortcuts/#tocAnchor-1-1-1
+[shortcut-desktop]: https://www.qubes-os.org/doc/managing-appvm-shortcuts/#tocAnchor-1-1-1
 [message]: https://groups.google.com/d/msg/qubes-users/rMMgeR-KLbU/XXOFri26BAAJ
-[mailing list]: /support/
+[mailing list]: https://www.qubes-os.org/support/

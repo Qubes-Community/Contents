@@ -11,7 +11,7 @@ redirect_from:
 Postfix
 =======
 
-Postfix is full featured MTA (Message Transfer Agent). Here we will configure it in smarthost mode as part of common [Mutt](/doc/mutt/)+Postfix+[Fetchmail](/doc/fetchmail/) stack.
+Postfix is full featured MTA (Message Transfer Agent). Here we will configure it in smarthost mode as part of common [Mutt](https://www.qubes-os.org/doc/mutt/)+Postfix+[Fetchmail](https://www.qubes-os.org/doc/fetchmail/) stack.
 
 Installation
 ------------

@@ -23,7 +23,7 @@ These are mostly USB audio cards, but firewire devices also might be used.
 Implementing external audio devices
 -----------------------------------
 
-First you need to identify an user VM dedicated to audio and [assign a device](/doc/AssigningDevices) to it.
+First you need to identify an user VM dedicated to audio and [assign a device](https://www.qubes-os.org/doc/AssigningDevices) to it.
 In the most common case the assigned device is the USB controller to which your USB audio card will be connected.
 
 ### Fedora VMs

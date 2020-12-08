@@ -10,7 +10,7 @@ This section provides user suggested tips that aim to increase Qubes OS usabilit
 
 Opening links in your preferred AppVM
 -------------------------------------
-To increase both security and usability you can set an AppVM so that it automatically opens any link in an different AppVM of your choice. You can do this for example in the email AppVM, in this way you avoid to make mistakes like opening links in it. To learn more you can check [security guidelines](/doc/security-guidelines/) and [security goals](/security/goals/).
+To increase both security and usability you can set an AppVM so that it automatically opens any link in an different AppVM of your choice. You can do this for example in the email AppVM, in this way you avoid to make mistakes like opening links in it. To learn more you can check [security guidelines](https://www.qubes-os.org/doc/security-guidelines/) and [security goals](https://www.qubes-os.org/security/goals/).
 
 The command `qvm-open-in-vm` lets you open a document or a URL in another VM. It takes two parameters: vmname and filename.
 
@@ -44,7 +44,7 @@ Credit: [Micah Lee](https://micahflee.com/2016/06/qubes-tip-opening-links-in-you
 
 Preventing data leaks
 ---------------------
-First make sure to read [Understanding and Preventing Data Leaks](/doc/data-leaks/) section to understand the limits of this tip.
+First make sure to read [Understanding and Preventing Data Leaks](https://www.qubes-os.org/doc/data-leaks/) section to understand the limits of this tip.
 
 Suppose that you have within a not so trusted environment - for example, a Windows VM - an application that tracks and reports its usage, or you simply want to protect your data.
 

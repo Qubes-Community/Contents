@@ -39,7 +39,7 @@ Select the connection to randomize and click Edit.
 
 Select the Cloned MAC Address drop down and set to Random or Stable.
 Stable will generate a random address that persists until reboot, while Random will generate an address each time a link goes up.
-![Edit Connection](/attachment/wiki/RandomizeMAC/networkmanager-mac-random.png)
+![Edit Connection](https://www.qubes-os.org/attachment/wiki/RandomizeMAC/networkmanager-mac-random.png)
 
 Save the change and reconnect the connection (click on Network Manager tray icon and click disconnect under the connection, it should automatically reconnect).
 
@@ -114,4 +114,4 @@ exit 0
 ```
 Assuming that you're using `sys-net` as your network VM, your `sys-net` hostname should now be `PC-[number]` with a different `[number]` each time your `sys-net` is started.
 
-Please note that the above script should _not_ be added to [/rw/config/rc.local](/doc/config-files/)) as that is executed only _after_ the network fully started.
+Please note that the above script should _not_ be added to [/rw/config/rc.local](https://www.qubes-os.org/doc/config-files/)) as that is executed only _after_ the network fully started.

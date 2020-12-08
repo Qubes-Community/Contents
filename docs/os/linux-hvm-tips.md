@@ -14,7 +14,7 @@ Tips for Linux in HVM domain
 How to fix bootup kernel error 
 -------------------------------
 
-If the HVM pauses on boot and shows a series of warnings, visit [HVM Troubleshooting](/doc/hvm-troubleshooting/#hvm-pauses-on-boot-followed-by-kernel-error) for a fix. 
+If the HVM pauses on boot and shows a series of warnings, visit [HVM Troubleshooting](https://www.qubes-os.org/doc/hvm-troubleshooting/#hvm-pauses-on-boot-followed-by-kernel-error) for a fix. 
 
 Screen resolution
 -----------------

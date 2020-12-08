@@ -21,7 +21,7 @@ Support for newer cards is limited until AMDGPU support in the 4.5+ kernel, whic
 Built in Intel graphics, Radeon graphics (between that 4000-9000 range), and perhaps some prebaked NVIDIA card support that I don't know about. Those are your best bet for great Qubes support.
 
 If you do happen to get proprietary drivers working on your Qubes system (via installing them), please take the time to go to the 
-[Hardware Compatibility List (HCL)](/doc/hcl/#generating-and-submitting-new-reports )
+[Hardware Compatibility List (HCL)](https://www.qubes-os.org/doc/hcl/#generating-and-submitting-new-reports )
 Add your computer, graphics card, and installation steps you did to get everything working.
 
 Before continuing, you may wish to try the `kernel-latest` package from the `current` repository. This kernel may better support your card and if so, you would not have to rely on proprietary drivers. This can be installed from dom0 with:
@@ -75,7 +75,7 @@ Reboot.
 
 This process is quite complicated: First - download the source from nvidia.com site. Here "NVIDIA-Linux-x86\_64-260.19.44.run" is used. Copy it to dom0. Every next step is done in dom0.
 
-See [this page](/doc/copy-to-dom0/) for instructions on how to transfer files to Dom0 (where there is normally no networking).
+See [this page](https://www.qubes-os.org/doc/copy-to-dom0/) for instructions on how to transfer files to Dom0 (where there is normally no networking).
 
 **WARNING**: Nvidia doesn't sign their files. To make it worse, you are forced to download them over a plaintext connection. This means there are virtually dozens of possibilities for somebody to modify this file and provide you with a malicious/backdoored file. You should realize that installing untrusted files into your Dom0 is a bad idea. Perhaps it might be a better idea to just get a new laptop with integrated Intel GPU? You have been warned.
 
@@ -137,5 +137,5 @@ Reboot to verify all this works.
 
 ## Troubleshooting lack of video output during installation
 
-The GRUB menu may show up fine, the installation environment starts loading, and then the display(s) go into standby mode. This is, typically, related to some sort of an issue with the kernel's KMS/video card modules. See the [Nvidia Troubleshooting](/doc/nvidia-troubleshooting/#lack-of-video-output-during-nvidia-driver-installation) guide for troubleshooting steps. 
+The GRUB menu may show up fine, the installation environment starts loading, and then the display(s) go into standby mode. This is, typically, related to some sort of an issue with the kernel's KMS/video card modules. See the [Nvidia Troubleshooting](https://www.qubes-os.org/doc/nvidia-troubleshooting/#lack-of-video-output-during-nvidia-driver-installation) guide for troubleshooting steps. 
 
