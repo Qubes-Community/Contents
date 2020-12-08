@@ -39,7 +39,7 @@ Select the connection to randomize and click Edit.
 
 Select the Cloned MAC Address drop down and set to Random or Stable.
 Stable will generate a random address that persists until reboot, while Random will generate an address each time a link goes up.
-![Edit Connection](https://www.qubes-os.org/attachment/wiki/RandomizeMAC/networkmanager-mac-random.png)
+![Edit Connection](/attachment/wiki/RandomizeMAC/networkmanager-mac-random.png)
 
 Save the change and reconnect the connection (click on Network Manager tray icon and click disconnect under the connection, it should automatically reconnect).
 

@@ -48,11 +48,11 @@ Set up a ProxyVM as a VPN gateway using NetworkManager
 
 1. Create a new VM, name it, click the ProxyVM radio button, and choose a color and template.
 
-   ![Create\_New\_VM.png](https://www.qubes-os.org/attachment/wiki/VPN/Create_New_VM.png)
+   ![Create\_New\_VM.png](/attachment/wiki/VPN/Create_New_VM.png)
 
 2. Add the `network-manager` service to this new VM.
 
-   ![Settings-services.png](https://www.qubes-os.org/attachment/wiki/VPN/Settings-services.png)
+   ![Settings-services.png](/attachment/wiki/VPN/Settings-services.png)
 
 3. Set up your VPN as described in the NetworkManager documentation linked above.
 
@@ -92,7 +92,7 @@ Set up a ProxyVM as a VPN gateway using NetworkManager
 
 6. Configure your AppVMs to use the new VM as a NetVM.
 
-   ![Settings-NetVM.png](https://www.qubes-os.org/attachment/wiki/VPN/Settings-NetVM.png)
+   ![Settings-NetVM.png](/attachment/wiki/VPN/Settings-NetVM.png)
 
 7. Optionally, you can install some [custom icons](https://github.com/Zrubi/qubes-artwork-proxy-vpn) for your VPN
 
@@ -107,7 +107,7 @@ Before proceeding, you will need to download a copy of your VPN provider's confi
 
 1. Create a new VM, name it, choose "provides network", and choose a color and template.
 
-   ![Create\_New\_VM.png](https://www.qubes-os.org/attachment/wiki/VPN/Create_New_VM.png)
+   ![Create\_New\_VM.png](/attachment/wiki/VPN/Create_New_VM.png)
 
    Note: Do not enable NetworkManager in the ProxyVM, as it can interfere with the scripts' DNS features.
    If you enabled NetworkManager or used other methods in a previous attempt, do not re-use the old ProxyVM...
@@ -310,7 +310,7 @@ Usage
 
 Configure your AppVMs to use the VPN VM as a NetVM...
 
-![Settings-NetVM.png](https://www.qubes-os.org/attachment/wiki/VPN/Settings-NetVM.png)
+![Settings-NetVM.png](/attachment/wiki/VPN/Settings-NetVM.png)
 
 If you want to update your TemplateVMs through the VPN, you can enable the `qubes-updates-proxy` service for your new VPN VM and configure the [qubes-rpc policy](https://www.qubes-os.org/doc/software-update-domu/#updates-proxy).
 

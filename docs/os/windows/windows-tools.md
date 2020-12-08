@@ -184,7 +184,7 @@ Once you start a Windows-based AppVM with Qubes Tools installed, you can easily 
 qvm-run -a my-win7-appvm explorer.exe
 ~~~
 
-![windows-seamless-4.png](https://www.qubes-os.org/attachment/wiki/WindowsAppVms/windows-seamless-4.png) ![windows-seamless-1.png](https://www.qubes-os.org/attachment/wiki/WindowsAppVms/windows-seamless-1.png)
+![windows-seamless-4.png](/attachment/wiki/WindowsAppVms/windows-seamless-4.png) ![windows-seamless-1.png](/attachment/wiki/WindowsAppVms/windows-seamless-1.png)
 
 Also, the inter-VM services work as usual -- e.g. to request opening a document or URL in the Windows AppVM from another VM:
 
@@ -202,7 +202,7 @@ Inter-VM file copy and clipboard works for Windows AppVMs the same way as for Li
 
 To simulate CTRL-ALT-DELETE in the HVM (SAS, Secure Attention Sequence), press Ctrl-Alt-Home while having any window of this VM in the foreground.
 
-![windows-seamless-7.png](https://www.qubes-os.org/attachment/wiki/WindowsAppVms/windows-seamless-7.png)
+![windows-seamless-7.png](/attachment/wiki/WindowsAppVms/windows-seamless-7.png)
 
 Changing between seamless and full desktop mode
 -----------------------------------------------
@@ -303,7 +303,7 @@ Debug and Verbose levels can generate large volume of logs and are intended for 
 
 To override global settings for a specific component, create a new key under the root key mentioned above and name it as the executable name, without `.exe` extension. For example, to change qrexec-agent's log level to Debug, set it like this:
 
-![qtw-log-level.png](https://www.qubes-os.org/attachment/wiki/WindowsTools/qtw-log-level.png)
+![qtw-log-level.png](/attachment/wiki/WindowsTools/qtw-log-level.png)
 
 Component-specific settings currently available:
 
