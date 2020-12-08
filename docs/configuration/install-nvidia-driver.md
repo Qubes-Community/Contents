@@ -1,12 +1,3 @@
----
-layout: doc
-title: How to Install an Nvidia Driver
-permalink: /doc/install-nvidia-driver/
-redirect_from:
-- /en/doc/install-nvidia-driver/
-- /doc/InstallNvidiaDriver/
-- /wiki/InstallNvidiaDriver/
----
 
 # Nvidia proprietary driver installation
 

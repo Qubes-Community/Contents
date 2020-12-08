@@ -1,8 +1,3 @@
----
-layout: doc
-title: Removing TemplateVM Packages
-permalink: /doc/removing-templatevm-packages/
----
 
 # Removing TemplateVM Packages
 When removing any packages from a default TemplateVM, be sure to check what's being removed by `apt autoremove` or `dnf`. 

@@ -1,9 +1,3 @@
----
-layout: doc
-title: Windows Template Customization
-permalink: /doc/windows-template-customization/
-redirect_from: /en/doc/windows-template-customization/
----
 
 Disable/Uninstall unnecessary features/services
 =============================

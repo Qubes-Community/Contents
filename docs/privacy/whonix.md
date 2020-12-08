@@ -1,22 +1,3 @@
----
-layout: doc
-title: Whonix for Privacy & Anonymity
-permalink: /doc/whonix/
-redirect_from:
-- /doc/privacy/whonix/
-- /doc/templates/whonix/
-- /en/doc/templates/whonix/
-- /doc/Templates/Whonix/
-- /wiki/Templates/Whonix/
-- /doc/whonix/customize/
-- /doc/privacy/customizing-whonix/
-- /doc/whonix/install/
-- /doc/privacy/install-whonix/
-- /doc/whonix/uninstall/
-- /doc/privacy/uninstall-whonix/
-- /doc/whonix/update/
-- /doc/privacy/updating-whonix/
----
 
 Whonix for Privacy & Anonymity
 ==============================

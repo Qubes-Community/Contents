@@ -1,8 +1,3 @@
----
-layout: doc
-title: Multibooting
-permalink: /doc/multiboot/
----
 
 Multibooting Qubes 
 ========================================

@@ -1,8 +1,3 @@
----
-layout: doc
-title: Changing your Time Zone
-permalink: /doc/change-time-zone/
----
 
 # Changing your Time Zone #
 

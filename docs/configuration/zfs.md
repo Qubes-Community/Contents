@@ -1,12 +1,3 @@
----
-layout: doc
-title: ZFS
-permalink: /doc/zfs/
-redirect_from:
-- /en/doc/zfs/
-- /doc/ZFS/
-- /wiki/ZFS/
----
 
 ZFS in Qubes
 ============

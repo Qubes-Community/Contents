@@ -1,8 +1,3 @@
----
-layout: doc
-title: Apple MacBook Troubleshooting
-permalink: /doc/macbook-troubleshooting/
----
 
 # Apple MacBook Troubleshooting
 

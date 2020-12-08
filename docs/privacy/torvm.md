@@ -1,14 +1,3 @@
----
-layout: doc
-title: TorVM
-permalink: /doc/torvm/
-redirect_from:
-- /doc/privacy/torvm/
-- /en/doc/torvm/
-- /doc/TorVM/
-- /doc/UserDoc/TorVM/
-- /wiki/UserDoc/TorVM/
----
 
 Known issues:
 -------------

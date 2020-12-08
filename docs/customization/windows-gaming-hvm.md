@@ -1,8 +1,3 @@
----
-layout: doc
-title: Windows gaming hvm
-permalink: /doc/windows-gaming-hvm/
----
 
 # Windows gaming HVM
 

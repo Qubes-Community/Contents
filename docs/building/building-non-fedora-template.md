@@ -1,12 +1,3 @@
----
-layout: doc
-title: Building Non-Fedora Template
-permalink: /doc/building-non-fedora-template/
-redirect_from:
-- /en/doc/building-non-fedora-template/
-- /doc/BuildingNonFedoraTemplate/
-- /wiki/BuildingNonFedoraTemplate/
----
 
 Building a TemplateVM for a new OS
 ==============================================================

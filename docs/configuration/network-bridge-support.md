@@ -1,12 +1,3 @@
----
-layout: doc
-title: Network Bridge Support
-permalink: /doc/network-bridge-support/
-redirect_from:
-- /en/doc/network-bridge-support/
-- /doc/NetworkBridgeSupport/
-- /wiki/NetworkBridgeSupport/
----
 
 Network Bridge Support (EXPERIMENTAL and UNSUPPORTED)
 =====================================================

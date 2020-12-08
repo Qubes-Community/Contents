@@ -1,10 +1,3 @@
----
-layout: doc
-title: Anonymizing your MAC Address
-permalink: /doc/anonymizing-your-mac-address/
-redirect_from:
-- /doc/randomizing-your-mac-address/
----
 
 Anonymizing your MAC Address
 ============================

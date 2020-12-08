@@ -1,12 +1,3 @@
----
-layout: doc
-title: Mutt
-permalink: /doc/mutt/
-redirect_from:
-- /en/doc/mutt/
-- /doc/Mutt/
-- /wiki/Mutt/
----
 
 Mutt
 ====

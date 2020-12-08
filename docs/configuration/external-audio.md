@@ -1,12 +1,3 @@
----
-layout: doc
-title: External Audio
-permalink: /doc/external-audio/
-redirect_from:
-- /en/doc/external-audio/
-- /doc/ExternalAudio/
-- /wiki/ExternalAudio/
----
 
 Using External Audio Devices
 ============================

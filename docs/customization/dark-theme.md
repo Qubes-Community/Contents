@@ -1,8 +1,3 @@
----
-layout: doc
-title: Dark Theme in Dom0 and DomU
-permalink: /doc/dark-theme/
----
 
 Dark Theme in Dom0
 ==================

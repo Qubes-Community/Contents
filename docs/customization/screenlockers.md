@@ -1,8 +1,3 @@
----
-layout: doc
-title: Screenlockers
-permalink: /doc/screenlockers/
----
 
 # Custom screenlockers in Qubes OS
 

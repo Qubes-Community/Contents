@@ -1,12 +1,3 @@
----
-layout: doc
-title: Building Archlinux Template
-permalink: /doc/building-archlinux-template/
-redirect_from:
-- /en/doc/building-archlinux-template/
-- /doc/BuildingArchlinuxTemplate/
-- /wiki/BuildingArchlinuxTemplate/
----
 
 Archlinux template building instructions
 ===========================================

@@ -1,8 +1,3 @@
----
-layout: doc
-title: CentOS Template
-permalink: /doc/templates/centos/
----
 
 # CentOS Template
 

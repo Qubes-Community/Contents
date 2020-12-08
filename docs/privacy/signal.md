@@ -1,8 +1,3 @@
----
-layout: doc
-title: Signal
-permalink: /doc/signal/
----
 
 Signal
 ======

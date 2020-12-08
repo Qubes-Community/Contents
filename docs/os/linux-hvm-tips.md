@@ -1,12 +1,3 @@
----
-layout: doc
-title: Linux HVM Tips
-permalink: /doc/linux-hvm-tips/
-redirect_from:
-- /en/doc/linux-hvm-tips/
-- /doc/LinuxHVMTips/
-- /wiki/LinuxHVMTips/
----
 
 Tips for Linux in HVM domain
 ============================

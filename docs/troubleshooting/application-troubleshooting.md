@@ -1,8 +1,3 @@
----
-layout: doc
-title: Application Troubleshooting
-permalink: /doc/application-troubleshooting/
----
 
 # Troubleshooting default applications on Qubes #
 

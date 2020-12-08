@@ -1,8 +1,3 @@
----
-layout: doc
-title: Gentoo Template
-permalink: /doc/templates/gentoo/
----
 
 # Gentoo Template
 

@@ -1,8 +1,3 @@
----
-layout: doc
-title: Tails Troubleshooting
-permalink: /doc/tails-troubleshooting/
----
 
 # Tails Troubleshooting Guide #
 

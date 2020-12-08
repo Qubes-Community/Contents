@@ -1,12 +1,3 @@
----
-layout: doc
-title: Rxvt
-permalink: /doc/rxvt/
-redirect_from:
-- /en/doc/rxvt/
-- /doc/Rxvt/
-- /wiki/Rxvt/
----
 
 Rxvt
 ====
