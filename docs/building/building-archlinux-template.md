@@ -155,14 +155,6 @@ $ make core-agent-linux-vm
 $ make gui-common-vm
 $ make gui-agent-linux-vm
 $ make app-linux-split-gpg-vm
-$ make vmm-xen-vm
-$ make core-vchan-xen-vm
-$ make core-qubesdb-vm
-$ make linux-utils-vm
-$ make core-agent-linux-vm
-$ make gui-common-vm
-$ make gui-agent-linux-vm
-$ make app-linux-split-gpg-vm
 ```
 
 8:   Make the actual Archlinux template
