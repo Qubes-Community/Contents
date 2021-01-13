@@ -38,7 +38,7 @@ might still get a lot of English content which has not been translated to your d
 Setting only some formats
 -------------------------
 
-If you want just change some format specifiers, you can add the `LC_*` identifier
+If you just want to change some format specifiers, you can add the `LC_*` identifier
 in the same file, below the `LANG=` code. Avoid the `LC_ALL` identifier, because it overwrites
 all previous settings! For example, to use German time formats but still use the English
 language as default for anything else, you would write the following in `/etc/locale.conf`:
