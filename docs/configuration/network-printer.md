@@ -35,6 +35,7 @@ Steps to configure a network printer in a template VM
 ----------------------------------------------------------
 
 1.  Start the "Printer Settings" App in a template VM (either via Qubes "Start Menu", or by launching the `system-config-printer` in the template).
+  You may need to install it first `sudo dnf install system-config-printer`.
 2.  Add/Configure the printer in the same way as one would do on any normal Linux.
   You may need to allow network access from the template VM to your printer to complete configuration, as normally the template VM is not allowed any network access except to the Qubes proxy for software installation.
   One can use Qubes Manager to modify firewall rules for particular VMs.
