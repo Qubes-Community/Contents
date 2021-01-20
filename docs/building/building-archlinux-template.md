@@ -272,6 +272,32 @@ $ cp -R ~/qubes-gui-agent-linux "~/qubes-builder/qubes-src/gui-agent-linux"
 and retry to build the template.
 If  it build successfully and that the template work as expected, do a pull request on github to share your fix. 
 
+Missing pulsecore error when building the gui-agent-linux
+----------------------------------------------------------------
+```shell_session
+$ make
+module-vchan-sink.c:64:10: fatal error: pulsecore/core-error.h: No such file or directory
+   64 | #include <pulsecore/core-error.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~
+```
+This error is caused by archlinux having a newer version of pulseaudio than the headers imported by the qubes team.
+It can be fixed by downloading the new version of the headers, and rebuilding.
+This solution prevents any breaking API changes from going silently unoticed.
+```
+$ #replace 14.2 with your version here (remove downstream -PATCH suffix (14.2-1 -> 14.2))
+$ git clone https://github.com/pulseaudio/pulseaudio.git /home/user/git/pulseaudio
+$ cd /home/user/git/pulseaudio
+$ git checkout v14.2
+$ cd /home/user/qubes-builder/qubes-src/gui-agent-linux/pulse/
+$ cp -r /home/user/git/pulseaudio/src/pulsecore/ pulsecore-14.2/ #symlink didn't work
+```
+or simply use the old headers and hope nothing breaks unexpectedly later:
+```
+$ #replace 14.2 with your version here (remove downstream -PATCH suffix (14.2-1 -> 14.2))
+$ cd /home/user/qubes-builder/qubes-src/gui-agent-linux/pulse/
+$ ln -sr pulsecore-14.1 pulsecore-14.2
+```
+
 Debugging the qube runtime
 ================================================================
 If you are able to launch a terminal and execute command, just use your usual 
