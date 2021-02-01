@@ -58,7 +58,7 @@ This will allow you to install the Qubes Windows Tools on Windows 10 both as a S
  
  6. Check the integrity of the file `qubes-tools-4.0.1.3.exe`by comparing its hash checksum. This can be done using the Windows command `certutil` on the windows command prompt (`cmd.exe`) and specifying an appropriate hash algorithm like:
         
-		certutil --hashfile C:\qubes-tools-4.0.1.3.exe SHA256
+		certutil -hashfile C:\qubes-tools-4.0.1.3.exe SHA256
 
 	And compare it the value to `148A2A993F0C746B48FA6C5C9A5D1B504E09A7CFBA3FB931A4DCF86FDA4EC9B1` (**it has to exactly match for security reasons**). If it matches, feel free to continue the installation. If not, repeat the download to make sure it was not corrupted due to a network problem. If keeps on not matching it might be an attacker attempting to do something nasty to your system -- Ask for support.
 
