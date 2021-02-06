@@ -112,12 +112,12 @@ If you still want to encrypt your keys you must refer to the [Securing Your Priv
 
 To control which VM is allowed as a client, which may act as the server and how we want this interaction to happen, we have to write a policy file for qrexec in `dom0`.
 
-1. Create and edit `/etc/qubes-rpc/qubes.SshAgent`.
+1. Create and edit `/etc/qubes-rpc/policy/qubes.SshAgent`.
 
    - Open the file with e.g. `nano`.
 
      ```shell_prompt
-     [user@fedora-32 ~]$ sudo nano /etc/qubes-rpc/qubes.SshAgent
+     [user@fedora-32 ~]$ sudo nano /etc/qubes-rpc/policy/qubes.SshAgent
      ```
 
    - If you want to explicitly allow only this connection, add the following line:
