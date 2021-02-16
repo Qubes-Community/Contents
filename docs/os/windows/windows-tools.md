@@ -22,7 +22,7 @@ Below is a breakdown of the feature availability depending on the windows versio
 | Application shortcuts                |        +       |       +        |
 | Copy/Edit in Disposable VM           |        +       |       +        |
 | Block device                         |        +       |       +        |
-| USB device                           |        -       |       -        |
+| USB device                           |        +       |       +        |
 | Audio                                |        -       |       -        |
 
 Qubes Windows Tools are open source and are distributed under a GPL license.
@@ -66,13 +66,14 @@ This will allow you to install the Qubes Windows Tools on Windows 10 both as a S
 
  7. Install Qubes Windows Tools 4.0.1.3 by starting `qubes-tools-4.0.1.3.exe`, not selecting the `Xen PV disk drivers` and the `Move user profiles` (which would probably lead to problems in Windows, anyhow). If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
 
- 8. Shut down Windows.
+ 8. Shut down Windows and wait until the VM is really stopped, i.e. Qubes shows no more activity.
 
  9. On a `dom0` terminal write: *(where `<VMname>` is the name of your Windows 10 VM)*
   
 		qvm-features <VMname> gui 1
+		qvm-prefs <VMname> qrexec_timeout 300
 
- 10. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager and reboot Windows once more.
+ 10. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
  
  11. Now the system should be up, with QWT running correctly.
  
@@ -130,7 +131,7 @@ qvm-prefs <your-appvm-name>
 NOTE: it is recommended to increase the default value of Windows VM's `qrexec_timeout` property from 60 (seconds) to, for example, 300. During one of the first reboots after Windows Tools installation Windows user profiles are moved onto the private VM's virtual disk (private.img) and this operation can take some time. Moving profiles is performed in an early boot phase when qrexec is not yet running, so timeout may occur with the default value. To change the property use this command in dom0:
 
 ~~~
-qvm-prefs -s <vm-name> qrexec_timeout 300
+qvm-prefs <vm-name> qrexec_timeout 300
 ~~~
 
 Xen PV drivers and Qubes Windows Tools
