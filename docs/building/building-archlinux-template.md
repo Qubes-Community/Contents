@@ -59,7 +59,7 @@ ___
 
 ___
 ### 3. Downloading and verifying the integrity of the "Qubes Automated Build System"
-#### Open a terminal in the `build-archlinux2` TemplateVM
+#### Open a terminal in the `build-archlinux2` AppVM
 * Set terminal size to 30 lines and 100 columns; ensures text from **qubes-builder**'s setup script isn't cut-off.
 ```console
 $ resize -s 30 100
@@ -257,7 +257,7 @@ $ make template
 ```
 
 ___
-### 7. Transfer Arch Linux template into Dom0
+### 7. Transfer 'archlinux-minimal' template into Dom0
 * You need to ensure these two files are in the `noarch` directory:
 ```console
 $ cd $HOME/qubes-builder/qubes-src/linux-template-builder/rpm/
@@ -286,8 +286,8 @@ ___
 Arch Linux is a [rolling](https://en.wikipedia.org/wiki/Rolling_release) distro, making it a fragile template for Qubes.
 It's important to understand how to debug Qubes templates, fix, then do a pull request.
 
-[neowutran's semi-automated Arch Linux template builder script](https://github.com/Qubes-Community/Contents/blob/master/code/OS-administration/build-archlinux.sh). \
-The most important part about this script is where to add custom code that is not in the QubesOS repositories.
+[neowutran's semi-automated 'archlinux-minimal' Qubes template builder script](https://github.com/Qubes-Community/Contents/blob/master/code/OS-administration/build-archlinux.sh). \
+The most important part about this script is where to add custom code that is not in the Qubes OS repositories.
 
 <!-- Whoever made these lines need to clarify what this is about.
 
@@ -393,9 +393,10 @@ Example of this kind of debugging [that happened on Reddit](https://old.reddit.c
 #### Question
 Hello.
 I just built an 'archlinux' template and moved it to Dom0, then installed the template.
-After I tried to open a terminal in the 'archlinux' TemplateVM, but it shows nothing. \
+Afterwards I tried to open a terminal in the 'archlinux' TemplateVM, but it shows nothing. \
 Can you please check this logs and please tell me what is wrong. Thanks.
-I searched the word "Failed" and found few.
+
+I searched the word "Failed" and found few:
 ```
 [0m] Failed to start..... Initialize and mount /rw and /home.... see 'systemctl status qubes-mount-dirs.service' for details
 [0m] Failed unmounting.... /usr/lib/modules....
