@@ -1,6 +1,7 @@
-# These instructions are for Qubes 4.0.? and 4.1.?
+# Building the 'archlinux-minimal' Qubes template
+> **These instructions are for Qubes 4.0.? and 4.1.? only.**
 
-### 0. Installing the Fedora 32 Minimal template
+### 0. Installing the 'fedora-32-minimal' Qubes template
 #### Open a terminal in Dom0
 
 Large download (~639MB); if using 'sys-whonix' as the Dom0 UpdateVM then temporarily swap to 'sys-firewall' (to speed-up download speeds).
@@ -58,7 +59,7 @@ ___
 
 ___
 ### 3. Downloading and verifying the integrity of the "Qubes Automated Build System"
-#### Open a terminal in the `build-archlinux2` Qube
+#### Open a terminal in the `build-archlinux2` TemplateVM
 * Set terminal size to 30 lines and 100 columns; ensures text from **qubes-builder**'s setup script isn't cut-off.
 ```console
 $ resize -s 30 100
@@ -67,7 +68,7 @@ $ resize -s 30 100
 ```console
 # dnf install -y git make
 ```
-* Import and verify the Qubes master key; [to understand the purpose of GPG (a frontend for OpenPGP)](https://www.qubes-os.org/security/verifying-signatures/).
+* Import and verify the Qubes master key; [to understand the purpose of GPG (a frontend for PGP)](https://www.qubes-os.org/security/verifying-signatures/).
 ```console
 $ gpg2 --import /usr/share/qubes/qubes-master-key.asc
 $ gpg2 --edit-key 0x427F11FD0FAA4B080123F01CDDFA1A3E36879494
@@ -180,7 +181,8 @@ $ ./setup
 * **Template Distribution Selection** offers choices of distributions to build
     * Deselect ***everything***
     * Select **archlinux-minimal**
-    > **The Arch Linux template is broken on Qubes 4.1.? currently, so trying to use 'archlinux' is introducing more failed compiles in the form of Qubes packages you might not use.**
+    > **Using 'archlinux' introduces more failed compiles, in the form of Qubes component packages you might not use. \
+    You want to use Arch Linux, so it's assumed you'll figure out your desired Qubes component selection.**
 
 ![arch-template-13](/attachment/wiki/ArchlinuxTemplate/arch-template-13.png)
 
