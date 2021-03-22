@@ -8,12 +8,12 @@ You can confirm this is the issue by looking for a line similar to the following
 
     [   131.769] (EE) AIGLX: reverting to software rendering
 
-Newer versions of the Linux kernel have renamed the `i915.preliminary_hw_support=1` option to `i915.alpha_support=1`, so if you needed this kernel option in the past you will have to rename it or add it to your configuration files (follow either GRUB2 or EFI, not both):
-
+Newer versions of the Linux kernel have renamed the `i915.alpha_support=1` option (which was originally called `i915.preliminary_hw_support=1`) to `i915.force_probe=*`, so if you needed this kernel option in the past you will have to rename it or add it to your configuration files (follow either GRUB2 or EFI, not both):
  * GRUB2: `/etc/default/grub`, `GRUB_CMDLINE_LINUX` line and  
    Rebuild grub config (`grub2-mkconfig -o /boot/grub2/grub.cfg`)   
  * EFI: `/boot/efi/EFI/qubes/xen.cfg`, `kernel=` line(s)
 
+If you are unsure as to which parameter works with your kernel, check whether your kernel log from your latest boot has a message containing "i915: unknown parameter". 
 
 ## IOMMU-related issues ##
 
