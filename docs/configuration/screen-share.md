@@ -18,9 +18,17 @@ Choose one of these sub-sections depending on whether you want to open a new scr
 
 In the Content Qube:
 
-1. Install packages `sudo apt install -y xfwm4 tigervnc-standalone-server tigervnc-viewer` or `sudo dnf install -y xfwm4 tigervnc-server tigervnc`
+1. Install packages `sudo apt install xfwm4 tigervnc-standalone-server tigervnc-viewer` or `sudo dnf install xfwm4 tigervnc-server tigervnc`
 
-2. Start the server `vncserver :10  -xstartup /usr/bin/xfwm4 -geometry 1920x1080 -localhost no`
+2. Enter the password by executing `vncpasswd`
+
+    1. You can generate secure enough passwords for this purpose using `openssl rand -base64 16 | tr -d '+/=' | head -c 8;echo`
+    
+    2. Enter one password for read/write (first password and verify prompt)
+
+    3. Enter a different password for the view only password (second password and verify prompt)
+
+2. Start the server `vncserver :1  -xstartup /usr/bin/xfwm4 -geometry 1920x1080 -localhost no`
 
 3. Enter passwords when prompted
 
@@ -30,41 +38,39 @@ In the Content Qube:
 
     3. (recommended) Enter a different password for the view only password (second password and verify prompt)
 
-3. View the shared screen `vncviewer -passwd /home/user/.vnc/passwd :10`
+3. View the shared screen `vncviewer -passwd ~/.vnc/passwd :1`
 
-4. Open applications `DISPLAY=:10 xterm` where xterm can be any binary on your system
+4. Open applications `DISPLAY=:1 xterm` where xterm can be any binary on your system
 
 ## If You Want To Share an Existing Monitor or Window
 
 In the Content Qube:
 
-1. Install packages `sudo apt install -y xfwm4 x11vnc x11-utils` or `sudo dnf install -y xfwm4 x11vnc xwininfo`
+1. Install packages `sudo apt install xfwm4 x11vnc x11-utils` or `sudo dnf install xfwm4 x11vnc xwininfo`
 
-2. Start the server 
+2. Enter the password by executing `x11vnc -storepasswd`
+
+    1. You can generate secure enough passwords for this purpose using `openssl rand -base64 16 | tr -d '+/=' | head -c 8;echo`
+
+3. Start the server 
     
-    1. If you want to share a window `x11vnc -rfbport 5910 -clip 1920x1080+0+0 -storepassword`
+    1. If you want to share a window `x11vnc -viewonly -rfbauth ~/.vnc/passwd -rfbport 5901 -clip 1920x1080+0+0 `
 
-        - Replace `1920x1080+0+0` with the resolution and offset of the screen area you want to share. The origin for linux monitors is in the top left, increasing down and to the right.
+        - Replace `1920x1080+0+0` with the resolution (e.g. `1920x1080`) and offset (e.g. `+0+0`) of the screen area you want to share. The coordinates 0,0 are in the top left, increasing down and to the right.
 
         - Use `xrandr --listactivemonitors` in Dom0 to get a list of all monitors and their offsets. That command returns in the form `W/_xH/_+X+Y`. For example to share DP-1, with xrandr output of ` 0: +DP-1 1920/510x1080/287+1280+0 DP-1`, 1920x1080+1280+0 would share just that screen.
 
         - `arandr` is a useful graphical tool to show where all the monitors are in relation to each other.
 
-    2. If you want to share a monitor `x11vnc -rfbport 5910 -id pick -storepassword`
+    2. If you want to share a monitor `x11vnc -viewonly -rfbauth ~/.vnc/passwd -rfbport 5901 -id pick`
 
-        - This uses the `xwininfo` (or `x11-utils`o on debian) package installed earlier to get the numerical id of the next window you click on.
+        - This retrieves the numerical id of the next window you click on.
 
-3. Enter passwords when prompted
+    3. If you want to share all the monitors use `x11vnc -viewonly -rfbauth ~/.vnc/passwd -rfbport 5901`
 
-    1. You can generate secure enough passwords for this purpose using `openssl rand -base64 16 | tr -d '+/=' | head -c 8;echo`
-    
-    2. Enter one password for read/write (first password and verify prompt)
+4. View the shared screen as specified in "View The Shared Screen"
 
-    3. Enter a different password for the view only password (second password and verify prompt)
-
-3. View the shared screen like normal
-
-4. Open applications like normal
+5. Open applications like normal
 
 ## Qubes Connect TCP Service
 
@@ -86,13 +92,13 @@ In the Presentation Qube:
 
 1. Install package `sudo apt install -y tigervnc-viewer`
 
-2. Bind TCP port using Qubes Connect TCP service `qvm-connect-tcp ::5910`
+2. Bind TCP port using Qubes Connect TCP service `qvm-connect-tcp ::5901`
 
-3. Start the VNC Viewer `vncviewer -Shared -ViewOnly -RemoteResize=0 -SendPrimary=0 -SendClipboard=0 -SetPrimary=0 127.0.0.1:5910`
+3. Start the VNC Viewer `vncviewer -Shared -ViewOnly -RemoteResize=0 -SendPrimary=0 -SendClipboard=0 -SetPrimary=0 127.0.0.1:5901`
 
 4. Confirm that you want to connect to the Presentation Qube in the dom0 prompt
 
-5. Enter the view only password given during step 3 of Setup The Shared Screen Server
+5. Enter password for the VNC server you created above
 
 6. In your presentation software share the VNC viewer
 
@@ -102,6 +108,6 @@ In the Content Qube interact with the shared screen, the changes will be mirrore
 
 ## Notes
 
-- To reset the VNC password delete `/home/user/.vnc/passwd` in the Content Qube
+- To reset the VNC password delete `~/.vnc/passwd` in the Content Qube
 
 - The Content Qube does not need to have access to the internet
