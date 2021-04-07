@@ -28,19 +28,11 @@ In the Content Qube:
 
     3. Enter a different password for the view only password (second password and verify prompt)
 
-2. Start the server `vncserver :1  -xstartup /usr/bin/xfwm4 -geometry 1920x1080 -localhost no`
+3. Start the server `vncserver :1  -xstartup /usr/bin/xfwm4 -geometry 1920x1080 -localhost no`
 
-3. Enter passwords when prompted
+4. View the shared screen `vncviewer -passwd ~/.vnc/passwd :1`
 
-    1. You can generate secure enough passwords for this purpose using `openssl rand -base64 16 | tr -d '+/=' | head -c 8;echo`
-    
-    2. Enter one password for read/write (first password and verify prompt)
-
-    3. (recommended) Enter a different password for the view only password (second password and verify prompt)
-
-3. View the shared screen `vncviewer -passwd ~/.vnc/passwd :1`
-
-4. Open applications `DISPLAY=:1 xterm` where xterm can be any binary on your system
+5. Open applications `DISPLAY=:1 xterm` where xterm can be any binary on your system
 
 ## If You Want To Share an Existing Monitor or Window
 
@@ -54,7 +46,7 @@ In the Content Qube:
 
 3. Start the server 
     
-    1. If you want to share a window `x11vnc -viewonly -rfbauth ~/.vnc/passwd -rfbport 5901 -clip 1920x1080+0+0 `
+    1. If you want to share a window `x11vnc -viewonly -rfbauth ~/.vnc/passwd -rfbport 5901 -clip 1920x1080+0+0`
 
         - Replace `1920x1080+0+0` with the resolution (e.g. `1920x1080`) and offset (e.g. `+0+0`) of the screen area you want to share. The coordinates 0,0 are in the top left, increasing down and to the right.
 
