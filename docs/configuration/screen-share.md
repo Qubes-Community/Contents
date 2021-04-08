@@ -6,9 +6,9 @@ How to Share A Screen Across Qubes
 > This guide involves opening up a TCP port between qubes. This is discouraged from the security standpoint and should only be used as a last resort, use sparingly.
 
 ## Terminology
-PRESENTATION-QUBE is the Qube you want to view the screen from
+PRESENTATION_QUBE is the Qube you want to view the screen from
 
-CONTENT-QUBE is the Qube that has the window you want to share
+CONTENT_QUBE is the Qube that has the window you want to share
 
 ## Setup The Shared Screen Server
 
@@ -70,7 +70,7 @@ These steps are a simpler version of [The Qubes Firewall](https://www.qubes-os.o
 
 1. Edit /etc/qubes-rpc/policy/qubes.ConnectTCP 
 
-2. Add the line: `<PRESENTATION-QUBE> @default ask,target=<CONTENT-QUBE>`
+2. Add the line: `<PRESENTATION_QUBE> @default ask,target=<CONTENT_QUBE>`
 
     - (recommended) By specifying `ask`, dom0 will ask each time a connection is attempted on that port
 
