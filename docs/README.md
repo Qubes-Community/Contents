@@ -12,6 +12,7 @@
 - ![](/_res/l.png) [VM hardening (fend off malware at VM startup)](https://github.com/tasket/Qubes-VM-hardening)
 - ![](/_res/l.png) [VPN configuration](https://github.com/tasket/Qubes-vpn-support)
 - [Run wireguard on server and use as VPN for Qubes](wireguard/README.md)
+- [Exposing Mumble server running in Qubes using Wireguard](mumble/README.md)
 - [Make an HTTP Filtering Proxy](configuration/http-proxy.md)
 - ![](/_res/l.png) [Ansible Qubes](https://github.com/Rudd-O/ansible-qubes) (see Rudd-O's [other repos](https://github.com/Rudd-O?tab=repositories) as well)
 - [shrink VM volumes](configuration/shrink-volumes.md)
