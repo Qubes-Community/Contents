@@ -56,10 +56,10 @@ In R4.x, LVM Logical volumes are frequently deleted (every time a disposable VM 
 However, this is relatively rare in R3.x.
 
 
-LUKS
+LUKS (R4.0)
 ----------
 
-If you have enabled LUKS in dom0, discards will not get passed down to the storage device. 
+If you have enabled LUKS in dom0, discards will not get passed down to the storage device in R4.0. Note that this procedure is no longer needed in R4.1, as discards are enabled by default.
 
 To enable TRIM support in dom0 with LUKS you need to:
 
@@ -90,7 +90,7 @@ To enable TRIM support in dom0 with LUKS you need to:
 Swap Space
 ----------
 
-By default TRIM is not enabled for swap.
+By default TRIM is not enabled for swap in both R4.0 and R4.1.
 To enable it add the `discard` flag to the options for the swap entry in `/etc/fstab`.
 This may or may not actually improve performance.
 If you only want the security against local forensics benefit of TRIM, you can use the `discard=once` option instead to only perform the TRIM operation once during at boot.
