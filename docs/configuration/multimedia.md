@@ -27,8 +27,8 @@ Launch a Terminal in the new template VM:
 `qvm-run --auto t-multimedia gnome-terminal`
 
 Important:
-Enter all the following commands in the terminal of the template VM
-Become the root user to run all following command without the need to use sudo in the multimedia template VM
+Enter all the following commands in the terminal of the template VM.
+Become the root user to run all following command without the need to use sudo in the multimedia template VM.
 
 `sudo -i`
 
@@ -48,7 +48,7 @@ Import GPG-Key for spotify
 As the template VM can't connect to internet you need to get the public key file from another AppVM and copy it to the template VM. The easiest way is to use the Qubes Clipboard to copy the keys from the AppVM where you get the key to the Template VM.
 
 In an AppVM which has Internet access:
-- Open <https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x4773BD5E130D1D45>
+- Open <https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x8fd3d9a8d3800305a9fff259d1742ad60d811d58>
 - Copy content of page to the Clipboard (Ctrl+A and Ctrl+C)
 - open a Terminal in this AppVM and copy the content of the clipboard to a file
   `xclip -o > spotify.pubkey`
@@ -67,15 +67,17 @@ Hint: depending on your installed version of GnuPG the command to show a public 
 See [this StackExchange question](https://unix.stackexchange.com/questions/391344/gnupg-command-to-show-key-info-from-file) for more information.
 If this command doesn't show a fingerprint choose one of the other commands mentioned in the above link.
 
-`gpg --with-fingerprint spotify.pubkey`
+`gpg --keyid-format long --with-fingerprint spotify.pubkey`
 
 This should look like:
-
-    [user@t-multimedia ~]$ `gpg --with-fingerprint spotify.pubkey`
-
-    pub  4096R/130D1D45 2019-07-15 Spotify Public Repository Signing Key <tux@spotify.com>
-
-         Key fingerprint = 2EBF 997C 15BD A244 B6EB  F5D8 4773 BD5E 130D 1D45 
+ 
+    [user@t-multimedia ~]$ gpg --keyid-format long --with-fingerprint spotify.pubkey 
+    
+    gpg: WARNING: no command supplied.  Trying to guess what you mean ...
+    pub   rsa4096/D1742AD60D811D58 2020-09-08 [SC] [expires: 2021-12-02]
+      Key fingerprint = 8FD3 D9A8 D380 0305 A9FF  F259 D174 2AD6 0D81 1D58
+    uid                           Spotify Public Repository Signing Key <tux@spotify.com>
+         
 
 You can (and should) lookup the fingerprint on at least one (or more) keyservers as the above information might be outdated.
 
@@ -124,17 +126,17 @@ Copy the public signing key over to the multimedia template VM
 
 Check the signature of the signing key
 
-`gpg --with-fingerprint videolan.pubkey`
+`gpg --keyid-format long --with-fingerprint videolan.pubkey`
 
 This should look like:
 
-    [user@t-multimedia ~]$ `gpg --with-fingerprint videolan.pubkey`
-
-    pub  2048R/B84288D9 2013-08-27 VideoLAN APT Signing Key <videolan@videolan.org>
-
+    [user@t-multimedia ~]$ gpg --keyid-format long --with-fingerprint videolan.pubkey
+    
+    gpg: WARNING: no command supplied.  Trying to guess what you mean ...
+    pub   rsa2048/6BCA5E4DB84288D9 2013-08-27 [SC]
           Key fingerprint = 8F08 45FE 77B1 6294 429A  7934 6BCA 5E4D B842 88D9
-
-    sub  2048R/288D4A2C 2013-08-27
+    uid                           VideoLAN APT Signing Key <videolan@videolan.org>
+    sub   rsa2048/ED1466D0288D4A2C 2013-08-27 [E]
 
 You can (and should) lookup the fingerprint on at least one (or more) keyservers as the above information might be outdated.
 
@@ -181,21 +183,19 @@ Copy the public signing key over to the multimedia template VM
 
 Check the signature of the signing key (still in the AppVM where you downloaded the key)
 
-`gpg --with-fingerprint google.pubkey`
+`gpg --keyid-format long --with-fingerprint google.pubkey`
 
 This should look like:
 
-    [user@t-multimedia ~]$ `gpg --with-fingerprint google.pubkey`
-
-    pub  4096R/D38B4796 2016-04-12 Google Inc. (Linux Packages Signing Authority)
-
-    <linux-packages-keymaster@google.com>
-
+    [user@t-multimedia ~]$ gpg --keyid-format long --with-fingerprint videolan.pubkey
+    
+    gpg: WARNING: no command supplied.  Trying to guess what you mean ...
+    pub   rsa4096/7721F63BD38B4796 2016-04-12 [SC]
           Key fingerprint = EB4C 1BFD 4F04 2F6D DDCC  EC91 7721 F63B D38B 4796
-
-    sub  4096R/640DB551 2016-04-12 [expires: 2019-04-12]
-
-    sub  4096R/997C215E 2017-01-24 [expires: 2020-01-24]
+    uid                           Google Inc. (Linux Packages Signing Authority) <linux-packages-keymaster@google.com>
+    sub   rsa4096/1397BC53640DB551 2016-04-12 [S] [expired: 2019-04-12]
+    sub   rsa4096/6494C6D6997C215E 2017-01-24 [S] [expired: 2020-01-24]
+    sub   rsa4096/78BD65473CB3BD13 2019-07-22 [S] [expires: 2022-07-21]
 
 You can (and should) lookup the fingerprint on at least one (or more) keyservers as the above information might be outdated.
 
