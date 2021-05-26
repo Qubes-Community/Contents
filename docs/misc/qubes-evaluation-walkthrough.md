@@ -112,8 +112,3 @@ Using cut and paste in qubes:
 
 Now go to mutt and open the link in firefox again, but this time instead of downloading something, browse the net and find a URL that we will imagine that we want to email to the person.  while viewing a email in mutt, press "r" to respond to that person.  hit enter twice to get through the "to" and "subject" fields.  Now we are going to cut and paste the URL we found in a disposable VM into a email in our eval-qube/"real computer".  In qubes instead of the sequence being Ctrl-C, Ctrl-V, the sequence is Ctrl-C, Ctrl-Shift-C, Ctrl-Shift-V, Ctrl-V.  This key sequence only takes a tiny fraction of a second more time to hit then Ctrl-C, Ctrl-V so the sequence works quite well.  So go to the firefox in the disposable VM, select the whole URL and press Ctrl-C, Ctrl-Shift-C, then go to the window with mutt in it and press Ctrl-Shift-V, but instead of hitting Ctrl-V, hit Super-Shift-C (remember "super" is the windows key).  (why? because your pasting in a terminal)
 
-
-Running untrusted code:
-=======================
-
-Now a common situation:  You want to find a new application to sove some problem.  
