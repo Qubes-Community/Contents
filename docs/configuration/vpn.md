@@ -207,6 +207,10 @@ Before proceeding, you will need to download a copy of your VPN provider's confi
    ;;
    down)
    su - -c 'notify-send "$(hostname): LINK IS DOWN !" --icon=dialog-error' user
+   
+   # Restart the VPN automatically
+   sleep 5s
+   sudo /rw/config/rc.local
    ;;
    esac
    ~~~
