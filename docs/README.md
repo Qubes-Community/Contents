@@ -28,7 +28,7 @@
 `customization`
 - [change DPI scaling in dom0 and VMs](customization/dpi-scaling.md)
 - [setup mirage firewall](customization/mirage-firewall.md)
-- [windows 7 gaming HVM with GPU passthrough](customization/windows-gaming-hvm.md)
+- [windows gaming HVM with GPU passthrough](customization/windows-gaming-hvm.md)
 - [Choose deafult terminal settings for a TemplateVM](customization/terminal-defaults.md)  
 - [Screenlockers](customization/screenlockers.md)  
 
