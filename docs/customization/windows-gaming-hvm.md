@@ -64,9 +64,9 @@ Short list of things to do to make the GPU passthrough work:
 -   You verified and confirmed that the secondary GPU is alone in its
     IOMMU Group
 
--   In dom0, you edited the file `/etc/default/grub`{.text} or
-    `/boot/efi/EFI/qubes/xen.cfg`{.text} or
-    `/boot/efi/EFI/qubes/grub.cfg`{.text} to allow PCI hiding for your
+-   In dom0, you edited the file `/etc/default/grub` or
+    `/boot/efi/EFI/qubes/xen.cfg` or
+    `/boot/efi/EFI/qubes/grub.cfg` to allow PCI hiding for your
     secondary GPU, and regenerated the grub if needed
 
 -   You have patched stubdom-linux-rootfs.gz to allow to have more than
@@ -99,7 +99,7 @@ qvm-pci
 ```
 
 Then find the devices id for your secondary gpu. In my case, it is
-`dom0:0a_00.0`{.text} and `dom0:0a_00.1`{.text}. Edit /etc/default/grub,
+`dom0:0a_00.0` and `dom0:0a_00.1`. Edit /etc/default/grub,
 and add the PCI hiding
 
 ``` text
@@ -112,9 +112,9 @@ then regenerate the grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
 
-Or if using UEFI boot, edit `/boot/efi/EFI/qubes/xen.cfg`{.text} or
-`/boot/efi/EFI/qubes/grub.cfg`{.text} and add the
-`rd.qubes.hide_pci=`{.text} option to the `kernel=`{.text} line.
+Or if using UEFI boot, edit `/boot/efi/EFI/qubes/xen.cfg` or
+`/boot/efi/EFI/qubes/grub.cfg` and add the
+`rd.qubes.hide_pci=` option to the `kernel=` line.
 
 ## Patching stubdom-linux-rootfs.gz
 
