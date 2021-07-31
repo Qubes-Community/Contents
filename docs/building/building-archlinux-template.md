@@ -1,25 +1,33 @@
 # Building the 'archlinux-minimal' Qubes template
-> **These instructions are for Qubes 4.0.? and 4.1.? only.**
+> **These instructions are for Qubes 4.0.4 and 4.1.**
 
-### 0. Installing the 'fedora-32-minimal' Qubes template
+Guide status:
+- 4.0.4 :
+- 4.1-beta1 : validated (2021-07-31) by the commit author of this line.
+ 
+## Steps
+### 0. Installing the 'fedora-33-minimal' Qubes template
+
+Note: an alternative is using an fedora-{33,34} appVM.
+
 #### Open a terminal in Dom0
 
 Large download (~639MB); if using 'sys-whonix' as the Dom0 UpdateVM then temporarily swap to 'sys-firewall' (to speed-up download speeds).
 ```console
-# qubes-dom0-update qubes-template-fedora-32-minimal
+# qubes-dom0-update qubes-template-fedora-33-minimal
 ```
 Keep in mind what Qubes OS version your installation is; used when building Qubes Components and Template(s).
 ```console
 # cat /etc/qubes-release
 ```
 ```
-# qvm-run -u root fedora-32-minimal xterm
+# qvm-run -u root fedora-33-minimal xterm
 # dnf install qubes-core-agent-passwordless-root qubes-core-agent-networking iproute
 # exit
 ```
 
 ___
-### 1. Open a non-root ($) terminal in the 'fedora-32-minimal' TemplateVM.
+### 1. Open a non-root ($) terminal in the 'fedora-33-minimal' TemplateVM.
 > **How to see whether the `'GNUMAKEFLAGS'` or `'MAKEFLAGS'` environment variable is used: \
 `$ strings /usr/bin/make | grep MAKEFLAGS` \
 GNU Make's `-l` set to same value as `-j` prevents CPU overcommitment.**
@@ -243,11 +251,14 @@ $ make qubes-vm
 $ make vmm-xen-vm
 $ make core-vchan-xen-vm
 $ make core-qubesdb-vm
+$ make core-qrexec-vm
 $ make linux-utils-vm
 $ make core-agent-linux-vm
 $ make gui-common-vm
 $ make gui-agent-linux-vm
 $ make app-linux-split-gpg-vm
+$ make app-linux-usb-proxy-vm
+$ make meta-packages-vm
 ```
 
 ___
@@ -282,9 +293,11 @@ $ ./install-templates.sh
 * If the build process went smoothly, the 'archlinux' and/or 'archlinux-minimal' template will be listed in Qubes Manager.
 
 ___
-### Debugging the build process
+## Debugging the build process
 Arch Linux is a [rolling](https://en.wikipedia.org/wiki/Rolling_release) distro, making it a fragile template for Qubes.
 It's important to understand how to debug Qubes templates, fix, then do a pull request.
+
+See below explanations and examples which (we hope) will help you to solve the common problems, and do a pull request with your solution.
 
 [neowutran's semi-automated 'archlinux-minimal' Qubes template builder script](https://github.com/Qubes-Community/Contents/blob/master/code/OS-administration/build-archlinux.sh). \
 The most important part about this script is where to add custom code that is not in the Qubes OS repositories.
@@ -308,7 +321,8 @@ $ rm -Rf "$directory/qubes-src/gui-agent-linux/"
 $ cp -R ~/qubes-gui-agent-linux "$directory/qubes-src/gui-agent-linux"
 ```
 
-#### Example
+### UseCase : Xorg
+
 Launch the build:
 ```console
 $ ./build_arch.sh
@@ -359,7 +373,8 @@ cp -R ~/qubes-gui-agent-linux "~/qubes-builder/qubes-src/gui-agent-linux"
 Then try building the template.
 If the template built successfully and works as expected, do a pull request on GitHub to share your fix(es). 
 
-### Missing pulsecore error when building the gui-agent-linux
+### UseCase: Missing pulsecore error when building the gui-agent-linux
+
 ```console
 $ make
 module-vchan-sink.c:64:10: fatal error: pulsecore/core-error.h: No such file or directory
@@ -385,12 +400,61 @@ $ cd $HOME/qubes-builder/qubes-src/gui-agent-linux/pulse/
 $ ln -sr pulsecore-14.1 pulsecore-14.2
 ```
 
-### Debugging Qubes' runtime
+### Known issues
+
+### sudo: effective uid is not 0
+If you get the below error with fedora 34:
+
+<details><summary>Details of the `sudo: effective uid is not 0` error</summary>
+
+```
+==> Making package: qubes-vm-xen 4.14.2-1 (Sat Jul 31 15:17:57 2021)
+==> Checking runtime dependencies...
+==> Installing missing dependencies...
+sudo: effective uid is not 0, is /usr/sbin/sudo on a file system with the 'nosuid' option set or an NFS file system without root privileges?
+==> ERROR: 'pacman' failed to install missing dependencies.
+==> Missing dependencies:
+  -> python
+  -> bridge-utils
+  -> python-lxml
+  -> lzo
+  -> yajl
+==> Checking buildtime dependencies...
+==> Installing missing dependencies...
+sudo: effective uid is not 0, is /usr/sbin/sudo on a file system with the 'nosuid' option set or an NFS file system without root privileges?
+==> ERROR: 'pacman' failed to install missing dependencies.
+==> Missing dependencies:
+  -> wget
+  -> git
+  -> bin86
+  -> dev86
+  -> acpica
+  -> yajl
+  -> pixman
+==> ERROR: Could not resolve all dependencies.
+make[2]: *** [/home/user/qubes-builder/qubes-src/builder-archlinux/Makefile.archlinux:138: dist-package] Error 8
+make[1]: *** [Makefile.generic:191: packages] Error 1
+make: *** [Makefile:259: vmm-xen-vm] Error 1
+```
+
+</details>
+
+The partition used for the build process needs the suid option, in the qubes-builder remount script.
+In the `/home/user/qubes-builder/scripts/remount` file change the line:
+```
+sudo mount "$mountpoint" -o dev,remount
+```
+with:
+```
+sudo mount "$mountpoint" -o dev,suid,remount
+```
+
+## Debugging the Qubes-ArchLinux runtime
 If you are able to launch a terminal and execute command, utilize your Arch-fu to fix the issue. \
 If unable to launch a terminal, shutdown the qube, create a new DisposableVM, [mount an Arch Linux ISO in a DisposableVM](https://www.qubes-os.org/doc/mount-lvm-image/), chroot to it, and then use your Arch-fu. \
 Example of this kind of debugging [that happened on Reddit](https://old.reddit.com/r/Qubes/comments/eg50ne/built_arch_linux_template_and_installed_but_app/).
 
-#### Question
+### Question
 Hello.
 I just built an 'archlinux' template and moved it to Dom0, then installed the template.
 Afterwards I tried to open a terminal in the 'archlinux' TemplateVM, but it shows nothing. \
@@ -412,7 +476,7 @@ audit: type=1131 audit(some number): pid=1 uid=0 auid=some number ses=some numbe
 I tried to rebuild the 'archlinux' template and got the same issue. \
 How can I debug this Qube?
 
-#### Answer
+### Answer
 The issue came from a systemd unit named "qubes-mount-dirs". We want to know more about that. \
 We can't execute command into the qube, so let's shut it down.
 Then, we mount the 'archlinux' root disk into a DisposableVM (
@@ -506,7 +570,8 @@ I rebuild the template with those modification, and it is working as expected.
 I will send a pull request. Does someone have a better idea on "Why ***`diffutils`*** was not installed in the first place?" ?
 [The commit](https://github.com/neowutran/qubes-builder-archlinux/commit/09a435fcc6bdcb19144d198ea20f7a27826c1d80)
 
-### Creating a archlinux repository
+___
+## Creating an ArchLinux repository
 Once the template have been build, you could use the generated archlinux packages to create your own archlinux repository for QubesOS packages.
 You need to:
 * Sign the packages with your GPG key
