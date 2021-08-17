@@ -352,7 +352,7 @@ make[1]: *** [Makefile:64: rootimg-build] Error 1
 ```
 The xorg-server package was probably updated to a version greater than 1.20.7.
 Let's search what is the current version of xorg-server... Currently, it is **1.20.7-1**.
-Nor a fix nor a minor version change is likely to break things.
+Neither a fix nor a minor version change is likely to break things.
 So let's find the dependency for "**xorg-server<1.20.7**" and change it to "**xorg-server<1.21**".
 
 > **rg stands for [ripgrep](https://github.com/BurntSushi/ripgrep), an alternative to GNU grep.**
