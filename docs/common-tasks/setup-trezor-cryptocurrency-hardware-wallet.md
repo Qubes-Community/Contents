@@ -1,7 +1,7 @@
 ## Setting up a Trezor cryptocurrency hardware wallet in Qubes
 
 using a Fedora-based sys-usb VM and a Whonix WS-based application VM:
-
+- navigate to the [Trezor instructions](https://wiki.trezor.io/Qubes_OS) page and read them. They are more frequently updated than this document.
 - in dom0:
     `sudo vim /etc/qubes-rpc/policy/trezord-service`
 add this line:
@@ -19,10 +19,8 @@ replace `sys-usb` with `disp-sys-usb` if you are using a disposable sys-usb
     `sudo vim /rw/config/rc.local`
 	add this line (note the "&" at the end):
     `socat TCP-LISTEN:21325,fork EXEC:"qrexec-client-vm sys-usb trezord-service" &`
-
 - in the fedora-3x template:
     `sudo dnf install trezor-common`
-
 - download the bridge RPM from
     https://wallet.trezor.io/#/bridge
 	and remember to verify it!
