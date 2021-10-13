@@ -29,11 +29,11 @@ Subkeys are essentially children keys of the main keypair. The advantage is they
 
 <sup>[Setup without subkeys](https://www.qubes-os.org/doc/split-gpg/#setup-description)</sup>
 
-### Create master key
+### Create main key
 
 Skip to [Create Subkey](#create-subkey) if you already have a key.
 
-In `vault`, create the master keypair, subkeys, and a revocation certificate.
+In `vault`, create the main keypair, subkeys, and a revocation certificate.
 
 ```
 [user@vault ~]$ gpg --full-generate-key
@@ -84,7 +84,7 @@ Backup keys and revocation cert, then shred the exported keys:
 [user@vault ~]$ tar -cf backup_alice_keys.tar alice* 
 [user@vault ~]$ shred -u alice*
 ```
-The master key is still in the keyring. Export its subkeys in a temp file, delete the master key from the keyring, then import the subkeys. Be sure to delete `subkeys` after importing.
+The main key is still in the keyring. Export its subkeys in a temp file, delete the main key from the keyring, then import the subkeys. Be sure to delete `subkeys` after importing.
 ```
 [user@vault ~]$ gpg --export-secret-subkeys alice > subkeys
 [user@vault ~]$ gpg --delete-secret-key alice
