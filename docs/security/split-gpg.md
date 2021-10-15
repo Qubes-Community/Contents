@@ -20,10 +20,10 @@ Subkeys are essentially children keys of the main keypair. The advantage is they
 #### One possible key distribution
 
 | Key type | VM location | Note             |
-|:----------|:-------------|:------------------ |
+|:---------|:------------|:-----------------|
 | sec      | vault       | Main secret key. Should be tarballed and stored, not actively on the keychain   |
-| pub      | vault       | Main public key. Can be used or not. However, if you sign with a subkey (ssb) it cannot be verifid with the main public key. If you don't use it, may as well keep it in the vault.   |
-| ssb      | gpg         | Secret subkey. Only accessed with Split GPG commands where needed. `gpg` VM is not connected to the internet.  |
+| pub      | vault       | Main public key. You can use this if you want, but if you sign with a subkey (ssb) it cannot be verified with the main public key. If you don't use it, may as well keep it in the vault. |
+| ssb      | gpg         | Secret subkey. Only accessed with Split GPG commands where needed. `gpg` VM is not connected to the internet. |
 | sub      | personal    | Public subkey. Can be freely distributed  |
 
 
