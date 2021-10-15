@@ -23,11 +23,12 @@ Subkeys are essentially children keys of the main keypair. The advantage is they
 |:---------|:------------|:-----------------|
 | sec      | vault       | Main secret key. Should be tarballed and stored, not actively on the keychain   |
 | pub      | vault       | Main public key. You can use this if you want, but if you sign with a subkey (ssb) it cannot be verified with the main public key. If you don't use it, may as well keep it in the vault. |
-| ssb      | gpg         | Secret subkey. Only accessed with Split GPG commands where needed. `gpg` VM is not connected to the internet. |
+| ssb      | gpg-store   | Secret subkey. Only accessed with Split GPG commands where needed. `gpg` VM is not connected to the internet. |
 | sub      | personal    | Public subkey. Can be freely distributed  |
 
 
 <sup>[Setup without subkeys](https://www.qubes-os.org/doc/split-gpg/#setup-description)</sup>
+
 
 ### Create main key
 
@@ -101,22 +102,22 @@ To verify you're using the correct key, run `gpg -K` and ensure you see a `#` ne
  [...]
 ```
 
-Export the public and secret key to `work-gpg`
+Export the public and secret key to `gpg-store` (or whatever your gpg VM is).
 ```
 [user@vault ~]$ gpg --export-secret-keys --armor alice > alice_secret.key
 [user@vault ~]$ gpg --export --armor alice > alice_public.key
 [user@vault ~]$ qvm-copy alice_*.key
 ```
-At the prompt, select `work-gpg` as the destination.
+At the prompt, select `gpg-store` as the destination.
 
-Now import the public and secret keys into `work-gpg`, then delete them.
+Now import the public and secret keys into `gpg-store`, then delete them.
 ```
-[user@work-gpg ~]$ cd ~/QubesIncoming/vault
-[user@work-gpg QubesIncoming/vault]$ gpg --import alice_*.key
-[user@work-gpg QubesIncoming/vault]$ shred -u alice_*.key
+[user@gpg-store ~]$ cd ~/QubesIncoming/vault
+[user@gpg-store QubesIncoming/vault]$ gpg --import alice_*.key
+[user@gpg-store QubesIncoming/vault]$ shred -u alice_*.key
 ```
-Finally, in `work-email`, import the public key from `work-gpg`
+Finally, in `personal`, import the public key from `gpg-store`
 ```
-[user@work-email ~]$ qubes-gpg-client-wrapper --armor --export alice > alice_public.asc
-[user@work-email ~]$ gpg --import alice_public.asc
+[user@gpg-store ~]$ qubes-gpg-client-wrapper --armor --export alice > alice_public.asc
+[user@gpg-store ~]$ gpg --import alice_public.asc
 ```
