@@ -102,7 +102,7 @@ To verify you're using the correct key, run `gpg -K` and ensure you see a `#` ne
  [...]
 ```
 
-Export the public and secret key to `gpg-store` (or whatever your gpg VM is).
+Export the public and secret key.
 ```
 [user@vault ~]$ gpg --export-secret-keys --armor alice > alice_secret.key
 [user@vault ~]$ gpg --export --armor alice > alice_public.key
@@ -118,6 +118,6 @@ Now import the public and secret keys into `gpg-store`, then delete them.
 ```
 Finally, in `personal`, import the public key from `gpg-store`
 ```
-[user@gpg-store ~]$ qubes-gpg-client-wrapper --armor --export alice > alice_public.asc
-[user@gpg-store ~]$ gpg --import alice_public.asc
+[user@personal ~]$ qubes-gpg-client-wrapper --armor --export alice > alice_public.asc
+[user@personal ~]$ gpg --import alice_public.asc
 ```
