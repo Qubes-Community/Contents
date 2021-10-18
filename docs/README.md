@@ -42,6 +42,12 @@
 - ![](/_res/l.png) [Qubes 3.2 cheat sheet](https://github.com/Jeeppler/qubes-cheatsheet)
 - [infrequently asked questions](misc/iaq.adoc)
 
+`security`
+- [multifactor authentication](security/multifactor-authentication.md)
+- [security guidelines](security/security-guidelines.md)
+- [split bitcoin](security/split-bitcoin.md)
+- [split gpg](security/split-gpg.md)
+
 `system`
 - [understanding and fixing issues with time/clock](system/clock-time.md)
 - [restoring 3.2 templates/standalones to 4.0](system/restore-3.2.md)
