@@ -284,9 +284,9 @@ Before proceeding, you will need to download a copy of your VPN provider's confi
    VPN_CLIENT='openvpn'
    VPN_OPTIONS='--cd /rw/config/vpn/ --config openvpn-client.ovpn --daemon'
    
-   su - -c 'notify-send "$(hostname): Starting $VPN_CLIENT..." --icon=network-idle' user
    groupadd -rf qvpn ; sleep 2s
    sg qvpn -c "$VPN_CLIENT $VPN_OPTIONS"
+   su - -c 'notify-send "$(hostname): Starting $VPN_CLIENT..." --icon=network-idle' user
    ~~~
 
    If you are using anything other than OpenVPN, change the `VPN_CLIENT` and `VPN_OPTIONS` variables to match your VPN software.
