@@ -257,7 +257,7 @@ Note that the location and name of your private key may differ.
 
    For Debian templates:<br/>
    ```
-   user@debian-10:~$ sudo apt-get install ssh-askpass
+   user@debian-10:~$ sudo apt-get install ssh-askpass-gnome
    ```
 3. Shutdown the template and restart your `vault` VM.
 
