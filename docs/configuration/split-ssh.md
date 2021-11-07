@@ -166,6 +166,12 @@ We now need to write a small script that handles connection requests from `ssh-c
       socat - UNIX-CONNECT:$SSH_AUTH_SOCK
       ```
 
+2. Make it executable
+
+```shell_prompt
+[user@fedora-32 ~]$ sudo chmod +x /etc/qubes-rpc/qubes.SshAgent
+```
+
 ### In the AppVM `ssh-client`
 
 Theoretically, you can use SSH in any AppVM. 
@@ -193,7 +199,7 @@ Therefore, we add a script in `rc.local` (Which will run at VM startup) to liste
       if [ "$SSH_VAULT_VM" != "" ]; then
         export SSH_SOCK="/home/user/.SSH_AGENT_$SSH_VAULT_VM"
         rm -f "$SSH_SOCK"
-        sudo -u user /bin/sh -c "umask 177 && exec socat 'UNIX-LISTEN:$SSH_SOCK,fork' 'EXEC:qrexec-client-vm $SSH_VAULT_VM qubes.SshAgent'" 
+        sudo -u user /bin/sh -c "umask 177 && exec socat 'UNIX-LISTEN:$SSH_SOCK,fork' 'EXEC:qrexec-client-vm $SSH_VAULT_VM qubes.SshAgent'" &
       fi
       # <<< SPLIT SSH CONFIGURATION
       ```
