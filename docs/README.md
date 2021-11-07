@@ -31,6 +31,7 @@
 - [windows 7 gaming HVM with GPU passthrough](customization/windows-gaming-hvm.md)
 - [Choose deafult terminal settings for a TemplateVM](customization/terminal-defaults.md)  
 - [Screenlockers](customization/screenlockers.md)  
+- [USB Hardening](customization/usb-hardening.md)  
 
 `hardware`
 - [tips on choosing the right hardware](hardware/hardware-selection.md)
