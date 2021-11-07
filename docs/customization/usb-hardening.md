@@ -49,7 +49,8 @@ any devices (users may want to add their device/interface combinations for conve
 following:
 
 1. All USB devices attached at boot time are allowed, all others rejected.
-2. The user may employ a small script to allow USB devices attached during the next minute or so.
+2. The user may employ a small script to allow USB devices attached during the next minute or so. Only
+   certain reasonable USB device classes (audio, HID, mass storage, hub, smart card) are allowed.
 
 #### USBGuard Configuration
 
