@@ -40,6 +40,9 @@ For dom0, you can install it via
 sudo qubes-dom0-update usbguard
 ```
 
+The [usual security considerations](https://www.qubes-os.org/doc/how-to-install-software-in-dom0/) for
+software installations in `dom0` apply.
+
 ### `dom0` Example Setup
 
 _(The below guide only works with Qubes OS 4.1 or higher.)_
