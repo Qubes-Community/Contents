@@ -41,6 +41,20 @@ Skip the first step if you don't wish to create another vault.
 
 ## Setting up SSH
 
+Install `ssh-askpass` in the template of your `vault` VM.  It will be
+used by `ssh-agent` to ask for confirmation, for keys added using
+`ssh-add -c`.
+
+For Fedora templates:<br/>
+```
+[user@fedora-32 ~]$ sudo dnf install openssh-askpass
+```
+
+For Debian templates:<br/>
+```
+user@debian-10:~$ sudo apt-get install ssh-askpass-gnome
+```
+
 Perform the next steps in the AppVM `vault`.
 
 1. Generate an SSH key pair. 
@@ -100,7 +114,7 @@ If you still want to encrypt your keys you must refer to the [Securing Your Priv
       ```shell_prompt
       [Desktop Entry]
       Name=ssh-add
-      Exec=ssh-add
+      Exec=ssh-add -c
       Type=Application
       ```
         
@@ -166,6 +180,12 @@ We now need to write a small script that handles connection requests from `ssh-c
       socat - UNIX-CONNECT:$SSH_AUTH_SOCK
       ```
 
+2. Make it executable
+
+```shell_prompt
+[user@fedora-32 ~]$ sudo chmod +x /etc/qubes-rpc/qubes.SshAgent
+```
+
 ### In the AppVM `ssh-client`
 
 Theoretically, you can use SSH in any AppVM. 
@@ -193,7 +213,7 @@ Therefore, we add a script in `rc.local` (Which will run at VM startup) to liste
       if [ "$SSH_VAULT_VM" != "" ]; then
         export SSH_SOCK="/home/user/.SSH_AGENT_$SSH_VAULT_VM"
         rm -f "$SSH_SOCK"
-        sudo -u user /bin/sh -c "umask 177 && exec socat 'UNIX-LISTEN:$SSH_SOCK,fork' 'EXEC:qrexec-client-vm $SSH_VAULT_VM qubes.SshAgent'" 
+        sudo -u user /bin/sh -c "umask 177 && exec socat 'UNIX-LISTEN:$SSH_SOCK,fork' 'EXEC:qrexec-client-vm $SSH_VAULT_VM qubes.SshAgent'" &
       fi
       # <<< SPLIT SSH CONFIGURATION
       ```
@@ -230,6 +250,8 @@ Please note that since `ssh-askpass` prompt is displayed on `vault` VM boot, it 
 
 ### Using the Built-in Password Utility and `ssh-askpass`
 
+You should have added `ssh-askpass` to your vault template earlier when [setting up SSH](#setting-up-ssh).
+
 1. Either add a password to an existing private key with `ssh-keygen -p` or directly create a key pair with a password (enter password when prompted during the creation process, see [above](#setting-up-ssh)).
 Note that the location and name of your private key may differ.
 
@@ -242,18 +264,7 @@ Note that the location and name of your private key may differ.
    Your identification has been saved with the new passphrase.
    ```
     
-2. Install `ssh-askpass` in the template of your `vault` VM.
-
-   For Fedora templates:<br/>
-   ```
-   [user@fedora-32 ~]$ sudo dnf install openssh-askpass
-   ```
-
-   For Debian templates:<br/>
-   ```
-   user@debian-10:~$ sudo apt-get install ssh-askpass
-   ```
-3. Shutdown the template and restart your `vault` VM.
+2. Shutdown the template and restart your `vault` VM.
 
 With this configuration you'll be prompted for entering your password every time you start your vault VM to be able to make use of your SSH key. 
 
@@ -366,7 +377,9 @@ If you're getting an error (e.g. `error fetching identities: communication with 
 * It is possible for a malicious VM to hold onto an ssh-agent connection for more than one use. 
 Therefore, if you authorize usage once, assume that a malicious VM could then use it many more times. 
 In this case, though, the SSH Agent will continue to protect your private keys; only usage of it would be available to the malicious VM until it is shut down.
-* It doesn’t solve the problem of allowing the user to know what is requested before the operation gets approved.
+* It is still to be fully verified if solve the problem of allowing the user to know what is requested before the operation gets approved is properly solved by either:
+  * configuring the vault to use `ssh-add -c` as described above
+  * configuring KeepassXC to "Require user confirmation when this key is used"
 
 Want more Qubes split magic?
 Check out [Split-GPG][Split-GPG].
