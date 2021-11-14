@@ -377,7 +377,7 @@ If you're getting an error (e.g. `error fetching identities: communication with 
 * It is possible for a malicious VM to hold onto an ssh-agent connection for more than one use. 
 Therefore, if you authorize usage once, assume that a malicious VM could then use it many more times. 
 In this case, though, the SSH Agent will continue to protect your private keys; only usage of it would be available to the malicious VM until it is shut down.
-* It is still to be fully verified if solve the problem of allowing the user to know what is requested before the operation gets approved is properly solved by either:
+* The two actions below should allow the user to know what is requested before the operation gets approved, but has not been fully verified:
   * configuring the vault to use `ssh-add -c` as described above
   * configuring KeepassXC to "Require user confirmation when this key is used"
 
