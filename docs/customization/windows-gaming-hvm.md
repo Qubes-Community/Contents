@@ -2,25 +2,24 @@
 
 Some information to configure a windows HVM for gaming. 
 This is not officially supported, just some community trial & errors.
-This doc is also hosted on
-https://neowutran.ovh/qubes/articles/gaming_windows_hvm.html
+This doc is also hosted on https://neowutran.ovh/qubes/articles/gaming_windows_hvm.html
 
 ## References
 
-Everythings needed is referenced here
+Everything needed is referenced here
 
--   [Usefull technical details](https://paste.debian.net/1043341/)
+-   [Useful technical details](https://paste.debian.net/1043341/)
 
 -   [Reddit thread of what is needed for GPU
     passthrough](https://www.reddit.com/r/Qubes/comments/9hp3e7/gpu_passthrough_howto/)
 
--   [Solution to have more than 3Go of RAM in the Windows
+-   [Solution to have more than 3 GB of RAM in the Windows
     HVM](https://github.com/QubesOS/qubes-issues/issues/4321#issuecomment-423011787)
 
 -   [Some old
     references](https://www.reddit.com/r/Qubes/comments/66wk4q/gpu_passthrough/)
 
-## Prerequise
+## Prerequisite
 
 You have a functional Windows HVM (Windows 7 or Windows 10). The \"how
 to\" for this part can be found on the Qubes OS documentation and here:
@@ -53,7 +52,7 @@ In my case:
 
 -   Primary GPU: Some Nvidia trash, used for dom0
 
--   32Go of RAM. 12Go of RAM will be dedicated for the Windows HVM
+-   32 GB of RAM. 12 GB of RAM will be dedicated to the Windows HVM
 
 -   A fast M.2 disk
 
@@ -70,7 +69,7 @@ Short list of things to do to make the GPU passthrough work:
     secondary GPU, and regenerated the grub if needed
 
 -   You have patched stubdom-linux-rootfs.gz to allow to have more than
-    3Go of RAM for your HVM
+    3 GB of RAM for your HVM
 
 ## IOMMU Group
 
@@ -98,7 +97,7 @@ the GRUB. In a dom0 Terminal, type:
 qvm-pci
 ```
 
-Then find the devices id for your secondary gpu. In my case, it is
+Then find the devices id for your secondary GPU. In my case, it is
 `dom0:0a_00.0` and `dom0:0a_00.1`. Edit /etc/default/grub,
 and add the PCI hiding
 
@@ -167,7 +166,7 @@ sudo mv ../stubdom-linux-rootfs /usr/lib/xen/boot/
 ```
 
 Note that this will apply the change to all HVMs, so if you have any
-other HVM with more than 3.5G ram assigned, they will not start without
+other HVM with more than 3.5GB ram assigned, they will not start without
 the adapter being passed through. Ideally to fix this libvirt should be
 extended to pass the max-ram-below-4g parameter through to xen, and then
 a calculation added to determine the correct TOLUD based on the total
@@ -193,7 +192,7 @@ Before the line
 add:
 
 ``` bash
-# Patch 3.5 Go limit
+# Patch 3.5 GB limit
 vm_name=$(xenstore-read "/local/domain/$domid/name")
 # Apply the patch only if the qube name start by "gpu_"
 if [ $(echo "$vm_name" | grep -iEc '^gpu_' ) -eq 1 ]; then
@@ -242,7 +241,7 @@ And safely.
 
 The AMD GPUs have a bug when used in HVM: each time you will reboot your
 windows HVM, it will get slower and slower. It is because the AMD GPUs
-is not correctly resetted when you restart your windows HVM Two
+is not correctly reset when you restart your Windows HVM. Two
 solutions for that:
 
 -   Reboot your computer
