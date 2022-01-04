@@ -26,7 +26,7 @@ Configuration
 
 In all versions of Qubes, you may want to set up a periodic job in `dom0` to trim the disk.
 This can be done with either systemd (weekly only) or cron (daily or weekly).
-You should add this service or cron to **each VM** if you want the trim function to work in.
+You should also add this service or cron job to **each VM** you want the trim function to work in.
 
  * **Systemd**
 
