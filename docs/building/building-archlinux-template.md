@@ -400,7 +400,7 @@ xenstore-read: xs_open: Permission denied
 </details>
 
 During the template building process an error ocurred, corrupting the group id of the /dev/xen/* files.
-To fix this you'll need to assign the correct permissions, so you'll have to enter the following <b> while `make template` is running:
+To fix this you'll need to assign the correct permissions, so you'll have to enter the following <b> while `make template` is running: </b>
 ```console
 sudo chgrp qubes /dev/xen/*
 ```
