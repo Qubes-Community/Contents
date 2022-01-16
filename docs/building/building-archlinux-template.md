@@ -4,30 +4,11 @@
 Guide status:
 - 4.0.4 :
 - 4.1-beta1 : validated (2021-07-31) by the commit author of this line.
- 
+- 4.1rc3 : validated (2022-01-11) by the commit author of this line. 
+
 ## Steps
-### 0. Installing the 'fedora-33-minimal' Qubes template
 
-Note: an alternative is using an fedora-{33,34} appVM.
-
-#### Open a terminal in Dom0
-
-Large download (~639MB); if using 'sys-whonix' as the Dom0 UpdateVM then temporarily swap to 'sys-firewall' (to speed-up download speeds).
-```console
-# qubes-dom0-update qubes-template-fedora-33-minimal
-```
-Keep in mind what Qubes OS version your installation is; used when building Qubes Components and Template(s).
-```console
-# cat /etc/qubes-release
-```
-```
-# qvm-run -u root fedora-33-minimal xterm
-# dnf install qubes-core-agent-passwordless-root qubes-core-agent-networking iproute
-# exit
-```
-
-___
-### 1. Open a non-root ($) terminal in the 'fedora-33-minimal' TemplateVM.
+### 1. Open a non-root ($) terminal in the 'fedora-34' TemplateVM.
 > **How to see whether the `'GNUMAKEFLAGS'` or `'MAKEFLAGS'` environment variable is used: \
 `$ strings /usr/bin/make | grep MAKEFLAGS` \
 GNU Make's `-l` set to same value as `-j` prevents CPU overcommitment.**
@@ -402,52 +383,30 @@ $ ln -sr pulsecore-14.1 pulsecore-14.2
 
 ### Known issues
 
-### sudo: effective uid is not 0
-If you get the below error with fedora 34:
-
-<details><summary>Details of the `sudo: effective uid is not 0` error</summary>
+### xenstore-read: xs_open: permission denied
+If the following error appears:
+<details><summary>Click here to show error message</summary>
 
 ```
-==> Making package: qubes-vm-xen 4.14.2-1 (Sat Jul 31 15:17:57 2021)
-==> Checking runtime dependencies...
-==> Installing missing dependencies...
-sudo: effective uid is not 0, is /usr/sbin/sudo on a file system with the 'nosuid' option set or an NFS file system without root privileges?
-==> ERROR: 'pacman' failed to install missing dependencies.
-==> Missing dependencies:
-  -> python
-  -> bridge-utils
-  -> python-lxml
-  -> lzo
-  -> yajl
-==> Checking buildtime dependencies...
-==> Installing missing dependencies...
-sudo: effective uid is not 0, is /usr/sbin/sudo on a file system with the 'nosuid' option set or an NFS file system without root privileges?
-==> ERROR: 'pacman' failed to install missing dependencies.
-==> Missing dependencies:
-  -> wget
-  -> git
-  -> bin86
-  -> dev86
-  -> acpica
-  -> yajl
-  -> pixman
-==> ERROR: Could not resolve all dependencies.
-make[2]: *** [/home/user/qubes-builder/qubes-src/builder-archlinux/Makefile.archlinux:138: dist-package] Error 8
-make[1]: *** [Makefile.generic:191: packages] Error 1
-make: *** [Makefile:259: vmm-xen-vm] Error 1
++ umask 022
++ cd /home/user/qubes-builder/qubes-src/linux-template-builder
++ rm -rf /home/user/qubes-builder/qubes-src/linux-template-builder/rpmbuild/BUILDROOT/qubes-template-archlinux-4.0.6-202111300407.noarch
++ RPM_EC=0
+++ jobs -p
++ exit 0
+xenstore-read: xs_open: Permission denied
 ```
 
 </details>
 
-The partition used for the build process needs the suid option, in the qubes-builder remount script.
-In the `/home/user/qubes-builder/scripts/remount` file change the line:
+During the template building process an error ocurred, corrupting the group id of the /dev/xen/* files.
+To fix this you'll need to assign the correct permissions, so you'll have to enter the following <b> while `make template` is running: </b>
+```console
+sudo chgrp qubes /dev/xen/*
 ```
-sudo mount "$mountpoint" -o dev,remount
-```
-with:
-```
-sudo mount "$mountpoint" -o dev,suid,remount
-```
+
+
+
 
 ## Debugging the Qubes-ArchLinux runtime
 If you are able to launch a terminal and execute command, utilize your Arch-fu to fix the issue. \
