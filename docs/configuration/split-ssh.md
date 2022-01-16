@@ -169,16 +169,16 @@ We now need to write a small script that handles connection requests from `ssh-c
      
    - Paste the following contents:
      
-       ```shell_prompt
-      #!/bin/sh
-      # Qubes App Split SSH Script
-     
-      # safeguard - Qubes notification bubble for each ssh request
-      notify-send "[`qubesdb-read /name`] SSH agent access from: $QREXEC_REMOTE_DOMAIN"
-     
-      # SSH connection
-      socat - UNIX-CONNECT:$SSH_AUTH_SOCK
-      ```
+     ```shell_prompt
+     #!/bin/sh
+     # Qubes App Split SSH Script
+
+     # safeguard - Qubes notification bubble for each ssh request
+     notify-send "[$(qubesdb-read /name)] SSH agent access from: $QREXEC_REMOTE_DOMAIN"
+
+     # SSH connection
+     socat - "UNIX-CONNECT:$SSH_AUTH_SOCK"
+     ```
 
 2. Make it executable
 
