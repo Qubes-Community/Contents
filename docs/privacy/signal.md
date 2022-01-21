@@ -25,29 +25,29 @@ How to install Signal in Qubes
 This website cannot guarantee that any PGP key you download from the Internet is authentic.
 Always obtain a trusted key fingerprint via other channels, and always check any key you download against your trusted copy of the fingerprint.
 
-1. (Optional)Create a TemplateVM (Debian, 9 is used as an example but feel free to use any more updated by changing the 9 to a 10, etc.)
+1. (Optional)Create a TemplateVM (Debian, 11 is used as an example)
 
-       [user@dom0 ~]$ sudo qubes-dom0-update qubes-template-debian-9
+       [user@dom0 ~]$ sudo qubesctl --skip-dom0 --targets=debian-11 --show-output state.sls update.qubes-vm
 
-2. Open a terminal in Debian 9 (Or your previously chosen template)
+2. Open a terminal in Debian 11 (Or your previously chosen template)
 
-       [user@dom0 ~]$ qvm-run -a debian-9 gnome-terminal
+       [user@dom0 ~]$ qvm-run -a debian-11 gnome-terminal
        
-3. Use these commands in your terminal (If you chose a different distribution, such as buster, substitute that for xenial in the 3rd command)
+3. Use these commands in your terminal (If you chose a different distribution, such as buster, substitute that for xenial in the 4th command)
 
-       (Optional)[user@debian-8 ~]$ sudo apt-get install curl
-       [user@debian-8 ~]$ curl -s -x 127.0.0.1:8082 https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
-       [user@debian-8 ~]$ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
-       [user@debian-8 ~]$ sudo apt update && sudo apt install signal-desktop
+       (Optional)[user@debian-11 ~]$ sudo apt-get install curl
+       (for better signal notifications)[user@debian-11 ~]$ sudo apt-get install dunst
+       [user@debian-11 ~]$ curl --proxy 127.0.0.1:8082 -s https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+       [user@debian-11 ~]$ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+       [user@debian-11 ~]$ sudo apt update && sudo apt full-upgrade && sudo apt install --no-install-recommends signal-desktop
 
 5. Shutdown the TemplateVM (substitute your template name if needed) :
 
-        [user@dom0 ~]$ qvm-shutdown debian-9
+        [user@dom0 ~]$ qvm-shutdown debian-11
         
 6. Create an AppVM based on this TemplateVM
-7. With your mouse select the `Q` menu -> `Domain: "AppVM Name"` ->  'AppVM name: Qube Settings' -> OK -> 'Applications'
-(or `"AppVM Name": VM Settings` -> `Applications`). 
-   Select `Signal` from the left `Available` column, move it to the right `Selected` column by clicking the `>` button and then `OK` to apply the changes and close the window.
+7. With your mouse select the `Q` menu -> `Domain: "AppVM Name"` -> `"AppVM Name": Qube Settings` -> `Applications`
+(or in Qubes Manager`"AppVM Name"` -> `Settings` -> `Applications`). Select `Signal` from the left `Available` column, move it to the right `Selected` column by clicking the `>` button and then `OK` to apply the changes and close the window.
 
 -----
 
