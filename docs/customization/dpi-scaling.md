@@ -102,9 +102,11 @@ gsettings reset org.gnome.desktop.interface text-scaling-factor
 
 For more information on setting system-wide dconf values see [this page](https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en).
 
-# Troubleshooting
+Troubleshooting
+===============
 
-## Firefox and other GTK3 applications
+Firefox and other GTK3 applications
+-----------------------------------
 
 Even when setting the correct dpi values, some applications might have very
 small icons or similar elements. This usually happens in Firefox for example.
@@ -135,7 +137,8 @@ export GDK_DPI_SCALE=0.5
 ~~~
 
 Resources
----------
+=========
+
 - ARCH Linux HiDPI wiki page: https://wiki.archlinux.org/index.php/HiDPI
 - Gnome HiDPI wiki page: https://wiki.gnome.org/HowDoI/HiDpi
 - Mozilla DPI-related Font Size Issues on Unix: https://www-archive.mozilla.org/unix/dpi.html
