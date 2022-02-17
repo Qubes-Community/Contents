@@ -11,6 +11,7 @@ The simplest way to set dpi scaling in dom0 is to use the desktop environment's 
 
 - Xfce: Qubes Menu → System Tools → Appearance → Fonts tab: Custom DPI setting: `xxx`
 - KDE: Qubes Menu → System Settings → Font → Force font dpi: `xxx`
+- i3: add `Xft.dpi: xxx` to `/home/user/.Xresources' in dom0
 
 Replace `xxx` with a number that fits your setup and is a multiple of 6, as numbers that aren't sometimes result in annoying rounding errors that cause adjacent bitmap font sizes to not increment and decrement linearly.
 
