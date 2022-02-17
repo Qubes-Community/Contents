@@ -102,6 +102,37 @@ gsettings reset org.gnome.desktop.interface text-scaling-factor
 
 For more information on setting system-wide dconf values see [this page](https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en).
 
+# Troubleshooting
+
+## Firefox and other GTK3 applications
+
+Even when setting the correct dpi values, some applications might have very
+small icons or similar elements. This usually happens in Firefox for example.
+
+To mitigate this issue it is possible to set the `GDK_SCALE` and `GDK_DPI_SCALE`
+variables as described
+[here](https://wiki.archlinux.org/title/HiDPI#GDK_3_(GTK_3). To test these
+values first, open a terminal and type:
+
+~~~
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+firefox
+~~~
+
+You can try change the values for `GDK_SCALE` and `GDK_DPI_SCALE` to your
+liking, but `GDK_SCALE` needs to be an integer value.
+
+Once you confirmed that this is working, you can make these settings permanent
+by creating a file `/etc/profile.d/dpi_GDK.sh` (ideally in the template VM) with
+the following content and your own values:
+
+~~~
+#!/bin/sh
+
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+~~~
 
 Resources
 ---------
