@@ -11,6 +11,7 @@ The simplest way to set dpi scaling in dom0 is to use the desktop environment's 
 
 - Xfce: Qubes Menu → System Tools → Appearance → Fonts tab: Custom DPI setting: `xxx`
 - KDE: Qubes Menu → System Settings → Font → Force font dpi: `xxx`
+- i3: add `Xft.dpi: xxx` to `/home/user/.Xresources' in dom0
 
 Replace `xxx` with a number that fits your setup and is a multiple of 6, as numbers that aren't sometimes result in annoying rounding errors that cause adjacent bitmap font sizes to not increment and decrement linearly.
 
@@ -101,9 +102,43 @@ gsettings reset org.gnome.desktop.interface text-scaling-factor
 
 For more information on setting system-wide dconf values see [this page](https://help.gnome.org/admin/system-admin-guide/stable/dconf-custom-defaults.html.en).
 
+Troubleshooting
+===============
+
+Firefox and other GTK3 applications
+-----------------------------------
+
+Even when setting the correct dpi values, some applications might have very
+small icons or similar elements. This usually happens in Firefox for example.
+
+To mitigate this issue it is possible to set the `GDK_SCALE` and `GDK_DPI_SCALE`
+variables as described
+[here](https://wiki.archlinux.org/title/HiDPI#GDK_3_(GTK_3). To test these
+values first, open a terminal and type:
+
+~~~
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+firefox
+~~~
+
+You can try change the values for `GDK_SCALE` and `GDK_DPI_SCALE` to your
+liking, but `GDK_SCALE` needs to be an integer value.
+
+Once you confirmed that this is working, you can make these settings permanent
+by creating a file `/etc/profile.d/dpi_GDK.sh` (ideally in the template VM) with
+the following content and your own values:
+
+~~~
+#!/bin/sh
+
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+~~~
 
 Resources
----------
+=========
+
 - ARCH Linux HiDPI wiki page: https://wiki.archlinux.org/index.php/HiDPI
 - Gnome HiDPI wiki page: https://wiki.gnome.org/HowDoI/HiDpi
 - Mozilla DPI-related Font Size Issues on Unix: https://www-archive.mozilla.org/unix/dpi.html
