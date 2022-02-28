@@ -64,13 +64,27 @@ Finally, shutdown all VMs and change the settings of sys-firewall, etc. to use t
 
 You can check the MAC address currently in use by looking at the status pages of your router device(s), or inside the NetVM with the command `sudo ip link show`.
 
-## Randomize your hostname
+## Anonymize your hostname
 
 DHCP requests also leak your hostname to your LAN. Since your hostname is usually `sys-net`, other network users can easily spot that you're using Qubes OS.
 
-Unfortunately `NetworkManager` currently doesn't provide an option to disable that leak globally ([Gnome Bug 768076](https://bugzilla.gnome.org/show_bug.cgi?id=768076)).
+Unfortunately `NetworkManager` currently doesn't provide an option to disable that leak globally ([Gnome Bug 768076](https://bugzilla.gnome.org/show_bug.cgi?id=768076)). However the below alternatives exist.
 
-You may however use the following code to assign a random hostname to a VM during each of its startup. Please follow the instructions mentioned in the beginning to properly install it.
+### Prevent hostname sending
+
+`NetworkManager` can be configured to use `dhclient` for DHCP requests. `dhclient` has options to prevent the hostname from being sent. To do that, add a file to your `sys-net` template (usually the Fedora or Debian base template) named e.g. `/etc/NetworkManager/conf.d/dhclient.conf` with the following content:  
+```
+[main]
+dhcp=dhclient
+```
+Afterwards edit `/etc/dhcp/dhclient.conf` and remove or comment out the line starting with `send host-name`.
+
+If you want to decide per connection, `NetworkManager` also provides an option to not send the hostname:  
+Edit the saved connection files at `/rw/config/NM-system-connections/*.nmconnection` and add the `dhcp-send-hostname=false` line to both the `[ipv4]` and the `[ipv6]` section.
+
+### Randomize the hostname
+
+Alternatively you may use the following code to assign a random hostname to a VM during each of its startup. Please follow the instructions mentioned in the beginning to properly install it.
 
 ```.bash
 #!/bin/bash
