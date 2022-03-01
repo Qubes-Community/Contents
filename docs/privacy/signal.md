@@ -37,8 +37,8 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
        
 3. Use these commands in your terminal (if you chose a different distribution, such as `buster`, substitute that for `xenial` in the fourth command):
 
-       [user@debian-11 ~]$ sudo apt-get install curl  # (Optional)
-       [user@debian-11 ~]$ sudo apt-get install dunst  # (for better Signal notifications)
+       [user@debian-11 ~]$ sudo apt install curl  # (Optional)
+       [user@debian-11 ~]$ sudo apt install dunst  # (for better Signal notifications)
        [user@debian-11 ~]$ curl --proxy 127.0.0.1:8082 -s https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
        [user@debian-11 ~]$ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
        [user@debian-11 ~]$ sudo apt update && sudo apt full-upgrade && sudo apt install --no-install-recommends signal-desktop
