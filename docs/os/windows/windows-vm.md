@@ -1,4 +1,5 @@
-
+:warning: *Some of the information below is outdated ; please read [this forum wiki post](https://forum.qubes-os.org/t/wip-windows-qwt-user-reports/9687) for current instructions and users feedback.
+The content below will eventually be updated to reflect the newer 4.1 release and QWT recent development (contributors welcome!)*
 
 Installing a Windows VM
 =======================
