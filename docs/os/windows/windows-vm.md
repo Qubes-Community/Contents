@@ -1,4 +1,4 @@
-The content below will eventually has been updated to reflect the newer 4.1 release and QWT recent development - see ...
+The content below will eventually has been updated to reflect the newer 4.1 release and QWT recent development - see [Installing and Using Windows-based VMs in Qubes R4.1](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-vm41.md)
 
 Installing a Windows VM
 =======================
