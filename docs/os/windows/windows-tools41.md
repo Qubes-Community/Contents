@@ -44,32 +44,40 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 > **Note:** seamless mode is currently not available for windows 10 and 11. Please check the top of this document for the full feature availability breakdown.
 
- 1. Download the [Qubes Windows Tools installation disk](https://github.com/tabit-pro/qubes-windows-tools-cross/releases/download/v4.1.67/qubes-windows-tools-4.1.67.1.iso/) and move it to `C:\`.
+ 1. Download the [Qubes Windows Tools installation disk](https://github.com/tabit-pro/qubes-windows-tools-cross/releases/download/v4.1.67/qubes-windows-tools-4.1.67.1.iso/) into some AppVM.
 
- 2. Download the [checksumfile](https://github.com/tabit-pro/qubes-windows-tools-cross/releases/download/v4.1.67/sha256sum.txt) and move it to `C:\`.
+ 2. Download the [checksumfile](https://github.com/tabit-pro/qubes-windows-tools-cross/releases/download/v4.1.67/sha256sum.txt) into the same AppVM.
  
- 3. Check the integrity of the file `qubes-windows-tools-4.1.67.1.iso` by comparing its hash checksum. This can be done using the Windows command `certutil` on the windows command prompt (`cmd.exe`) and specifying an appropriate hash algorithm like:
+ 3. Check the integrity of the file `qubes-windows-tools-4.1.67.1.iso` by comparing its hash checksum. This can be done using the `sha256sum` command in the AppVM like:
         
-		certutil -hashfile C:\qubes-windows-tools-4.1.67.1.iso SHA256
+		sha256sum qubes-windows-tools-4.1.67.1.iso
 
 	and compare it to the value stored in the file `sha256sum.txt` for the `iso` file (**it has to exactly match for security reasons**). If it matches, feel free to continue the installation. If not, repeat the download to make sure it was not corrupted due to a network problem. If keeps on not matching it might be an attacker attempting to do something nasty to your system -- Ask for support.
 
-    > **Note**: this is a workaround for installing the qubes windows tools since the tools are .
+    > **Note**: this is a workaround for installing the qubes windows tools since the tools are not yet available in the Qubes repositories.
 
- 7. Install Qubes Windows Tools 4.0.1.3 by starting `qubes-tools-4.0.1.3.exe`, not selecting the `Xen PV disk drivers` and the `Move user profiles` (which would probably lead to problems in Windows, anyhow). If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
+ 4. Start the Windows qube attaching the `iso` file as a virtual CD-Rom drive *(where `<VMname>` is the name of your Windows VM and <AppVM> the name of the AppVM where you downloaded the installation `iso`)*
 
- 8. Shut down Windows and wait until the VM is really stopped, i.e. Qubes shows no more activity.
+                qvm-start <VMname> --cdrom=<AppVM>:/path_to_the_file/qubes-windows-tools-4.1.67.1.iso
 
- 9. On a `dom0` terminal write: *(where `<VMname>` is the name of your Windows 10 VM)*
+         You will find an addtional CD-ROM drive containing the Qubes Windows Tools installation kit file `qubes-tools-x64.msi`.
+
+ 5. Install Qubes Windows Tools 4.1.67.1 by starting `qubes-tools-x64.msi`, optionally selecting the `Xen PV disk drivers`. For Windows 10 and 11, but not Windows 7, you should select `Move user profiles` (which would probably lead to problems in Windows 7). If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
+
+ 6. Shut down Windows and wait until the VM is really stopped, i.e. Qubes shows no more activity.
+
+ 7. On a `dom0` terminal write: *(where `<VMname>` is the name of your Windows VM)*
   
 		qvm-features <VMname> gui 1
+		qvm-features <VMname> audio-model ich9
+		qvm-features <VMname> qubes-stubdomain 1
 		qvm-prefs <VMname> qrexec_timeout 300
 
- 10. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
+ 8. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
  
- 11. Now the system should be up, with QWT running correctly.
+ 9. Now the system should be up, with QWT running correctly.
  
- 12. Lastly to enable file copy operations to a Windows 10 VM the `default_user` property should be set the `<username>` that you use to login to the Windows VM. This can be done via the following command on a `dom0` terminal: *(where `<VMname>` is the name of your Windows 10 VM)*
+ 10. Lastly to enable file copy operations to a Windows VM the `default_user` property should be set the `<username>` that you use to login to the Windows VM. This can be done via the following command on a `dom0` terminal: *(where `<VMname>` is the name of your Windows 10 VM)*
   
 		`qvm-prefs <VMname> default_user <username>`
 
