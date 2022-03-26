@@ -75,7 +75,7 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 		[user@dom0 ~] $ qvm-start <VMname> --cdrom=<AppVM>:/<PathToFile>/qubes-windows-tools-4.1.67.1.iso
 
-	Once the Windows VM boots, a CDROM should appear in the 'My Computer' menu (typically as `D:`) with the setup program `qubes-tools-x64.msi` in its main directory.
+	Once the Windows VM boots, a CDROM should appear in the 'My Computer' menu (typically as `D:` or `E:`) with the setup program `qubes-tools-x64.msi` in its main directory.
 
  5. **Windows 7 only:** Rename the private disk `D:` to `Q:`. This can be done by starting the diskmanager and changing the drive letter:
 	
