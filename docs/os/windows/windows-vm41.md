@@ -6,12 +6,12 @@ Simple Windows install
 
 If you just want something simple and you can live without some features. This works for Windows XP, 7, 10 and 11, and it may work for Windows 8 and 8.1, although this has not been tested.
 
-Works:
+**Works:**
 - display (1440x900 or 1280x1024 are a nice fit onto FHD hw display)
 - keyboard (incl. correct mapping), pointing device
 - network (emulated Realtek NIC)
 
-Does not work:
+**Does not work:**
 - copy & paste (the qubes way)
 - copying files into / out of the VM (the qubes way)
 - assigning USB devices (the qubes way via the tray applet)
@@ -19,7 +19,7 @@ Does not work:
 - PCI device 5853:0001 (Xen platform device) - no driver
 - all other features/hardware needing special tool/driver support
 
-Installation procedure:
+**Installation procedure:**
 - Have the Windows ISO image (preferrably the 64-bit version) downloaded in some qube.
 - Create a new Qube:
   - Name: WindowsQube, Color: orange
@@ -107,9 +107,11 @@ Windows' installer requires a significant amount of memory or else the VM will c
 
 `/var/log/xen/console/hypervisor.log`:
 
-> p2m_pod_demand_populate: Dom120 out of PoD memory! (tot=102411 ents=921600 dom120)
-> (XEN) domain_crash called from p2m-pod.c:1218
-> (XEN) Domain 120 (vcpu#0) crashed on cpu#3:
+~~~
+p2m_pod_demand_populate: Dom120 out of PoD memory! (tot=102411 ents=921600 dom120)
+(XEN) domain_crash called from p2m-pod.c:1218
+(XEN) Domain 120 (vcpu#0) crashed on cpu#3:
+~~~
 
 So, increase the VM's memory to 4096MB (memory = maxmem because we don't use memory balancing).
 
@@ -150,7 +152,7 @@ The VM will shutdown after the installer completes the extraction of Windows ins
 
 The second part of Windows' installer should then be able to complete successfully.
 
-Finally, increase the VM's `qrexec_timeout`: in case you happen to get a BSOD or a similar crash in the VM, utilities like chkdsk won't complete on restart before `qrexec_timeout` automatically halts the VM. That can really put the VM in a totally unrecoverable state, whereas with higher `qrexec_timeout`, `chkdsk` or the appropriate utility has plenty of time to fix the VM. Note that Qubes Windows Tools also require a larger timeout to move the user profiles to the private volume the first time the VM reboots after the tools' installation.
+Finally, increase the VM's `qrexec_timeout`: in case you happen to get a BSOD or a similar crash in the VM, utilities like `chkdsk` won't complete on restart before `qrexec_timeout` automatically halts the VM. That can really put the VM in a totally unrecoverable state, whereas with higher `qrexec_timeout`, `chkdsk` or the appropriate utility has plenty of time to fix the VM. Note that Qubes Windows Tools also require a larger timeout to move the user profiles to the private volume the first time the VM reboots after the tools' installation.
 
 ~~~
 qvm-prefs WindowsNew qrexec_timeout 300
