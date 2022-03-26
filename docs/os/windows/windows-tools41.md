@@ -111,9 +111,9 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 	
 	 - Start the command prompt as administrator, i.e. right click on the Command Prompt icon (All Programs -> Accessories) and choose "Run as administrator"
 	 - In the command prompt type `regedit`
-	 - In the registry editor, position to the key `\HKLM\Software\Invisible Things Lab\Qubes Tools\`
+	 - In the registry editor, position to the key `\HKEY_LOCAL_MACHINE\Software\Invisible Things Lab\Qubes Tools\`
 	 - Change the value `SeamlessMode` from 0 to 1
-	 - Position to the key `\HKLM\Software\Invisible Things Lab\Qubes Tools\qga\`
+	 - Position to the key `\HKEY_LOCAL_MACHINE\Software\Invisible Things Lab\Qubes Tools\qga\`
 	 - Change the value `SeamlessMode` from 0 to 1
 	 - Terminate the registry editor.
 	
@@ -131,10 +131,10 @@ Xen PV drivers and Qubes Windows Tools
 
 Installing Xen's PV drivers in the VM will lower its resources usage when using network and/or I/O intensive applications, but *may* come at the price of system stability (although Xen's PV drivers on a Windows VM are usually very stable). They can be installed as an optional part of Qubes Windows Tools (QWT), which bundles Xen's PV drivers.
 
-Notes about using Xen's VBD (storage) PV driver:
-- **Windows 7:** Installing the driver requires a fully updated VM or else you'll likely get a BSOD and a VM in a difficult to fix state. Updating Windows takes *hours* and for casual usage there isn't much of a performance between the disk PV driver and the default one; so there is likely no need to go through the lengthy Windows Update process if your VM doesn't have access to untrusted networks and if you don't use I/O intensive apps or attach block devices. If you plan to update your newly installed Windows VM it is recommended that you do so *before* installing Qubes Windows Tools (QWT).
-- The option to install the storage PV driver is disabled by default in Qubes Windows Tools 
-- In case you already had QWT installed without the storage PV driver and you then updated the VM, you may then install the driver by again starting the QWT installer and selecting the change option.
+> **Notes** about using Xen's VBD (storage) PV driver:
+> - **Windows 7:** Installing the driver requires a fully updated VM or else you'll likely get a BSOD ("Blue Screen Of Death") and a VM in a difficult to fix state. Updating Windows takes *hours* and for casual usage there isn't much of a performance between the disk PV driver and the default one; so there is likely no need to go through the lengthy Windows Update process if your VM doesn't have access to untrusted networks and if you don't use I/O intensive apps or attach block devices. If you plan to update your newly installed Windows VM it is recommended that you do so *before* installing Qubes Windows Tools.  Installing the driver will probably cause Windows 7 activation to become invalid, but the activation can be restored using the Microsoft telephone activation method. 
+> - The option to install the storage PV driver is disabled by default in Qubes Windows Tools 
+> - In case you already had QWT installed without the storage PV driver and you then updated the VM, you may then install the driver by again starting the QWT installer and selecting the change option.
 
 Using Windows AppVMs in seamless mode
 -------------------------------------
@@ -144,7 +144,7 @@ Using Windows AppVMs in seamless mode
 Once you start a Windows-based AppVM with Qubes Tools installed, you can easily start individual applications from the VM (note the `-a` switch used here, which will auto-start the VM if it is not running):
 
 ~~~
-qvm-run -a my-win7-appvm explorer.exe
+[user@dom0 ~] $ qvm-run -a my-win-appvm explorer.exe
 ~~~
 
 ![windows-seamless-4.png](/attachment/wiki/WindowsAppVms/windows-seamless-4.png) ![windows-seamless-1.png](/attachment/wiki/WindowsAppVms/windows-seamless-1.png)
@@ -152,11 +152,11 @@ qvm-run -a my-win7-appvm explorer.exe
 Also, the inter-VM services work as usual -- e.g. to request opening a document or URL in the Windows AppVM from another VM:
 
 ~~~
-[user@work ~]$ qvm-open-in-vm work-win7 roadmap.pptx
+[user@dom0 ~] $ qvm-open-in-vm my-win-appvm roadmap.pptx
 ~~~
 
 ~~~
-[user@work ~]$ qvm-open-in-vm work-win7 https://invisiblethingslab.com
+[user@dom0 ~]$ qvm-open-in-vm my-win-appvm https://invisiblethingslab.com
 ~~~
 
 ... just like in the case of Linux AppVMs. Of course all those operations are governed by central policy engine running in Dom0 -- if the policy doesn't contain explicit rules for the source and/or target AppVM, the user will be asked whether to allow or deny the operation.
@@ -177,13 +177,7 @@ Using template-based Windows AppVMs
 
 Qubes allows HVM VMs to share a common root filesystem from a select Template VM, just as for Linux AppVMs. This mode is not limited to Windows AppVMs, and can be used for any HVM (e.g. FreeBSD running in a HVM). 
 
-In order to create a HVM TemplateVM one can use the following command, suitably adapted:
-
-~~~
-qvm-create --class TemplateVM win-template --property virt_mode=HVM --property kernel=''  -l green
-~~~
-
-... , set memory as appropriate, and install the Windows OS (or any other OS) into this template the same way as you would install it into a normal HVM -- please see instructions on [this page](https://www.qubes-os.org/doc/hvm-create/).
+In order to create an HVM TemplateVM, the type "TemplateVM" has to be selected on creating the VM. Then set memory as appropriate, and install the Windows OS (or any other OS) into this template the same way as you would install it into a normal HVM -- please see instructions on [this page](https://www.qubes-os.org/doc/hvm-create/).
 
 If you use this Template as it is, then any HVMs that use it will effectively be DisposableVMs - the User directory will be wiped when the HVM is closed down.
 
@@ -199,20 +193,14 @@ Reboot is required because the "mover utility" runs very early in the boot proce
 This can take some time depending on the profiles' size and because the GUI agent is not yet active dom0/Qubes Manager may complain that the AppVM failed to boot. 
 That's a false alarm (you can increase the AppVM's default boot timeout using `qvm-prefs`), the VM should appear "green" in Qubes Manager shortly after.
 
-For Windows 7, the user directories have to be moved manually, because the automatic transfer during QWT installation does not work for not yet known reasons.
-
 It also makes sense to disable Automatic Updates for all the template-based AppVMs -- of course this should be done in the Template VM, not in individual AppVMs, because the system-wide settings are stored in the root filesystem (which holds the system-wide registry hives). Then, periodically check for updates in the Template VM and the changes will be carried over to any child AppVMs.
 
-Once the template has been created and installed it is easy to create AppVMs based on it:
-
-~~~
-qvm-create --property virt_mode=hvm <new windows appvm name> --template <name of template vm> --label <label color>
-~~~
+Once the template has been created and installed it is easy to create AppVMs based on it, by selecting the type "AppVM" and a suitable template.
 
 Components
 ----------
 
-Qubes Windows Tools (QWT for short) contain several components than can be enabled or disabled during installation:
+Qubes Windows Tools (QWT) contain several components than can be enabled or disabled during installation:
 
 - Shared components (required): common libraries used by QWT components.
 - Xen PV drivers: drivers for the virtual hardware exposed by Xen.
@@ -224,24 +212,21 @@ Qubes Windows Tools (QWT for short) contain several components than can be enabl
 - Qubes GUI Agent: video driver and gui agent that enable seamless showing of Windows applications on the secure Qubes desktop.
 - Disable UAC: User Account Control may interfere with QWT and doesn't really provide any additional benefits in Qubes environment.
 
-**In testing VMs only** it's probably a good idea to install a VNC server before installing QWT. If something goes very wrong with the Qubes gui agent, a VNC server should still allow access to the OS.
+> **Note:** *In testing VMs only* it's probably a good idea to install a VNC server before installing QWT. If something goes very wrong with the Qubes gui agent, a VNC server should still allow access to the OS.
 
-**NOTE**: Xen PV disk drivers are not installed by default. This is because they seem to cause problems (BSOD = Blue Screen Of Death). We're working with upstream devs to fix this. *However*, the BSOD seems to only occur after the first boot and everything works fine after that. **Enable the drivers at your own risk** of course, but we welcome reports of success/failure in any case (backup your VM first!). With disk PV drivers absent `qvm-block` will not work for the VM, but you can still use standard Qubes inter-VM file copying mechanisms.
-
-Xen PV driver components may display a message box asking for reboot during installation -- it's safe to ignore them and defer the reboot.
+> **Note**: Xen PV disk drivers are not installed by default. This is because they seem to cause problems (BSOD = Blue Screen Of Death). We're working with upstream devs to fix this. *However*, the BSOD seems to only occur after the first boot and everything works fine after that. **Enable the drivers at your own risk** of course, but we welcome reports of success/failure in any case (backup your VM first!). With disk PV drivers absent `qvm-block` will not work for the VM, but you can still use standard Qubes inter-VM file copying mechanisms.
 
 Installation logs
 -----------------
 
 If the install process fails or something goes wrong during it, include the installation logs in your bug report. They are created in the `%TEMP%` directory, by default `<user profile>\AppData\Local\Temp`. There are two text files, one small and one big, with names starting with `Qubes_Windows_Tools`.
 
-Uninstalling QWT is supported from version 3.2.1. Uninstalling previous versions is **not recommended**.
-After uninstalling you need to manually enable the DHCP Client Windows service, or set IP settings yourself to restore network access.
+Uninstalling QWT is supported. After uninstalling you need to manually enable the DHCP Client Windows service, or set IP settings yourself to restore network access.
 
 Configuration
 -------------
 
-Starting from version 2.2.\* various aspects of Qubes Windows Tools can be configured through the registry. The main configuration key is located in `HKEY_LOCAL_MACHINE\SOFTWARE\Invisible Things Lab\Qubes Tools`. Configuration values set on this level are global to all QWT components. It's possible to override global values with component-specific keys, this is useful mainly for setting log verbosity for troubleshooting. Possible configuration values are:
+Various aspects of Qubes Windows Tools (QWT) can be configured through the registry. The main configuration key is located in `HKEY_LOCAL_MACHINE\SOFTWARE\Invisible Things Lab\Qubes Tools`. Configuration values set on this level are global to all QWT components. It's possible to override global values with component-specific keys, this is useful mainly for setting log verbosity for troubleshooting. Possible configuration values are:
 
 |**Name**|**Type**|**Description**|**Default value**|
 |:-------|:-------|:--------------|:----------------|
@@ -251,7 +236,8 @@ Starting from version 2.2.\* various aspects of Qubes Windows Tools can be confi
 
 Possible log levels:
 
-||
+|**Level**|**Title**|**Description**|
+|:-----|:-----|:--------------|
 |1|Error|Serious errors that most likely cause irrecoverable failures|
 |2|Warning|Unexpected but non-fatal events|
 |3|Info|Useful information (default)|
@@ -260,10 +246,8 @@ Possible log levels:
 
 Debug and Verbose levels can generate large volume of logs and are intended for development/troubleshooting only.
 
-To override global settings for a specific component, create a new key under the root key mentioned above and name it as the executable name, without `.exe` extension. For example, to change qrexec-agent's log level to Debug, set it like this:
-
-![qtw-log-level.png](/attachment/wiki/WindowsTools/qtw-log-level.png)
-
+To override global settings for a specific component, create a new key under the root key mentioned above and name it as the executable name, without `.exe` extension.
+	
 Component-specific settings currently available:
 
 |**Component**|**Setting**|**Type**|**Description**|**Default value**|
@@ -275,17 +259,19 @@ Troubleshooting
 
 If the VM is inaccessible (doesn't respond to qrexec commands, gui is not functioning), try to boot it in safe mode:
 
--   `qvm-start --debug vmname`
--   mash F8 on the boot screen to enable boot options and select Safe Mode (optionally with networking)
+-  `[user@dom0 ~] $ qvm-start --debug <VMname>`
+-  Enable boot options and select Safe Mode (method depends on the Windows version; optionally with networking)
 
 Safe Mode should at least give you access to logs (see above).
 
-**Please include appropriate logs when reporting bugs/problems.** Starting from version 2.4.2 logs contain QWT version, but if you're using an earlier version be sure to mention which one. If the OS crashes (BSOD) please include the BSOD code and parameters in your bug report. The BSOD screen should be visible if you run the VM in debug mode (`qvm-start --debug vmname`). If it's not visible or the VM reboots automatically, try to start Windows in safe mode (see above) and 1) disable automatic restart on BSOD (Control Panel - System - Advanced system settings - Advanced - Startup and recovery), 2) check the system event log for BSOD events. If you can, send the `memory.dmp` dump file from c:\Windows.
-Xen logs (/var/log/xen/console/guest-*) are also useful as they contain pvdrivers diagnostic output.
+**Please include appropriate logs when reporting bugs/problems.** Logs contain the QWT version. If the OS crashes (BSOD) please include the BSOD code and parameters in your bug report. The BSOD screen should be visible if you run the VM in debug mode (`qvm-start --debug vmname`). If it's not visible or the VM reboots automatically, try to start Windows in safe mode (see above) and 1) disable automatic restart on BSOD (Control Panel - System - Advanced system settings - Advanced - Startup and recovery), 2) check the system event log for BSOD events. If you can, send the `memory.dmp` dump file from `C:\Windows`.
+	
+Xen logs (`/var/log/xen/console/guest-*`) are also useful as they contain pvdrivers diagnostic output.
 
 If a specific component is malfunctioning, you can increase its log verbosity as explained above to get more troubleshooting information. Below is a list of components:
 
-||
+|**Component**|**Description**|
+|:------------|:--------------|
 |qrexec-agent|Responsible for most communication with Qubes (dom0 and other domains), secure clipboard, file copying, qrexec services.|
 |qrexec-wrapper|Helper executable that's responsible for launching qrexec services, handling their I/O and vchan communication.|
 |qrexec-client-vm|Used for communications by the qrexec protocol.|
@@ -299,9 +285,11 @@ If a specific component is malfunctioning, you can increase its log verbosity as
 Updates
 -------
 
+:warning: *Currently Qubes Windows Tools (QWT) are not yet available from the repositories.*
+	
 When we publish a new QWT version, it's usually pushed to the `current-testing` or `unstable` repository first. To use versions from current-testing, run this in dom0:
 
-`qubes-dom0-update --enablerepo=qubes-dom0-current-testing qubes-windows-tools`
+	[user@dom0 ~] $ sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing qubes-windows-tools
 
 That command will download a new QWT `.iso` from the testing repository. It goes without saying that you should **backup your VMs** before installing anything from testing repos.
 
