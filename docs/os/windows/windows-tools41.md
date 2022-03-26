@@ -3,11 +3,11 @@ Qubes Windows Tools
 
 Qubes Windows Tools (QWT) are a set of programs and drivers that provide integration of Windows 7, 10 and 11 AppVMs with the rest of the Qubes system. Currently the following features are available for Windows VMs after installation of those tools:
 
--   **Qubes Video Driver** - provides for the Seamless GUI mode that integrates apps windows onto the common Qubes trusted desktop (currently only for Windows 7)
+-   **Qubes Video Driver** - provides for the seamless GUI mode that integrates windows apps onto the common Qubes trusted desktop (currently only for Windows 7)
 -   **Clipboard sender/receiver** - Support for [secure clipboard copy/paste](https://www.qubes-os.org/doc/copy-paste/) between the Windows VM and other AppVMs
 -   **File sender/receiver** - Support for [secure file exchange](https://www.qubes-os.org/doc/copying-files/) between the Windows VM and other AppVMs
--   **Copy/Edit in Disposable VM** - Support for editing files in DisposableVMs as well as for qvm-run and generic qrexec for the Windows VM (e.g. ability to run custom service within/from the Windows VM)
--   **Xen PV drivers** for Windows that increase performance compared to qemu emulated devices
+-   **Copy/Edit in Disposable VM** - Support for editing files in DisposableVMs as well as for `qvm-run` and generic `qrexec` for the Windows VM (e.g. ability to run custom service within/from the Windows VM)
+-   **Xen PV drivers** for Windows that increase performance compared to QEMU emulated devices
 
 Below is a breakdown of the feature availability depending on the windows version:
 
@@ -28,7 +28,7 @@ Qubes Windows Tools are open source and are distributed under a GPL license.
 
 > **Notes:**
 > - Currently only 64-bit versions of Windows 7, 10 and 11 are supported by Qubes Windows Tools. Only emulated SVGA GPU is supported (although [there has been reports](https://groups.google.com/forum/#!topic/qubes-users/cmPRMOkxkdA) on working GPU passthrough).
-> - __This page documents the process of installing Qubes Windows Tools in version R4.1.__
+> - This page documents the process of installing Qubes Windows Tools in version **R4.1**.
 
 Preparation
 -----------
@@ -153,9 +153,7 @@ Also, the inter-VM services work as usual -- e.g. to request opening a document 
 
 ~~~
 [user@dom0 ~] $ qvm-open-in-vm my-win-appvm roadmap.pptx
-~~~
 
-~~~
 [user@dom0 ~]$ qvm-open-in-vm my-win-appvm https://invisiblethingslab.com
 ~~~
 
@@ -163,7 +161,7 @@ Also, the inter-VM services work as usual -- e.g. to request opening a document 
 
 Inter-VM file copy and clipboard works for Windows AppVMs the same way as for Linux AppVM (except that we don't provide a command line wrapper, `qvm-copy-to-vm` in Windows VMs) -- to copy files from Windows AppVMs just right-click on the file in Explorer, and choose: Send To-\> Other AppVM.
 
-To simulate CTRL-ALT-DELETE in the HVM (SAS, Secure Attention Sequence), press Ctrl-Alt-Home while having any window of this VM in the foreground.
+To simulate Ctrl-Alt-Delete in the HVM (SAS, Secure Attention Sequence), press Ctrl-Alt-Home while having any window of this VM in the foreground.
 
 ![windows-seamless-7.png](/attachment/wiki/WindowsAppVms/windows-seamless-7.png)
 
@@ -208,7 +206,7 @@ Qubes Windows Tools (QWT) contain several components than can be enabled or disa
    - Xen PV Disk Drivers: paravirtual storage drivers.
    - Xen PV Network Drivers: paravirtual network drivers.
 - Qubes Core Agent: qrexec agent and services. Needed for proper integration with Qubes.
-   - Move user profiles: user profile directory (c:\users) is moved to VM's private disk backed by private.img file in dom0 (useful mainly for HVM templates).
+   - Move user profiles: user profile directory (`C:\users`) is moved to VM's private disk backed by `private.img file` in `dom0` (useful mainly for HVM templates).
 - Qubes GUI Agent: video driver and gui agent that enable seamless showing of Windows applications on the secure Qubes desktop.
 - Disable UAC: User Account Control may interfere with QWT and doesn't really provide any additional benefits in Qubes environment.
 
@@ -276,11 +274,11 @@ If a specific component is malfunctioning, you can increase its log verbosity as
 |qrexec-wrapper|Helper executable that's responsible for launching qrexec services, handling their I/O and vchan communication.|
 |qrexec-client-vm|Used for communications by the qrexec protocol.|
 |qga|Gui agent.|
-|QgaWatchdog|Service that monitors session/desktop changes (logon/logoff/locking/UAC...) and simulates SAS sequence (ctrl-alt-del).|
+|QgaWatchdog|Service that monitors session/desktop changes (logon/logoff/locking/UAC...) and simulates SAS sequence (Ctrl-Alt-Del).|
 |qubesdb-daemon|Service for accessing Qubes configuration database.|
 |network-setup|Service that sets up network parameters according to VM's configuration.|
 |prepare-volume|Utility that initializes and formats the disk backed by `private.img` file. It's registered to run on next system boot during QWT setup, if that feature is selected (it can't run *during* the setup because Xen block device drivers are not yet active). It in turn registers move-profiles (see below) to run at early boot.|
-|relocate-dir|Utility that moves user profiles directory to the private disk. It's registered as an early boot native executable (similar to chkdsk) so it can run before any profile files are opened by some other process. Its log is in a fixed location: `c:\move-profiles.log` (it can't use our common logger library so none of the log settings apply).|
+|relocate-dir|Utility that moves user profiles directory to the private disk. It's registered as an early boot native executable (similar to chkdsk) so it can run before any profile files are opened by some other process. Its log is in a fixed location: `C:\move-profiles.log` (it can't use our common logger library so none of the log settings apply).|
 
 Updates
 -------
@@ -291,6 +289,4 @@ When we publish a new QWT version, it's usually pushed to the `current-testing` 
 
 	[user@dom0 ~] $ sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing qubes-windows-tools
 
-That command will download a new QWT `.iso` from the testing repository. It goes without saying that you should **backup your VMs** before installing anything from testing repos.
-
-
+That command will download a new QWT `iso` file from the testing repository. It goes without saying that you should **backup your VMs** before installing anything from testing repos.
