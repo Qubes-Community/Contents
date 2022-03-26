@@ -1,4 +1,4 @@
-The content below will eventually has been updated to reflect the newer 4.1 release and QWT recent development - see [Installing and Using Windows Tools in Qubes R4.1](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md)
+:warning: *The content below has been updated to reflect the newer 4.1 release and QWT recent development - see* [Installing and Using Windows Tools in Qubes R4.1](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md)
 
 Qubes Windows Tools
 ===================
