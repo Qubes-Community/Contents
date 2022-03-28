@@ -10,12 +10,12 @@ If you just want something simple and you can live without some features. This w
 - display (1440x900 or 1280x1024 are a nice fit onto FHD hw display)
 - keyboard (incl. correct mapping), pointing device
 - network (emulated Realtek NIC)
+- audio output and input (available even without QWT installation if `qvm-features audio-model` is set as `ich6`)
 
 **Does not work:**
 - copy & paste (the qubes way)
 - copying files into / out of the VM (the qubes way)
 - assigning USB devices (the qubes way via the tray applet)
-- audio output and input
 - PCI device 5853:0001 (Xen platform device) - no driver
 - all other features/hardware needing special tool/driver support
 
