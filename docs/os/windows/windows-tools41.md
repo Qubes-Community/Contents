@@ -104,13 +104,13 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 	        [user@dom0 ~] $ qvm-features <VMname> stubdom-qrexec 1
 	        [user@dom0 ~] $ qvm-features <VMname> timezone localtime
 
-	With the value `localtime` the dom0 `timezone` will be provided to virtual hardware, effectively setting the Windows clock to that of Qubes. With a digit value (negative or positive) the guest clock will have an offset applied relative to UTC 
+	With the value `localtime` the dom0 `timezone` will be provided to virtual hardware, effectively setting the Windows clock to that of Qubes. With a digit value (negative or positive) the guest clock will have an offset (in seconds) applied relative to UTC.
 
  9. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
  
  10. Now the system should be up, with QWT running correctly.
  
- 11. **Windows 7 only:** Optionally enable seamless mode on VM startup. This can be done by setting appropriate values in the Windows registry:
+ 11. **Windows 7 only:** Optionally enable seamless mode on VM startup. This can be done by setting appropriate values in the Windows registry: 
 	
 	 - Start the command prompt as administrator, i.e. right click on the Command Prompt icon (All Programs -> Accessories) and choose "Run as administrator"
 	 - In the command prompt type `regedit`
@@ -121,6 +121,8 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 	 - Terminate the registry editor.
 	
  	 After the next boot, the VM will start in seamless mode.
+	
+	 If Windows is used in a TemplateVM / AppVM combination, this registry fix has to be applied to the TemplateVM, as the `HKLM` registry key belongs to the template-based part of the registry.
 	
  12. Lastly to enable file copy operations to a Windows VM the `default_user` property should be set the `<username>` that you use to login to the Windows VM. This can be done via the following command on a `dom0` terminal: *(where `<VMname>` is the name of your Windows VM)*
 	
@@ -185,7 +187,7 @@ If you use this Template as it is, then any HVMs that use it will effectively be
 If you want to retain the User directory between reboots, then it would make sense to store the `C:\Users` directory on the 2nd disk which is automatically exposed by Qubes to all HVMs. 
 This 2nd disk is backed by the `private.img` file in the AppVMs' and is not reset upon AppVMs reboot, so the user's directories and profiles would survive the AppVMs reboot, unlike the "root" filesystem which will be reverted to the "golden image" from the Template VM automatically. 
 To facilitate such separation of user profiles, Qubes Windows Tools provide an option to automatically move `C:\Users` directory to the 2nd disk backed by `private.img`. 
-It's a selectable feature of the installer, but currently working only for Windows 10 and 11. 
+It's a selectable feature of the installer. For Windows 7, it requires the private disk to be renamed to `Q:` before QWT installation (see above); for Windows 10 and 11, this renaming occurs during QWT installation automatically.
 If that feature is selected during installation, completion of the process requires two reboots:
 
 -   The private disk is initialized and formatted on the first reboot after tools installation. It can't be done **during** the installation because Xen mass storage drivers are not yet active.
