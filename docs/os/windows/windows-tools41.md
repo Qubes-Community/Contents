@@ -7,7 +7,8 @@ Qubes Windows Tools (QWT) are a set of programs and drivers that provide integra
 -   **Clipboard sender/receiver** - Support for [secure clipboard copy/paste](https://www.qubes-os.org/doc/copy-paste/) between the Windows VM and other AppVMs
 -   **File sender/receiver** - Support for [secure file exchange](https://www.qubes-os.org/doc/copying-files/) between the Windows VM and other AppVMs
 -   **Copy/Edit in Disposable VM** - Support for editing files in DisposableVMs as well as for `qvm-run` and generic `qrexec` for the Windows VM (e.g. ability to run custom service within/from the Windows VM)
--   **Xen PV drivers** for Windows that increase performance compared to QEMU emulated devices
+-   **Audio** - Audio support requires R4.1 and is available even without QWT installation if `qvm-features audio-model` is set as `ich6`
+-   **Xen PV drivers** for Windows that increase performance compared to QEMU emulated devices and are required for attaching USB devices, they allow USB device access even without QWT installation if `qvm-features stubdom-qrexec` is set as `1`
 
 Below is a breakdown of the feature availability depending on the windows version:
 
@@ -33,7 +34,7 @@ Qubes Windows Tools are open source and are distributed under a GPL license.
 Preparation
 -----------
 
-Before proceeding with the installation we need to disable the Windows mechanism that allows only signed drivers to be installed, because currently the drivers we provide as part of the Windows Tools are not digitally signed with a publicly recognizable certificate. To do that:
+**Windows 7 only:** Before proceeding with the installation we need to disable the Windows mechanism that allows only signed drivers to be installed, because currently the Qubes video driver, available for Windows 7, provided as part of the Windows Tools are not digitally signed with a publicly recognizable certificate. To do that:
 
  1. Start the command prompt as Administrator, i.e. right click on the Command Prompt icon (All Programs -> Accessories) and choose "Run as administrator"
  2. In the command prompt type `bcdedit /set testsigning on`
@@ -41,9 +42,11 @@ Before proceeding with the installation we need to disable the Windows mechanism
 
 In the future this step will not be necessary anymore, because we will sign our drivers with a publicly verifiable certificate. However, it should be noted that even now, the fact that those drivers are not digitally signed, this doesn't affect security of the Windows VM in 'any' way. This is because the actual installation `iso` file can be verified as described in step 3 below. The only downside of those drivers not being signed is the inconvenience to the user that he or she must disable the signature enforcement policy before installing the tools.
 
-> **Note:** it is recommended to increase the default value of Windows VM's `qrexec_timeout` property from 60 (seconds) to, for example, 300. During one of the first reboots after Windows Tools installation Windows user profiles are moved onto the private VM's virtual disk (private.img) and this operation can take some time. Moving profiles is performed in an early boot phase when `qrexec` is not yet running, so timeout may occur with the default value. To change the property use this command in `dom0`: *(where `<VMname>` is the name of your Windows VM)*
+The Xen PV Drivers bundled with QWT are signed by a Linux Foundation certificate. Thus Windows 10 and 11 do not require this security mitigation.
 
-		[user@dom0 ~] $ qvm-prefs <VMname> qrexec_timeout 300
+> **Note:** it is recommended to increase the default value of Windows VM's `qrexec_timeout` property from 60 (seconds) to, for example, 300. During one of the first reboots after Windows Tools installation Windows user profiles are moved onto the private VM's virtual disk (private.img) and this operation can take some time. Moving profiles and, later on, updating a Windows installation, is performed in an early boot phase when `qrexec` is not yet running, so timeout may occur with the default value. To change the property use this command in `dom0`: *(where `<VMname>` is the name of your Windows VM)*
+
+		[user@dom0 ~] $ qvm-prefs <VMname> qrexec_timeout 7200
 
 Installing Windows OS in a Qubes VM
 -----------------------------------
@@ -95,13 +98,13 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 	        [user@dom0 ~] $ qvm-prefs <VMname>
 
- 	It is advisable to set some other parameters in order to enable audio, synchronize the Windows clock with the Qubes clock, and so on:
+ 	It is advisable to set some other parameters in order to enable audio and USB block device access, synchronize the Windows clock with the Qubes clock, and so on:
 	        
-	        [user@dom0 ~] $ qvm-features <VMname> gui 1
-	        [user@dom0 ~] $ qvm-features <VMname> gui-emulated 1
 	        [user@dom0 ~] $ qvm-features <VMname> audio-model ich9
 	        [user@dom0 ~] $ qvm-features <VMname> stubdom-qrexec 1
 	        [user@dom0 ~] $ qvm-features <VMname> timezone localtime
+
+	With the value `localtime` the dom0 `timezone` will be provided to virtual hardware, effectively setting the Windows clock to that of Qubes. With a digit value (negative or positive) the guest clock will have an offset applied relative to UTC 
 
  9. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
  
