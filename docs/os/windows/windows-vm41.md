@@ -1,60 +1,22 @@
 Installing a Windows VM
 =======================
 
-Simple Windows install
-----------------------
+You can install Windows just like any other OS as an [HVM](https://www.qubes-os.org/doc/hvm/), if you just want something simple and you can live without some features. This works for Windows XP, 7, 10 and 11, and it may work for Windows 8 and 8.1, although this has not been tested.
 
-If you just want something simple and you can live without some features. This works for Windows XP, 7, 10 and 11, and it may work for Windows 8 and 8.1, although this has not been tested.
+You will get an environment in which basic functions are supported, but integration into the Qubes environment is rather restricted. The following functions will work right out of the box:
 
-**Works:**
 - display (1440x900 or 1280x1024 are a nice fit onto FHD hw display)
 - keyboard (incl. correct mapping), pointing device
 - network (emulated Realtek NIC)
 - audio output and input (available even without QWT installation if `qvm-features audio-model` is set as `ich6`)
 
-**Does not work:**
+For better integration, a set of drivers and services, called Qubes Windows Tools (QWT) is available. Installation of these tools is straightforward and is described in a [separate document](https://www.qubes-os.org/doc/windows-tools41/). QWT will provide functions like the following:
+
 - copy & paste (the qubes way)
 - copying files into / out of the VM (the qubes way)
 - assigning USB devices (the qubes way via the tray applet)
 - PCI device 5853:0001 (Xen platform device) - no driver
 - all other features/hardware needing special tool/driver support
-
-**Installation procedure:**
-- Have the Windows ISO image (preferrably the 64-bit version) downloaded in some qube.
-- Create a new Qube:
-  - Name: WindowsQube, Color: orange
-  - Standalone Qube not based on a template
-  - Networking: sys-firewall (default)
-  - Launch settings after creation: check
-  - Click "OK".
-- Settings:
-  - Basic:
-    - System storage: 50000+ MB
-  - Advanced:
-    - Include in memory balancing: uncheck
-    - Initial memory: 4096+ MB
-    - Kernel: None
-    - Mode: HVM
-  - Click "Apply".
-  - Click "Boot from CDROM":
-    - "from file in qube":
-      - Select the qube that has the ISO.
-      - Select ISO by clicking "...".
-    - Click "OK" to boot into the windows installer.
-- Windows Installer:
-  - Mostly as usual, but automatic reboots will halt the qube - just restart it again and again until the installation is finished.
-  - Install on first disk.
-  - The Windows license may be read from flash via root in dom0:
-
-    `strings < /sys/firmware/acpi/tables/MSDM`
-
-    Alternatively, you can also try a Windows 7 license key (as of 2018/11
-    they are still accepted for a free upgrade to Windows 10).
-    
-- Afterwards:
-  - In case you switch from `sys-network` to `sys-whonix`, you'll need a static IP network configuration, DHCP won't work for `sys-whonix`.
-  - Use `powercfg -H off` and `disk cleanup` to save some disk space.
-
 
 Qubes R4.1 - importing a Windows VM from an earlier version of Qubes
 --------------------------------------------------------------------
@@ -74,19 +36,20 @@ An unofficial, third-party tool for automating this process is available [here](
 Use it at your own risk.)
 However, if you are an expert or want to do it manually you may continue below.
 
-### Summary ###
+### Summary: Installing Windows via CLI ###
 
 ~~~
-qvm-create --class StandaloneVM --label orange --property virt_mode=hvm win7new
+qvm-create --class StandaloneVM --label orange --property virt_mode=hvm WindowsNew
 qvm-prefs WindowsNew memory 4096
 qvm-prefs WindowsNew maxmem 4096
 qvm-prefs WindowsNew kernel ''
-qvm-volume extend WindowsNew:root 50g
+qvm-prefs WindowsNew qrexec_timeout 7200
+qvm-volume extend WindowsNew:root 60g
 qvm-start --cdrom=untrusted:/home/user/windows_install.iso WindowsNew
 # restart after the first part of the windows installation process ends
 qvm-start WindowsNew
 # once Windows is installed and working
-qvm-prefs WindowsNew qrexec_timeout 300
+as administrator in Windows, set: powercfg -H off
 ~~~
 
 To install Qubes Windows Tools, follow instructions in [Qubes Windows Tools](https://www.qubes-os.org/doc/windows-tools41/).
@@ -95,48 +58,108 @@ To install Qubes Windows Tools, follow instructions in [Qubes Windows Tools](htt
 
 > **Notes:**
 > - The instructions may work on other versions than Windows 7, 10 and 11 x64 but haven't been tested.
->- Qubes Windows Tools (QWT) only supports Windows 7, 10 and 11 x64. For installation, see [Qubes Windows Tools](https://www.qubes-os.org/doc/windows-tools41/).
+> - Qubes Windows Tools (QWT) only supports Windows 7, 10 and 11 x64. For installation, see [Qubes Windows Tools](https://www.qubes-os.org/doc/windows-tools41/).
 
-Create a VM named WindowsNew in [HVM](https://www.qubes-os.org/doc/hvm/) mode (Xen's current PVH limitations precludes from using PVH):
+**Installation procedure:**
 
+- Have the Windows ISO image (preferrably the 64-bit version) downloaded in some qube.
+
+- Create a VM named WindowsNew in [HVM](https://www.qubes-os.org/doc/hvm/) mode (Xen's current PVH limitations precludes from using PVH):
+
+  The Windows' installer requires a significant amount of memory or else the VM will crash with such errors:
+
+  `/var/log/xen/console/hypervisor.log`:
+
+  ~~~
+  p2m_pod_demand_populate: Dom120 out of PoD memory! (tot=102411 ents=921600 dom120)
+  (XEN) domain_crash called from p2m-pod.c:1218
+  (XEN) Domain 120 (vcpu#0) crashed on cpu#3:
+  ~~~
+
+  So, increase the VM's memory to 4096MB (memory = maxmem because we don't use memory balancing).
+
+  ~~~
+  qvm-prefs WindowsNew memory 4096
+  qvm-prefs WindowsNew maxmem 4096
+  ~~~
+
+  Disable direct boot so that the VM will go through the standard cdrom/HDD boot sequence:
+
+  ~~~
+  qvm-prefs WindowsNew kernel ''
+  ~~~
+
+  A typical Windows installation requires between 25GB up to 60GB of disk space depending on the version (Home/Professional/...). Windows updates also end up using significant space. So, extend the root volume from the default 10GB to at least 50GB (note: it is straightforward to increase the root volume size after Windows is installed: simply extend the volume again in dom0 and then extend the system partition with Windows's disk manager).
+
+  ~~~
+  qvm-volume extend WindowsNew:root 60g
+  ~~~
+
+  Finally, increase the VM's `qrexec_timeout`: in case you happen to get a BSOD or a similar crash in the VM, utilities like `chkdsk` won't complete on restart before `qrexec_timeout` automatically halts the VM. That can really put the VM in a totally unrecoverable state, whereas with higher `qrexec_timeout`, `chkdsk` or the appropriate utility has plenty of time to fix the VM. Note that Qubes Windows Tools also require a larger timeout to move the user profiles to the private volume the first time the VM reboots after the tools' installation.
+
+  ~~~
+  qvm-prefs WindowsNew qrexec_timeout 7200
+  ~~~
+  
+ In order to create the new qube, select the command Qube -> New Qube in the Qube Manager::
+  - Name: WindowsNew, Color: orange
+  - Standalone Qube not based on a template
+  - Networking: sys-firewall (default)
+  - Launch settings after creation: check
+  - Click "OK".
+- Settings:
+  - Basic:
+    - System storage: 60.0+ GB
+  - Advanced:
+    - Include in memory balancing: uncheck
+    - Initial memory: 4096+ MB
+    - Kernel: None
+    - Mode: HVM
+  - Click "Apply".
+  
+This can also be done via the following CLI commands in dom0:
 ~~~
-qvm-create --class StandaloneVM --label red --property virt_mode=hvm WindowsNew
-~~~
-
-Windows' installer requires a significant amount of memory or else the VM will crash with such errors:
-
-`/var/log/xen/console/hypervisor.log`:
-
-~~~
-p2m_pod_demand_populate: Dom120 out of PoD memory! (tot=102411 ents=921600 dom120)
-(XEN) domain_crash called from p2m-pod.c:1218
-(XEN) Domain 120 (vcpu#0) crashed on cpu#3:
-~~~
-
-So, increase the VM's memory to 4096MB (memory = maxmem because we don't use memory balancing).
-
-~~~
+qvm-create --class StandaloneVM --label orange --property virt_mode=hvm WindowsNew
 qvm-prefs WindowsNew memory 4096
 qvm-prefs WindowsNew maxmem 4096
-~~~
-
-Disable direct boot so that the VM will go through the standard cdrom/HDD boot sequence:
-
-~~~
 qvm-prefs WindowsNew kernel ''
+qvm-volume extend WindowsNew:root 60g
 ~~~
 
-A typical Windows 7 installation requires between 25GB up to 60GB of disk space depending on the version (Home/Professional/...). Windows updates also end up using significant space. So, extend the root volume from the default 10GB to at least 50GB (note: it is straightforward to increase the root volume size after Windows is installed: simply extend the volume again in dom0 and then extend the system partition with Windows's disk manager).
-
+After creating the new qube, set its timeout value in dom0:
 ~~~
-qvm-volume extend WindowsNew:root 25g
+qvm-prefs WindowsNew qrexec_timeout 7200
 ~~~
 
-The VM is now ready to be started; the best practice is to use an installation ISO [located in a VM](https://www.qubes-os.org/doc/standalone-and-hvm/#installing-an-os-in-an-hvm):
+The VM is now ready to be started; the best practice is to use an installation ISO [located in a VM](https://www.qubes-os.org/doc/standalone-and-hvm/#installing-an-os-in-an-hvm). Now boot the newly created qube from the Windows installation media. In the Qubes Manager:
 
+- Select the new qube, in this example "WindowsNew".
+- Switch to the "Advanced" tab.
+- Click "Boot from CDROM":
+  - "from file in qube":
+    - Select the qube that has the ISO.
+    - Select ISO by clicking "...".
+    - Click "OK" to boot into the windows installer.
+
+This can also be done via the following CLI command in dom0 (assuming that the Windows installer ISO is stored in the directory `/home/user/` in the AppVM `untrusted`:
 ~~~
 qvm-start --cdrom=untrusted:/home/user/windows_install.iso WindowsNew
 ~~~
+
+- Windows Installer:
+  - Mostly as usual, but automatic reboots will halt the qube - just restart it again and again until the installation is finished.
+  - Install on first disk.
+  - The Windows license may be read from flash via root in dom0:
+
+    `strings < /sys/firmware/acpi/tables/MSDM`
+
+    Alternatively, you can also try a Windows 7 license key (as of 2018/11
+    they are still accepted for a free upgrade to Windows 10).
+    
+- Afterwards:
+  - In case you switch from `sys-network` to `sys-whonix`, you'll need a static IP network configuration, DHCP won't work for `sys-whonix`.
+  - From the Windows command line, use `powercfg -H off` in order to avoid incomplete Windows shutdown, which could lead to corruption of the VM's disk.
+  - Optionally use `disk cleanup` to save some disk space.
 
 Given the higher than usual memory requirements of Windows, you may get a `Not enough memory to start domain 'WindowsNew'` error. In that case try to shutdown unneeded VMs to free memory before starting the Windows VM.
 
@@ -151,12 +174,6 @@ tailf /var/log/qubes/vm-WindowsNew.log \
 The VM will shutdown after the installer completes the extraction of Windows installation files. It's a good idea to clone the VM now (eg. `qvm-clone WindowsNew WindowsNewbkp1`). Then, (re)start the VM with `qvm-start WindowsNew`.
 
 The second part of Windows' installer should then be able to complete successfully.
-
-Finally, increase the VM's `qrexec_timeout`: in case you happen to get a BSOD or a similar crash in the VM, utilities like `chkdsk` won't complete on restart before `qrexec_timeout` automatically halts the VM. That can really put the VM in a totally unrecoverable state, whereas with higher `qrexec_timeout`, `chkdsk` or the appropriate utility has plenty of time to fix the VM. Note that Qubes Windows Tools also require a larger timeout to move the user profiles to the private volume the first time the VM reboots after the tools' installation.
-
-~~~
-qvm-prefs WindowsNew qrexec_timeout 300
-~~~
 
 At that point you should have a functional and stable Windows VM, although without updates, Xen's PV drivers nor Qubes integration (see sections [Windows Update](#windows-update) and [Xen PV drivers and Qubes Windows Tools](https://www.qubes-os.org/doc/windows-tools41/#xen-pv-drivers-and-qubes-windows-tools)). It is a good time to clone the VM again.
 
