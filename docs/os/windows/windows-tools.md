@@ -1,5 +1,4 @@
-:warning: *Some of the information below is outdated ; please read [this forum wiki post](https://forum.qubes-os.org/t/wip-windows-qwt-user-reports/9687) for up to date instructions and users feedback.
-The content below will eventually be updated to reflect the newer 4.1 release and QWT recent development (contributors welcome!)*
+:warning: *The content below describes Qubes Windows Tools installation in Qubes R4.0. The text has been updated to reflect the newer R4.1 release and QWT recent development. Please see [this updated document](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md) for instructions for Qubes R4.1 and the updated version of Qubes Windows Tools.*
 
 Qubes Windows Tools
 ===================
