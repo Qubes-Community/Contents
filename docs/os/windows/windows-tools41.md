@@ -1,14 +1,23 @@
 Qubes Windows Tools
 ===================
 
-Qubes Windows Tools (QWT) are a set of programs and drivers that provide integration of Windows 7, 10 and 11 AppVMs with the rest of the Qubes system. Currently the following features are available for Windows VMs after installation of those tools:
+Qubes Windows Tools (QWT) are a set of programs and drivers that provide integration of Windows 7, 10 and 11 Standalone, TemplateVMs and AppVMs with the rest of the Qubes system. They contain several components than can be enabled or disabled during installation:
 
--   **Qubes Video Driver** - provides for the seamless GUI mode that integrates windows apps onto the common Qubes trusted desktop (currently only for Windows 7)
--   **Clipboard sender/receiver** - Support for [secure clipboard copy/paste](https://www.qubes-os.org/doc/copy-paste/) between the Windows VM and other AppVMs
--   **File sender/receiver** - Support for [secure file exchange](https://www.qubes-os.org/doc/copying-files/) between the Windows VM and other AppVMs
--   **Copy/Edit in Disposable VM** - Support for editing files in DisposableVMs as well as for `qvm-run` and generic `qrexec` for the Windows VM (e.g. ability to run custom service within/from the Windows VM)
--   **Audio** - Audio support requires R4.1 and is available even without QWT installation if `qvm-features audio-model` is set as `ich6`
--   **Xen PV drivers** for Windows that increase performance compared to QEMU emulated devices and are required for attaching USB devices, they allow USB device access even without QWT installation if `qvm-features stubdom-qrexec` is set as `1`
+- **Shared components (required)** - common libraries used by QWT components
+- **Qubes Core Agent** - qrexec agent and services. Needed for proper integration with Qubes
+- **Qubes GUI Agent** - video driver and GUI agent that enable the seamless GUI mode that integrates windows apps onto the common Qubes trusted desktop (currently only for Windows 7)
+- **Disable UAC** - User Account Control may interfere with QWT and doesn't really provide any additional benefits in Qubes environment
+- **Clipboard sender/receiver** - Support for [secure clipboard copy/paste](https://www.qubes-os.org/doc/copy-paste/) between the Windows VM and other AppVMs
+- **File sender/receiver** - Support for [secure file exchange](https://www.qubes-os.org/doc/copying-files/) between the Windows VM and other AppVMs
+- **Copy/Edit in Disposable VM** - Support for editing files in DisposableVMs as well as for `qvm-run` and generic `qrexec` for the Windows VM (e.g. ability to run custom service within/from the Windows VM)
+- **Audio** - Audio support requires R4.1 and is available even without QWT installation if `qvm-features audio-model` is set as `ich6`
+- **Xen PV drivers** - drivers for the virtual hardware exposed by Xen for Windows that increase performance compared to QEMU emulated devices and are required for attaching USB devices
+   - Base Xen PV Drivers (required): paravirtual bus and interface drivers
+   - Xen PV Disk Drivers: paravirtual storage drivers
+   - Xen PV Network Drivers: paravirtual network drivers
+   - Move user profiles: user profile directory (`C:\users`) is moved to VM's private disk backed by `private.img file` in `dom0` (useful mainly for HVM templates).
+	
+	> **Note**: Xen PV disk drivers are not installed by default. This is because they seem to cause problems (BSOD = Blue Screen Of Death). We're working with upstream devs to fix this. *However*, the BSOD seems to only occur after the first boot and everything works fine after that. **Enable the drivers at your own risk** of course, but we welcome reports of success/failure in any case (backup your VM first!). With disk PV drivers absent `qvm-block` will not work for the VM, but you can still use standard Qubes inter-VM file copying mechanisms. On the other hand, the Xen PV drivers allow USB device access even without QWT installation if `qvm-features stubdom-qrexec` is set as `1`
 
 Below is a breakdown of the feature availability depending on the windows version:
 
@@ -30,6 +39,8 @@ Qubes Windows Tools are open source and are distributed under a GPL license.
 > **Notes:**
 > - Currently only 64-bit versions of Windows 7, 10 and 11 are supported by Qubes Windows Tools. Only emulated SVGA GPU is supported (although [there has been reports](https://groups.google.com/forum/#!topic/qubes-users/cmPRMOkxkdA) on working GPU passthrough).
 > - This page documents the process of installing Qubes Windows Tools in version **R4.1**.
+> - *In testing VMs only* it's probably a good idea to install a VNC server before installing QWT. If something goes very wrong with the Qubes gui agent, a VNC server should still allow access to the OS.
+
 
 Preparation
 -----------
@@ -170,8 +181,7 @@ To simulate Ctrl-Alt-Delete in the HVM (SAS, Secure Attention Sequence), press C
 
 ![windows-seamless-7.png](/attachment/wiki/WindowsAppVms/windows-seamless-7.png)
 
-Changing between seamless and full desktop mode
------------------------------------------------
+**Changing between seamless and full desktop mode**
 
 You can switch between seamless and "full desktop" mode for Windows HVMs in their settings in Qubes Manager. The latter is the default.
 
@@ -199,25 +209,6 @@ That's a false alarm (you can increase the AppVM's default boot timeout using `q
 It also makes sense to disable Automatic Updates for all the template-based AppVMs -- of course this should be done in the Template VM, not in individual AppVMs, because the system-wide settings are stored in the root filesystem (which holds the system-wide registry hives). Then, periodically check for updates in the Template VM and the changes will be carried over to any child AppVMs.
 
 Once the template has been created and installed it is easy to create AppVMs based on it, by selecting the type "AppVM" and a suitable template.
-
-Components
-----------
-
-Qubes Windows Tools (QWT) contain several components than can be enabled or disabled during installation:
-
-- Shared components (required): common libraries used by QWT components.
-- Xen PV drivers: drivers for the virtual hardware exposed by Xen.
-   - Base Xen PV Drivers (required): paravirtual bus and interface drivers.
-   - Xen PV Disk Drivers: paravirtual storage drivers.
-   - Xen PV Network Drivers: paravirtual network drivers.
-- Qubes Core Agent: qrexec agent and services. Needed for proper integration with Qubes.
-   - Move user profiles: user profile directory (`C:\users`) is moved to VM's private disk backed by `private.img file` in `dom0` (useful mainly for HVM templates).
-- Qubes GUI Agent: video driver and gui agent that enable seamless showing of Windows applications on the secure Qubes desktop.
-- Disable UAC: User Account Control may interfere with QWT and doesn't really provide any additional benefits in Qubes environment.
-
-> **Note:** *In testing VMs only* it's probably a good idea to install a VNC server before installing QWT. If something goes very wrong with the Qubes gui agent, a VNC server should still allow access to the OS.
-
-> **Note**: Xen PV disk drivers are not installed by default. This is because they seem to cause problems (BSOD = Blue Screen Of Death). We're working with upstream devs to fix this. *However*, the BSOD seems to only occur after the first boot and everything works fine after that. **Enable the drivers at your own risk** of course, but we welcome reports of success/failure in any case (backup your VM first!). With disk PV drivers absent `qvm-block` will not work for the VM, but you can still use standard Qubes inter-VM file copying mechanisms.
 
 Installation logs
 -----------------
