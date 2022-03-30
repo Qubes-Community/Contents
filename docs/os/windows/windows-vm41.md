@@ -10,7 +10,7 @@ You will get an environment in which basic functions are supported, but integrat
 - network (emulated Realtek NIC)
 - audio output and input (available even without QWT installation if `qvm-features audio-model` is set as `ich6`)
 
-For better integration, a set of drivers and services, called Qubes Windows Tools (QWT) is available. Installation of these tools is straightforward and is described in a [separate document](https://www.qubes-os.org/doc/windows-tools41.md). QWT’s main features are:
+For better integration, a set of drivers and services, called Qubes Windows Tools (QWT) is available. Installation of these tools is straightforward and is described in a [separate document](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md). QWT’s main features are:
 
 - copy/paste between qubes
 - copy files between qubes
@@ -28,7 +28,7 @@ Qubes R4.1 - importing a Windows VM from an earlier version of Qubes
 
 - Importing from R3.2 or earlier will not work, because  Qubes R3.2 has the old stubdomain by default and this is preserved over backup and restore (as Windows otherwise won't boot.
 
-- Importing from R4.0 should work, see [Migrate backups of Windows VMs created under Qubes R4.0 to R4.1](https://www.qubes-os.org/doc/windows-migrate41.md).
+- Importing from R4.0 should work, see [Migrate backups of Windows VMs created under Qubes R4.0 to R4.1](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-migrate41.md).
 
 
 Windows VM installation
@@ -57,13 +57,13 @@ qvm-start WindowsNew
 as administrator in Windows, set: powercfg -H off
 ~~~
 
-To install Qubes Windows Tools, follow instructions in [Qubes Windows Tools](https://www.qubes-os.org/doc/windows-tools41.md).
+To install Qubes Windows Tools, follow instructions in [Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md).
 
 ### Detailed instructions ###
 
 > **Notes:**
 > - The instructions may work on other versions than Windows 7, 10 and 11 x64 but haven't been tested.
-> - Qubes Windows Tools (QWT) only supports Windows 7, 10 and 11 x64. For installation, see [Qubes Windows Tools](https://www.qubes-os.org/doc/windows-tools41.md).
+> - Qubes Windows Tools (QWT) only supports Windows 7, 10 and 11 x64. For installation, see [Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md).
 
 **Installation procedure:**
 
@@ -186,7 +186,7 @@ The VM will shutdown after the installer completes the extraction of Windows ins
 
 The second part of Windows' installer should then be able to complete successfully.
 
-At that point you should have a functional and stable Windows VM, although without updates, Xen's PV drivers nor Qubes integration (see sections [Windows Update](#windows-update) and [Xen PV drivers and Qubes Windows Tools](https://www.qubes-os.org/doc/windows-tools41/#xen-pv-drivers-and-qubes-windows-tools)). It is a good time to clone the VM again.
+At that point you should have a functional and stable Windows VM, although without updates, Xen's PV drivers nor Qubes integration (see sections [Windows Update](#windows-update) and [Xen PV drivers and Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41/#xen-pv-drivers-and-qubes-windows-tools)). It is a good time to clone the VM again.
 
 Again, don’t forget to `qvm-clone` your qube before you install Qubes Windows Tools (QWT) in case something goes south.
 
@@ -212,7 +212,7 @@ Windows 7, 10 and 11 can be installed as TemplateVM by selecting
 ~~~
 qvm-create --class TemplateVM --property virt_mode=HVM --property kernel='' --label black Windows-template
 ~~~
-when creating the VM. To have the user data stored in AppVMs depending on this template, the option `Move User Profiles` has to be selected on installation of Qubes Windows Tools. For Windows 7, before installing QWT, the private disk `D:` has to be renamed to `Q:`, see the QWT installation documentation in [Qubes Windows Tools](https://www.qubes-os.org/doc/windows-tools41.md).
+when creating the VM. To have the user data stored in AppVMs depending on this template, the option `Move User Profiles` has to be selected on installation of Qubes Windows Tools. For Windows 7, before installing QWT, the private disk `D:` has to be renamed to `Q:`, see the QWT installation documentation in [Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md).
 
 AppVMs based on these templates can be created the normal way by using the Qube Manager or by specifying
 ~~~
