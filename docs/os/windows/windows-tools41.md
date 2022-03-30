@@ -62,7 +62,7 @@ The Xen PV Drivers bundled with QWT are signed by a Linux Foundation certificate
 Installing Windows OS in a Qubes VM
 -----------------------------------
 
-Please refer to [this page](https://www.qubes-os.org/doc/windows-vm41.md/) for instructions on how to install Windows in a Qubes VM.
+Please refer to [this page](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-vm41.md/) for instructions on how to install Windows in a Qubes VM.
 
 > **Note:** It is strongly suggested to enable autologon for any Windows HVMs that will have Qubes Tools installed. To do so, run `netplwiz` command from the `Win+R`/Start menu and uncheck the *Users must enter a user name and password to use this computer* option.
 
