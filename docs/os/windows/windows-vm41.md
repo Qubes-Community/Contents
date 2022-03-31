@@ -186,7 +186,7 @@ The VM will shutdown after the installer completes the extraction of Windows ins
 
 The second part of Windows' installer should then be able to complete successfully.
 
-At that point you should have a functional and stable Windows VM, although without updates, Xen's PV drivers nor Qubes integration (see sections [Windows Update](#windows-update) and [Xen PV drivers and Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41/#xen-pv-drivers-and-qubes-windows-tools)). It is a good time to clone the VM again.
+At that point you should have a functional and stable Windows VM, although without updates, Xen's PV drivers nor Qubes integration (see sections [Windows Update](#windows-update) and [Xen PV drivers and Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md/#xen-pv-drivers-and-qubes-windows-tools)). It is a good time to clone the VM again.
 
 Again, don’t forget to `qvm-clone` your qube before you install Qubes Windows Tools (QWT) in case something goes south.
 
