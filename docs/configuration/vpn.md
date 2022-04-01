@@ -110,7 +110,8 @@ Before proceeding, you will need to download a copy of your VPN provider's confi
    Disable any auto-starting service that comes with the software package.
    For example for OpenVPN.
 
-       sudo systemctl disable openvpn.service
+       sudo systemctl disable openvpn-server@.service
+       sudo systemctl disable openvpn-client@.service
 
 2. Set up and test the VPN client.
    Make sure the VPN VM and its TemplateVM is not running.
