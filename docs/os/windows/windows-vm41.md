@@ -166,9 +166,12 @@ qvm-start --cdrom=untrusted:/home/user/windows_install.iso WindowsNew
     
 - Afterwards:
   - In case you switch from `sys-network` to `sys-whonix`, you'll need a static IP network configuration, DHCP won't work for `sys-whonix`.
-  - From the Windows command line, use `powercfg -H off` in order to avoid incomplete Windows shutdown, which could lead to corruption of the VM's disk. Also, recent versions of Windows won’t show the CD-ROM drive after starting the qube with `qvm-start vm --cdrom ...` (or using the GUI). The solution is to disable hibernation in Windows with this command. (That command is included in QWT’s setup but it’s necessary to run it manually in order to be able to open QWT’s setup ISO/CD-ROM in Windows).
+  - From the Windows command line, disable hibernation in order to avoid incomplete Windows shutdown, which could lead to corruption of the VM's disk. 
+    ~~~
+    powercfg -H off
+    ~~~
+    Also, recent versions of Windows won’t show the CD-ROM drive after starting the qube with `qvm-start vm --cdrom ...` (or using the GUI). The solution is to disable hibernation in Windows with this command. (That command is included in QWT’s setup but it’s necessary to run it manually in order to be able to open QWT’s setup ISO/CD-ROM in Windows).
 
-powercfg -H off
 
   - Optionally use `disk cleanup` to save some disk space.
 
