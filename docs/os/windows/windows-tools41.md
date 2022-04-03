@@ -184,7 +184,7 @@ To simulate Ctrl-Alt-Delete in the HVM (SAS, Secure Attention Sequence), press C
 **Changing between seamless and full desktop mode**
 
 You can switch between seamless and "full desktop" mode for Windows HVMs in their settings in Qubes Manager. The latter is the default.
-
+	
 Using template-based Windows AppVMs
 -----------------------------------
 
@@ -209,6 +209,43 @@ That's a false alarm (you can increase the AppVM's default boot timeout using `q
 It also makes sense to disable Automatic Updates for all the template-based AppVMs -- of course this should be done in the Template VM, not in individual AppVMs, because the system-wide settings are stored in the root filesystem (which holds the system-wide registry hives). Then, periodically check for updates in the Template VM and the changes will be carried over to any child AppVMs.
 
 Once the template has been created and installed it is easy to create AppVMs based on it, by selecting the type "AppVM" and a suitable template.
+
+Using Windows disposables
+-------------------------
+
+Windows qubes can be used as disposables, like any other Linux-based qubes. On creating a template for Windows disposables, certain preparations have to be executed:
+
+- Create an AppVM based on a Windows TemplateVM.
+- **For Windows 7:**
+	- Start this AppVM and insert a link to the command prompt executable in the `Autostart` directory of the Windows menu tree:
+	 	- If the Windows qube started in seamless mode, hit the Windows keyboard key. In non-seamless mode, klick on the Start button. In both cases, the Windows menu will be displayed.
+		- Position into the `Autostart` submenu.
+		- Right-click and select the option "New -> Link".
+		- Select `C:\Windows\System32\CMD.exe`as executable.
+		- Name the link, e.g. as `Command Prompt`.
+		- Close the Window with `OK`.
+		- Shut down this AppVM.
+- **For Windows 10:**
+	- Start the TemplateVM, on which this AppVM is based, and insert a link to the command prompt executable in the `Autostart` directory of the Windows menu tree:
+	 	- Type Win+R to open the execution Prompt.
+		- Type `shell:startup`.
+		- An explorer window will open, which is positioned to the `Autostart` folder.
+		- Right-click and select the option "New -> Link".
+		- Select `C:\Windows\System32\CMD.exe`as executable.
+		- Name the link, e.g. as `Command Prompt`.
+		- Close the Window with `OK`.
+		- Shut down this TemplateVM.
+- In the Qube Manager, refresh the applications of the newly created AppVM and select those applications that you want to make available from the disposable. Alternatively, in dom0 execute the command `qvm-sync-appmenus <VMname>`, *where `<VMname>` is the name of your windows qube*.
+- In the Qube Manager, go to the "Advanced" tab and enable the option `Disposable template` for your Windows qube.  Alternatively, in dom0 execute the commands `qvm-prefs <VMname> template_for_dispvms True` and `qvm-features <VMname> appmenus-dispvm 1`.
+- Click `Apply`.
+- Still in the Advaced tab, select your Windows qube as its own `Default disposable template`. Alternatively, in dom0 execute the command `qvm-prefs <VMname> default_dispvm <VMname>`.
+- Close the Qube Manager by clicking `OK`.
+
+Now you should have a menu `Disposable: <VMname>` containing the applications that can be started in a disposable Windows VM. If you set the newly created and configured Windows VM as `Default disposable template`for any other Windows- (or Linux-) based qube, this qube can use the Windows-based dispvm like any other disposable.
+
+For further information on usage of disposables, see [How to use disposables](https://www.qubes-os.org/doc/how-to-use-disposables/).
+
+:warning: **Caution:** *If a Windows-based disposable is used from another qube via the `Open/Edit in DisposableVM` command, this disposaable may not close automatically, due to the command prompt window still running in this dispvm. The disposable has to be shut down  manually.*
 
 Installation logs
 -----------------
