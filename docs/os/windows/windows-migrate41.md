@@ -9,18 +9,27 @@ Preparation for Windows 7
 -------------------------
 
  - Uninstall QWT 4.0.1.3, using the standard procedure from the system control panel of Windows. This will most likely result in a crash.
- - Restart Windows again, hitting the F8 key, select the restart menu, and there select a start in protected mode.
+ - Restart Windows again, hitting the F8 key, select the restart menu, and there select a start in safe mode.
  - The system will start gain, but in a rather useless way. Just shut it down, and reboot again.
  - Now Windows will start normally. Check in the control panel, if there are any Xen drivers left. If so, uninstall them.
  - In the Windows device manager, check if there is still a (probably non working) Xen PV disk device. If so, uninstall it. Otherwise, QWT 4.1-67 will not install.
  - In the control panel, check again, if the Xen drivers are removed. A Xen Bus Package (version 8.2.1.8) may remain and cannot be removed, but does no harm. Any other Xen drivers should have disappeared.
+ - There probably will be a drive `D:` containing the private user data. For Qubes, R4.1, QWT will expect this drive to be called `Q:`, so it has to be renamed:
+	 - Start the command prompt as administrator, i.e. right click on the Command Prompt icon (All Programs -> Accessories) and choose "Run as administrator"
+	 - In the command prompt type `diskmgmt.msc`
+	 - In the disk manager, select the volume `Private (D:)`
+	 - Select the option `Change Drive Letter and Path`
+	 - Select option `Change...`
+	 - Select the letter `Q`
+	 - Click `OK` in all still open windows of the disk manager and terminate it.
+
   
 Preparation for Windows 10 and 11
 ---------------------------------
 
  - First, be sure that the automatic repair function is disabled. In a command window, execute `bcdedit /set recoveryenabled NO`, and check that this worked by issuing the command `bcdedit`, without parameters, again.
  - Now, uninstall QWT 4.0.1.3, using the Apps and Features function of Windows. This will most likely result in a crash.
- - Restart Windows again, possibly two or three times, until repair options are offered. By hitting the F8 key, select the restart menu, and there select a start in protected mode (in German, it's option number 4).
+ - Restart Windows again, possibly two or three times, until repair options are offered. By hitting the F8 key, select the restart menu, and there select a start in safe mode (in German, it's option number 4).
  - The system will start gain, but in a rather useless way. Just shut it down, and reboot again.
  - Now Windows will start normally. Check in the Apps and Features display, if there are any Xen drivers left. If so, uninstall them.
  - In the Windows device manager, check if there is still a (probably non working) Xen PV disk device. If so, uninstall it. Otherwise, QWT 4.1-67 will not install.
