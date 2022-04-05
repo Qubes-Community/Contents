@@ -91,21 +91,11 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 	Once the Windows VM boots, a CDROM should appear in the 'My Computer' menu (typically as `D:` or `E:`) with the setup program `qubes-tools-x64.msi` in its main directory.
 
- 5. **Windows 7 only:** Rename the private disk `D:` to `Q:`. This can be done by starting the diskmanager and changing the drive letter:
-	
-	 - Start the command prompt as administrator, i.e. right click on the Command Prompt icon (All Programs -> Accessories) and choose "Run as administrator"
-	 - In the command prompt type `diskmgmt.msc`
-	 - In the disk manager, select the volume `Private (D:)`
-	 - Select the option `Change Drive Letter and Path`
-	 - Select option `Change...`
-	 - Select the letter `Q`
-	 - Click `OK` in all still open windows of the disk manager and terminate it.
+ 5. Install Qubes Windows Tools by starting `qubes-tools-x64.msi` as administrator, optionally selecting the `Xen PV disk drivers`. For installation in a template, you should select `Move user profiles`. If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
 
- 6. Install Qubes Windows Tools by starting `qubes-tools-x64.msi` as administrator, optionally selecting the `Xen PV disk drivers`. For installation in a template, you should select `Move user profiles`. If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
+ 6. After successful installation, the Windows VM must be shut down and started again, possibly a couple of times. On each shutdown, wait until the VM is really stopped, i.e. Qubes shows no more activity.
 
- 7. After successful installation, the Windows VM must be shut down and started again, possibly a couple of times. On each shutdown, wait until the VM is really stopped, i.e. Qubes shows no more activity.
-
- 8. Qubes will automatically detect that the tools have been installed in the VM and will set appropriate properties for the VM, such as `qrexec_installed`, `guiagent_installed`, and `default_user`. This can be verified (but is not required) using the `qvm-prefs` command  *(where `<VMname>` is the name of your Windows VM)*:
+ 7. Qubes will automatically detect that the tools have been installed in the VM and will set appropriate properties for the VM, such as `qrexec_installed`, `guiagent_installed`, and `default_user`. This can be verified (but is not required) using the `qvm-prefs` command  *(where `<VMname>` is the name of your Windows VM)*:
 
 	        [user@dom0 ~] $ qvm-prefs <VMname>
 
@@ -117,11 +107,11 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 	With the value `localtime` the dom0 `timezone` will be provided to virtual hardware, effectively setting the Windows clock to that of Qubes. With a digit value (negative or positive) the guest clock will have an offset (in seconds) applied relative to UTC.
 
- 9. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
+ 8. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
  
- 10. Now the system should be up, with QWT running correctly.
+ 9. Now the system should be up, with QWT running correctly.
  
- 11. **Windows 7 only:** Optionally enable seamless mode on VM startup. This can be done by setting appropriate values in the Windows registry: 
+ 10. **Windows 7 only:** Optionally enable seamless mode on VM startup. This can be done by setting appropriate values in the Windows registry: 
 	
 	 - Start the command prompt as administrator, i.e. right click on the Command Prompt icon (All Programs -> Accessories) and choose "Run as administrator"
 	 - In the command prompt type `regedit`
@@ -135,7 +125,7 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 	
 	 If Windows is used in a TemplateVM / AppVM combination, this registry fix has to be applied to the TemplateVM, as the `HKLM` registry key belongs to the template-based part of the registry.
 	
- 12. Lastly to enable file copy operations to a Windows VM the `default_user` property should be set the `<username>` that you use to login to the Windows VM. This can be done via the following command on a `dom0` terminal: *(where `<VMname>` is the name of your Windows VM)*
+ 11. Lastly to enable file copy operations to a Windows VM, the `default_user` property of this VM should be set to the `<username>` that you use to login to the Windows VM. This can be done via the following command on a `dom0` terminal: *(where `<VMname>` is the name of your Windows VM)*
 	
 		`[user@dom0 ~] $ qvm-prefs <VMname> default_user <username>`
   
@@ -216,25 +206,19 @@ Using Windows disposables
 Windows qubes can be used as disposables, like any other Linux-based qubes. On creating a template for Windows disposables, certain preparations have to be executed:
 
 - Create an AppVM based on a Windows TemplateVM.
-- **For Windows 7:**
-	- Start this AppVM and insert a link to the command prompt executable in the `Autostart` directory of the Windows menu tree:
-	 	- If the Windows qube started in seamless mode, hit the Windows keyboard key. In non-seamless mode, klick on the Start button. In both cases, the Windows menu will be displayed.
+- Start this AppVM and insert a link to the command prompt executable in the `Autostart` directory of the Windows menu tree:
+	- **For Windows 7:**
+	 	- If the Windows qube started in seamless mode, hit the Windows keyboard key while the cursor is positioned in a window of this VM. In non-seamless mode, klick on the Start button. In both cases, the Windows menu will be displayed.
 		- Position into the `Autostart` submenu.
-		- Right-click and select the option "New -> Link".
-		- Select `C:\Windows\System32\CMD.exe`as executable.
-		- Name the link, e.g. as `Command Prompt`.
-		- Close the Window with `OK`.
-		- Shut down this AppVM.
-- **For Windows 10:**
-	- Start the TemplateVM, on which this AppVM is based, and insert a link to the command prompt executable in the `Autostart` directory of the Windows menu tree:
+	- **For Windows 10:**
 	 	- Type Win+R to open the execution Prompt.
 		- Type `shell:startup`.
 		- An explorer window will open, which is positioned to the `Autostart` folder.
-		- Right-click and select the option "New -> Link".
-		- Select `C:\Windows\System32\CMD.exe`as executable.
-		- Name the link, e.g. as `Command Prompt`.
-		- Close the Window with `OK`.
-		- Shut down this TemplateVM.
+	- Right-click and select the option "New -> Link".
+	- Select `C:\Windows\System32\CMD.exe`as executable.
+	- Name the link, e.g. as `Command Prompt`.
+	- Close the Window with `OK`.
+	- Shut down this AppVM.
 - In the Qube Manager, refresh the applications of the newly created AppVM and select those applications that you want to make available from the disposable. Alternatively, in dom0 execute the command `qvm-sync-appmenus <VMname>`, *where `<VMname>` is the name of your windows qube*.
 - In the Qube Manager, go to the "Advanced" tab and enable the option `Disposable template` for your Windows qube.  Alternatively, in dom0 execute the commands `qvm-prefs <VMname> template_for_dispvms True` and `qvm-features <VMname> appmenus-dispvm 1`.
 - Click `Apply`.
@@ -245,7 +229,7 @@ Now you should have a menu `Disposable: <VMname>` containing the applications th
 
 For further information on usage of disposables, see [How to use disposables](https://www.qubes-os.org/doc/how-to-use-disposables/).
 
-:warning: **Caution:** *If a Windows-based disposable is used from another qube via the `Open/Edit in DisposableVM` command, this disposaable may not close automatically, due to the command prompt window still running in this dispvm. The disposable has to be shut down  manually.*
+:warning: **Caution:** *If a Windows-based disposable is used from another qube via the `Open/Edit in DisposableVM` command, this disposable may not close automatically, due to the command prompt window still running in this dispvm. In this case, the disposable has to be shut down  manually.*
 
 Installation logs
 -----------------
