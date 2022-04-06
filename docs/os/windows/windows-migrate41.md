@@ -23,22 +23,21 @@ Preparation for Windows 7
 	 - Select the letter `Q`
 	 - Click `OK` in all still open windows of the disk manager and terminate it.
 
-  
 Preparation for Windows 10 and 11
 ---------------------------------
-
- - First, be sure that the automatic repair function is disabled. In a command window, execute `bcdedit /set recoveryenabled NO`, and check that this worked by issuing the command `bcdedit`, without parameters, again.
- - Now, uninstall QWT 4.0.1.3, using the Apps and Features function of Windows. This will most likely result in a crash.
- - Restart Windows again, possibly two or three times, until repair options are offered. By hitting the F8 key, select the restart menu, and there select a start in safe mode (in German, it's option number 4).
- - The system will start gain, but in a rather useless way. Just shut it down, and reboot again.
- - Now Windows will start normally. Check in the Apps and Features display, if there are any Xen drivers left. If so, uninstall them.
- - In the Windows device manager, check if there is still a (probably non working) Xen PV disk device. If so, uninstall it. Otherwise, QWT 4.1-67 will not install.
- - In the Apps and Features display, check again, if the Xen drivers are removed. A Xen Bus Package (version 8.2.1.8) may remain and cannot be removed, but does no harm. Any other Xen drivers should have disappeared.
+If there is a drive `D:` from this earlier installation of Qubes Windows Tools, it will probably contain incomplete private data; especially the folder `AppData` containing program configuration data will be missing. In this situation, it may be better to perform a new Windows installation, because repair may be difficult and trouble-prone.
+- First, be sure that the automatic repair function is disabled. In a command window, execute `bcdedit /set recoveryenabled NO`, and check that this worked by issuing the command `bcdedit`, without parameters, again.
+- Now, uninstall QWT 4.0.1.3, using the Apps and Features function of Windows. This will most likely result in a crash.
+- Restart Windows again, possibly two or three times, until repair options are offered. By hitting the F8 key, select the restart menu, and there select a start in safe mode (in German, it's option number 4).
+- The system will start gain, but in a rather useless way. Just shut it down, and reboot again.
+- Now Windows will start normally. Check in the Apps and Features display, if there are any Xen drivers left. If so, uninstall them.
+- In the Windows device manager, check if there is still a (probably non working) Xen PV disk device. If so, uninstall it. Otherwise, QWT 4.1-67 will not install.
+- In the Apps and Features display, check again, if the Xen drivers are removed. A Xen Bus Package (version 8.2.1.8) may remain and cannot be removed, but does no harm. Any other Xen drivers should have disappeared.
   
 Transferring the Windows Qube
 -----------------------------
 
-- Now, finally, after one additional reboot, Qubes Windows Tools 4.1-67 can be installed.
+- Now, finally, after one additional reboot, Qubes Windows Tools 4.1-67 can be installed. The option `Move user profiles` should be used **if and only if** there was **no** separate drive `D:` in the earlier Windows installation.
 - After one more reboot, the backup for R4.1 may be created.
 - This backup can be installed in Qubes R4.1 and will (probably) work.
  
