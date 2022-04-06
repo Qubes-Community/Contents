@@ -5,6 +5,7 @@ Guide status:
 - 4.0.4 :
 - 4.1-beta1 : validated (2021-07-31) by the commit author of this line.
 - 4.1rc3 : validated (2022-01-11) by the commit author of this line. 
+- 4.1 : validated (2022-04-05) by the commit author of this line. 
 
 ## Steps
 
@@ -245,7 +246,7 @@ $ make meta-packages-vm
 ___
 ### 6. Build the actual Arch Linux template
 ```console
-$ make template
+# make template
 ```
 
 ___
