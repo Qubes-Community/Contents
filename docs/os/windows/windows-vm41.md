@@ -157,6 +157,19 @@ qvm-start --cdrom=untrusted:/home/user/windows_install.iso WindowsNew
 - Windows Installer:
   - Mostly as usual, but automatic reboots will halt the qube - just restart it again and again until the installation is finished.
   - Install on first disk.
+  - **For Windows 11 only**: Windows 11 requires TPM 2.0, which currently is not supported from Xen. In Order to install Windows 11 under Qubes, the check for TPM in the Windows installer has to be disabled:
+ 
+    -    When you start setup without having a TPM, you get an error message like *This PC does not fulfil the minimum requirements for Windows 11*.
+    -    Typing Shift-F10 then opens a console window.
+    -    Here you type `regedit` to start the registry editor.
+    -    There you position to the key `HKEY_LOCAL_MACHINE\SYSTEM\Setup`.
+    -    Now create the key `LabConfig`.
+    -    Position to this key and create 3 DWORD values called `BypassTPMCheck`, `BypassSecureBootCheck` and `BypassRAMCheck` and set each value to `1`.
+    -    Close the regstry editor and console windows.
+    -    In the setup window, hit the left arrow in the left upper corner. You will then return into the setup, which will continue normally and install Windows 11 without TPM 2.0.
+   
+    :warning: **Caution:** This temporary patch may cease to work if it so pleases Microsoft some time.
+
   - The Windows license may be read from flash via root in dom0:
 
     `strings < /sys/firmware/acpi/tables/MSDM`
