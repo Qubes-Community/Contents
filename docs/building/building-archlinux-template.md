@@ -1,14 +1,32 @@
 # Building the 'archlinux-minimal' Qubes template
+
+## Read first
+This is a community guide, not an official guide. So please, first read the below official guides:
+- [Qubes-builder](https://www.qubes-os.org/doc/qubes-builder/)
+- [Qubes-builder-details](https://www.qubes-os.org/doc/qubes-builder-details/)
+- [Qubes-builder doc directory](https://github.com/marmarek/qubes-builder/tree/master/doc)
+- [Qubes templates config](https://github.com/QubesOS/qubes-template-configs/blob/master/README.md)
+
+Only if the above guides don't work for you, then try this one.
+
+Arch Linux is a [rolling](https://en.wikipedia.org/wiki/Rolling_release) distribution, making it fragile. In fact, with always the latest versions, the ArchLinux packages meet first the new problems. So it's better to first try to build templates or packages for Fedora or Debian.
+
+Also read :
+- the *Debugging the build process* below section
+- the [ArchLinux known issues](https://github.com/QubesOS/qubes-issues/labels/C%3A%20Arch%20Linux) with Qubes-OS
+
+## Guide status
 > **These instructions are for Qubes 4.0.4 and 4.1.**
 
-Guide status:
 - 4.0.4 :
 - 4.1-beta1 : validated (2021-07-31) by the commit author of this line.
 - 4.1rc3 : validated (2022-01-11) by the commit author of this line. 
+- 4.1 : validated (2022-04-11) by the commit author of this line. 
 
 ## Steps
 
-### 1. Open a non-root ($) terminal in the 'fedora-34' TemplateVM.
+### 1. Create a qubes-builder AppVM
+Create an AppVM, based on the last Fedora TemplateVM, named for example *qubes-builder* or *build-archlinux*.
 > **The StandaloneVM type cannot build the Arch Linux (minimal or not) template currently, as its Makefiles and Scripts only fully accomodate for the AppVM type's set of filesystem permissions.**
 
 ![arch-template-01](/attachment/wiki/ArchlinuxTemplate/arch-template-01.png)
@@ -46,7 +64,7 @@ $ resize -s 30 100
 ```
 * Install initial dependencies without user confirmation.
 ```console
-# dnf install -y git make
+# sudo dnf install -y git make
 ```
 * Import and verify the Qubes master key; [to understand the purpose of GPG (a frontend for PGP)](https://www.qubes-os.org/security/verifying-signatures/).
 ```console
@@ -104,7 +122,7 @@ ___
 ### 4. Configure the `builder.conf` file
 > **The manual way is copying an example config like `$HOME/qubes-builder/example-configs/qubes-os-r4.0.conf` to `$HOME/qubes-builder/builder.conf`, then editing that copied file.**
 
-<details><summary>Setup script method</summary>
+<details><summary>{Preferred if you start} Setup script method</summary>
 
 * Run the `setup` script located in `$HOME/qubes-builder/`:
 ```console
@@ -240,28 +258,22 @@ $ make template
 ```
 
 ___
-### 7. Transfer 'archlinux-minimal' template into Dom0
-* You need to ensure these two files are in the `noarch` directory:
+### 7. Transfer the template into Dom0
+* You need to ensure the rpm template is in the `noarch` directory:
 ```console
-$ cd $HOME/qubes-builder/qubes-src/linux-template-builder/rpm/
-$ ls
-install-templates.sh
-$ cd noarch
-$ ls
+$ ls $HOME/qubes-builder/qubes-src/linux-template-builder/rpm/noarch
 qubes-template-archlinux-*.*.*-*.noarch.rpm
 ```
-
-![arch-template-16](/attachment/wiki/ArchlinuxTemplate/arch-template-16.png)
-
-*   **Transfer the install-templates.sh script file into Dom0**
-  > **There are more steps involved for file transfering to Dom0 since it's considered unsafe. \
+* Transfer the qubes-template-archlinux rpm into Dom0
+  > **File transfering to Dom0 is considered unsafe. \
   You accept full responsibility if Dom0 is compromised due to this file transfer.**
-* Open a terminal in Dom0, and execute the following commands:
-```console
-$ qvm-run --pass-io build-archlinux2 'cat $HOME/qubes-builder/qubes-src/linux-template-builder/rpm/install-templates.sh' > install-templates.sh
-$ chmod +x install-templates.sh
-$ ./install-templates.sh
-```
+  
+Follow the [copying-to-dom0](https://www.qubes-os.org/doc/how-to-copy-from-dom0/#copying-to-dom0) official guide.
+
+* Install the rpm file in dom0.
+
+Read [How to install software in dom0](https://www.qubes-os.org/doc/how-to-install-software-in-dom0/), then install the rpm with `sudo dnf install <rpm_file>`.
+
 * If the build process went smoothly, the 'archlinux' and/or 'archlinux-minimal' template will be listed in Qubes Manager.
 
 ___
