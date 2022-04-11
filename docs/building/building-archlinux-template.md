@@ -9,15 +9,6 @@ Guide status:
 ## Steps
 
 ### 1. Open a non-root ($) terminal in the 'fedora-34' TemplateVM.
-> **How to see whether the `'GNUMAKEFLAGS'` or `'MAKEFLAGS'` environment variable is used: \
-`$ strings /usr/bin/make | grep MAKEFLAGS` \
-GNU Make's `-l` set to same value as `-j` prevents CPU overcommitment.**
-
-* `#`Edit: `/etc/profile.d/99-makeflags.sh`
-```sh
-export GNUMAKEFLAGS="-j$(nproc) -l$(nproc)"
-export MAKEFLAGS="-j$(nproc) -l$(nproc)"
-```
 > **The StandaloneVM type cannot build the Arch Linux (minimal or not) template currently, as its Makefiles and Scripts only fully accomodate for the AppVM type's set of filesystem permissions.**
 
 ![arch-template-01](/attachment/wiki/ArchlinuxTemplate/arch-template-01.png)
