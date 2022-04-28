@@ -37,23 +37,23 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
        
 3. Use these commands in your terminal (if you chose a different distribution, such as `buster`, substitute that for `xenial` in the fourth command):
 
-  Install the curl program needed to download the signal signing key:
+    Install the curl program needed to download the signal signing key:
 
        [user@debian-11 ~]$ sudo apt install curl
 
-  We need a notification daemon, otherwise signal will hang the first time you receive a message when the window doesn’t have the focus:
+    We need a notification daemon, otherwise signal will hang the first time you receive a message when the window doesn’t have the focus:
   
        [user@debian-11 ~]$ sudo apt install dunst	# alternatively, install xfce4-notifyd
 
-  Download the signal signing key (we need to pass the `--proxy` argument to `curl` as TemplateVMs access internet through a proxy at localhost (127.0.0.1) port 8082):
+    Download the signal signing key (we need to pass the `--proxy` argument to `curl` as TemplateVMs access internet through a proxy at localhost (127.0.0.1) port 8082):
 
        [user@debian-11 ~]$ curl --proxy 127.0.0.1:8082 -s https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
 
-  Add the signal repository:
+    Add the signal repository:
   
        [user@debian-11 ~]$ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 
-  Then fetch all repositories (now including the newly added signal repository), bring the TemplateVM up-to-date, and finally install signal:
+    Then fetch all repositories (now including the newly added signal repository), bring the TemplateVM up-to-date, and finally install signal:
 
        [user@debian-11 ~]$ sudo apt update && sudo apt full-upgrade && sudo apt install --no-install-recommends signal-desktop
 
