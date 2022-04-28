@@ -27,27 +27,56 @@ Always obtain a trusted key fingerprint via other channels, and always check any
 
 The following adapts the official [Linux (Debian-based) Install Instructions][signal-debian-instructions] from Signal's website for Qubes.
 
-1. (Optional) Create a TemplateVM (Debian 11 is used as an example):
+1. (Optional) Create a TemplateVM ('debian-11' is used as an example, but could have been 'debian-11-minimal', 'debian-10', etc.):
 
        [user@dom0 ~]$ sudo qubesctl --skip-dom0 --targets=debian-11 --show-output state.sls update.qubes-vm
 
-2. Open a terminal in Debian 11 (or your previously chosen template):
+2. Open a terminal in Debian 11 (or your previously chosen template ; note that `gnome-terminal` isn't installed by default in minimal templates, in which case replace with `gnome-terminal` with `uxterm`):
 
        [user@dom0 ~]$ qvm-run -a debian-11 gnome-terminal
        
 3. Use these commands in your terminal (if you chose a different distribution, such as `buster`, substitute that for `xenial` in the fourth command):
 
-       [user@debian-11 ~]$ sudo apt-get install curl  # (Optional)
-       [user@debian-11 ~]$ sudo apt-get install dunst  # (for better Signal notifications)
+  Install the curl program needed to download the signal signing key:
+
+       [user@debian-11 ~]$ sudo apt install curl
+
+  We need a notification daemon, otherwise signal will hang the first time you receive a message when the window doesn’t have the focus:
+  
+       [user@debian-11 ~]$ sudo apt install dunst	# alternatively, install xfce4-notifyd
+
+  Download the signal signing key (we need to pass the `--proxy` argument to `curl` as TemplateVMs access internet through a proxy at localhost (127.0.0.1) port 8082):
+
        [user@debian-11 ~]$ curl --proxy 127.0.0.1:8082 -s https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+
+  Add the signal repository:
+  
        [user@debian-11 ~]$ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+
+  Then fetch all repositories (now including the newly added signal repository), bring the TemplateVM up-to-date, and finally install signal:
+
        [user@debian-11 ~]$ sudo apt update && sudo apt full-upgrade && sudo apt install --no-install-recommends signal-desktop
+
+4. In case you used a [minimal template]:
+
+    `signal-desktop` requires at the minimum `libatk1.0-0`, `libatk-bridge2.0-0`, `libcups2` and `libgtk-3-0` to run. Those dependencies are automatically installed when installing `xfce4-notifyd`, but if you installed `dunst` you'll have to add them:
+
+       [user@debian-11 ~]$ sudo apt install libatk1.0-0 libatk-bridge2.0-0 libcups2 libgtk-3-0
+
+       If you haven't done so already, `qubes-core-agent-networking` must be installed for networking to work in qubes based on minimal templates:
+
+       [user@debian-11 ~]$ sudo apt install qubes-core-agent-networking
+
+       Then optionally install the following packages for convenience of handling files (`zenity` is needed by the Qubes OS functions in `qubes-core-agent-nautilus` to show the progress dialog when moving / copying files):
+
+       [user@debian-11 ~]$ sudo apt install nautilus qubes-core-agent-nautilus zenity
 
 5. Shutdown the TemplateVM (substitute your template name if needed):
 
         [user@dom0 ~]$ qvm-shutdown debian-11
         
 6. Create an AppVM based on this TemplateVM.
+
 7. With your mouse, select the `Q` menu -> `Domain: "AppVM Name"` -> `"AppVM Name": Qube Settings` -> `Applications` (or in Qubes Manager `"AppVM Name"` -> `Settings` -> `Applications`). Select `Signal` from the left `Available` column, move it to the right `Selected` column by clicking the `>` button and then `OK` to apply the changes and close the window.
 
 -----
@@ -60,3 +89,4 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
 [shortcut-desktop]: https://www.qubes-os.org/doc/managing-appvm-shortcuts/#tocAnchor-1-1-1
 [message]: https://groups.google.com/d/msg/qubes-users/rMMgeR-KLbU/XXOFri26BAAJ
 [mailing list]: https://www.qubes-os.org/support/
+[minimal template]: https://www.qubes-os.org/doc/templates/minimal/
