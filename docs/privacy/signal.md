@@ -57,7 +57,7 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
 
        sudo apt update && sudo apt full-upgrade && sudo apt install --no-install-recommends signal-desktop
 
-4. In case you used a [minimal template]:
+4. In case you used a [minimal template] for the TemplateVM above:
 
     `signal-desktop` requires at the minimum `libatk1.0-0`, `libatk-bridge2.0-0`, `libcups2` and `libgtk-3-0` to run. Those dependencies are automatically installed when installing `xfce4-notifyd`, but if you installed `dunst` you'll have to add them:
 
