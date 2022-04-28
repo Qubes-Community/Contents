@@ -31,7 +31,7 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
 
        [user@dom0 ~]$ sudo qubesctl --skip-dom0 --targets=debian-11 --show-output state.sls update.qubes-vm
 
-2. Open a terminal in Debian 11 (or your previously chosen template ; note that `gnome-terminal` isn't installed by default in minimal templates, in which case replace `gnome-terminal` with `uxterm`):
+2. Open a terminal in Debian 11 (or your previously chosen template ; note that `gnome-terminal` isn't installed by default in a [minimal template], in which case replace `gnome-terminal` with `uxterm`):
 
        [user@dom0 ~]$ qvm-run -a debian-11 gnome-terminal
        
@@ -57,7 +57,7 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
 
        sudo apt update && sudo apt full-upgrade && sudo apt install --no-install-recommends signal-desktop
 
-4. A bit more work is required in case you used a [minimal template] for the TemplateVM above:
+4. A bit more work is required in case you used a minimal template for the TemplateVM above:
 
     `signal-desktop` requires at the minimum `libatk1.0-0`, `libatk-bridge2.0-0`, `libcups2` and `libgtk-3-0` to run. Those dependencies are automatically installed when installing `xfce4-notifyd`, but if you installed `dunst` you'll have to add them:
 
