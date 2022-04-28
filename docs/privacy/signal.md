@@ -63,11 +63,11 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
 
        [user@debian-11 ~]$ sudo apt install libatk1.0-0 libatk-bridge2.0-0 libcups2 libgtk-3-0
 
-       If you haven't done so already, `qubes-core-agent-networking` must be installed for networking to work in qubes based on minimal templates:
+    If you haven't done so already, `qubes-core-agent-networking` must be installed for networking to work in qubes based on minimal templates:
 
        [user@debian-11 ~]$ sudo apt install qubes-core-agent-networking
 
-       Then optionally install the following packages for convenience of handling files (`zenity` is needed by the Qubes OS functions in `qubes-core-agent-nautilus` to show the progress dialog when moving / copying files):
+    Then optionally install the following packages for convenience of handling files (`zenity` is needed by the Qubes OS functions in `qubes-core-agent-nautilus` to show the progress dialog when moving / copying files):
 
        [user@debian-11 ~]$ sudo apt install nautilus qubes-core-agent-nautilus zenity
 
