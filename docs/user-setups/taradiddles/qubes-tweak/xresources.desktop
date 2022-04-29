@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=Merge Xressources (with preprocessing, unlike xinit)
-Exec=xrdb merge /etc/X11/Xresources
-Terminal=false
-Type=Application

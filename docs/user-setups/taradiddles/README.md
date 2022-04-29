@@ -7,46 +7,60 @@ Hardware
 Lenovo Thinkpad T450s
 
 
-TemplateVMs and VMs
--------------------
+TemplateVMs and qubes
+---------------------
 
-(see the [TemplateVMs customization](#templatevms-customization) section for how to configure the templateVMs)
+Philosophy: use a few custom templates rather than a large one. Pro: minimize attack surface. Cons: more work to set up, and more time spent updating (for the latter, setting up a caching proxy in your LAN or [even in a qube](https://github.com/rustybird/qubes-updates-cache) will speed up things).
 
-### TemplateVM 'fedora-minimal' ###
+### TemplateVM 'fedora-minimal'
 
 Custom minimal template for:
 
-- VM 'sys-firewall'
-- VM 'sys-net'
-- VM 'vault': not networked; used for keepassxc (password manager) and [split gpg](https://www.qubes-os.org/doc/split-gpg/)
+- qube 'sys-firewall'
+- qube 'sys-net'
+- qube 'vault': not networked; used for keepassxc (password manager) and [split gpg](https://www.qubes-os.org/doc/split-gpg/)
 
-### TemplateVM 'fedora-medium ###
+### TemplateVM 'fedora-medium' (default template)
 
-Custom default template with libreoffice, thunderbird, ...
+Custom template with libreoffice, evolution, ...
 
-- VM 'work': firewalled, ssh to known hosts and to mail server; used for emails/office work, storing non confidential documents, and terminals (with [tmux](https://en.wikipedia.org/wiki/Tmux)).
-- VM 'banking': firewalled, only a few IPs allowed; used only for e-banking
-- VM 'halftrusted': used only for e-shopping
-- VM 'private': not networked; used for opening and storing private documents
+- qube 'work': firewalled, ssh only to known hosts and to mail server; used for emails/office work, storing non confidential documents, and terminals (with [tmux](https://en.wikipedia.org/wiki/Tmux)).
+- qube 'banking': firewalled, https only to know hosts; used only for e-banking
+- qube 'private': not networked; for opening and storing private/personal documents
+- qube 'sys-usb': firewalled, only LAN allowed (required for storing large android backups to a NFS share).
 
-### TemplateVM 'fedora-heavy' ###
+### TemplateVM 'fedora-heavy'
 
-Larger custom template with programs from non-fedora repos (multimedia, non free, ...)
+Larger custom template with a lot more apps, some from non-fedora repos (rpmfusion, ...)
 
-- VM 'untrusted': firewalled, only a few IPs allowed (eg. nextcloud server, ...); used for opening multimedia files, and content that is thought to be OK. See [this comment](https://github.com/Qubes-Community/Contents/issues/21#issuecomment-385189481) for the rationale behind keeping this VM without full Internet access.
-- VM 'sys-usb': firewalled, only 1 IP allowed (playing music from a NAS to a USB soundcard).
-- dispVM 'dispBrowser': doc / WIP; used for casual browsing. Using with a customized firefox profile with privacy extensions and a custom `user.js` file (adapted from [here](https://github.com/pyllyukko/user.js)).
-- dispVMs: used for opening content downloaded from unknown/dodgy sources as well as browsing sites that won't work with the restricted firefox profile of 'dispBrowser'.
+- qube 'untrusted': firewalled, only a few IPs allowed (eg. own cloud/seafile server, ...); mainly used for managing personal pictures and opening multimedia files and content that is more or less trusted. 
+- (named) dispVM 'dispBrowser': for casual browsing. Customized firefox profile with privacy extensions and a custom `user.js` file (from [here](https://github.com/arkenfox/user.js))
+- dispVMs: used for opening content downloaded from unknown/dodgy sources as well as browsing sites that won't work with the restricted firefox profile of 'dispBrowser' above.
 
-### Other VMs ###
+### TemplateVM 'fedora-print'
 
-- a few Windows 7 VMs without network for CAD/3D drawing, programing controllers with a Windows-only toolkit, ... ; 
-- a StandaloneVM based on fedora with third-party drivers installed for a networked printer. Firewalled to allow only the network printer's IP.
+A custom template with third-party printing drivers
+
+- (named) dispVM 'print': firewalled, access only to remote printer/scanner
+
+### TemplateVM 'debian-11-signal'
+
+A custom template with `signal-desktop` [installed](https://github.com/Qubes-Community/Contents/blob/master/docs/privacy/signal.md) in a minimal debian-11 template.
+
+- dispVM 'signal'
+
+
+### Other qubes
+
+- a few Windows 10 qubes without network for CAD/3D drawing, programing controllers with a Windows-only toolkit, ... ; 
+- a dedicated qube for GIS work
+- ...
+
 
 DOM0 customization
 ------------------
 
-### Xterm ###
+### Xterm
 
 Open xterm instead of xfce4-terminal: in `/etc/xdg/xfce4/helpers.rc`, set
 
@@ -54,149 +68,36 @@ Open xterm instead of xfce4-terminal: in `/etc/xdg/xfce4/helpers.rc`, set
 TerminalEmulator=xterm
 ~~~
 
-Xresources for xterm are in `$HOME/.Xresources`
+(Xresources for xterm are in `$HOME/.Xresources`)
 
 
-### Power management ###
+### Power management
 
-See https://github.com/taradiddles/qubes-os/tree/master/powermgnt
+- install and configure `tlp` in dom0
+- add `workqueue.power_efficient` to `GRUB_CMD_LINE` in `/etc/default/grub`
 
-(not clear how much it helps with battery usage - never had the time to do proper testing; shouldn't hurt though).
 
-
-### Productivity tweaks ###
+### Productivity tweaks
 
 Define application shortcuts with Qubes Menu -> System Tools -> Keyboard -> Application Shortcuts; for instance:
 
-- ctrl-alt C: open a calculator in VM untrusted ; shortcut: `qvm-run -q -a untrusted galculator`
-- ctrl-alt X: open a popup windows to open xterm in a given VM (script [here](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu-r4), screenshot [there](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu.screenshot.jpg)). Shortcut: `popup-appmenu xterm`.
+- ctrl-alt C: open a calculator in qube untrusted ; shortcut: `qvm-run -q -a untrusted galculator`
+- ctrl-alt X: open a popup windows to open xterm in a given qube (script [here](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu-r4), screenshot [there](https://github.com/taradiddles/qubes-os/blob/master/popup-appmenu.screenshot.jpg)). Shortcut: `popup-appmenu xterm`.
 - ctrl-alt F: ditto, but with firefox
-- ctrl-alt K: open keepassxc in VM vault; shortcut: `qvm-run -q -a vault keepassxc`
+- ctrl-alt K: open keepassxc in qube vault; shortcut: `qvm-run -q -a vault keepassxc`
 
 
-VMs customization
------------------
+Backups
+-------
 
-sys-net: since nm-applet isn't started by default in all VMs (see section below), start it with a .desktop file in `$HOME/.config/autostart` (note: can't use `rc.local` because Xorg isn't started yet when `rc.local` runs).
+`qvm-backup` is horribly slow and can't be used on a regular basis to backup qubes with large amounts of data. So use tasket's excellent [wyng](https://github.com/tasket/wyng-backup) backup tool.
 
+Setup (fully automated with scripts):
 
-TemplateVMs customization
--------------------------
-
-### fedora-minimal ###
-
-Installed ITL's fedora-26-minimal rpm + installed the following rpms:
-
-~~~
-qubes-core-agent-passwordless-root
-qubes-core-agent-networking
-qubes-core-agent-network-manager
-qubes-core-agent-dom0-updates
-qubes-usb-proxy
-network-manager-applet
-polkit
-less
-pciutils
-psmisc
-NetworkManager-wifi
-dejavu-sans-fonts
-dejavu-sans-mono-fonts
-tcpdump
-telnet
-wireless-tools
-iwl7260-firmware
-keepassxc pwgen
-sharutils
-rsync
-qubes-gpg-split
-qubes-core-agent-nautilus
-bzip2
-encfs
-openssl
-~~~
-
-Fixes/tweaks:
-- `/usr/lib/qubes-tweak`:
-    - `fix-xdg`: remove autostart stuff in `/etc/xdg/autostart`; this will prevent for instance nm-applet from starting in all VMs while it's only required in sys-net.
-    - `setxkbmap.desktop`: multiple keyboard layouts (see [this doc](https://github.com/Qubes-Community/Contents/blob/master/docs/localization/keyboard-multiple-layouts.md)).
-    - `solarized.vim2`, `vimrc.add.colors`: configure vim to use the [solarized](http://ethanschoonover.com/solarized) color scheme.
-    - `Xresources` and `xresources.desktop`: load Xresources at boot (can't simply use `/etc/X11/xresources` because `xinit` runs `xrdb -merge` without the preprocessor, which breaks the solarized color scheme definitions.
-- `/etc/profile.d/interactive-commands.sh`: ask before deleting/overwriting files with rm/cp/mv
-
-
-### fedora-medium ###
-
-Cloned fedora-minimal above and installed the following rpms:
-
-~~~
-tigervnc
-firefox
-thunderbird
-tmux
-proxychains
-nfs-utils
-gimp
-libreoffice-calc libreoffice-writer libreoffice-draw libreoffice-impress
-units
-fuse-sshfs
-p7zip
-perl-Image-ExifTool
-qpdf
-vim-enhanced
-man
-glibc-langpack-en
-nfs-utils
-eog
-evince
-thunderbird-qubes
-qubes-img-converter
-qubes-pdf-converter
-git
-thunderbird-enigmail
-~~~
-
-Fixes:
-
-~~~
-set LANG=en_US.UTF-8 in /etc/locale.conf
-~~~
-
-
-### fedora-heavy ###
-
-Cloned fedora-medium above.
-
-Installed the following repos:
-
-- Google Chrome
-- rpmfusion-free
-- rpmfusion-nonfree
-
-And installed the following rpms:
-
-~~~
-calibre
-nextcloud-client
-ufraw
-viking
-java-1.8.0-openjdk
-mc
-google-chrome-stable
-gphoto2
-gvfs-mtp
-gvfs-gphoto2
-gvfs-fuse
-simple-mtpfs
-qubes-vm-recommended
-whois
-bind-utils
-galculator
-fuse-exfat
-unrar
-ffmpeg
-mplayer
-qgis-python
-~~~
-
+- in a dedicated trusted qube based on fedora-minimal, mount a nfs share which hosts a large (ie. 500GB) file with a LUKS volume and `losetup` that file
+- attach the newly created loop device to dom0
+- in dom0, attach the newly create loop device to dom0, open the LUKS volume in the trusted qubes and mount its underlying fs
+- in dom0, run `wyng`, backup (rsync) home dir + various config files, etc.
+- unmount, close luks, detach, shutdown trusted qube
 
 
