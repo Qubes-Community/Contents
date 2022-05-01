@@ -41,19 +41,19 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
 
        sudo apt install curl
 
-    We need a notification daemon, otherwise signal will hang the first time you receive a message when the window doesn’t have the focus (alternatively you could install `xfce4-notifyd` instead of `dunst`):
+    We need a notification daemon, otherwise Signal will hang the first time you receive a message when the window doesn’t have the focus (alternatively you could install `xfce4-notifyd` instead of `dunst`):
   
        sudo apt install dunst
 
-    Download the signal signing key (we need to pass the `--proxy` argument to `curl` as TemplateVMs can only access internet through a proxy at localhost/127.0.0.1 port 8082):
+    Download the Signal signing key (we need to pass the `--proxy` argument to `curl` as TemplateVMs can only access internet through a proxy at localhost/127.0.0.1 port 8082):
 
        curl --proxy 127.0.0.1:8082 -s https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
 
-    Add the signal repository (if you chose a different distribution, such as `buster`, substitute that for `xenial`):
+    Add the Signal repository (if you chose a different distribution, such as `buster`, substitute that for `bullseye`):
   
-       echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+       echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt bullseye main' | sudo tee -a /etc/apt/sources.list.d/signal-bullseye.list
 
-    Then fetch all repositories (now including the newly added signal repository), bring the TemplateVM up-to-date, and finally install signal:
+    Then fetch all repositories (now including the newly added Signal repository), bring the TemplateVM up-to-date, and finally install Signal:
 
        sudo apt update && sudo apt full-upgrade && sudo apt install --no-install-recommends signal-desktop
 
