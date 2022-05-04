@@ -49,9 +49,9 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
 
        curl --proxy 127.0.0.1:8082 -s https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
 
-    Add the Signal repository (if you chose a different distribution, such as `buster`, substitute that for `bullseye`):
+    Add the Signal repository (Signal don't offer a `buster/bullseye` repository, they use `xenial` but it doesn't change anything for debian users):
   
-       echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt bullseye main' | sudo tee -a /etc/apt/sources.list.d/signal-bullseye.list
+       echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee -a /etc/apt/sources.list.d/signal-desktop.list
 
     Then fetch all repositories (now including the newly added Signal repository), bring the TemplateVM up-to-date, and finally install Signal:
 
