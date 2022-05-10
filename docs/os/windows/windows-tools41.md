@@ -83,6 +83,10 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 		sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing qubes-windows-tools
 
+	If an earlier version of Qubes Windows Tools is already installed, with enabled current-testing repo you need to specify as action to `upgrade` the existing package, because the default action is `install`, which will fail if it detects that QWT is already present in Dom0:
+	
+		sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing --action=upgrade qubes-windows-tools
+
 	This package brings the ISO with Qubes Windows Tools that is passed to the VM when `--install-windows-tools` is specified for the `qvm-start` command. Please note that none of this software ever runs in Dom0 or any other part of the system except for the Windows AppVM in which it is to be installed.
 
  2. To install the Qubes Windows Tools in a Windows VM one should start the VM passing the additional option `--install-windows-tools`:
