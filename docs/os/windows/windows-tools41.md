@@ -73,29 +73,29 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 > **Note:** Seamless mode is currently not available for windows 10 and 11. Please check the top of this document for the full feature availability breakdown.
 
-> **Note:** *Steps 1 through 4 are prelimnary and will be replaced once Qubes Windows Tools are made available in a Qubes repository. This is a workaround for installing the Qubes windows tools until the tools are available in the Qubes repositories.*
+ 1. First, make sure that `qubes-windows-tools` is installed in your system:
 
- 1. Download the [Qubes Windows Tools installation disk](https://github.com/tabit-pro/qubes-windows-tools-cross/releases/download/v4.1.67/qubes-windows-tools-4.1.67.1.iso/) into some AppVM, e.g. *untrusted*.
+		sudo qubes-dom0-update qubes-windows-tools
 
- 2. Download the [checksumfile](https://github.com/tabit-pro/qubes-windows-tools-cross/releases/download/v4.1.67/sha256sum.txt) into the same AppVM.
- 
- 3. Check the integrity of the file `qubes-windows-tools-4.1.67.1.iso` by comparing its hash checksum. This can be done using the `sha256sum` command in the AppVM like:
-        
-		[user@untrusted Downloads] $ sha256sum qubes-windows-tools-4.1.67.1.iso
+	(If the above command does not work, it could be that the Qubes Tools are not in the stable repo yet. Try installing from the testing repo instead.)
 
-	and compare it to the value stored in the file `sha256sum.txt` for the `iso` file (**it has to exactly match for security reasons**). If it matches, feel free to continue the installation. If not, repeat the download to make sure it was not corrupted due to a network problem. If it keeps on not matching it might be an attacker attempting to do something nasty to your system -- *Ask for support.*
+	You can also install the package from testing repositories, where we usually publish new versions first:
 
- 4. Start the Windows qube attaching the `iso` file as a virtual CD-Rom drive *(where `<VMname>` is the name of your Windows VM and <AppVM> the name of the AppVM where you downloaded the installation `iso`)*
+		sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing qubes-windows-tools
 
-		[user@dom0 ~] $ qvm-start <VMname> --cdrom=<AppVM>:/<PathToFile>/qubes-windows-tools-4.1.67.1.iso
+	This package brings the ISO with Qubes Windows Tools that is passed to the VM when `--install-windows-tools` is specified for the `qvm-start` command. Please note that none of this software ever runs in Dom0 or any other part of the system except for the Windows AppVM in which it is to be installed.
+
+ 2. To install the Qubes Windows Tools in a Windows VM one should start the VM passing the additional option `--install-windows-tools`:
+
+		qvm-start <VMname> --install-windows-tools
 
 	Once the Windows VM boots, a CDROM should appear in the 'My Computer' menu (typically as `D:` or `E:`) with the setup program `qubes-tools-x64.msi` in its main directory.
 
- 5. Install Qubes Windows Tools by starting `qubes-tools-x64.msi` as administrator, optionally selecting the `Xen PV disk drivers`. For installation in a template, you should select `Move user profiles`. If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
+ 3. Install Qubes Windows Tools by starting `qubes-tools-x64.msi` as administrator, optionally selecting the `Xen PV disk drivers`. For installation in a template, you should select `Move user profiles`. If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
 
- 6. After successful installation, the Windows VM must be shut down and started again, possibly a couple of times. On each shutdown, wait until the VM is really stopped, i.e. Qubes shows no more activity.
+ 4. After successful installation, the Windows VM must be shut down and started again, possibly a couple of times. On each shutdown, wait until the VM is really stopped, i.e. Qubes shows no more activity.
 
- 7. Qubes will automatically detect that the tools have been installed in the VM and will set appropriate properties for the VM, such as `qrexec_installed`, `guiagent_installed`, and `default_user`. This can be verified (but is not required) using the `qvm-prefs` command  *(where `<VMname>` is the name of your Windows VM)*:
+ 5. Qubes will automatically detect that the tools have been installed in the VM and will set appropriate properties for the VM, such as `qrexec_installed`, `guiagent_installed`, and `default_user`. This can be verified (but is not required) using the `qvm-prefs` command  *(where `<VMname>` is the name of your Windows VM)*:
 
 	        [user@dom0 ~] $ qvm-prefs <VMname>
 
@@ -107,11 +107,11 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 	With the value `localtime` the dom0 `timezone` will be provided to virtual hardware, effectively setting the Windows clock to that of Qubes. With a digit value (negative or positive) the guest clock will have an offset (in seconds) applied relative to UTC.
 
- 8. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
+ 6. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
  
- 9. Now the system should be up, with QWT running correctly.
+ 7. Now the system should be up, with QWT running correctly.
  
- 10. **Windows 7 only:** Optionally enable seamless mode on VM startup. This can be done by setting appropriate values in the Windows registry: 
+ 8. **Windows 7 only:** Optionally enable seamless mode on VM startup. This can be done by setting appropriate values in the Windows registry: 
 	
 	 - Start the command prompt as administrator, i.e. right click on the Command Prompt icon (All Programs -> Accessories) and choose "Run as administrator"
 	 - In the command prompt type `regedit`
@@ -125,7 +125,7 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 	
 	 If Windows is used in a TemplateVM / AppVM combination, this registry fix has to be applied to the TemplateVM, as the `HKLM` registry key belongs to the template-based part of the registry.
 	
- 11. Lastly to enable file copy operations to a Windows VM, the `default_user` property of this VM should be set to the `<username>` that you use to login to the Windows VM. This can be done via the following command on a `dom0` terminal: *(where `<VMname>` is the name of your Windows VM)*
+ 9. Lastly to enable file copy operations to a Windows VM, the `default_user` property of this VM should be set to the `<username>` that you use to login to the Windows VM. This can be done via the following command on a `dom0` terminal: *(where `<VMname>` is the name of your Windows VM)*
 	
 		`[user@dom0 ~] $ qvm-prefs <VMname> default_user <username>`
   
@@ -300,7 +300,7 @@ If a specific component is malfunctioning, you can increase its log verbosity as
 Updates
 -------
 
-:warning: *Currently Qubes Windows Tools (QWT) are not yet available from the repositories.*
+:warning: *Currently Qubes Windows Tools (QWT) are only available from the testing repositories.*
 	
 When we publish a new QWT version, it's usually pushed to the `current-testing` or `unstable` repository first. To use versions from current-testing, run this in dom0:
 
