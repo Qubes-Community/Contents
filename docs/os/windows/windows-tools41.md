@@ -103,15 +103,15 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
  4. Install Qubes Windows Tools by starting `qubes-tools-x64.msi` as administrator, optionally selecting the `Xen PV disk drivers`. For installation in a template, you should select `Move user profiles`.
 	
-	![QWT_install_select](https://user-images.githubusercontent.com/22047384/168032730-5ad372f2-e1b0-4977-8cd5-4add1277ab06.png)	
+	![QWT_install_select](/attachment/wiki/WindowsAppVms/QWT_install_select.png)	
 
 	Several times, Windows security may ask for confirmation of driver installation. Driver installation has to be allowed; otherwise the installation of Qubes Windows Tools will abort.
 	
-	![QWT_install_driver](https://user-images.githubusercontent.com/22047384/168032725-64a29176-34de-4d08-8568-138d11f89378.png)
+	![QWT_install_driver](/attachment/wiki/WindowsAppVms/QWT_install_driver.png)
 
 	If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
 
-	![QWT_install_no_restart](https://user-images.githubusercontent.com/22047384/168032728-d9e97196-3517-4d7f-81ec-70adc6945a8d.png)
+	![QWT_install_no_restart](/attachment/wiki/WindowsAppVms/QWT_install_no_restart.png)
 
  5. After successful installation, the Windows VM must be shut down and started again, possibly a couple of times. On each shutdown, wait until the VM is really stopped, i.e. Qubes shows no more activity.
 
