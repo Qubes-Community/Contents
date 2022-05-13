@@ -89,17 +89,33 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 	This package brings the ISO with Qubes Windows Tools that is passed to the VM when `--install-windows-tools` is specified for the `qvm-start` command. Please note that none of this software ever runs in Dom0 or any other part of the system except for the Windows AppVM in which it is to be installed.
 
- 2. To install the Qubes Windows Tools in a Windows VM one should start the VM passing the additional option `--install-windows-tools`:
+ 2. **For Windows 10 and 11:** From the Windows command line, disable hibernation in order to avoid incomplete Windows shutdown, which may lead to corruption of the VM's disk.
+
+		powercfg -H off
+
+	Also, these versions of Windows won’t show the CD-ROM drive after starting the qube with `qvm-start vm --cdrom ...` or `qvm-start ... --install-windows-tools`. The solution is to disable hibernation in Windows with this command. (That command is included in QWT’s setup but it’s necessary to run it manually in order to be able to open QWT’s setup ISO/CD-ROM in Windows).
+
+ 3. To install the Qubes Windows Tools in a Windows VM one should start the VM passing the additional option `--install-windows-tools`:
 
 		qvm-start <VMname> --install-windows-tools
 
 	Once the Windows VM boots, a CDROM should appear in the 'My Computer' menu (typically as `D:` or `E:`) with the setup program `qubes-tools-x64.msi` in its main directory.
 
- 3. Install Qubes Windows Tools by starting `qubes-tools-x64.msi` as administrator, optionally selecting the `Xen PV disk drivers`. For installation in a template, you should select `Move user profiles`. If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
+ 4. Install Qubes Windows Tools by starting `qubes-tools-x64.msi` as administrator, optionally selecting the `Xen PV disk drivers`. For installation in a template, you should select `Move user profiles`.
+	
+	![QWT_install_select](/attachment/wiki/WindowsAppVms/QWT_install_select.png)	
 
- 4. After successful installation, the Windows VM must be shut down and started again, possibly a couple of times. On each shutdown, wait until the VM is really stopped, i.e. Qubes shows no more activity.
+	Several times, Windows security may ask for confirmation of driver installation. Driver installation has to be allowed; otherwise the installation of Qubes Windows Tools will abort.
+	
+	![QWT_install_driver](/attachment/wiki/WindowsAppVms/QWT_install_driver.png)
 
- 5. Qubes will automatically detect that the tools have been installed in the VM and will set appropriate properties for the VM, such as `qrexec_installed`, `guiagent_installed`, and `default_user`. This can be verified (but is not required) using the `qvm-prefs` command  *(where `<VMname>` is the name of your Windows VM)*:
+	If during installation, the Xen driver requests a reboot, select "No" and let the installation continue - the system will be rebooted later.
+
+	![QWT_install_no_restart](/attachment/wiki/WindowsAppVms/QWT_install_no_restart.png)
+
+ 5. After successful installation, the Windows VM must be shut down and started again, possibly a couple of times. On each shutdown, wait until the VM is really stopped, i.e. Qubes shows no more activity.
+
+ 6. Qubes will automatically detect that the tools have been installed in the VM and will set appropriate properties for the VM, such as `qrexec_installed`, `guiagent_installed`, and `default_user`. This can be verified (but is not required) using the `qvm-prefs` command  *(where `<VMname>` is the name of your Windows VM)*:
 
 	        [user@dom0 ~] $ qvm-prefs <VMname>
 
@@ -111,11 +127,11 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 	With the value `localtime` the dom0 `timezone` will be provided to virtual hardware, effectively setting the Windows clock to that of Qubes. With a digit value (negative or positive) the guest clock will have an offset (in seconds) applied relative to UTC.
 
- 6. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
+ 7. Reboot Windows. If the VM starts, but does not show any window then shutdown Windows from the Qube manager, wait until it has really stopped, and reboot Windows once more.
  
- 7. Now the system should be up, with QWT running correctly.
+ 8. Now the system should be up, with QWT running correctly.
  
- 8. **Windows 7 only:** Optionally enable seamless mode on VM startup. This can be done by setting appropriate values in the Windows registry: 
+ 9. **Windows 7 only:** Optionally enable seamless mode on VM startup. This can be done by setting appropriate values in the Windows registry: 
 	
 	 - Start the command prompt as administrator, i.e. right click on the Command Prompt icon (All Programs -> Accessories) and choose "Run as administrator"
 	 - In the command prompt type `regedit`
@@ -129,7 +145,7 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 	
 	 If Windows is used in a TemplateVM / AppVM combination, this registry fix has to be applied to the TemplateVM, as the `HKLM` registry key belongs to the template-based part of the registry.
 	
- 9. Lastly to enable file copy operations to a Windows VM, the `default_user` property of this VM should be set to the `<username>` that you use to login to the Windows VM. This can be done via the following command on a `dom0` terminal: *(where `<VMname>` is the name of your Windows VM)*
+ 10. Lastly to enable file copy operations to a Windows VM, the `default_user` property of this VM should be set to the `<username>` that you use to login to the Windows VM. This can be done via the following command on a `dom0` terminal: *(where `<VMname>` is the name of your Windows VM)*
 	
 		`[user@dom0 ~] $ qvm-prefs <VMname> default_user <username>`
   
