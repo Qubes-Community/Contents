@@ -89,7 +89,7 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 	This package brings the ISO with Qubes Windows Tools that is passed to the VM when `--install-windows-tools` is specified for the `qvm-start` command. Please note that none of this software ever runs in Dom0 or any other part of the system except for the Windows AppVM in which it is to be installed.
 
- 2. **For Windows 10 and 11:** From the Windows command line, disable hibernation in order to avoid incomplete Windows shutdown, which could lead to corruption of the VM's disk.
+ 2. **For Windows 10 and 11:** From the Windows command line, disable hibernation in order to avoid incomplete Windows shutdown, which may lead to corruption of the VM's disk.
 
 		powercfg -H off
 
