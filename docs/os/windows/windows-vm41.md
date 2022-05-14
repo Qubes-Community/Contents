@@ -169,7 +169,15 @@ qvm-start --cdrom=untrusted:/home/user/windows_install.iso WindowsNew
     -    In the setup window, hit the left arrow in the left upper corner. You will then return into the setup, which will continue normally and install Windows 11 without TPM 2.0.
    
     :warning: **Caution:** This temporary patch may cease to work if it so pleases Microsoft some time.
-
+    
+    The installation of Windows 11 may require an internet connection to grab a Microsoft ID. This is currently true only for the home addition, but will probably extend to the Pro edition, too. A workaround to bypass the internet connection requirements of the Windows 11 setup has been published that currently works but may be blocked some time in the future by Microsoft:
+    
+    -    When you reach the “Let’s Connect You To A Network” page, type Shift-F10 to open a console window.
+    -    Here you type `taskmgr` to start the Task Manager window so you can see all running processes.
+    -    Expand the Task Manager by clicking the “More Details” button, and then find “Network Connection Flow.”
+    -    Select this process and then hit the “End Task” button.
+    -    Now you can close these newly opened windows and return to the Windows 11 setup, where you will enter local account information.
+ 
   - The Windows license may be read from flash via root in dom0:
 
     `strings < /sys/firmware/acpi/tables/MSDM`
