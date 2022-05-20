@@ -51,6 +51,8 @@ wifi.scan-rand-mac-address=yes
 wifi.cloned-mac-address=stable
 ethernet.cloned-mac-address=stable
 connection.stable-id=${CONNECTION}/${BOOT}
+#use random IPv6 addresses per session / don't leak MAC via IPv6 (cf. RFC 4941):
+ipv6.ip6-privacy=2
 ~~~
 
 * `stable` in combination with `${CONNECTION}/${BOOT}` generates a random address that persists until reboot.
