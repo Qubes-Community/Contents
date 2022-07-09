@@ -210,8 +210,12 @@ Before proceeding, you will need to download a copy of your VPN provider's confi
    su - -c 'notify-send "$(hostname): LINK IS DOWN !" --icon=dialog-error' user
    
    # Restart the VPN automatically
-   sleep 5s
-   sudo /rw/config/rc.local
+   if [[! -e /run/systemd/shutdown/scheduled ]] ; then
+	    sleep 5s
+	    sudo /rw/config/rc.local
+   else
+	    exit 0
+   fi
    ;;
    esac
    ~~~
