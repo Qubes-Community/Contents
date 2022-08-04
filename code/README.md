@@ -14,6 +14,7 @@
 **`monitoring`**
 - [ls-qubes.sh](/code/monitoring/ls-qubes.sh): outputs the nb. of running qubes + total memory used; the output can be fed into a panel text applet (see comments in the script).
 - ![](/_res/l.png) [qubes-performance](https://github.com/3hhh/qubes-performance)
+- ![](/_res/l.png) [qrexec-proxy](https://github.com/3hhh/qubes-qrexec-proxy)
 
 **`multimedia`**
 - sound-control-scripts: toggle, volume up, volume down, ...
