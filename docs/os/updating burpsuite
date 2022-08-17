@@ -1,0 +1,25 @@
+#Burp Suite comes as a jar package while upgrading from Debian to Kali which can be difficult to update. 
+#At most times it will mess with the configured settings, so I have created a documentation to do this safely.
+
+Step 1: Open a Temp VM.
+Step 2: Go to "https://portswigger.net/burp/releases/community/latest", select "jar" version and click download.
+Step 3: After downloading jar file, click on "show checksums" to view checksums.
+Step 4: Open downloads folder and run below command to compare checksums:-
+
+```shell_session
+
+$ sha256sum burpsuite_community_XXX.jar
+
+```where XXX is the version number. 
+
+Step 5: Rename this file as "burpsuite.jar" and move it to your Kali Template.
+Step 6: Open a terinal in your Kali Template and navigate to QubesIncoming folder of received file.
+Step 7: In same folder, run this command:-
+
+```shell_session
+
+$ sudo mv burpsuite.jar /usr/share/burpsuite/
+
+```
+
+Congratulations, your Burp Suite has been updated to latest version. You can close the Kali Template now.
