@@ -9,69 +9,82 @@ This is a community guide, not an official guide. So please, first read the belo
 
 Only if the above guides don't work for you, then try this one.
 
-Arch Linux is a [rolling](https://en.wikipedia.org/wiki/Rolling_release) distribution, making it fragile. In fact, with always the latest versions, the ArchLinux packages meet first the new problems. So it's better to first try to build templates or packages for Fedora or Debian.
+Arch Linux is a [rolling](https://en.wikipedia.org/wiki/Rolling_release)
+distribution, making it fragile. In fact, with always the latest versions, the
+ArchLinux packages meet first the new problems. So it's better to first try to
+build templates or packages for Fedora or Debian.
 
-Also read :
+Also read:
 - the *Debugging the build process* below section
 - the [ArchLinux known issues](https://github.com/QubesOS/qubes-issues/labels/C%3A%20Arch%20Linux) with Qubes-OS
 
-## Guide status
-> **These instructions are for Qubes 4.0.4 and 4.1.**
-
-- 4.0.4 :
-- 4.1-beta1 : validated (2021-07-31) by the commit author of this line.
-- 4.1rc3 : validated (2022-01-11) by the commit author of this line. 
-- 4.1 : validated (2022-04-11) by the commit author of this line. 
+These instructions are known to work for QubesOS 4.1.
 
 ## Steps
 
 ### 1. Create a qubes-builder AppVM
-Create an AppVM, based on the last Fedora TemplateVM, named for example *qubes-builder* or *build-archlinux*.
-> **The StandaloneVM type cannot build the Arch Linux (minimal or not) template currently, as its Makefiles and Scripts only fully accomodate for the AppVM type's set of filesystem permissions.**
+
+Create an AppVM, based on the last Fedora TemplateVM, named for example
+*qubes-builder* or *build-archlinux* (see below).
 
 ![arch-template-01](/attachment/wiki/ArchlinuxTemplate/arch-template-01.png)
 
-* Allow at least 15GB of space in the Qube's private storage, then run the following commands:
-```console
-$ qvm-prefs build-archlinux2 vcpus $(nproc)
-$ qvm-prefs build-archlinux2 memory 4000
-$ qvm-prefs build-archlinux2 maxmem 4000
-```
-> **`nproc` specified the number of CPU logical cores it detected, meaning memory usage will increase for compilations that utilize the additional logical cores. For building the 'archlinux-minimal' template, 4000MB should be plenty.**
+> **The StandaloneVM type cannot build the Arch Linux (minimal or not) template
+> currently, as its Makefiles and Scripts only fully accomodate for the AppVM
+> type's set of filesystem permissions!**
+
+In the qubes settings set at least 15GB of space in the Qube's private storage
+and create the AppVM by clicking OK. 
 
 ![arch-template-02](/attachment/wiki/ArchlinuxTemplate/arch-template-02.png)
 
-> **"System storage max. size" is allocated from the TemplateVM chosen.**
+Then run the following commands in dom0 to set the VCPUs and memory for the
+AppVM:
 
-___
-### 2. Create a GitHub account
-<details><summary>Details</summary>
-
-**This is a community effort in expanding the Qubes OS project. If you can help this effort out, do so for yourself and others.**
-
-> **This is an optional step.**
-
-![arch-template-03](/attachment/wiki/ArchlinuxTemplate/arch-template-03.png)
-
-</details>
-
-___
-### 3. Downloading and verifying the integrity of the "Qubes Automated Build System"
-#### Open a terminal in the `build-archlinux2` AppVM
-* Set terminal size to 30 lines and 100 columns; ensures text from **qubes-builder**'s setup script isn't cut-off.
 ```console
-$ resize -s 30 100
+qvm-prefs build-archlinux2 vcpus $(nproc)
+qvm-prefs build-archlinux2 memory 4000
+qvm-prefs build-archlinux2 maxmem 4000
 ```
-* Install initial dependencies without user confirmation.
+
+> **`nproc` specified the number of CPU logical cores it detected, meaning
+> memory usage will increase for compilations that utilize the additional
+> logical cores. For building the 'archlinux-minimal' template, 4000MB should be
+> plenty.**
+
+### 2. Downloading and verifying the integrity of the "Qubes Automated Build System"
+
+> **Open a terminal in the qubes-builder AppVM that you just created. All
+following commands are supposed to typed there, unless stated otherwise.**
+
+Set terminal size to 30 lines and 100 columns; ensures text from **qubes-builder**'s setup script isn't cut-off.
+
 ```console
-# sudo dnf install -y git make
+resize -s 30 100
 ```
-* Import and verify the Qubes master key; [to understand the purpose of GPG (a frontend for PGP)](https://www.qubes-os.org/security/verifying-signatures/).
+
+Install initial dependencies without user confirmation.
+
 ```console
-$ gpg2 --import /usr/share/qubes/qubes-master-key.asc
-$ gpg2 --edit-key 0x427F11FD0FAA4B080123F01CDDFA1A3E36879494
+sudo dnf install -y git make
 ```
+
+Import and verify the Qubes master key (have a look
+[here](https://www.qubes-os.org/security/verifying-signatures/) to understand
+the purpose of the verification).
+
+```console
+gpg2 --import /usr/share/qubes/qubes-master-key.asc
+gpg2 --edit-key 0x427F11FD0FAA4B080123F01CDDFA1A3E36879494
 ```
+
+In the interactive gnupg shell that opens following the last command, you type
+in `fpr` and hit enter to show the fingerprint. Afterwards you type `trust` and
+`5` to set the trust level to 'ultimately'. Afterwards you need to confirm your
+selection with 'y' and save and exit via `quit`. It should look something like
+this:
+
+```console
 gpg> fpr
 pub   rsa4096/DDFA1A3E36879494 2010-04-01 Qubes Master Signing Key
  Primary key fingerprint: 427F 11FD 0FAA 4B08 0123  F01C DDFA 1A3E 3687 9494
@@ -93,114 +106,138 @@ Please decide how far you trust this user to correctly verify other users' keys
   m = back to the main menu
 
 Your decision? 5
-```
-* Download then import the Qubes developers' keys:
-```console
-$ curl -O https://keys.qubes-os.org/keys/qubes-developers-keys.asc
-$ gpg2 --import qubes-developers-keys.asc
-```
-> **`$HOME` is always defined; see the POSIX 2017 standard for more information: https://pubs.opengroup.org/onlinepubs/9699919799/**
+Do you really want to set this key to ultimate trust? (y/N) y
 
-* Download the latest stable `qubes-builder` repository:
+pub  rsa4096/DDFA1A3E36879494
+     created: 2010-04-01  expires: never       usage: SC  
+     trust: ultimate      validity: unknown
+[ unknown] (1). Qubes Master Signing Key
+Please note that the shown key validity is not necessarily correct
+unless you restart the program.
+
+gpg> quit
+```
+
+Download then import the Qubes developers' keys:
+
 ```console
-$ git clone https://github.com/QubesOS/qubes-builder.git $HOME/qubes-builder/
+curl -O https://keys.qubes-os.org/keys/qubes-developers-keys.asc
+gpg2 --import qubes-developers-keys.asc
 ```
-* Verify the integrity of the `qubes-builder` repository:
+
+Download the latest stable `qubes-builder` repository:
+
 ```console
-$ cd $HOME/qubes-builder/
-$ git tag -v $(git describe)
+git clone https://github.com/QubesOS/qubes-builder.git $HOME/qubes-builder/
 ```
+
+Verify the integrity of the `qubes-builder` repository:
+
+```console
+cd $HOME/qubes-builder/
+git tag -v $(git describe)
 ```
+
+The output should contain something like this
+
+```console
 gpg: Good signature from "Marek Marczykowski-Górecki (Qubes OS signing key) <marmarek@invisiblethingslab.com>" [full]
 ```
-* Install the remaining dependencies:
+
+The verifcation succeeded if you see a good signature as seen above.
+
+Now install the remaining dependencies:
+
 ```console
-$ make install-deps
+make install-deps
 ```
 
-___
-### 4. Configure the `builder.conf` file
-> **The manual way is copying an example config like `$HOME/qubes-builder/example-configs/qubes-os-r4.0.conf` to `$HOME/qubes-builder/builder.conf`, then editing that copied file.**
+### 3. Configure the `builder.conf` file
 
-<details><summary>{Preferred if you start} Setup script method</summary>
+> **The manual way is copying an example config like
+> `$HOME/qubes-builder/example-configs/qubes-os-r4.0.conf` to
+> `$HOME/qubes-builder/builder.conf`, then editing that copied file.**
 
-* Run the `setup` script located in `$HOME/qubes-builder/`:
+<details><summary>Setup script method (easier to begin with)</summary>
+
+Run the `setup` script located in `$HOME/qubes-builder/`:
+
 ```console
-$ ./setup
+./setup
 ```
+
+Install the missing dependencies, by pressing **y**.
 
 ![arch-template-04](/attachment/wiki/ArchlinuxTemplate/arch-template-04.png)
 
-* Install the missing ***dialog*** dependency if asked.
-    * Press **y**
+Import the 'Qubes-Master-Signing-key.asc' by selecting **Yes**. The setup script
+downloads and confirms this key to that of the key on Qubes OS website.
 
 ![arch-template-05](/attachment/wiki/ArchlinuxTemplate/arch-template-05.png)
 
-* **Add Key 0x36879494** asks to import 'Qubes-Master-Signing-key.asc'. The 'setup' script downloads and confirms this key to that of the key on Qubes OS website.
-    * Select **Yes**, press Enter/Return
-    
+Confirm again with **Yes**.
+
 ![arch-template-06](/attachment/wiki/ArchlinuxTemplate/arch-template-06.png)
 
-* **Add Key 0x42CFA724**; again, 'setup' will confirm this key to the fingerprint)
-    * Select **Yes**, press Enter/Return
-    
+Choose which Qubes release to build templates for, e.g. **4.1** (use space key to select) and
+hit enter to accept selection.
+
 ![arch-template-07](/attachment/wiki/ArchlinuxTemplate/arch-template-07.png)
 
-* **Choose Which Qubes Release To Use To Build Packages**; what Qubes release to build templates for
-    * Select the **Qubes Release** for the currently installed version
-    	* Press Space to select the highlighted version.
-    * Select **OK**, press Enter/Return
-    
+Choose source repos to use to build packages. Select **QubesOS/qubes-** to get the
+default stable repo.
+
 ![arch-template-08](/attachment/wiki/ArchlinuxTemplate/arch-template-08.png)
 
-* **Choose Source Repos To Use To Build Packages**
-    * Select **QubesOS/qubes- Stable - Default Repo**
-    * Select **OK**, press Enter/Return
-    
+Select **Yes** for fast git cloning.
+
+> **'No' is for reusing the same building environment on a StandaloneVM (not an
+> AppVM, as we have used here); a "shallow clone" (depth equal one) is [a bad
+> choice for reusable
+> environments](https://github.blog/2020-12-21-get-up-to-speed-with-partial-clone-and-shallow-clone/).**
+
 ![arch-template-09](/attachment/wiki/ArchlinuxTemplate/arch-template-09.png)
 
-* **Git Clone Faster?**
-    * Select **Yes**, press Enter/Return
+Do **not select** any pre-built package repository to build the template
+yourself.
 
-> **'No' is for reusing the same building environment on a StandaloneVM (not an AppVM); a "shallow clone" (depth equal one) is [a bad choice for reusable environments](https://github.blog/2020-12-21-get-up-to-speed-with-partial-clone-and-shallow-clone/).**
-    
 ![arch-template-10](/attachment/wiki/ArchlinuxTemplate/arch-template-10.png)
 
-* **Choose Pre-Build Packages Repositories**
-    * Select ***nothing***, press Enter/Return
-    
+Select **Yes** to only build the template.
+
 ![arch-template-11](/attachment/wiki/ArchlinuxTemplate/arch-template-11.png)
 
-* **Build Template Only?**
-    * Select **Yes**, press Enter/Return
-    
+Template distribution selection offers choices of distributions to build.
+Deselect everything (navigating to entry and hitting space) and select
+**archlinux-minimal** and confirm by hitting enter.
+
+> **Using 'archlinux' may introduce more failed compiles based on additional
+> Qubes components you may not even need. You can install them later manually
+> instead.**
+
 ![arch-template-12](/attachment/wiki/ArchlinuxTemplate/arch-template-12.png)
 
-* **Template Distribution Selection** offers choices of distributions to build
-    * Deselect ***everything***
-    * Select **archlinux-minimal**
-    > **Using 'archlinux' introduces more failed compiles, in the form of Qubes component packages you might not use. \
-    You want to use Arch Linux, so it's assumed you'll figure out your desired Qubes component selection.**
+The builder plugins selection offers choices of builder plugins to compile.
+Deselect everything (navigating to entry and hitting space) and select
+**builder-archlinux** and confirm by hitting enter.
 
 ![arch-template-13](/attachment/wiki/ArchlinuxTemplate/arch-template-13.png)
 
-* **Builder Plugins Selection** will give choices of builder plugins to compile
-    * Deselect ***everything***
-    * Select **builder-archlinux**
-    * Select **OK**, press Enter/Return
+Select **Yes** to fetch additional source files needed for the chosen builder
+plugins.
 
 ![arch-template-14](/attachment/wiki/ArchlinuxTemplate/arch-template-14.png)
 
-* Screen **Get sources** asks to fetch additional source files needed for the chosen builder plugins
-    * Select **Yes**, press Enter/Return
+Press Enter/Return while **OK** is selected to exit.
 
 ![arch-template-15](/attachment/wiki/ArchlinuxTemplate/arch-template-15.png)
 
-* Press Enter/Return while **OK** is selected.
+Go directly to [step 4 below](#4-make-all-the-required-qubes-components) to
+proceed with the build process.
 
 </details>
 
-<details><summary>Manually creating `builder.conf`</summary>
+<details><summary>Manually creating `builder.conf` (for experienced users)</summary>
 
 ```console
 ls -l $HOME/qubes-builder/example-configs
@@ -224,60 +261,77 @@ fi
 
 </details>
 
-___
-### 5. Make all the require Qubes components
-* Required before proceeding:
+### 4. Make all the required Qubes components
+
+At first the following components need to be build:
+
 ```console
-$ make remount
-$ make install-deps
-$ make get-sources
-```
-* {Preferred} Building all Qubes components (this can take a long time): 
-```console
-$ make qubes-vm
-```
-* {Debugging/development} Individual 'make' commands for Qubes components:
-```console
-$ make vmm-xen-vm
-$ make core-vchan-xen-vm
-$ make core-qubesdb-vm
-$ make core-qrexec-vm
-$ make linux-utils-vm
-$ make core-agent-linux-vm
-$ make gui-common-vm
-$ make gui-agent-linux-vm
-$ make app-linux-split-gpg-vm
-$ make app-linux-usb-proxy-vm
-$ make meta-packages-vm
+make remount
+make install-deps
+make get-sources
 ```
 
-___
-### 6. Build the actual Arch Linux template
+> **These commands above should get executed every time you restart the
+> qubes-builder AppVM, because these change are lost after a reboot of the VM!**
+
+Now build all Qubes components (this can take a long time) via 
+
 ```console
-$ make template
+make qubes-vm
 ```
 
-___
-### 7. Transfer the template into Dom0
-* You need to ensure the rpm template is in the `noarch` directory:
+<details><summary>Debugging: commands to 'make' every Qubes component manually</summary>
+
+If `make qubes-vm` fails, you can try to pinpoint the problem by building the
+components one by one manually.
+
 ```console
-$ ls $HOME/qubes-builder/qubes-src/linux-template-builder/rpm/noarch
+make vmm-xen-vm
+make core-vchan-xen-vm
+make core-qubesdb-vm
+make core-qrexec-vm
+make linux-utils-vm
+make core-agent-linux-vm
+make gui-common-vm
+make gui-agent-linux-vm
+make app-linux-split-gpg-vm
+make app-linux-usb-proxy-vm
+make meta-packages-vm
+```
+
+</details>
+
+### 5. Build the actual Arch Linux template
+
+```console
+make template
+```
+
+### 6. Transfer the template into Dom0
+
+You need to ensure the rpm template is in the `noarch` directory:
+
+```console
+ls $HOME/qubes-builder/qubes-src/linux-template-builder/rpm/noarch
 qubes-template-archlinux-*.*.*-*.noarch.rpm
 ```
-* Transfer the qubes-template-archlinux rpm into Dom0
-  > **File transfering to Dom0 is considered unsafe. \
-  You accept full responsibility if Dom0 is compromised due to this file transfer.**
+
+Transfer the qubes-template-archlinux rpm into Dom0
+
+> **File transfering to Dom0 is considered unsafe. You accept full
+> responsibility if Dom0 is compromised due to this file transfer.**
   
-Follow the [copying-to-dom0](https://www.qubes-os.org/doc/how-to-copy-from-dom0/#copying-to-dom0) official guide.
+Follow the
+[copying-to-dom0](https://www.qubes-os.org/doc/how-to-copy-from-dom0/#copying-to-dom0)
+official guide. Afterwards, read [how to install software in
+dom0](https://www.qubes-os.org/doc/how-to-install-software-in-dom0/) and install
+the rpm with `sudo dnf install <rpm_file>`.
 
-* Install the rpm file in dom0.
-
-Read [How to install software in dom0](https://www.qubes-os.org/doc/how-to-install-software-in-dom0/), then install the rpm with `sudo dnf install <rpm_file>`.
-
-* If the build process went smoothly, the 'archlinux' and/or 'archlinux-minimal' template will be listed in Qubes Manager.
+If the build process went smoothly, the 'archlinux-minimal' template will be listed in Qubes Manager.
 
 ___
 ## Debugging the build process
+
 Arch Linux is a [rolling](https://en.wikipedia.org/wiki/Rolling_release) distro, making it a fragile template for Qubes.
 It's important to understand how to debug Qubes templates, fix, then do a pull request.
 
