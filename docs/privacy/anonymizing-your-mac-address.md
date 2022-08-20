@@ -3,26 +3,9 @@ Anonymizing your MAC Address
 ============================
 
 Although it is not the only metadata broadcast by network hardware, changing the default [MAC Address](https://en.wikipedia.org/wiki/MAC_address) of your hardware could be [an important step in protecting privacy](https://tails.boum.org/contribute/design/MAC_address/#index1h1).
-Currently, Qubes OS *does not* automatically "anonymize" or spoof the MAC Address, so unless this gets implemented by default you can randomize your MAC Address with the following guide.
 
-
-## Upgrading and configuring Network Manager in Qubes
-
-Newer versions of Network Manager have options for randomizing MAC addresses, and can handle the entire process across reboots, sleep/wake cycles and different connection states.
-In particular, versions 1.4.2 and later should be well suited for Qubes. Qubes R4.0's default sys-net should have 1.8.2-4 by default.  
-However, use of the NetworkManager GUI to set these options is **unreliable** - there are numerous reports of changes not being saved for particular cards or interfaces.
-You should check carefully that any settings you make in the GUI are saved, before relying on this method.
-If the settings are not saved, you can use the method described below using a config file.
-
-
-Network Manager 1.4.2 or later is available from the Fedora 25 repository as well as the Debian 10 repository.
-
-Check that Network Manager version is now at least 1.4.2:
-
-~~~
-$ sudo NetworkManager -V
-1.4.2
-~~~
+Qubes OS 4.1 and higher already anonymize all Wifi MAC addresses [by default](https://github.com/QubesOS/qubes-core-agent-linux/blob/master/network/nm-31-randomize-mac.conf) - they change during every Wifi session.
+So there is **no need** to apply any of the below instructions if you're only interested in Wifi connections. Users requiring Ethernet MAC address anonymization may want to read on.
 
 ## Randomize a single connection
 
