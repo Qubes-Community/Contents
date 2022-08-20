@@ -51,7 +51,7 @@ You can check the MAC address currently in use by looking at the status pages of
 
 ## Anonymize your hostname
 
-DHCP requests also leak your hostname to your LAN. Since your hostname is usually `sys-net`, other network users can easily spot that you're using Qubes OS.
+DHCP requests _may_ also leak your hostname to your LAN. Since your hostname is usually `sys-net`, other network users can easily spot that you're using Qubes OS.
 
 Unfortunately `NetworkManager` currently doesn't provide an option to disable that leak globally ([Gnome Bug 768076](https://bugzilla.gnome.org/show_bug.cgi?id=768076)). However the below alternatives exist.
 
@@ -62,7 +62,8 @@ Unfortunately `NetworkManager` currently doesn't provide an option to disable th
 [main]
 dhcp=dhclient
 ```
-Afterwards edit `/etc/dhcp/dhclient.conf` and remove or comment out the line starting with `send host-name`.
+Afterwards edit `/etc/dhcp/dhclient.conf` and remove or comment out the line starting with `send host-name`. If the file does not exist, you may be fine already.
+In any case it makes sense to double check your results on e.g. your home router, `wireshark` or `tcpdump`.
 
 If you want to decide per connection, `NetworkManager` also provides an option to not send the hostname:  
 Edit the saved connection files at `/rw/config/NM-system-connections/*.nmconnection` and add the `dhcp-send-hostname=false` line to both the `[ipv4]` and the `[ipv6]` section.
