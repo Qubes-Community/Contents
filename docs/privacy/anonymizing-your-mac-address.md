@@ -3,26 +3,9 @@ Anonymizing your MAC Address
 ============================
 
 Although it is not the only metadata broadcast by network hardware, changing the default [MAC Address](https://en.wikipedia.org/wiki/MAC_address) of your hardware could be [an important step in protecting privacy](https://tails.boum.org/contribute/design/MAC_address/#index1h1).
-Currently, Qubes OS *does not* automatically "anonymize" or spoof the MAC Address, so unless this gets implemented by default you can randomize your MAC Address with the following guide.
 
-
-## Upgrading and configuring Network Manager in Qubes
-
-Newer versions of Network Manager have options for randomizing MAC addresses, and can handle the entire process across reboots, sleep/wake cycles and different connection states.
-In particular, versions 1.4.2 and later should be well suited for Qubes. Qubes R4.0's default sys-net should have 1.8.2-4 by default.  
-However, use of the NetworkManager GUI to set these options is **unreliable** - there are numerous reports of changes not being saved for particular cards or interfaces.
-You should check carefully that any settings you make in the GUI are saved, before relying on this method.
-If the settings are not saved, you can use the method described below using a config file.
-
-
-Network Manager 1.4.2 or later is available from the Fedora 25 repository as well as the Debian 10 repository.
-
-Check that Network Manager version is now at least 1.4.2:
-
-~~~
-$ sudo NetworkManager -V
-1.4.2
-~~~
+Qubes OS 4.1 and higher already anonymize all Wifi MAC addresses [by default](https://github.com/QubesOS/qubes-core-agent-linux/blob/master/network/nm-31-randomize-mac.conf) - they change during every Wifi session.
+So there is **no need** to apply any of the below instructions if you're only interested in Wifi connections. Users requiring Ethernet MAC address anonymization may want to read on.
 
 ## Randomize a single connection
 
@@ -68,7 +51,7 @@ You can check the MAC address currently in use by looking at the status pages of
 
 ## Anonymize your hostname
 
-DHCP requests also leak your hostname to your LAN. Since your hostname is usually `sys-net`, other network users can easily spot that you're using Qubes OS.
+DHCP requests _may_ also leak your hostname to your LAN. Since your hostname is usually `sys-net`, other network users can easily spot that you're using Qubes OS.
 
 Unfortunately `NetworkManager` currently doesn't provide an option to disable that leak globally ([Gnome Bug 768076](https://bugzilla.gnome.org/show_bug.cgi?id=768076)). However the below alternatives exist.
 
@@ -79,48 +62,8 @@ Unfortunately `NetworkManager` currently doesn't provide an option to disable th
 [main]
 dhcp=dhclient
 ```
-Afterwards edit `/etc/dhcp/dhclient.conf` and remove or comment out the line starting with `send host-name`.
+Afterwards edit `/etc/dhcp/dhclient.conf` and remove or comment out the line starting with `send host-name`. If the file does not exist, you may be fine already.
+In any case it makes sense to double check your results on e.g. your home router, `wireshark` or `tcpdump`.
 
 If you want to decide per connection, `NetworkManager` also provides an option to not send the hostname:  
 Edit the saved connection files at `/rw/config/NM-system-connections/*.nmconnection` and add the `dhcp-send-hostname=false` line to both the `[ipv4]` and the `[ipv6]` section.
-
-### Randomize the hostname
-
-Alternatively you may use the following code to assign a random hostname to a VM during each of its startup. Please follow the instructions mentioned in the beginning to properly install it.
-
-```.bash
-#!/bin/bash
-set -e -o pipefail
-#
-# Set a random hostname for a VM session.
-#
-# Instructions:
-# 1. This file must be placed and made executable (owner: root) inside the template VM of your network VM such that it will be run before your hostname is sent over a network.
-# In a Fedora template, use `/etc/NetworkManager/dispatcher.d/pre-up.d/00_hostname`.
-# In a Debian template, use `/etc/network/if-pre-up.d/00_hostname`.
-# 2. Execute `sudo touch /etc/hosts.lock` inside the template VM of your network VM.
-# 3. Execute inside your network VM:
-#  `sudo bash -c 'mkdir -p /rw/config/protected-files.d/ && echo -e "/etc/hosts\n/etc/hostname" > /rw/config/protected-files.d/protect_hostname.txt'`
-
-
-#NOTE: mv is atomic on most systems
-if [ -f "/rw/config/protected-files.d/protect_hostname.txt" ] && rand="$RANDOM" && mv "/etc/hosts.lock" "/etc/hosts.lock.$rand" ; then
-	name="PC-$rand"
-	echo "$name" > /etc/hostname
-	hostname "$name"
-	#NOTE: NetworkManager may set it again after us based on DHCP or /etc/hostname, cf. `man NetworkManager.conf` @hostname-mode
-	
-	#from /usr/lib/qubes/init/qubes-early-vm-config.sh
-	if [ -e /etc/debian_version ]; then
-            ipv4_localhost_re="127\.0\.1\.1"
-        else
-            ipv4_localhost_re="127\.0\.0\.1"
-        fi
-        sed -i "s/^\($ipv4_localhost_re\(\s.*\)*\s\).*$/\1${name}/" /etc/hosts
-        sed -i "s/^\(::1\(\s.*\)*\s\).*$/\1${name}/" /etc/hosts
-fi
-exit 0
-```
-Assuming that you're using `sys-net` as your network VM, your `sys-net` hostname should now be `PC-[number]` with a different `[number]` each time your `sys-net` is started.
-
-Please note that the above script should _not_ be added to [/rw/config/rc.local](https://www.qubes-os.org/doc/config-files/)) as that is executed only _after_ the network fully started.
