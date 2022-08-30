@@ -6,7 +6,7 @@ This is done by using Qubes's [qrexec][qrexec] framework to connect a local SSH 
 This way the compromise of the domain you use to connect to your remote server does not allow the attacker to automatically also steal all your keys. 
 (We should make a rather obvious comment here that the so-often-used passphrases on private keys are pretty meaningless because the attacker can easily set up a simple backdoor which would wait until the user enters the passphrase and steal the key then.)
 
-   ![diagram](https://raw.githubusercontent.com/santorihelix/qubes-splitssh-diagram/main/split-ssh-keepassxc-8.svg)
+   ![diagram](/attachment/wiki/split-ssh/diagram.svg)
 
 ## Security Benefits
 
@@ -33,11 +33,11 @@ Skip the first step if you don't wish to create another vault.
 
 1. Create a new vault AppVM (`vault`) based on your chosen template. Set networking to `(none)`.
 
-   ![vault creation](https://forum.qubes-os.org/uploads/db3820/original/1X/80fad13c2d72b4f6ac4c03cd30d15ebd2c08a927.png)
+   ![vault creation](/attachment/wiki/split-ssh/vault-creation.png)
    
 2. Create a SSH Client AppVM (`ssh-client`). This VM will be used to make SSH connections to your remote machine.
 
-   ![ssh-client creation](https://forum.qubes-os.org/uploads/db3820/original/1X/ff7c5d239b53906b8d1396381810b291d4364900.png)
+   ![ssh-client creation](/attachment/wiki/split-ssh/client-creation.png)
 
 ## Setting up SSH
 
@@ -278,55 +278,55 @@ KeePassXC should be installed by default in both Fedora and Debian TemplateVMs. 
 
 1. Add KeepasXC to the Applications menu of the newly created AppVM for ease of access and launch it.
 
-   ![vault adding keepass](https://forum.qubes-os.org/uploads/db3820/optimized/1X/e20e988e356ea63feda6760dca6a88fcd2a650c6_2_602x500.png)
+   ![vault adding keepass](/attachment/wiki/split-ssh/vault-adding-keepass.png)
 
    **Note:** Since the vault VM has no internet connection, you can safely deny automatic updates if prompted.
 
 2. Create a new database.
 
-   ![create database](https://forum.qubes-os.org/uploads/db3820/original/1X/a25e16fca7d5a394e9a9acdc017c9a02f7e6f4f4.png)
+   ![create database](/attachment/wiki/split-ssh/create-database.png)
 
 3. Enter a name for your database and continue.
 
-   ![naming screen](https://forum.qubes-os.org/uploads/db3820/original/1X/0925cd8e469b6194f80b1e46e51d7f137a01dd74.png)
+   ![naming screen](/attachment/wiki/split-ssh/naming-screen.png)
 
 4. Adjust the encryption settings. 
 Check the [KeePassXC User Guide][KeePassXC User Guide] for more information about these settings.
 
-   ![encryption settings](https://forum.qubes-os.org/uploads/db3820/optimized/1X/8537b07f453a0950d72cb51b9b5339e0f7bfc3c4_2_690x472.png)
+   ![encryption settings](/attachment/wiki/split-ssh/encryption-settings.png)
    
 5. Enter a password for your database. Take your time make a secure but also rememberable password. ([hint][Hint])
 
-   ![password screen](https://forum.qubes-os.org/uploads/db3820/original/1X/413a9bbe68395ae07d1e2989735c9af53409071f.png)
+   ![password screen](/attachment/wiki/split-ssh/password-screen.png)
 
 6. Add a new entry.
 
-   ![adding new entry](https://forum.qubes-os.org/uploads/db3820/original/1X/a5a6c74aac781f95db2909ce43058971e08e5407.png)
+   ![adding new entry](/attachment/wiki/split-ssh/adding-new-entry.png)
    
 7. Set password to your SSH key passphrase.
 
-   ![enter passphrase](https://forum.qubes-os.org/uploads/db3820/original/1X/881340d19c2e78e10374555a1a8867040b713cd2.png)
+   ![enter passphrase](/attachment/wiki/split-ssh/enter-passphrase.png)
    
 8. Go into the Advanced section and add your keys.
 
-   ![adding keys](https://forum.qubes-os.org/uploads/db3820/original/1X/ff4a1197826ee69740251dbf8204d90b6cf4c6c8.png)
+   ![adding keys](/attachment/wiki/split-ssh/adding-keys.png)
 
    **Note:** Technically, you only need to add the private key (`id_25519`) for the following steps to work. If you add the public key here, too, you can later on backup your kdbx file and have everything in one place. You can even delete your keys (`id_25519` and `id_25519.pub`) from your file system if you like.
 
 9. Enable "SSH Agent Integration" within the Application Settings.
 
-   ![enable ssh agent integration](https://forum.qubes-os.org/uploads/db3820/optimized/1X/29dba9a7d44729cd8dce261cfecbbb63db3f4a70_2_594x500.png)
+   ![enable ssh agent integration](/attachment/wiki/split-ssh/enable-ssh-agent-integration.png)
    
 10. Restart KeePassXC
 
 11. Check the SSH Agent Integration status.
 
-    ![check integration status](https://forum.qubes-os.org/uploads/db3820/original/1X/2ef14b195947d2190306b500298379458d6194da.png)
+    ![check integration status](/attachment/wiki/split-ssh/check-integration-status.png)
 
 12. Open the entry you created and select your private key in the "SSH Agent" section. 
 Don't forget to also check the first two options.
 
-    ![select private key](https://forum.qubes-os.org/uploads/db3820/optimized/1X/0d19ae6f3545a154823a8b3f8c89d52f6e0d6b68_2_594x500.png)
+    ![select private key](/attachment/wiki/split-ssh/select-private-key.png)
 
 #### Testing the KeePassXC Setup
 
@@ -358,7 +358,7 @@ If it is, restart your vault VM and do not enter your password when it asks you 
 
 3. Allow operation execution. (If you don't see the below prompt, check your VM interconnection setup.)
 
-    ![operation execution](https://forum.qubes-os.org/uploads/db3820/original/1X/37e62ebb62482d83d878e3481161c72f22ec801c.png)
+   ![operation execution](/attachment/wiki/split-ssh/operation-execution.png)
 
 It should return `The agent has no identities.`. 
 
@@ -391,7 +391,7 @@ Using split ssh in QubesOS 4.0 (Kushal Das) https://kushaldas.in/posts/using-spl
 Using Split-SSH in Qubes 4 (Denis Zanin) https://deniszanin.com/using-split-ssh-gpg-in-qubes-os/ <br/>
 R.I.S.K.S. https://19hundreds.github.io/risks-workflow/ssh-split-setup <br/>
 
-Contributor(s): @shaaati, @invalid-error, @deeplow, @santorihelix
+Contributor(s): @shaaati, @invalid-error, @deeplow, @ephemer4l
 
 [CreateBackup]:https://www.qubes-os.org/doc/backup-restore/#creating-a-backup
 [qrexec]: https://www.qubes-os.org/doc/qrexec/
