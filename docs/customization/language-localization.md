@@ -7,6 +7,38 @@ Enable UTF-8 in dom0 title bars
 
 You can enable UTF-8 characters in the title bar for all qubes or on a per-qube basis. Follow the instructions [here](https://www.qubes-os.org/doc/config-files/#gui-and-audio-configuration-in-dom0) for further information.
 
+Changing the language of dom0
+-----------------------------
+
+In order to install an additional language in `dom0`, e.g. German: In a `dom0` terminal, execute
+
+   `sudo qubes-dom0-update langpacks-de`
+
+Then reboot.
+
+Before logging in, the task panel will show - usually far to the right - the current language, e.g. `C.UTF-8`. Clicking on this value will open a menu where you can select the GUI language, i.e. the interface language of Qubes used in `dom0` and in the menus, like Whiskers. Note, however, that the language of some Qubes utilities like the Qube Manager does not change, and any Templates and AppVMs based on these Templates retain their language.
+
+This need only be done once; the selected language survives logging out and reboot.
+
+Changing the language of Templates and the AppVMs based on them
+---------------------------------------------------------------
+
+To change the language of existing Templates, you have to install the language packs in these Templates.
+
+For Fedora-based Templates, this is done (for German as an example) via
+
+   `sudo dnf install langpacks-de`
+
+For debian-based Templates, the corresponding command is
+
+   `sudo apt-get install language-pack-de language-pack-gnome-de language-pack-de-base language-pack-gnome-de-base`
+
+For other languages, the correspondig code has to be used, e.g. `fr` for French. After installing a language, it has to be selected/enabled via the settings of the Template.
+
+New Templates will be installed in their default language, usually English, and they have to be changed just like existing Templates. The language of Windows Templates is determined at the installation of the operating system and can be changed afterwards if the installed edition is a multi-language edition; otherwise the language stays fixed.
+
+AppVMs started after this change will inherit the language from the corresponsing Template.
+
 How to set up pinyin input in Qubes
 -----------------------------------
 
