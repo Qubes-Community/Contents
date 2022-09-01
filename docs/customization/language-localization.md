@@ -5,7 +5,15 @@ Language Localization
 Enable UTF-8 in dom0 title bars
 -------------------------
 
-You can enable UTF-8 characters in the title bar for all qubes or on a per-qube basis. Follow the instructions [here](https://www.qubes-os.org/doc/config-files/#gui-and-audio-configuration-in-dom0) for further information.
+You can enable UTF-8 characters in the title bar for all (non-Windows) qubes or on a per-qube basis via the command
+
+   `qvm-features <VMname> gui-allow-utf8-titles true`
+
+in a `dom0` terminal.
+
+To change a given GUI option globally, set the `gui-default-{option}` feature on the GuiVM for that qube.
+
+**Note:** This does not work for Windows qubes.
 
 Changing the language of dom0
 -----------------------------
@@ -33,7 +41,7 @@ For debian-based Templates, the corresponding command is
 
    `sudo apt-get install language-pack-de language-pack-gnome-de language-pack-de-base language-pack-gnome-de-base`
 
-For other languages, the correspondig code has to be used, e.g. `fr` for French. After installing a language, it has to be selected/enabled via the settings of the Template.
+For other languages, the corresponding code has to be used, e.g. `fr` for French. After installing a language, it has to be selected/enabled via the settings of the Template.
 
 New Templates will be installed in their default language, usually English, and they have to be changed just like existing Templates. The language of Windows Templates is determined at the installation of the operating system and can be changed afterwards if the installed edition is a multi-language edition; otherwise the language stays fixed.
 
