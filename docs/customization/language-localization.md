@@ -1,4 +1,3 @@
-
 Language Localization
 =====================
 
@@ -11,7 +10,8 @@ You can enable UTF-8 characters in the title bar for all (non-Windows) qubes or 
 
 To change this given GUI option globally, set this feature in the Qube Manager's `Global Settings` plane, which will apply to all qubes using the GuiVM under which Qube Manager is running (usually `dom0`, or possibly in one of the alternative GuiVMs `sys-gui` or `sys-gui-gpu`.). To set this property globally for all qubes running under a certain GuiVM, e.g. `dom0`, use the command
 
-   `qvm-feautures dom0 gui-default-allow-utf8-titles true`
+   `qvm-features dom0 gui-default-allow-utf8-titles true`
+
 or accordingly.
 
 **Note:** This does not work for Windows qubes.
