@@ -106,7 +106,7 @@ These parameters are set for the following reasons:
   ~~~
   So, increase the VM's memory to 4096MB (memory = maxmem because we don't use memory balancing).
      
-- Disable direct boot so that the VM will go through the standard cdrom/HDD boot sequence. This is done by setting the qube's kernel to `none`.
+- Disable direct boot so that the VM will go through the standard cdrom/HDD boot sequence. This is done by setting the qube's kernel to an empty value.
 
 **Configure Windows VM**
 
