@@ -101,7 +101,7 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 	Once the Windows VM boots, a CDROM should appear in the 'My Computer' menu (typically as `D:` or `E:`) with the setup program `qubes-tools-x64.msi` in its main directory.
 
- 4. Install Qubes Windows Tools by starting `qubes-tools-x64.msi` as administrator, optionally selecting the `Xen PV disk drivers`. For installation in a template, you should select `Move user profiles`.
+ 4. Install Qubes Windows Tools by starting `qubes-tools-x64.msi` (logged in as administrator), optionally selecting the `Xen PV disk drivers`. For installation in a template, you should select `Move user profiles`.
 	
 	![QWT_install_select](/attachment/wiki/WindowsAppVms/QWT_install_select.png)	
 
@@ -124,6 +124,12 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 	        [user@dom0 ~] $ qvm-features <VMname> audio-model ich9
 	        [user@dom0 ~] $ qvm-features <VMname> stubdom-qrexec 1
 	        [user@dom0 ~] $ qvm-features <VMname> timezone localtime
+
+	For audio, the parameter `audio-model`can be selected as `ich6` or `ich9`; select the value that gives the best audio quality. Audio quality may also be improved by setting the following parameters, but this can depend on the Windows version and on your hardware:
+
+	        [user@dom0 ~] $ qvm-features <VMname> timer-period 1000
+	        [user@dom0 ~] $ qvm-features <VMname> out.latency 10000
+	        [user@dom0 ~] $ qvm-features <VMname> out.buffer-length 4000
 
 	With the value `localtime` the dom0 `timezone` will be provided to virtual hardware, effectively setting the Windows clock to that of Qubes. With a digit value (negative or positive) the guest clock will have an offset (in seconds) applied relative to UTC.
 
