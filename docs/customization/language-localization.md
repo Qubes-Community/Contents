@@ -8,7 +8,7 @@ You can enable UTF-8 characters in the title bar for all (non-Windows) qubes or 
 
    `qvm-features <VMname> gui-allow-utf8-titles true`
 
-To change this given GUI option globally, set this feature in the Qube Manager's `Global Settings` plane, which will apply to all qubes using the GuiVM under which Qube Manager is running (usually `dom0`, or possibly in one of the alternative GuiVMs `sys-gui` or `sys-gui-gpu`.). To set this property globally for all qubes running under a certain GuiVM, e.g. `dom0`, use the command
+To change this given GUI option globally, set this feature in the Qube Manager's `Global Settings` plane, which will apply to all qubes using the GuiVM under which Qube Manager is running (usually `dom0`, or possibly in one of the alternative GuiVMs `sys-gui` or `sys-gui-gpu`). To set this property globally for all qubes running under a certain GuiVM, e.g. `dom0`, use the command
 
    `qvm-features dom0 gui-default-allow-utf8-titles true`
 
@@ -44,7 +44,9 @@ For debian-based Templates, the corresponding command is
 
 For other languages, the corresponding code has to be used, e.g. `fr` for French. After installing a language, it has to be selected/enabled via the settings of the Template.
 
-New Templates will be installed in their default language, usually English, and they have to be changed just like existing Templates. The language of Windows Templates is determined at the installation of the operating system and can be changed afterwards if the installed edition is a multi-language edition; otherwise the language stays fixed.
+New Templates will be installed in their default language, usually English, and they have to be changed just like existing Templates. This could be alleviated by installing a “clean” Template from the repository, with nothing but the needed language packs before starting to create a new template–clone using one of these languages. For instance, when you need a totally new Template (e.g., Debian 12 when it comes out), you’ll have to create debian-12-de and regenerate all other Templates from that.
+
+The language of Windows Templates is determined at the installation of the operating system and can be changed afterwards if the installed edition is a multi-language edition; otherwise the language stays fixed.
 
 AppVMs started after this change will inherit the language from the corresponsing Template.
 
