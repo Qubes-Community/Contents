@@ -70,8 +70,8 @@ Create a VM named WindowsNew in [HVM](https://www.qubes-os.org/doc/hvm/) mode (X
         - Advanced:
           - Include in memory balancing: uncheck
           - Initial memory: 4096+ MB
-          - Kernel: None
-          - Mode: HVM
+          - Kernel: `(none)`
+          - Mode: `HVM`
         - Click "Apply".
 
 - Using CLI in a dom0 terminal
