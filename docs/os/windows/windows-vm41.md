@@ -41,31 +41,10 @@ An unofficial, third-party tool for automating this process is available [here](
 Use it at your own risk.)
 However, if you are an expert or want to do it manually you may continue below.
 
-### Summary: Installing Windows via CLI ###
-
-The installation of Windows as a standalone qube is identical to that of a Windows template, so they are described together in the following sections. For a template, however, a few additional rules have to be followed after installation, described later on.
-
-For a standalone VM, execute the following commands; for a template, replace `--class StandaloneVM --label orange` in the first line with `--class TemplateVM  --label black`; otherwise, the installation is identical:
-
-~~~
-qvm-create --class StandaloneVM --label orange --property virt_mode=hvm WindowsNew
-qvm-prefs WindowsNew memory 4096
-qvm-prefs WindowsNew maxmem 4096
-qvm-prefs WindowsNew kernel ''
-qvm-prefs WindowsNew qrexec_timeout 7200
-qvm-volume extend WindowsNew:root 60g
-qvm-start --cdrom=untrusted:/home/user/windows_install.iso WindowsNew
-# restart after the first part of the windows installation process ends
-qvm-start WindowsNew
-# once Windows is installed and working
-as administrator in Windows, set: powercfg -H off
-~~~
 
 To install Qubes Windows Tools, follow instructions in [Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md).
 
-### Detailed instructions ###
-
-> **Notes:**
+**Notes:**
 > - The instructions may work on other versions than Windows 7, 10 and 11 x64 but haven't been tested.
 > - Qubes Windows Tools (QWT) only supports Windows 7, 10 and 11 x64. For installation, see [Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md).
 
@@ -82,7 +61,7 @@ To install Qubes Windows Tools, follow instructions in [Qubes Windows Tools](htt
   - Name: `WindowsNew`, Color: `orange` (for a standalone qubes, `black` for a template)
   - Type: `StandaloneVM (fully persistent)` or `TemplateVM (template home, persistent root)`
   - Template: `(none)`
-  - Networking: sys-firewall (default)
+  - Networking: `sys-firewall (default)`
   - Launch settings after creation: check
   - Click "OK".
   
@@ -104,27 +83,29 @@ To install Qubes Windows Tools, follow instructions in [Qubes Windows Tools](htt
    ~~~
    qvm-create --class TemplateVM --label black --property virt_mode=hvm WindowsNew
    ~~~
-  The Windows' installer requires a significant amount of memory or else the VM will crash with such errors:
-   ~~~
-   /var/log/xen/console/hypervisor.log:
-
-   p2m_pod_demand_populate: Dom120 out of PoD memory! (tot=102411 ents=921600 dom120)
-   (XEN) domain_crash called from p2m-pod.c:1218
-   (XEN) Domain 120 (vcpu#0) crashed on cpu#3:
-   ~~~
-  So, increase the VM's memory to 4096MB (memory = maxmem because we don't use memory balancing), via the Qube Manager (Advanced tab), or via the following CLI commands in a dom0 terminal:
-   ~~~
-   qvm-prefs WindowsNew memory 4096
-   qvm-prefs WindowsNew maxmem 4096
-   ~~~
-  Disable direct boot so that the VM will go through the standard cdrom/HDD boot sequence:
-   ~~~
-   qvm-prefs WindowsNew kernel ''
-   ~~~
-  A typical Windows installation requires between 25GB up to 60GB of disk space depending on the version (Home/Professional/...). Windows updates also end up using significant space. So, extend the root volume from the default 10GB to at least 60GB (note: it is straightforward to increase the root volume size after Windows is installed: simply extend the volume again in dom0 and then extend the system partition with Windows's disk manager).
+  After creation, set the following parameters via CLI in a dom0 terminal:
    ~~~
    qvm-volume extend WindowsNew:root 60g
+   qvm-prefs WindowsNew memory 4096
+   qvm-prefs WindowsNew maxmem 4096
+   qvm-prefs WindowsNew kernel ''
    ~~~
+
+  These parameters are set for the following reasons:
+  
+     - A typical Windows installation requires between 25GB up to 60GB of disk space depending on the version (Home/Professional/...). Windows updates also end up using significant space. So, extend the root volume from the default 10GB to at least 60GB (note: it is straightforward to increase the root volume size after Windows is installed: simply extend the volume again in dom0 and then extend the system partition with Windows's disk manager).
+
+     - The Windows' installer requires a significant amount of memory or else the VM will crash with such errors:
+      ~~~
+      /var/log/xen/console/hypervisor.log:
+
+      p2m_pod_demand_populate: Dom120 out of PoD memory! (tot=102411 ents=921600 dom120)
+      (XEN) domain_crash called from p2m-pod.c:1218
+      (XEN) Domain 120 (vcpu#0) crashed on cpu#3:
+      ~~~
+     So, increase the VM's memory to 4096MB (memory = maxmem because we don't use memory balancing).
+     
+     - Disable direct boot so that the VM will go through the standard cdrom/HDD boot sequence. This is done by setting the qube's kernel to `none`.
 
 - After creating the new qube, increase the VM's `qrexec_timeout`: in case you happen to get a BSOD or a similar crash in the VM, utilities like `chkdsk` won't complete on restart before `qrexec_timeout` automatically halts the VM. That can really put the VM in a totally unrecoverable state, whereas with higher `qrexec_timeout`, `chkdsk` or the appropriate utility has plenty of time to fix the VM. Note that Qubes Windows Tools also require a larger timeout to move the user profiles to the private volume the first time the VM reboots after the tools' installation.
   ~~~
