@@ -1,7 +1,9 @@
 Installing a Windows VM
 =======================
 
-You can install Windows just like any other OS as an [HVM](https://www.qubes-os.org/doc/hvm/), if you just want something simple and you can live without some features. This works for Windows XP, 7, 10 and 11, and it may work for Windows 8 and 8.1, although this has not been tested.
+You can install Windows just like any other OS as an [HVM](https://www.qubes-os.org/doc/hvm/), if you just want something simple and you can live without some features. This works for Windows XP, 7, 8.1, 10 and 11.
+
+Please keep in mind that Qubes Windows Tools are not supported on Windows XP.
 
 You will get an environment in which basic functions are supported, but integration into the Qubes environment is rather restricted. The following functions will work right out of the box:
 
