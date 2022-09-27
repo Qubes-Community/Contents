@@ -16,6 +16,48 @@ To switch, reinstall and uninstall a CentOS TemplateVM that is already installed
 
 After a fresh install, we recommend to [Update the TemplateVM](https://www.qubes-os.org/doc/software-update-vm/).
 
+## CentOS 8 End of Life
+
+With the end of 2021, CentOS ended its life in its stable form and started functioning as CentOS Stream, a development branch for Red Hat® Enterprise Linux®. As a result, it stopped receiving proven, stable updates and its use, especially in production environments, became risky. This is a very serious problem for many companies and individuals around the world. So there was an urgent need to find a new source of updates for CentOS in order to keep it in the infrastructure. A complete solution to this problem is support switching, that is, pointing to a new repository from which CentOS will be downloading stable updates. Such a solution is offered by various Enterprise Linux vendors such as AlmaLinux, EuroLinux or Rocky Linux. It is worth mentioning that both CentOS and RHEL and AlmaLinux/EuroLinux/Rocky Linux are systems built on the same source code, so they provide the same functionality. They differ mainly in branding.
+
+It's up to the user to decide, which Enterprise Linux 8 they want to migrate to. There are some differences mainly in the time it takes to release updates, errata, major and minor releases, etc. but it's up to the user to do their own research for that in order to provide an unbiased opinion.
+
+### How to migrate your CentOS 8 template
+
+We'll use vendors' migration scripts for migrating our CentOS 8 template.
+
+The scripts will perform various operations that may require connecting the template to the Internet.
+
+The scripts are located in
+
+- https://github.com/AlmaLinux/almalinux-deploy - for AlmaLinux
+- https://github.com/EuroLinux/eurolinux-migration-scripts - for EuroLinux
+- https://github.com/rocky-linux/rocky-tools - for Rocky Linux
+
+Please read their manuals for a successful operation.
+
+Please update your CentOS 8 template to the latest officially released CentOS 8.5 before running the scripts.
+
+#### How to update to CentOS 8.5
+
+Edit your CentOS 8 repositories so they point to release 8.5 in CentOS Vault. You can use the following commands:
+
+```
+sudo sed -i -e '/mirrorlist=http:\/\/mirrorlist.centos.org\/?release=$releasever&arch=$basearch&repo=/ s/^#*/#/' -e '/baseurl=http:\/\/mirror.centos.org\/$contentdir\/$releasever\// s/^#*/#/' -e '/^\[baseos\]/a baseurl=https://mirror.rackspace.com/centos-vault/8.5.2111/BaseOS/$basearch/os' /etc/yum.repos.d/CentOS-Linux-BaseOS.repo
+sudo sed -i -e '/mirrorlist=http:\/\/mirrorlist.centos.org\/?release=$releasever&arch=$basearch&repo=/ s/^#*/#/' -e '/baseurl=http:\/\/mirror.centos.org\/$contentdir\/$releasever\// s/^#*/#/' -e '/^\[appstream\]/a baseurl=https://mirror.rackspace.com/centos-vault/8.5.2111/AppStream/$basearch/os' /etc/yum.repos.d/CentOS-Linux-AppStream.repo
+sudo sed -i -e '/mirrorlist=http:\/\/mirrorlist.centos.org\/?release=$releasever&arch=$basearch&repo=/ s/^#*/#/' -e '/baseurl=http:\/\/mirror.centos.org\/$contentdir\/$releasever\// s/^#*/#/' -e '/^\[cr\]/a baseurl=https://mirror.rackspace.com/centos-vault/8.5.2111/ContinuousRelease/$basearch/os' /etc/yum.repos.d/CentOS-Linux-ContinuousRelease.repo
+sudo sed -i -e '/mirrorlist=http:\/\/mirrorlist.centos.org\/?release=$releasever&arch=$basearch&repo=/ s/^#*/#/' -e '/baseurl=http:\/\/mirror.centos.org\/$contentdir\/$releasever\// s/^#*/#/' -e '/^\[devel\]/a baseurl=https://mirror.rackspace.com/centos-vault/8.5.2111/Devel/$basearch/os' /etc/yum.repos.d/CentOS-Linux-Devel.repo
+sudo sed -i -e '/mirrorlist=http:\/\/mirrorlist.centos.org\/?release=$releasever&arch=$basearch&repo=/ s/^#*/#/' -e '/baseurl=http:\/\/mirror.centos.org\/$contentdir\/$releasever\// s/^#*/#/' -e '/^\[extras\]/a baseurl=https://mirror.rackspace.com/centos-vault/8.5.2111/extras/$basearch/os' /etc/yum.repos.d/CentOS-Linux-Extras.repo
+sudo sed -i -e '/mirrorlist=http:\/\/mirrorlist.centos.org\/?release=$releasever&arch=$basearch&repo=/ s/^#*/#/' -e '/baseurl=http:\/\/mirror.centos.org\/$contentdir\/$releasever\// s/^#*/#/' -e '/^\[fasttrack\]/a baseurl=https://mirror.rackspace.com/centos-vault/8.5.2111/fasttrack/$basearch/os' /etc/yum.repos.d/CentOS-Linux-FastTrack.repo
+sudo sed -i -e '/mirrorlist=http:\/\/mirrorlist.centos.org\/?release=$releasever&arch=$basearch&repo=/ s/^#*/#/' -e '/baseurl=http:\/\/mirror.centos.org\/$contentdir\/$releasever\// s/^#*/#/' -e '/^\[ha\]/a baseurl=https://mirror.rackspace.com/centos-vault/8.5.2111/HighAvailability/$basearch/os' /etc/yum.repos.d/CentOS-Linux-HighAvailability.repo
+sudo sed -i -e '/mirrorlist=http:\/\/mirrorlist.centos.org\/?release=$releasever&arch=$basearch&repo=/ s/^#*/#/' -e '/baseurl=http:\/\/mirror.centos.org\/$contentdir\/$releasever\// s/^#*/#/' -e '/^\[plus\]/a baseurl=https://mirror.rackspace.com/centos-vault/8.5.2111/centosplus/$basearch/os' /etc/yum.repos.d/CentOS-Linux-Plus.repo
+sudo sed -i -e '/mirrorlist=http:\/\/mirrorlist.centos.org\/?release=$releasever&arch=$basearch&repo=/ s/^#*/#/' -e '/baseurl=http:\/\/mirror.centos.org\/$contentdir\/$releasever\// s/^#*/#/' -e '/^\[powertools\]/a baseurl=https://mirror.rackspace.com/centos-vault/8.5.2111/PowerTools/$basearch/os' /etc/yum.repos.d/CentOS-Linux-PowerTools.repo
+```
+
+Then update your system with `sudo yum update -y`
+
+You're now able to use the aformentioned migration scripts to migrate your CentOS 8.5 to your desired Enterprise Linux 8.
+
 ## Want to contribute?
 
 *   [How can I contribute to the Qubes Project?](https://www.qubes-os.org/doc/contributing/)
