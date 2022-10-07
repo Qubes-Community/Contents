@@ -253,3 +253,14 @@ Depending on how old your installation media is, fully updating your Windows VM 
 Note: if you already have Qubes Windows Tools installed the video adapter in Windows will be "Qubes video driver" and you won't be able to see the Windows Update process when the VM is being powered off because Qubes services would have been stopped by then. Depending on the size of the Windows update packs it may take a bit of time until the VM shutdowns by itself, leaving one wondering if the VM has crashed or still finalizing the updates (in dom0 a changing CPU usage - eg. shown with `xentop` - usually indicates that the VM hasn't crashed).
 
 To avoid guessing the VM's state enable debugging (`qvm-prefs -s WindowsNew debug true`) and in Windows' device manager (My computer -> Manage / Device manager / Display adapters) temporarily re-enable the standard VGA adapter and disable "Qubes video driver". You can disable debugging and revert to Qubes' display once the VM is updated.
+
+Troubleshooting
+---------------
+
+**Windows 7 - USB drives are not visible in your domain**
+
+After Qubes Windows Tools have been installed on your Windows 7 system, please install the [Chipset_Driver_X2NF0_WN_2.1.39.0_A03.EXE driver](https://web.archive.org/web/20221007093126/https://dl.dell.com/FOLDER01557883M/3/Chipset_Driver_X2NF0_WN_2.1.39.0_A03.EXE). Then shut down your domain.
+
+From now on you should be able to attach your USB drive by passing it from your *Qubes Devices* menu as a *USB device* rather than *Data (Block) Device*
+
+This procedure has been tested on Windows 7 installed as a TemplateVM. Different combinations (such as StandaloneVM or different Windows versions) have not been tested.
