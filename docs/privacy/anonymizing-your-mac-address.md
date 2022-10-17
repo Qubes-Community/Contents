@@ -53,7 +53,7 @@ You can check the MAC address currently in use by looking at the status pages of
 
 DHCP requests _may_ also leak your hostname to your LAN. Since your hostname is usually `sys-net`, other network users can easily spot that you're using Qubes OS.
 
-Unfortunately `NetworkManager` currently doesn't provide an option to disable that leak globally ([Gnome Bug 768076](https://bugzilla.gnome.org/show_bug.cgi?id=768076)). However the below alternatives exist.
+Unfortunately `NetworkManager` currently doesn't provide an option to disable that leak globally ([Network Manager bug 584](https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/issues/584)). However the below alternatives exist.
 
 ### Prevent hostname sending
 
