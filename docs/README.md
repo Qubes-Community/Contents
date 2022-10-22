@@ -22,6 +22,7 @@
 - ![](/_res/l.png) [Newer Pihole qube, with cloudflared or NextDNS servers](https://github.com/92VV3M42d3v8/PiHole/blob/master/PiHole%20Cloudflared)
 - ![](/_res/l.png) [qubes-dns](https://github.com/3hhh/qubes-dns/)
 - [Using multiple languages in dom0](localization/multi-language-support-dom0.md)
+- [How to manage Bluetooth graphically](configuration/bluetooth.md)
 
 `coreboot`
 - [install coreboot on a Thinkpad x230](coreboot/x230.md)
