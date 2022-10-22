@@ -80,7 +80,7 @@ Set up a ProxyVM as a VPN gateway using NetworkManager
    ip6tables -I FORWARD -i eth0 -j DROP
    ```
 
-6. (Optional) Configure the VPN Qube firewall rules so it **only** allows the VPN endpoint address. This is much quicker and can be done graphically, unlike the optional points mentioned above.
+6. (Optional) Configure the VPN Qube firewall rules so it **only** allows the VPN endpoint address. This is much quicker and can be done graphically, unlike the optional points mentioned above. However, while quicker, it is not as "strict" as the one above. See [PR#220](https://github.com/Qubes-Community/Contents/pull/220#discussion_r1001357914) for more information.
 
 7. Configure your AppVMs to use the new VM as a NetVM.
 
