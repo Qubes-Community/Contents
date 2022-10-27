@@ -7,18 +7,13 @@
 
 toc::[]
 
+# Qubes common
 
 ## Troubleshooting
 
 ### How can I disable Xen Meltdown mitigations?
 
 Set `xpti=false` option in Xen command line (xen.gz option in grub, or options= line in xen.cfg for UEFI).
-
-### How can I switch R4.0 stubdomains back to qemu-traditional?
-
-```
-qvm-features VMNAME linux-stubdom ''
-```
 
 ### How can I upgrade to testing?
 
@@ -124,34 +119,9 @@ See "source" link [here](https://dev.qubes-os.org/projects/core-admin/en/latest/
 4. in dstVM, `/etc/qubes-rpc/qubes.OpenURL` is called upon reception of the `qubes.OpenURL` RPC event above, which validates the url and executes `/usr/bin/qubes-open`
 5. in dstVM, `/usr/bin/qubes-open` executes `xdg-open`, which then opens the url/file with the program registered to handle the associated mime type (for additional info see the [freedesktop specifications](https://www.freedesktop.org/wiki/)).
 
-### How can I contribute to developing Qubes Windows Tools for R4.0?
-
-See [this post](https://www.mail-archive.com/qubes-devel@googlegroups.com/msg02808.html) and thread.
-
 ### What are some undocumented QWT registry keys?
 
 MaxFPS, UseDirtyBits.
-
-### How can I build an ISO from existing packages without having to compile them all?
-
-```
-gpg --fetch-keys https://keys.qubes-os.org/keys/qubes-developers-keys.asc
-git clone https://github.com/QubesOS/qubes-builder.git
-cd qubes-builder
-git verify-commit HEAD || echo DANGER DANGER HIGH VOLTAGE
-cp example-configs/qubes-os-r4.0.conf builder.conf
-variables='DISTS_VM= USE_QUBES_REPO_VERSION=4.0 USE_QUBES_REPO_TESTING=1 INSTALLER_KICKSTART=/tmp/qubes-installer/conf/travis-iso-full.ks'
-make $variables COMPONENTS='installer-qubes-os builder-rpm' get-sources
-make $variables COMPONENTS=intel-microcode get-sources qubes clean-rpms
-[Customize as desired here]
-sudo chroot chroot-fc25 dnf -y install dnf-yum
-make $variables COMPONENTS= iso
-```
-
-If any step fails due to a download error, just rerun it.
-If you wish to customize the kernel or another package, include it (e.g. `linux-kernel`) in `COMPONENTS` to actually include that package on the image.
-You may also need to either adjust `qubes-src/installer-qubes-os/conf/comps-qubes.xml` (kernel -> kernel-latest), or build the package as "kernel" not "kernel-latest" (edit `suffix` file in the linux-kernel sources).
-Make sure `audit=0` is not present in kernelopts / `/proc/cmdline`.
 
 ## Tweaks
 
@@ -208,49 +178,6 @@ swapon swapfile
 
 See https://groups.google.com/d/msg/qubes-users/LLSo_3oWXJI/0clWN0BUBgAJ for more details.
 
-### How can I permanently attach a block device to an HVM? ###
-
-In 3.2 you can just edit the conf file under /var/lib/qubes.
-
-In 4.0:
-Have a look at
-https://dev.qubes-os.org/projects/core-admin/en/latest/libvirt.html
-
-You want to add a new device: use normal Xen configuration.
-https://libvirt.org/formatdomain.html#elementsDisks will help.
-Use the phy driver, and specify the source as /dev/sdX, and target dev on your qube.
-
-The libvirt page explains how to create a custom specification for a qube, and where to put the files.
-The basic specification is created from a template file - on my system it's at /usr/share/qubes/templates/libvirt/xen.xml.
-(The documentation is a little out of step here.)
-If you look at that file you can see how the configuration for your qubes is constructed.
-
-What we want to do is to modify the settings for qube foo so that /dev/sdb on dom0 will appear at /dev/xvde in foo.
-
-Create a new file in dom0 at:
-```
-/etc/qubes/templates/libvirt/by-name/foo.xml
-```
-The contents are:
-```
-{% extends 'libvirt/xen.xml' %}
-{% block devices %}
-    {{ super() }}
-        <disk type='block' device='disk' >
-            <driver name='phy' />
-            <source dev='/dev/sdb' />
-            <target dev='xvde' />
-        </disk>
-{% endblock %}
-```
-
-The "extends" statement tells the system that it will be modifying the definition in libvirt/xen.xml.
-The "super()" imports the specification for block devices from that file.
-Then we define a new disk device - the syntax here is quite obvious and follows the reference in libvirt.org.
-
-Now when you boot foo, Qubes will pick up this file, and attach /dev/sdb to the foo qube, where it will appear as /dev/xvde. 
-You can put an entry in to /etc/fstab so that the /dev/xvde device will be automatically mounted where you will. 
-
 ### How can I "sparsify" an existing volume? ###
 
 Use the `fallocate` command. It has a way to deallocate zero blocks in-place so you probably won't need to use issue lvm commands directly:
@@ -258,11 +185,6 @@ Use the `fallocate` command. It has a way to deallocate zero blocks in-place so 
 `sudo fallocate --dig-holes /dev/mapper/qubes_dom0-vm--untrusted--private`
 
 This method can also be used on .img files (for Qubes installations that use them). 
-
-### In Qubes 3.2, how do I remove old entries from "Move/copy to other AppVM"? ###
-
-The rogue entries are stored in ~/.config/qvm-mru-filecopy in the qube you are trying to copy from.
-You can just edit that file to remove them from the list.
 
 ### How do I change display resolution on a Linux HVM?
 
@@ -327,3 +249,89 @@ $tag:whonix-updatevm $default allow,target=sys-whonix-14
 
 
 *Thanks to all mailing list contributors, from where most of these came.*
+
+# Qubes 3.2
+
+### In Qubes 3.2, how do I remove old entries from "Move/copy to other AppVM"? ###
+
+The rogue entries are stored in ~/.config/qvm-mru-filecopy in the qube you are trying to copy from.
+You can just edit that file to remove them from the list.
+
+### How can I permanently attach a block device to an HVM? ###
+
+In 3.2 you can just edit the conf file under /var/lib/qubes.
+
+# Qubes 4.0
+
+### How can I contribute to developing Qubes Windows Tools for R4.0?
+
+See [this post](https://www.mail-archive.com/qubes-devel@googlegroups.com/msg02808.html) and thread.
+
+### How can I switch R4.0 stubdomains back to qemu-traditional?
+
+```
+qvm-features VMNAME linux-stubdom ''
+```
+
+### How can I build an ISO from existing packages without having to compile them all?
+
+```
+gpg --fetch-keys https://keys.qubes-os.org/keys/qubes-developers-keys.asc
+git clone https://github.com/QubesOS/qubes-builder.git
+cd qubes-builder
+git verify-commit HEAD || echo DANGER DANGER HIGH VOLTAGE
+cp example-configs/qubes-os-r4.0.conf builder.conf
+variables='DISTS_VM= USE_QUBES_REPO_VERSION=4.0 USE_QUBES_REPO_TESTING=1 INSTALLER_KICKSTART=/tmp/qubes-installer/conf/travis-iso-full.ks'
+make $variables COMPONENTS='installer-qubes-os builder-rpm' get-sources
+make $variables COMPONENTS=intel-microcode get-sources qubes clean-rpms
+[Customize as desired here]
+sudo chroot chroot-fc25 dnf -y install dnf-yum
+make $variables COMPONENTS= iso
+```
+
+If any step fails due to a download error, just rerun it.
+If you wish to customize the kernel or another package, include it (e.g. `linux-kernel`) in `COMPONENTS` to actually include that package on the image.
+You may also need to either adjust `qubes-src/installer-qubes-os/conf/comps-qubes.xml` (kernel -> kernel-latest), or build the package as "kernel" not "kernel-latest" (edit `suffix` file in the linux-kernel sources).
+Make sure `audit=0` is not present in kernelopts / `/proc/cmdline`.
+
+### How can I permanently attach a block device to an HVM? ###
+
+In 4.0:
+Have a look at
+https://dev.qubes-os.org/projects/core-admin/en/latest/libvirt.html
+
+You want to add a new device: use normal Xen configuration.
+https://libvirt.org/formatdomain.html#elementsDisks will help.
+Use the phy driver, and specify the source as /dev/sdX, and target dev on your qube.
+
+The libvirt page explains how to create a custom specification for a qube, and where to put the files.
+The basic specification is created from a template file - on my system it's at /usr/share/qubes/templates/libvirt/xen.xml.
+(The documentation is a little out of step here.)
+If you look at that file you can see how the configuration for your qubes is constructed.
+
+What we want to do is to modify the settings for qube foo so that /dev/sdb on dom0 will appear at /dev/xvde in foo.
+
+Create a new file in dom0 at:
+```
+/etc/qubes/templates/libvirt/by-name/foo.xml
+```
+The contents are:
+```
+{% extends 'libvirt/xen.xml' %}
+{% block devices %}
+    {{ super() }}
+        <disk type='block' device='disk' >
+            <driver name='phy' />
+            <source dev='/dev/sdb' />
+            <target dev='xvde' />
+        </disk>
+{% endblock %}
+```
+
+The "extends" statement tells the system that it will be modifying the definition in libvirt/xen.xml.
+The "super()" imports the specification for block devices from that file.
+Then we define a new disk device - the syntax here is quite obvious and follows the reference in libvirt.org.
+
+Now when you boot foo, Qubes will pick up this file, and attach /dev/sdb to the foo qube, where it will appear as /dev/xvde. 
+You can put an entry in to /etc/fstab so that the /dev/xvde device will be automatically mounted where you will. 
+
