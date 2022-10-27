@@ -94,23 +94,6 @@ In the `/var/log/libvirst/libxl/`, `/var/log/qubes/` and `/var/log/xen/console/`
 
 QtCreator.
 
-### What is the process flow when starting an AppVM under Qubes R4.x?
-
-1. qvm-start sends a request to qubesd, using Admin API
-2. qubesd starts required netvm (recursively), if needed
-3. qubesd request qmemman to allocate needed memory for new VM (according to VM's 'memory' property)
-4. qubesd calls into appropriate storage pool driver to prepare for VM startup (create copy-on-write layers etc)
-5. qubesd gathers needed VM properties etc and builds libvirt VM configuration (XML format, can be seen using `virsh dumpxml`)
-6. qubesd calls into libvirt to start the VM (but in paused mode)
-7. libvirt setup the VM using libxl, this include starting stubdomain if needed
-8. qubesd start auxiliary processes, including:
-   - qrexec-daemon
-   - qubesdb-daemon (and fill its content)
-9. libvirt unpause the VM
-10. qvm-start-gui process (running separately from qubesd, as part of dom0 user GUI session) starts gui daemon
-
-See "source" link [here](https://dev.qubes-os.org/projects/core-admin/en/latest/qubes-vm/qubesvm.html#qubes.vm.qubesvm.QubesVM.start).
-
 ### What is the process flow when opening a link/file in another VM ?
 
 1. in an AppVM ('srcVM') a link - or file - is set to be opened with the graphical "open in VM" or "open in dispVM" extensions (or respectively with the `/usr/bin/qvm-open-in-vm` or `/usr/bin/qvm-open-in-dvm` command line tools)
@@ -334,4 +317,21 @@ Then we define a new disk device - the syntax here is quite obvious and follows 
 
 Now when you boot foo, Qubes will pick up this file, and attach /dev/sdb to the foo qube, where it will appear as /dev/xvde. 
 You can put an entry in to /etc/fstab so that the /dev/xvde device will be automatically mounted where you will. 
+
+### What is the process flow when starting an AppVM under Qubes R4.x?
+
+1. qvm-start sends a request to qubesd, using Admin API
+2. qubesd starts required netvm (recursively), if needed
+3. qubesd request qmemman to allocate needed memory for new VM (according to VM's 'memory' property)
+4. qubesd calls into appropriate storage pool driver to prepare for VM startup (create copy-on-write layers etc)
+5. qubesd gathers needed VM properties etc and builds libvirt VM configuration (XML format, can be seen using `virsh dumpxml`)
+6. qubesd calls into libvirt to start the VM (but in paused mode)
+7. libvirt setup the VM using libxl, this include starting stubdomain if needed
+8. qubesd start auxiliary processes, including:
+   - qrexec-daemon
+   - qubesdb-daemon (and fill its content)
+9. libvirt unpause the VM
+10. qvm-start-gui process (running separately from qubesd, as part of dom0 user GUI session) starts gui daemon
+
+See "source" link [here](https://dev.qubes-os.org/projects/core-admin/en/latest/qubes-vm/qubesvm.html#qubes.vm.qubesvm.QubesVM.start).
 
