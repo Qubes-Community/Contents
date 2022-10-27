@@ -192,6 +192,8 @@ as well do 1080p in the hvm.
 
 Either use a 3.5mm jack to BT adapter, or see [this](https://m7i.org/tips/qubes-VM-bluetooth-audio/).
 
+Hint: [this guide](../configuration/bluetooth.md) might come in handy too.
+
 ### Manually install Whonix templates
 
 See the [official Whonix documentation](https://www.whonix.org/wiki/Qubes/Install) for supported installation methods.
