@@ -90,10 +90,6 @@ In the `/var/log/libvirst/libxl/`, `/var/log/qubes/` and `/var/log/xen/console/`
 
 ## Development
 
-### What is a good IDE for Qubes?
-
-QtCreator.
-
 ### What is the process flow when opening a link/file in another VM ?
 
 1. in an AppVM ('srcVM') a link - or file - is set to be opened with the graphical "open in VM" or "open in dispVM" extensions (or respectively with the `/usr/bin/qvm-open-in-vm` or `/usr/bin/qvm-open-in-dvm` command line tools)
