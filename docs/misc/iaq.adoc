@@ -242,7 +242,6 @@ Make sure `audit=0` is not present in kernelopts / `/proc/cmdline`.
 
 ### How can I permanently attach a block device to an HVM? ###
 
-In 4.0:
 Have a look at
 https://dev.qubes-os.org/projects/core-admin/en/latest/libvirt.html
 
@@ -298,3 +297,11 @@ You can put an entry in to /etc/fstab so that the /dev/xvde device will be autom
 
 See "source" link [here](https://dev.qubes-os.org/projects/core-admin/en/latest/qubes-vm/qubesvm.html#qubes.vm.qubesvm.QubesVM.start).
 
+# Qubes 4.1
+
+### How can I permanently attach a block device to an HVM? ###
+
+Assuming that block device is labeled as `sdb`, run the following command:
+```
+qvm-block attach --persistent <HVM> sys-net:sdb
+```
