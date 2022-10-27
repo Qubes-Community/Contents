@@ -197,7 +197,6 @@ Hint: [this guide](../configuration/bluetooth.md) might come in handy too.
 ### Manually install Whonix templates
 
 See the [official Whonix documentation](https://www.whonix.org/wiki/Qubes/Install) for supported installation methods.
-```
 
 *Thanks to all mailing list contributors, from where most of these came.*
 
