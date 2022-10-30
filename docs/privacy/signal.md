@@ -27,17 +27,17 @@ Always obtain a trusted key fingerprint via other channels, and always check any
 
 The following adapts the official [Linux (Debian-based) Install Instructions][signal-debian-instructions] from Signal's website for Qubes.
 
-1. (Optional) Create a TemplateVM ('debian-11' is used as an example, but could have been 'debian-11-minimal', 'debian-10', etc.):
+1. (Optional) Create a TemplateVM (`debian-11` is used as an example, but can be `debian-11-minimal`, `debian-10`, etc.):
 
        [user@dom0 ~]$ sudo qubesctl --skip-dom0 --targets=debian-11 --show-output state.sls update.qubes-vm
 
-2. Open a terminal in Debian 11 (or your previously chosen template ; note that `gnome-terminal` isn't installed by default in a [minimal template], in which case replace `gnome-terminal` with `uxterm`):
+2. Open a terminal in Debian 11 (or your previously chosen template; note that `gnome-terminal` isn't installed by default in a [minimal template], in that case replace `gnome-terminal` with `uxterm`):
 
        [user@dom0 ~]$ qvm-run -a debian-11 gnome-terminal
        
-3. Run these commands in the terminal you've just opened:
+3. Run the commands below in the terminal you've just opened.
 
-    Install the curl program needed to download the signal signing key:
+    Install the curl program needed to download the Signal signing key:
 
        sudo apt install curl
 
@@ -49,7 +49,7 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
 
        curl --proxy 127.0.0.1:8082 -s https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
 
-    Add the Signal repository (Signal don't offer a `buster/bullseye` repository, they use `xenial` but it doesn't change anything for debian users):
+    Add the Signal repository (Signal don't offer a `buster/bullseye` repository - they use `xenial`, but this doesn't affect Debian users):
   
        echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee -a /etc/apt/sources.list.d/signal-desktop.list
 
@@ -59,15 +59,15 @@ The following adapts the official [Linux (Debian-based) Install Instructions][si
 
 4. A bit more work is required in case you used a minimal template for the TemplateVM above:
 
-    `signal-desktop` requires at the minimum `libatk1.0-0`, `libatk-bridge2.0-0`, `libcups2` and `libgtk-3-0` to run. Those dependencies are automatically installed when installing `xfce4-notifyd`, but if you installed `dunst` you'll have to add them:
+    `signal-desktop` requires at least `libatk1.0-0`, `libatk-bridge2.0-0`, `libcups2` and `libgtk-3-0` to run. Those dependencies are automatically installed when installing `xfce4-notifyd`, but if you installed `dunst` you'll have to add them:
 
        sudo apt install libatk1.0-0 libatk-bridge2.0-0 libcups2 libgtk-3-0
 
-    If you haven't done so already, `qubes-core-agent-networking` must be installed for networking to work in qubes which are based on minimal templates:
+    If you haven't done so already, `qubes-core-agent-networking` must be installed for networking to work in qubes based on minimal templates:
 
        sudo apt install qubes-core-agent-networking
 
-    Then optionally install the following packages for convenience of handling files (`zenity` is needed by the Qubes OS functions in `qubes-core-agent-nautilus` to show the progress dialog when moving / copying files):
+    Then optionally install the following packages for convenience of handling files (`zenity` is needed by the Qubes OS functions in `qubes-core-agent-nautilus` to show the progress dialog when moving/copying files):
 
        sudo apt install nautilus qubes-core-agent-nautilus zenity
 
