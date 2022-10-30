@@ -13,7 +13,7 @@ Right click on the Network Manager icon of your NetVM in the tray and click 'Edi
 
 Select the connection to randomize and click Edit.
 
-Select the "Cloned MAC Address" drop down menu and pick either 'Random" or "Stable'.
+Select the "Cloned MAC Address" drop-down list and pick either 'Random" or "Stable'.
 'Stable' will generate a random address that persists until reboot, while 'Random' will generate an address each time a link goes up.
 ![Edit Connection](/attachment/wiki/RandomizeMAC/networkmanager-mac-random.png)
 
