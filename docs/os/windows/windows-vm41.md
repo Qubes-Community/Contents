@@ -76,6 +76,8 @@ Create a VM named WindowsNew in [HVM](https://www.qubes-os.org/doc/hvm/) mode (X
           - Mode: `HVM`
         - Click "Apply".
 
+   After creation, set `qvm-prefs WindowsNew qrexec_timeout 7200` via CLI in a dom0 terminal.
+
 - Using CLI in a dom0 terminal
  
    - This can also be done via the following CLI commands in dom0, for a standalone qube:
@@ -92,11 +94,14 @@ Create a VM named WindowsNew in [HVM](https://www.qubes-os.org/doc/hvm/) mode (X
       qvm-prefs WindowsNew memory 4096
       qvm-prefs WindowsNew maxmem 4096
       qvm-prefs WindowsNew kernel ''
+      qvm-prefs WindowsNew qrexec_timeout 7200
       ~~~
 
 These parameters are set for the following reasons:
   
 - A typical Windows installation requires between 25GB up to 60GB of disk space depending on the version (Home/Professional/...). Windows updates also end up using significant space. So, extend the root volume from the default 10GB to at least 60GB (note: it is straightforward to increase the root volume size after Windows is installed: simply extend the volume again in dom0 and then extend the system partition with Windows's disk manager).
+
+- Setting memory to 4096MB may work in most cases, but using 6144MB (or even 8192MB) may reduce the likelihood of crashes during installation, especially for Windows 10 or 11.
 
 - The Windows' installer requires a significant amount of memory or else the VM will crash with such errors:
   ~~~
@@ -106,16 +111,11 @@ These parameters are set for the following reasons:
   (XEN) domain_crash called from p2m-pod.c:1218
   (XEN) Domain 120 (vcpu#0) crashed on cpu#3:
   ~~~
-  So, increase the VM's memory to 4096MB (memory = maxmem because we don't use memory balancing).
+  So, increase the VM's memory to 4096MB (memory = maxmem because we don't use memory balancing), or 6144MB / 8192MB, as recommended above.
      
 - Disable direct boot so that the VM will go through the standard cdrom/HDD boot sequence. This is done by setting the qube's kernel to an empty value.
 
-**Configure Windows VM**
-
-After creating the new qube, increase the VM's `qrexec_timeout`: in case you happen to get a BSOD or a similar crash in the VM, utilities like `chkdsk` won't complete on restart before `qrexec_timeout` automatically halts the VM. That can really put the VM in a totally unrecoverable state, whereas with higher `qrexec_timeout`, `chkdsk` or the appropriate utility has plenty of time to fix the VM. Note that Qubes Windows Tools also require a larger timeout to move the user profiles to the private volume the first time the VM reboots after the tools' installation. So set the parameter via the following CLI command from a dom0 terminal, because the Qube manager does not support this setting:
-~~~
-qvm-prefs WindowsNew qrexec_timeout 7200
-~~~
+- After creating the new qube, increase the VM's `qrexec_timeout`: in case you happen to get a BSOD or a similar crash in the VM, utilities like `chkdsk` won't complete on restart before `qrexec_timeout` automatically halts the VM. That can really put the VM in a totally unrecoverable state, whereas with higher `qrexec_timeout`, `chkdsk` or the appropriate utility has plenty of time to fix the VM. Note that Qubes Windows Tools also require a larger timeout to move the user profiles to the private volume the first time the VM reboots after the tools' installation. So set the parameter via the following CLI command from a dom0 terminal, because the Qube manager does not support this setting:
   
 **Start Windows VM**
 
@@ -129,7 +129,7 @@ qvm-prefs WindowsNew qrexec_timeout 7200
      - Select ISO by clicking "...".
      - Click "OK" to boot into the windows installer.
 
-   This can also be done via the following CLI command in dom0 (assuming that the Windows installer ISO is stored in the directory `/home/user/` in the AppVM `untrusted`:
+   This can also be done via the following CLI command in dom0 (assuming that the Windows installer ISO is stored in the directory `/home/user/` in the AppVM `untrusted`):
     ~~~
     qvm-start --cdrom=untrusted:/home/user/windows_install.iso WindowsNew
     ~~~
@@ -137,7 +137,7 @@ qvm-prefs WindowsNew qrexec_timeout 7200
 - Install Windows on the new VM
 
   - At the first start, the Windows logo may be briefly shown, and then a black screen with a blinking cursor may appear and stay for a few minutes. This is normal, and you just have to wait until the installation window appears.
-  - Mostly as usual, but automatic reboots will halt the qube - just restart it again and again until the installation is finished.
+  - The installation will run mostly as usual, but automatic reboots will halt the qube - just restart it again and again until the installation is finished. Note, however, that for these restarts, the parameter `--cdrom` **must not** be used, because otherwise the installation will start all over.
   - Install on first disk.
   - **For Windows 11 only**: Windows 11 requires TPM 2.0, which currently is not supported from Xen. In Order to install Windows 11 under Qubes, the check for TPM in the Windows installer has to be disabled:
  
@@ -152,7 +152,7 @@ qvm-prefs WindowsNew qrexec_timeout 7200
    
     :warning: **Caution:** This temporary patch may cease to work if it so pleases Microsoft some time.
     
-    The installation of Windows 11 may require an internet connection to grab a Microsoft ID. This is currently true only for the home addition, but will probably extend to the Pro edition, too. A workaround to bypass the internet connection requirements of the Windows 11 setup has been published that currently works but may be blocked some time in the future by Microsoft:
+    The installation of Windows 11 may require an internet connection to grab a Microsoft ID. This is currently true only for the home addition, but will probably extend to the Pro edition, too. A workaround to bypass the internet connection requirements of the Windows 11 setup has been published that currently works for version 21H2 but may be blocked some time in the future by Microsoft:
     
     - When you reach the “Let’s Connect You To A Network” page, type Shift-F10 to open a console window.
     - Here you type `taskmgr` to start the Task Manager window so you can see all running processes.
@@ -160,13 +160,21 @@ qvm-prefs WindowsNew qrexec_timeout 7200
     - Select this process and then hit the “End Task” button.
     - Now you can close these newly opened windows and return to the Windows 11 setup, where you will enter local account information.
  
-  - The Windows license may be read from flash via root in dom0:
+    For Windows 11 version 22H2, the following sequence of actions to use a local account instead of a Microsoft account has been published:
+
+    - Enter `no@thankyou.com` (or some other senseless address) as the email address and click `Next` when Windows 11 setup prompts you to log into your Microsoft account.
+    - Enter any text you want in the password field and click `Sign in`. If this method works, you'll get a message saying "Oops, something went wrong."
+    - Click `Next`. A screen appears saying "Who's going to use this device?" This is the local account creation screen.
+    - Enter the username you want to use and click `Next`.
+    - Enter a password and click `Next`. You can leave the field blank but it's not recommended.
+
+- On systems shipped with a Windows license, the product key may be read from flash via root in dom0:
 
     `strings < /sys/firmware/acpi/tables/MSDM`
 
     Alternatively, you can also try a Windows 7 license key (as of 2018/11 they are still accepted for a free upgrade to Windows 10).
     
- - The VM will shutdown after the installer completes the extraction of Windows installation files. It's a good idea to clone the VM now (eg. `qvm-clone WindowsNew WindowsNewbkp1`). Then, (re)start the VM via the Qubes Manager or with `qvm-start WindowsNew` from a dom0 terminal.
+ - The VM will shutdown after the installer completes the extraction of Windows installation files. It's a good idea to clone the VM now (eg. `qvm-clone WindowsNew WindowsNewbkp1`). Then, (re)start the VM via the Qubes Manager or with `qvm-start WindowsNew` from a dom0 terminal (without the `--cdrom` parameter!).
 
     The second part of Windows' installer should then be able to complete successfully.
 
@@ -217,7 +225,6 @@ Optimize resources for use in virtual machine as “vanilla” version of Window
 - …
 
 For additional information on configuring a Windows qube, see the [Customizing Windows 7 templates](https://www.qubes-os.org/doc/windows-template-customization/) page (despite the focus on preparing the VM for use as a template, most of the instructions are independent from how the VM will be used - ie. TemplateVM or StandaloneVM).
-
 
 Windows as TemplateVM
 ---------------------
