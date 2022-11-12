@@ -25,6 +25,7 @@ These steps should be done inside a template to be used to create a NetVM as it 
 
 Write the settings to a new file in the `/etc/NetworkManager/conf.d/` directory, such as `00-macrandomize.conf`.
 The following example enables Wi-Fi and Ethernet MAC address randomization while scanning (not connected), and uses a randomly generated but persistent MAC address for each individual Wi-Fi and Ethernet connection profile.
+It was inspired by the [official NetworkManager example](https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/examples/nm-conf.d/30-anon.conf).
 
 ~~~
 [device]
@@ -34,12 +35,18 @@ wifi.scan-rand-mac-address=yes
 wifi.cloned-mac-address=stable
 ethernet.cloned-mac-address=stable
 connection.stable-id=${CONNECTION}/${BOOT}
-#use random IPv6 addresses per session / don't leak MAC via IPv6 (cf. RFC 4941):
+
+#the below settings are optional (see the explanations below)
+ipv6.addr-gen-mode=stable-privacy
 ipv6.ip6-privacy=2
+ipv4.dhcp-client-id=stable
+ipv6.dhcp-duid=stable-uuid
 ~~~
 
-* `stable` in combination with `${CONNECTION}/${BOOT}` generates a random address that persists until reboot.
-* `random` generates a random address each time a link goes up.
+* `cloned-mac-address=stable` in combination with `connection.stable-id=${CONNECTION}/${BOOT}` generates a random MAC address that persists until reboot. You could use `connection.stable-id=random` instead, which generates a random MAC address each time a link goes up.
+* `ipv6.ip6-privacy=2` will cause a random IPv6 address to be used during every session. If you want to use an IPv6 address based on the already random MAC address, choose `ipv6.ip6-privacy=0`. Leaving this setting at the default is not recommended as it is basically undefined.
+* `ipv6.addr-gen-mode=stable-privacy` is a default explicitly set by current versions of `NetworkManager` when creating new connection profiles. Setting it globally just makes sure that previously created connection profiles will use the same setting.
+* `ipv4.dhcp-client-id=stable` and `ipv6.dhcp-duid=stable-uuid` instruct `NetworkManager` instruct `NetworkManager` to use a DHCP client identifier based upon the random MAC address. According to the current `NetworkManager` documentation the default is undefined. So it makes sense to set one explicitly.
 
 To see all the available configuration options, refer to the man page: `man nm-settings`
 
@@ -53,17 +60,10 @@ You can check the MAC address currently in use by looking at the status pages of
 
 DHCP requests _may_ also leak your hostname to your LAN. Since your hostname is usually `sys-net`, other network users can easily spot that you're using Qubes OS.
 
-Unfortunately `NetworkManager` currently doesn't provide an option to disable that leak globally ([Network Manager bug 584](https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/issues/584)). However, the alternatives below exist.
+Unfortunately `NetworkManager` currently doesn't provide an option to disable that leak globally ([NetworkManager bug 584](https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/issues/584)).
 
-### Prevent hostname sending
+However the `NetworkManager` versions as of Qubes OS 4.1 were found to not leak the hostname as long as the file `/etc/hostname` does **not** exist. This behaviour may be subject to change in future `NetworkManager` versions though.
+So please always double check whether your hostname is leaked or not on e.g. your home router, via `wireshark` or `tcpdump`.
 
-`NetworkManager` can be configured to use `dhclient` for DHCP requests. `dhclient` has options to prevent the hostname from being sent. To do that, add a file to your `sys-net` template (usually the Fedora or Debian base template) named e.g. `/etc/NetworkManager/conf.d/dhclient.conf` with the following content:  
-```
-[main]
-dhcp=dhclient
-```
-Afterwards edit `/etc/dhcp/dhclient.conf` and remove or comment out the line starting with `send host-name`. If the file does not exist, you may be fine already.
-In any case it makes sense to double check your results on e.g. your home router, `wireshark` or `tcpdump`.
-
-If you want to decide per connection, `NetworkManager` also provides an option to not send the hostname:  
+If you want to decide per connection, `NetworkManager` provides an option to not send the hostname:  
 Edit the saved connection files at `/rw/config/NM-system-connections/*.nmconnection` and add the `dhcp-send-hostname=false` line to both the `[ipv4]` and the `[ipv6]` section.
