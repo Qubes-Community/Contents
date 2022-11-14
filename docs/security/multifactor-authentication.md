@@ -176,7 +176,7 @@ Alternative - zbar & pass-otp
 
 As an alternative, one can download a QR code, scan it with zbar and use the scan to create one time passwords with pass-otp.
 
-First, generate a GPG key if you haven't done so yet.
+If you don't have a GPG key, generate one now. You can skip this step if you have one.
 
 ```
 gpg --full-gen-key
