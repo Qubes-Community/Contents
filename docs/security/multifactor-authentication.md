@@ -171,6 +171,38 @@ is largely the same.
 
     For a more complete list of compatible services, see [here][usage].
 
+Alternative - zbar & pass-otp
+-------------------
+
+As an alternative, one can download a QR code, scan it with zbar and use the scan to create one time passwords with pass-otp.
+
+First, generate a GPG key if you haven't done so yet.
+
+```
+gpg --full-gen-key
+```
+
+Initialize the `pass` store (`~/.password-store/`)
+
+```
+pass init <YOUR_EMAIL>
+```
+
+Then scan a downloaded QR code with zbar
+
+```
+zbarimg -q QR.png
+```
+
+Now we're ready to add it to `pass`. As an example let's assume we're trying to use it as an alternative to GitHub Authenticator app.
+
+```
+pass otp add github
+```
+
+You'll be prompted to enter the `otpauth://` URI. Copy it from the `zbarimg` output and paste.
+
+You can now use the command `pass otp github` to get your one-time password. Depending on your GPG configuration, you may get prompted to enter a passphrase to unlock your OpenPGP secret key first.
 
 [YubiKey]: https://www.qubes-os.org/doc/YubiKey/
 [MFA]: https://en.wikipedia.org/wiki/Multi-factor_authentication
