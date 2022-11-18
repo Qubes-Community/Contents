@@ -37,16 +37,16 @@ ethernet.cloned-mac-address=stable
 connection.stable-id=${CONNECTION}/${BOOT}
 
 #the below settings are optional (see the explanations below)
-ipv6.addr-gen-mode=stable-privacy
 ipv6.ip6-privacy=2
 ipv4.dhcp-client-id=stable
 ipv6.dhcp-duid=stable-uuid
 ~~~
 
 * `cloned-mac-address=stable` in combination with `connection.stable-id=${CONNECTION}/${BOOT}` generates a random MAC address that persists until reboot. You could use `connection.stable-id=random` instead, which generates a random MAC address each time a link goes up.
-* `ipv6.ip6-privacy=2` will cause a random IPv6 address to be used during every session. If you want to use an IPv6 address based on the already random MAC address, choose `ipv6.ip6-privacy=0`. Leaving this setting at the default is not recommended as it is basically undefined.
-* `ipv6.addr-gen-mode=stable-privacy` is a default explicitly set by current versions of `NetworkManager` when creating new connection profiles. Setting it globally just makes sure that previously created connection profiles will use the same setting.
-* `ipv4.dhcp-client-id=stable` and `ipv6.dhcp-duid=stable-uuid` instruct `NetworkManager` instruct `NetworkManager` to use a DHCP client identifier based upon the random MAC address. According to the current `NetworkManager` documentation the default is undefined. So it makes sense to set one explicitly.
+* `ipv6.ip6-privacy=2` will cause multiple random IPv6 addresses to be used during every session (cf. [RFC 4941](https://datatracker.ietf.org/doc/html/rfc4941)). If you want to use a fixed IPv6 address based on the already random MAC address, choose `ipv6.ip6-privacy=0`. Leaving this setting at the default is not recommended as it is basically undefined.
+* `ipv4.dhcp-client-id=stable` and `ipv6.dhcp-duid=stable-uuid` instruct `NetworkManager` to use a DHCP client identifier based upon the random MAC address. According to the current `NetworkManager` documentation the default is undefined. So it makes sense to set one explicitly.
+
+Also make sure that you have `addr-gen-mode=stable-privacy` in the `[ipv6]` section of your `/rw/config/NM-system-connections/*.nmconnection` files as this setting can only be set per connection.
 
 To see all the available configuration options, refer to the man page: `man nm-settings`
 
