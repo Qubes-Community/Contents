@@ -176,7 +176,13 @@ Alternative - zbar & pass-otp
 
 As an alternative, one can download a QR code, scan it with zbar and use the scan to create one time passwords with pass-otp.
 
-If you don't have a GPG key, generate one now. You can skip this step if you have one.
+Install the required tools. The following has been tested on a Fedora 36 template:
+
+```
+sudo dnf install -y zbar pass pass-otp
+```
+
+If you don't have a GPG key, generate one now. You can skip this step if you have one - that is if OTP codes will be generated in the same Qube that is used for split-gpg. Nevertheless you may want to accomplish this in a Qube dedicated to something else, so we'll cover this scenario with:
 
 ```
 gpg --full-gen-key
