@@ -21,7 +21,7 @@ Save the change and reconnect the connection (click on Network Manager tray icon
 
 ## Randomize all Ethernet and Wi-Fi connections
 
-These steps should be done inside a template to be used to create a NetVM as it relies on creating a config file that would otherwise be deleted after a reboot due to the nature of AppVMs.
+These steps should be done inside the template of the NetVM to change as it relies on creating a config file that would otherwise be deleted after a reboot due to the nature of AppVMs.
 
 Write the settings to a new file in the `/etc/NetworkManager/conf.d/` directory, such as `50-macrandomize.conf`.
 The following example enables Wi-Fi and Ethernet MAC address randomization while scanning (not connected), and uses a randomly generated but persistent MAC address for each individual Wi-Fi and Ethernet connection profile.
@@ -46,10 +46,6 @@ ipv6.ip6-privacy=2
 Also make sure that you have `addr-gen-mode=stable-privacy` in the `[ipv6]` section of your `/rw/config/NM-system-connections/*.nmconnection` files as this setting can only be set per connection.
 
 To see all the available configuration options, refer to the man page: `man nm-settings`
-
-Next, create a new NetVM using the edited template and assign network devices to it.
-
-Finally, shutdown all VMs and change the settings of sys-firewall, etc. to use the new NetVM.
 
 You can check the MAC address currently in use by looking at the status pages of your router device(s), or inside the NetVM with the command `sudo ip link show`.
 
