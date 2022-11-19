@@ -21,9 +21,9 @@ Save the change and reconnect the connection (click on Network Manager tray icon
 
 ## Randomize all Ethernet and Wi-Fi connections
 
-These steps should be done inside a template to be used to create a NetVM as it relies on creating a config file that would otherwise be deleted after a reboot due to the nature of AppVMs.
+These steps should be done inside the template of the NetVM to change as it relies on creating a config file that would otherwise be deleted after a reboot due to the nature of AppVMs.
 
-Write the settings to a new file in the `/etc/NetworkManager/conf.d/` directory, such as `00-macrandomize.conf`.
+Write the settings to a new file in the `/etc/NetworkManager/conf.d/` directory, such as `50-macrandomize.conf`.
 The following example enables Wi-Fi and Ethernet MAC address randomization while scanning (not connected), and uses a randomly generated but persistent MAC address for each individual Wi-Fi and Ethernet connection profile.
 It was inspired by the [official NetworkManager example](https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/blob/main/examples/nm-conf.d/30-anon.conf).
 
@@ -36,23 +36,16 @@ wifi.cloned-mac-address=stable
 ethernet.cloned-mac-address=stable
 connection.stable-id=${CONNECTION}/${BOOT}
 
-#the below settings are optional (see the explanations below)
+#the below settings is optional (see the explanations below)
 ipv6.ip6-privacy=2
-ipv4.dhcp-client-id=stable
-ipv6.dhcp-duid=stable-uuid
 ~~~
 
 * `cloned-mac-address=stable` in combination with `connection.stable-id=${CONNECTION}/${BOOT}` generates a random MAC address that persists until reboot. You could use `connection.stable-id=random` instead, which generates a random MAC address each time a link goes up.
 * `ipv6.ip6-privacy=2` will cause multiple random IPv6 addresses to be used during every session (cf. [RFC 4941](https://datatracker.ietf.org/doc/html/rfc4941)). If you want to use a fixed IPv6 address based on the already random MAC address, choose `ipv6.ip6-privacy=0`. Leaving this setting at the default is not recommended as it is basically undefined.
-* `ipv4.dhcp-client-id=stable` and `ipv6.dhcp-duid=stable-uuid` instruct `NetworkManager` to use a DHCP client identifier based upon the random MAC address. According to the current `NetworkManager` documentation the default is undefined. So it makes sense to set one explicitly.
 
 Also make sure that you have `addr-gen-mode=stable-privacy` in the `[ipv6]` section of your `/rw/config/NM-system-connections/*.nmconnection` files as this setting can only be set per connection.
 
 To see all the available configuration options, refer to the man page: `man nm-settings`
-
-Next, create a new NetVM using the edited template and assign network devices to it.
-
-Finally, shutdown all VMs and change the settings of sys-firewall, etc. to use the new NetVM.
 
 You can check the MAC address currently in use by looking at the status pages of your router device(s), or inside the NetVM with the command `sudo ip link show`.
 
