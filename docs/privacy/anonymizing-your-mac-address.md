@@ -35,12 +35,14 @@ wifi.scan-rand-mac-address=yes
 wifi.cloned-mac-address=stable
 ethernet.cloned-mac-address=stable
 connection.stable-id=${CONNECTION}/${BOOT}
+ipv6.dhcp-duid=stable-uuid
 
 #the below settings is optional (see the explanations below)
 ipv6.ip6-privacy=2
 ~~~
 
 * `cloned-mac-address=stable` in combination with `connection.stable-id=${CONNECTION}/${BOOT}` generates a random MAC address that persists until reboot. You could use `connection.stable-id=random` instead, which generates a random MAC address each time a link goes up.
+* `ipv6.dhcp-duid=stable-uuid` will prevent that the DHCP client identifier in IPv6 is looked up from a global lease file. The current default behaviour for IPv4 is to use the already random MAC as DHCP client identifier.
 * `ipv6.ip6-privacy=2` will cause multiple random IPv6 addresses to be used during every session (cf. [RFC 4941](https://datatracker.ietf.org/doc/html/rfc4941)). If you want to use a fixed IPv6 address based on the already random MAC address, choose `ipv6.ip6-privacy=0`. Leaving this setting at the default is not recommended as it is basically undefined.
 
 Also make sure that you have `addr-gen-mode=stable-privacy` in the `[ipv6]` section of your `/rw/config/NM-system-connections/*.nmconnection` files as this setting can only be set per connection.
