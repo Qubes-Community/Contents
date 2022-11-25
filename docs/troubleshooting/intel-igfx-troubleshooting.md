@@ -38,8 +38,10 @@ Workarounds:
     mentions using `compton` but `picom` might be an alternative. Both are
     packaged in Fedora 32 and can be installed easily with `qubes-dom0-update`).
 
-  * or switch to the `intel` driver (**Note - for some users the `intel` driver
-    is unstable, triggering random crashes/reboots !**).
+  * or switch to the `intel` driver. **Note: for some users the `intel` driver
+    is unstable, triggering crashes/reboots !** - either reproducible (eg.
+    moving a floating window to another monitor when using `i3wm`) to random and
+    infrequent (eg. 1-3x a day with XFCE).
 
     Create `/etc/X11/xorg.conf.d/20-intel.conf` with the following content:
 
