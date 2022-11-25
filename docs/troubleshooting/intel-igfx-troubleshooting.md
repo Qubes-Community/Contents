@@ -24,11 +24,11 @@ If you are unsure as to which parameter works with your kernel, check whether
 your kernel log from your latest boot has a message containing "i915: unknown
 parameter".
 
-## Fix tearing (glithes/artifacts/corruption/...)
+## Fix tearing (glitches/artifacts/corruption/...)
 
-By default Qubes OS uses the framebuffer/modesetting driver (`fbdev`). An issue
-with `fbdev` is that without compositing VM windows exhibit graphical artefacts
-(dom0 is unaffected). Workarounds:
+By default Qubes OS uses `fbdev`, the framebuffer/modesetting driver. An issue
+with is that without compositing VM windows exhibit graphical artefacts (dom0 is
+unaffected). Workarounds:
 
   * enable compositing; it is enabled by default in XFCE (if it was disabled for
     some reason, re-enabling it is done in "Window Manager Tweaks"; restarting
@@ -37,8 +37,8 @@ with `fbdev` is that without compositing VM windows exhibit graphical artefacts
     [faq](https://faq.i3wm.org/question/3279/do-i-need-a-composite-manager-compton.1.html)
     mentions using `compton`).
 
-  * or switch to the `intel` driver (**for some users the `intel` driver is
-    unstable, triggering random crashes from oopses to hard reboots !**).
+  * or switch to the `intel` driver (**Note - for some users the `intel` driver
+    is unstable, triggering random crashes/reboots !**).
     Create `/etc/X11/xorg.conf.d/20-intel.conf` and fill it with
 
     ```
