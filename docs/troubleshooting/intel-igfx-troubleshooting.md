@@ -35,7 +35,8 @@ Workarounds:
     `xfwm` isn't necessary). `i3wm` users would have to install a compositing
     manager (the old
     [faq](https://faq.i3wm.org/question/3279/do-i-need-a-composite-manager-compton.1.html)
-    mentions using `compton`).
+    mentions using `compton` but `picom` might be an alternative. Both are
+    packaged in Fedora 32 and can be installed easily with `qubes-dom0-update`).
 
   * or switch to the `intel` driver (**Note - for some users the `intel` driver
     is unstable, triggering random crashes/reboots !**).
