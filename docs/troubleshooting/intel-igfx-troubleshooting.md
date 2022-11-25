@@ -24,6 +24,46 @@ If you are unsure as to which parameter works with your kernel, check whether
 your kernel log from your latest boot has a message containing "i915: unknown
 parameter".
 
+## Fix tearing (glithes/artifacts/corruption/...)
+
+By default Qubes OS uses the framebuffer/modesetting driver (`fbdev`). An issue
+with `fbdev` is that without compositing VM windows exhibit graphical artefacts
+(dom0 is unaffected). Workarounds:
+
+  * enable compositing; it is enabled by default in XFCE (if it was disabled for
+    some reason, re-enabling it is done in "Window Manager Tweaks"; restarting
+    `xfwm` isn't necessary). `i3wm` users would have to install a compositing
+    manager (the old
+    [faq](https://faq.i3wm.org/question/3279/do-i-need-a-composite-manager-compton.1.html)
+    mentions using `compton`).
+
+  * or switch to the `intel` driver (**for some users the `intel` driver is
+    unstable, triggering random crashes from oopses to hard reboots !**).
+    Create `/etc/X11/xorg.conf.d/20-intel.conf` and fill it with
+
+    ```
+    Section "Device"
+        Identifier "Intel Graphics"
+        Driver "Intel"
+    EndSection
+    ```
+
+    A logout/login is then required.
+
+## Finding out which of `intel` or `fbdev` driver is in use:
+
+  * `grep -E 'LoadModule.*(fbdev|intel)"' /var/log/Xorg.0.log`; eg. for `intel`:
+
+    ```
+    (II) LoadModule: "intel"
+    ```
+
+  * or, `sudo lsof +D /usr/lib64/xorg/modules/drivers/` ; eg. for `fbdev`:
+
+    ```
+    Xorg    [...] /usr/lib64/xorg/modules/drivers/modesetting_drv.so
+    ```
+
 ## IOMMU-related issues
 
 Dom0 Kernels currently included in Qubes have issues related to VT-d (IOMMU) and
