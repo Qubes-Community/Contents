@@ -1,6 +1,6 @@
-# Qubes OS Community documentation and code snippets
+# Qubes OS Community Project
 
-**For more information about the project, content and contributing, see [this
+**For more information about this project, please see [this
 page](https://qubes-community.github.io/).**
 
 This repository hosts user-contributed documentation and code/resources. 
