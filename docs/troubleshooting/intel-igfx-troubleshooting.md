@@ -32,11 +32,14 @@ Workarounds:
 
   * enable compositing; it is enabled by default in XFCE (if it was disabled for
     some reason, re-enabling it is done in "Window Manager Tweaks"; restarting
-    `xfwm` isn't necessary). `i3wm` users would have to install a compositing
-    manager (the old
+    `xfwm` isn't necessary). `i3wm`, `AwesomeWM` or `DWM` window managers don't
+    provide compositing so their users would have to install a standalone
+    compositing manager (the old
     [faq](https://faq.i3wm.org/question/3279/do-i-need-a-composite-manager-compton.1.html)
-    mentions using `compton` but `picom` might be an alternative. Both are
-    packaged in Fedora 32 and can be installed easily with `qubes-dom0-update`).
+    mentions using `compton` but
+    [`picom`](https://wiki.archlinux.org/title/Picom)
+    is a more recent fork. Both are packaged in Fedora 32 and can be installed
+    easily with `qubes-dom0-update`).
 
   * or switch to the `intel` driver. **Note: for some users the `intel` driver
     is unstable, triggering crashes/reboots !** - either reproducible (eg.
