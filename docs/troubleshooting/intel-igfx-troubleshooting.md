@@ -41,7 +41,12 @@ Workarounds:
   * or switch to the `intel` driver. **Note: for some users the `intel` driver
     is unstable, triggering crashes/reboots !** - either reproducible (eg.
     moving a floating window to another monitor when using `i3wm`) to random and
-    infrequent (eg. 1-3x a day with XFCE).
+    infrequent (eg. 1-3x a day with XFCE). In that case using the "UXA"
+    acceleration method instead of the default "SNA" method seems to
+    [fix](https://forum.qubes-os.org/t/qubesos-freeze-crash-and-reboots/12851/177)
+    some crashes but [may
+    introduce](https://forum.qubes-os.org/t/qubesos-freeze-crash-and-reboots/12851/178)
+    other crashes.
 
     Create `/etc/X11/xorg.conf.d/20-intel.conf` with the following content:
 
@@ -49,6 +54,8 @@ Workarounds:
     Section "Device"
         Identifier "Intel Graphics"
         Driver "Intel"
+        # UXA is more stable than the default SNA for some users
+        Option "AccelMethod" "UXA"
     EndSection
     ```
 
