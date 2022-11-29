@@ -332,8 +332,6 @@ In this case it's recommended that the PV Network Drivers be unchecked during in
 Updates
 -------
 
-:warning: *Currently Qubes Windows Tools (QWT) are only available from the testing repositories.*
-	
 When we publish a new QWT version, it's usually pushed to the `current-testing` or `unstable` repository first. To use versions from current-testing, run this in dom0:
 
 	[user@dom0 ~] $ sudo qubes-dom0-update --enablerepo=qubes-dom0-current-testing qubes-windows-tools
