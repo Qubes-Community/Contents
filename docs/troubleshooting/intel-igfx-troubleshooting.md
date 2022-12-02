@@ -50,8 +50,6 @@ Workarounds:
     some crashes but [may
     introduce](https://forum.qubes-os.org/t/qubesos-freeze-crash-and-reboots/12851/178)
     other crashes.
-    PSR (Panel Self Refresh) may also cause tearing issues; it can be disabled
-    globally in GRUB2/EFI with the `i915.enable_psr=0` boot option.
 
     Create `/etc/X11/xorg.conf.d/20-intel.conf` with the following content:
 
@@ -65,6 +63,9 @@ Workarounds:
     ```
 
     A logout/login is then required.
+
+    Intel's PSR (Panel Self Refresh) may also cause tearing issues; it can be
+    disabled globally in GRUB2/EFI with the `i915.enable_psr=0` boot option.
 
 ## Finding out which of `intel` or `fbdev` driver is in use:
 
