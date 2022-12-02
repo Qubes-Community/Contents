@@ -66,7 +66,7 @@ Workarounds:
 
     Intel's PSR (Panel Self Refresh) may also cause tearing issues; it can be
     disabled globally in GRUB2/EFI with the `i915.enable_psr=0` boot option. If
-    this does fix tearing, a bad panel firmware was likely the cause.
+    this does fix tearing, a bad panel firmware is likely the cause.
 
 ## Finding out which of `intel` or `fbdev` driver is in use:
 
