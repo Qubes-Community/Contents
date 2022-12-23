@@ -47,12 +47,12 @@ used by `ssh-agent` to ask for confirmation, for keys added using
 
 For Fedora templates:<br/>
 ```
-[user@fedora-32 ~]$ sudo dnf install openssh-askpass
+ sudo dnf install openssh-askpass
 ```
 
 For Debian templates:<br/>
 ```
-user@debian-10:~$ sudo apt-get install ssh-askpass-gnome
+sudo apt-get install ssh-askpass-gnome
 ```
 
 Perform the next steps in the AppVM `vault`.
@@ -97,16 +97,16 @@ If you still want to encrypt your keys you must refer to the [Securing Your Priv
 
 2. Make a new directory `~/.config/autostart`
 
-   ```shell_prompt
-   [user@fedora-32 ~]$ mkdir -p ~/.config/autostart
+   ```
+   mkdir -p ~/.config/autostart
    ```
       
 3. Create the file `~/.config/autostart/ssh-add.desktop`
 
    - Open the file with e.g. `gedit`
 
-        ```shell_prompt
-        [user@fedora-32 ~]$ gedit ~/.config/autostart/ssh-add.desktop
+        ```
+        gedit ~/.config/autostart/ssh-add.desktop
         ```
 
    - Paste the following contents:
@@ -130,8 +130,8 @@ To control which VM is allowed as a client, which may act as the server and how 
 
    - Open the file with e.g. `nano`.
 
-     ```shell_prompt
-     [user@fedora-32 ~]$ sudo nano /etc/qubes-rpc/policy/qubes.SshAgent
+     ```
+     sudo nano /etc/qubes-rpc/policy/qubes.SshAgent
      ```
 
    - If you want to explicitly allow only this connection, add the following line:
@@ -164,7 +164,7 @@ We now need to write a small script that handles connection requests from `ssh-c
    - Open the file with e.g. `gedit`
 
      ```shell_prompt
-     [user@fedora-32 ~]$ sudo gedit /etc/qubes-rpc/qubes.SshAgent
+     sudo gedit /etc/qubes-rpc/qubes.SshAgent
      ```
      
    - Paste the following contents:
@@ -183,7 +183,7 @@ We now need to write a small script that handles connection requests from `ssh-c
 2. Make it executable
 
 ```shell_prompt
-[user@fedora-32 ~]$ sudo chmod +x /etc/qubes-rpc/qubes.SshAgent
+sudo chmod +x /etc/qubes-rpc/qubes.SshAgent
 ```
 
 ### In the AppVM `ssh-client`
@@ -201,7 +201,7 @@ Therefore, we add a script in `rc.local` (Which will run at VM startup) to liste
    - Open the file with e.g. `gedit`.
 
      ```shell_prompt
-     [user@ssh-client ~]$ sudo gedit /rw/config/rc.local
+     sudo gedit /rw/config/rc.local
      ```
    - Add the following to the bottom of the file:
 
@@ -223,7 +223,7 @@ Therefore, we add a script in `rc.local` (Which will run at VM startup) to liste
    - Open the file with e.g. `gedit`
 
      ```shell_prompt
-     [user@ssh-client ~]$ gedit ~/.bashrc
+     gedit ~/.bashrc
      ```
 
    - Add the following to the bottom of the file:
@@ -353,7 +353,7 @@ If it is, restart your vault VM and do not enter your password when it asks you 
 2. Try fetching your identities on the SSH Client VM. 
 
    ```shell_prompt
-   [user@ssh-client ~]$ ssh-add -L
+   ssh-add -L
    ```
 
 3. Allow operation execution. (If you don't see the below prompt, check your VM interconnection setup.)
