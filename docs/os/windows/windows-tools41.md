@@ -1,7 +1,7 @@
 Qubes Windows Tools
 ===================
 
-Qubes Windows Tools (QWT) are a set of programs and drivers that provide integration of Windows 7, 10 and 11 Standalone, TemplateVMs and AppVMs with the rest of the Qubes system. They contain several components than can be enabled or disabled during installation:
+Qubes Windows Tools (QWT) are a set of programs and drivers that provide integration of Windows 7, 8.1, 10 and 11 Standalone, TemplateVMs and AppVMs with the rest of the Qubes system. They contain several components than can be enabled or disabled during installation:
 
 - **Shared components (required)** - common libraries used by QWT components
 - **Qubes Core Agent** - qrexec agent and services. Needed for proper integration with Qubes
@@ -21,23 +21,23 @@ Qubes Windows Tools (QWT) are a set of programs and drivers that provide integra
 
 Below is a breakdown of the feature availability depending on the windows version:
 
-|             Feature                  |  Windows 7 x64 | Windows 10/11 x64 |
-| ------------------------------------ | :------------: | :---------------: |
-| Qubes Video Driver                   |        +       |         -         |
-| Qubes Network Setup                  |        +       |         +         |
-| Private Volume Setup (move profiles) |        +       |         +         |
-| File sender/receiver                 |        +       |         +         |
-| Clipboard Copy/Paste                 |        +       |         +         |
-| Application shortcuts                |        +       |         +         |
-| Copy/Edit in Disposable VM           |        +       |         +         |
-| Block device                         |        +       |         +         |
-| USB device                           |        +       |         +         |
-| Audio                                |        +       |         +         |
+|             Feature                  |  Windows 7 x64 | Windows 8.1/10/11 x64 |
+| ------------------------------------ | :------------: | :-------------------: |
+| Qubes Video Driver                   |        +       |           -           |
+| Qubes Network Setup                  |        +       |           +           |
+| Private Volume Setup (move profiles) |        +       |           +           |
+| File sender/receiver                 |        +       |           +           |
+| Clipboard Copy/Paste                 |        +       |           +           |
+| Application shortcuts                |        +       |           +           |
+| Copy/Edit in Disposable VM           |        +       |           +           |
+| Block device                         |        +       |           +           |
+| USB device                           |        +       |           +           |
+| Audio                                |        +       |           +           |
 
 Qubes Windows Tools are open source and are distributed under a GPL license.
 
 > **Notes:**
-> - Currently only 64-bit versions of Windows 7, 10 and 11 are supported by Qubes Windows Tools. Only emulated SVGA GPU is supported (although [there has been reports](https://groups.google.com/forum/#!topic/qubes-users/cmPRMOkxkdA) on working GPU passthrough).
+> - Currently only 64-bit versions of Windows 7, 8.1, 10 and 11 are supported by Qubes Windows Tools. Only emulated SVGA GPU is supported (although [there has been reports](https://groups.google.com/forum/#!topic/qubes-users/cmPRMOkxkdA) on working GPU passthrough).
 > - This page documents the process of installing Qubes Windows Tools in version **R4.1**.
 > - *In testing VMs only* it's probably a good idea to install a VNC server before installing QWT. If something goes very wrong with the Qubes gui agent, a VNC server should still allow access to the OS.
 
@@ -89,7 +89,7 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
 	This package brings the ISO with Qubes Windows Tools that is passed to the VM when `--install-windows-tools` is specified for the `qvm-start` command. Please note that none of this software ever runs in Dom0 or any other part of the system except for the Windows AppVM in which it is to be installed.
 
- 2. **For Windows 10 and 11:** From the Windows command line, disable hibernation in order to avoid incomplete Windows shutdown, which may lead to corruption of the VM's disk.
+ 2. **For Windows 8.1, 10 and 11:** From the Windows command line, disable hibernation in order to avoid incomplete Windows shutdown, which may lead to corruption of the VM's disk.
 
 		powercfg -H off
 
@@ -213,7 +213,7 @@ If you use this Template as it is, then any HVMs that use it will effectively be
 If you want to retain the User directory between reboots, then it would make sense to store the `C:\Users` directory on the 2nd disk which is automatically exposed by Qubes to all HVMs. 
 This 2nd disk is backed by the `private.img` file in the AppVMs' and is not reset upon AppVMs reboot, so the user's directories and profiles would survive the AppVMs reboot, unlike the "root" filesystem which will be reverted to the "golden image" from the Template VM automatically. 
 To facilitate such separation of user profiles, Qubes Windows Tools provide an option to automatically move `C:\Users` directory to the 2nd disk backed by `private.img`. 
-It's a selectable feature of the installer. For Windows 7, it requires the private disk to be renamed to `Q:` before QWT installation (see above); for Windows 10 and 11, this renaming occurs during QWT installation automatically.
+It's a selectable feature of the installer. For Windows 7, it requires the private disk to be renamed to `Q:` before QWT installation (see above); for Windows 8.1, 10 and 11, this renaming occurs during QWT installation automatically.
 If that feature is selected during installation, completion of the process requires two reboots:
 
 -   The private disk is initialized and formatted on the first reboot after tools installation. It can't be done **during** the installation because Xen mass storage drivers are not yet active.
@@ -236,7 +236,7 @@ Windows qubes can be used as disposables, like any other Linux-based qubes. On c
 	- **For Windows 7:**
 	 	- If the Windows qube started in seamless mode, hit the Windows keyboard key while the cursor is positioned in a window of this VM. In non-seamless mode, klick on the Start button. In both cases, the Windows menu will be displayed.
 		- Position into the `Autostart` submenu.
-	- **For Windows 10:**
+	- **For Windows 8.1, 10 or 11:**
 	 	- Type Win+R to open the execution Prompt.
 		- Type `shell:startup`.
 		- An explorer window will open, which is positioned to the `Autostart` folder.
