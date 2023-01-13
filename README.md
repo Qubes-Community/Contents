@@ -61,6 +61,7 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - [security guidelines](security/security-guidelines.md)
 - [split bitcoin](security/split-bitcoin.md)
 - [split gpg](security/split-gpg.md)
+- [forensics](docs/security/forensics.md)
 
 `system`
 - [understanding and fixing issues with time/clock](system/clock-time.md)
