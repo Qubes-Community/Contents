@@ -229,7 +229,7 @@ For additional information on configuring a Windows qube, see the [Customizing W
 Windows as TemplateVM
 ---------------------
 
-As described above Windows 7, 10 and 11 can be installed as TemplateVM. To have the user data stored in AppVMs depending on this template, the option `Move User Profiles` has to be selected on installation of Qubes Windows Tools. For Windows 7, before installing QWT, the private disk `D:` has to be renamed to `Q:`, see the QWT installation documentation in [Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md).
+As described above Windows 7, 8.1, 10 and 11 can be installed as TemplateVM. To have the user data stored in AppVMs depending on this template, the option `Move User Profiles` has to be selected on installation of Qubes Windows Tools. For Windows 7, before installing QWT, the private disk `D:` has to be renamed to `Q:`, see the QWT installation documentation in [Qubes Windows Tools](https://github.com/Qubes-Community/Contents/blob/master/docs/os/windows/windows-tools41.md).
 
 AppVMs based on these templates can be created the normal way by using the Qube Manager or by specifying
 ~~~
