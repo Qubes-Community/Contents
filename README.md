@@ -42,7 +42,7 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 `customization`
 - [change DPI scaling in dom0 and VMs](/docs/customization/dpi-scaling.md)
 - [setup mirage firewall](/docs/customization/mirage-firewall.md)
-- [windows gaming HVM with GPU passthrough](/docs/customization/windows-gaming-hvm.md)
+- [gaming HVM with GPU passthrough](/docs/customization/gaming-hvm.md)
 - [Choose deafult terminal settings for a TemplateVM](/docs/customization/terminal-defaults.md)  
 - [Screenlockers](/docs/customization/screenlockers.md)  
 
