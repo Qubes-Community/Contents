@@ -44,6 +44,7 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - [setup mirage firewall](/docs/customization/mirage-firewall.md)
 - [gaming HVM with GPU passthrough](/docs/customization/gaming-hvm.md)
 - [Choose deafult terminal settings for a TemplateVM](/docs/customization/terminal-defaults.md)  
+- [AwesomeWM](/docs/customization/awesomewm.md)  
 - [Screenlockers](/docs/customization/screenlockers.md)  
 
 `hardware`
