@@ -2,8 +2,8 @@
 
 For context, please see [passwordless root](https://www.qubes-os.org/doc/passwordless-root/).
 
-While ITL supports the statement above, some Qubes users may wish to enable user/root isolation in VMs anyway.
-We do not support it in any of our packages, but of course nothing is preventing the user from modifying his or her own system.
+Some Qubes users may wish to enable user/root isolation in VMs.
+This is not officially supported, but of course nothing is preventing the user from modifying his or her own system.
 A list of steps to do so is provided here **without any guarantee of safety, accuracy, or completeness.
 Proceed at your own risk.
 Do not rely on this for extra security.**
