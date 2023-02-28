@@ -35,6 +35,7 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - ![](/_res/l.png) [qubes-dns](https://github.com/3hhh/qubes-dns/)
 - [Using multiple languages in dom0](/docs/localization/multi-language-support-dom0.md)
 - [How to manage Bluetooth graphically](/docs/configuration/bluetooth.md)
+- [How to persist Tailscale tunnel in AppVM](/docs/customization/tailscale.md)
 
 `coreboot`
 - [install coreboot on a Thinkpad x230](/docs/coreboot/x230.md)
@@ -121,3 +122,4 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
   [other Qubes blog posts](http://zrubi.hu/en/category/virtualization/qubes/) !)
 - ![](/_res/l.png) [Ubuntu VMs](http://qubes.3isec.org/): repository with
   templates and packages to set up Ubuntu VMs
+- ![](/_res/l.png) [Qubes for Journalists and free-speech defenders](https://github.com/kennethrrosen/journoSEC): a work-in-progress respository of scripts and advice for journalists and human rights workers.
