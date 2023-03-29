@@ -72,7 +72,7 @@ Create a VM named WindowsNew in [HVM](https://www.qubes-os.org/doc/hvm/) mode (X
         - Advanced:
           - Include in memory balancing: uncheck
           - Initial memory: 4096+ MB
-          - Kernel: `(none)`
+          - Kernel: `(provided by qube)`
           - Mode: `HVM`
         - Click "Apply".
 
@@ -115,7 +115,7 @@ These parameters are set for the following reasons:
      
 - Disable direct boot so that the VM will go through the standard cdrom/HDD boot sequence. This is done by setting the qube's kernel to an empty value.
 
-- After creating the new qube, increase the VM's `qrexec_timeout`: in case you happen to get a BSOD or a similar crash in the VM, utilities like `chkdsk` won't complete on restart before `qrexec_timeout` automatically halts the VM. That can really put the VM in a totally unrecoverable state, whereas with higher `qrexec_timeout`, `chkdsk` or the appropriate utility has plenty of time to fix the VM. Note that Qubes Windows Tools also require a larger timeout to move the user profiles to the private volume the first time the VM reboots after the tools' installation. So set the parameter via the following CLI command from a dom0 terminal, because the Qube manager does not support this setting:
+- After creating the new qube, increase the VM's `qrexec_timeout`: in case you happen to get a BSOD or a similar crash in the VM, utilities like `chkdsk` won't complete on restart before `qrexec_timeout` automatically halts the VM. That can really put the VM in a totally unrecoverable state, whereas with higher `qrexec_timeout`, `chkdsk` or the appropriate utility has plenty of time to fix the VM. Note that Qubes Windows Tools also require a larger timeout to move the user profiles to the private volume the first time the VM reboots after the tools' installation. So set the parameter via the following CLI command from a dom0 terminal, because the Qube manager does not support this setting.
   
 **Start Windows VM**
 
