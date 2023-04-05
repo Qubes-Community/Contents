@@ -47,7 +47,9 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - [Choose deafult terminal settings for a TemplateVM](/docs/customization/terminal-defaults.md)  
 - [AwesomeWM](/docs/customization/awesomewm.md)  
 - [Screenlockers](/docs/customization/screenlockers.md)  
-- [QubesOS Autostart Menu]{https://github.com/kennethrrosen/Qubes-OS-Autostart-Menu/tree/main}
+- [QubesOS Autostart Menu](https://github.com/kennethrrosen/Qubes-OS-Autostart-Menu/)
+- [sys-VPN notification setup](https://github.com/kennethrrosen/qubes_VPN_notifier)
+- [PAM Distress login script](https://github.com/kennethrrosen/qubes-PAM-distress-login)
 
 `hardware`
 - [tips on choosing the right hardware](/docs/hardware/hardware-selection.md)
