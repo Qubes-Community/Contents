@@ -98,7 +98,7 @@ This will allow you to install the Qubes Windows Tools on Windows 7, 10 and 11 b
 
  3. To install the Qubes Windows Tools in a Windows VM one should start the VM passing the additional option `--install-windows-tools`:
 
-		qvm-start <VMname> --install-windows-tools
+		qvm-start --install-windows-tools <VMname>
 
 	Once the Windows VM boots, a CDROM should appear in the 'My Computer' menu (typically as `D:` or `E:`) with the setup program `qubes-tools-x64.msi` in its main directory.
 
