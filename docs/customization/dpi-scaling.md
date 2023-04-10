@@ -15,6 +15,37 @@ The simplest way to set dpi scaling in dom0 is to use the desktop environment's 
 
 Replace `xxx` with a number that fits your setup and is a multiple of 6, as numbers that aren't sometimes result in annoying rounding errors that cause adjacent bitmap font sizes to not increment and decrement linearly.
 
+### Qubes Applications
+
+Qubes applications (e.g. Qubes Create VM, etc.) don't scale automatically, to solve this issue it is possible to set the `QT_SCALE_FACTOR` variables as described
+[here](https://doc.qt.io/qt-6/highdpi.html#qt-scale-factor3). To test these
+values first, open a terminal and type:
+
+~~~
+QT_SCALE_FACTOR=1.8 qubes-global-settings
+~~~
+
+You can try change the values for `QT_SCALE_FACTOR` to your
+liking.
+
+Once you confirmed that this is working, you can make these settings permanent
+by creating a file `/etc/profile.d/dpi_QT.sh` (in dom0) with
+the following content and your own values:
+
+~~~
+#!/bin/sh
+
+export QT_SCALE_FACTOR=1.8
+~~~
+
+Then make the script executable with
+
+~~~
+sudo chmod +x /etc/profile.d/dpi_QT.sh
+~~~
+
+And logout and login again to see the results.
+
 
 VMs
 ---
@@ -134,6 +165,13 @@ the following content and your own values:
 
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
+~~~
+
+
+Then make the script executable with
+
+~~~
+sudo chmod +x /etc/profile.d/dpi_GDK.sh
 ~~~
 
 Resources
