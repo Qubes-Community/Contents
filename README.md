@@ -36,6 +36,7 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - [Using multiple languages in dom0](/docs/localization/multi-language-support-dom0.md)
 - [How to manage Bluetooth graphically](/docs/configuration/bluetooth.md)
 - [How to persist Tailscale tunnel in AppVM](/docs/customization/tailscale.md)
+- [Verify boot process without Heads or AEM on TPM 2.0](https://github.com/kennethrrosen/qubes-boot-verification)
 
 `coreboot`
 - [install coreboot on a Thinkpad x230](/docs/coreboot/x230.md)
