@@ -35,8 +35,8 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - ![](/_res/l.png) [qubes-dns](https://github.com/3hhh/qubes-dns/)
 - [Using multiple languages in dom0](/docs/localization/multi-language-support-dom0.md)
 - [How to manage Bluetooth graphically](/docs/configuration/bluetooth.md)
-- [How to persist Tailscale tunnel in AppVM](/docs/customization/tailscale.md)
-- [Verify boot process without Heads or AEM on TPM 2.0](https://github.com/kennethrrosen/qubes-boot-verification)
+- ![](/_res/l.png) [How to persist Tailscale tunnel in AppVM](/docs/customization/tailscale.md)
+- ![](/_res/l.png) [Verify boot process without Heads or AEM on TPM 2.0](https://github.com/kennethrrosen/qubes-boot-verification)
 
 `coreboot`
 - [install coreboot on a Thinkpad x230](/docs/coreboot/x230.md)
@@ -48,9 +48,9 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - [Choose deafult terminal settings for a TemplateVM](/docs/customization/terminal-defaults.md)  
 - [AwesomeWM](/docs/customization/awesomewm.md)  
 - [Screenlockers](/docs/customization/screenlockers.md)  
-- [QubesOS Autostart Menu](https://github.com/kennethrrosen/Qubes-OS-Autostart-Menu/)
-- [sys-VPN notification setup](https://github.com/kennethrrosen/qubes_VPN_notifier)
-- [PAM Distress login script](https://github.com/kennethrrosen/qubes-PAM-distress-login)
+- ![](/_res/l.png) [QubesOS Autostart Menu](https://github.com/kennethrrosen/Qubes-OS-Autostart-Menu/)
+- ![](/_res/l.png) [sys-VPN notification setup](https://github.com/kennethrrosen/qubes_VPN_notifier)
+- ![](/_res/l.png) [PAM Distress login script](https://github.com/kennethrrosen/qubes-PAM-distress-login)
 
 `hardware`
 - [tips on choosing the right hardware](/docs/hardware/hardware-selection.md)
