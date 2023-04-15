@@ -35,7 +35,7 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - ![](/_res/l.png) [qubes-dns](https://github.com/3hhh/qubes-dns/)
 - [Using multiple languages in dom0](/docs/localization/multi-language-support-dom0.md)
 - [How to manage Bluetooth graphically](/docs/configuration/bluetooth.md)
-- ![](/_res/l.png) [How to persist Tailscale tunnel in AppVM](/docs/customization/tailscale.md)
+- [How to persist Tailscale tunnel in AppVM](/docs/customization/tailscale.md)
 - ![](/_res/l.png) [Verify boot process without Heads or AEM on TPM 2.0](https://github.com/kennethrrosen/qubes-boot-verification)
 
 `coreboot`
