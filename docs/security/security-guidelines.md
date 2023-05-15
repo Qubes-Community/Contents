@@ -68,9 +68,9 @@ In **Dom0** terminal, run:
 qubes-hcl-report <userVM>
 ~~~
 
-where \<userVM\> is the name of the VM within which the report will be written (but the report will also be displayed in the Dom0 terminal). If it displays that VT-d is active, you should be able to assign **PCIe devices to an HVM** and **enjoy DMA protection** for your driver domains, so you successfully passed this step.
+where \<userVM\> is the name of the VM within which the report will be written (but the report will also be displayed in the Dom0 terminal). If it displays that VT-d (I/O MMU) is active, you should be able to assign **PCIe devices to an HVM** and **enjoy DMA protection** for your driver domains, so you successfully passed this step.
 
-If VT-d is not active, attempt to activate it by selecting the **VT-d flag** within the BIOS settings. If your processor/BIOS does not allow VT-d activation you still enjoy much better security than alternative systems, but you may be vulnerable to **DMA attacks**. Next time you buy a computer consult our **[HCL (Hardware Compatibility List)](https://www.qubes-os.org/hcl/)** and possibly contribute to it.
+If VT-d (I/O MMU) is not active, attempt to activate it by selecting the **VT-d flag** within the BIOS settings. If your processor/BIOS does not allow VT-d activation you still enjoy much better security than alternative systems, but you may be vulnerable to **DMA attacks**. Next time you buy a computer consult our **[HCL (Hardware Compatibility List)](https://www.qubes-os.org/hcl/)** and possibly contribute to it.
 
 Updating Software
 -----------------
