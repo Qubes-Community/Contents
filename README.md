@@ -115,6 +115,7 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - ![](/_res/l.png) [qubes-terminal-hotkeys](https://github.com/3hhh/qubes-terminal-hotkeys)
 - ![](/_res/l.png) [qubes-conky](https://github.com/3hhh/qubes-conky)
 - ![](/_res/l.png) [qvm-ls-mermaid](https://github.com/3hhh/qvm-ls-mermaid)
+- ![](/_res/l.png) [fedora-template-updater-script](https://github.com/kennethrrosen/qubes-fedora-upgrader)
 
 **`misc`**
 - ![](/_res/l.png)
