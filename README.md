@@ -127,5 +127,4 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
   [other Qubes blog posts](http://zrubi.hu/en/category/virtualization/qubes/) !)
 - ![](/_res/l.png) [Ubuntu VMs](http://qubes.3isec.org/): repository with
   templates and packages to set up Ubuntu VMs
-- ![](/_res/l.png) [shadow-qube](https://github.com/kennethrrosen/qubes-shadow-dvm): A "Truly Disposable" Qube
 - ![](/_res/l.png) [Qubes for Journalists and free-speech defenders](https://github.com/kennethrrosen/journoSEC): a work-in-progress respository of scripts and advice for journalists and human rights workers.
