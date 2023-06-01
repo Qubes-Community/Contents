@@ -26,6 +26,7 @@ fi
 done
 
 ```
+he loop should be the last thing in rc.local or appended with `&`. This is a simple solution. (Something more robust would require extra work with `udev` perhaps.) 
 
 ## AudioVM
 
