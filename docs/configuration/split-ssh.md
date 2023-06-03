@@ -118,7 +118,7 @@ If you still want to encrypt your keys you must refer to the [Securing Your Priv
       Type=Application
       ```
         
-   **Note:** If you've specified a custom name for your key using *-f*, you should adjust `Exec=ssh-add` to `Exec=ssh-add <path-to-your-key-file>`.
+   **Note:** If you've specified a custom name for your key using *-f*, you should adjust `Exec=ssh-add -c` to `Exec=ssh-add -c <path-to-your-key-file>` (the path must be absolute, e.g. `/home/user/.ssh/my_key`).
 
 ## Setting Up VM Interconnection
 
