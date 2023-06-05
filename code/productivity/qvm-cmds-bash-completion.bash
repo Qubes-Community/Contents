@@ -1,3 +1,12 @@
+# Note - Jun 2023 - this script is OUTDATED!
+#
+#  As the content of qubes-community is migrated to the forum (see issue #257)
+#  and the `Contents/` repository becomes read-only, up-to-date versions are now at:
+#
+#  https://github.com/taradiddles/qubes-os/blob/master/qvm-cmds-bash-completion.bash
+#
+
+
 # qvm-* commands bash auto completion
 
 # Copy this file to /etc/bash_completion.d/qvm.bash
