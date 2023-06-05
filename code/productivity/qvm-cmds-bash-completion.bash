@@ -3,7 +3,7 @@
 #  As the content of qubes-community is migrated to the forum (see issue #257)
 #  and the `Contents/` repository becomes read-only, up-to-date versions are now at:
 #
-#  https://github.com/taradiddles/qubes-os/blob/master/qvm-cmds-bash-completion.bash
+#  https://github.com/taradiddles/qubes-os-qvm-bash-completion
 #
 
 
