@@ -1,128 +1,87 @@
-How to open URLs/files in other VMs
-===================================
+*Note: there is an ongoing [pull request](https://github.com/QubesOS/qubes-doc/pull/1314) to add most of the content of this document to the official Qubes OS documentation.*
 
-Qubes' philosophy is to assume you are already compromised and to partition your work / data in a way that even if all your VMs are compromised an attacker would not be able to extract any information. This document describes how to implement such compartmentalization when opening URLs and files from "secure" offline or firewalled VMs. Configuration samples throughout this document show how to setup a flexible and powerful workflow, mitigating the long starting time and resource usage of dispVMs that unfortunately often results in users not taking advantage of them.
+<!-- BEGIN PR content -->
 
-Naming convention:
+This page is about opening URLs and files from one qube in a different qube. The most straightforward way to do this is simply to [copy and paste URLs](/doc/how-to-copy-and-paste-text/) or [copy and move files](/doc/how-to-copy-and-move-files/) from the source qube to the target qube, then manually open them in the target qube. However, some users might wish to use [RPC policies](/doc/rpc-policy/) in order to regiment their workflows and safeguard themselves from making mistakes.
 
-- `srcVM` is the VM where the files/URLs are
-- `dstVM` is the VM we want to open them in ; `dstVM` can be any VM type - a DispVM, a regular AppVM, a Whonix workstation dvm, ...
+Naming conventions:
 
+- `<SOURCE_QUBE>` is the qube in which the URL or file originates.
+- `<TARGET_QUBE>` is the qube in which we wish to open the URL or file.
 
-Configuring dom0 RPC permissions
---------------------------------
+## Configuring RPC policies
 
-Opening files and URLs in other VMs rely on the `qubes.OpenInVM` and `qubes.OpenURL` [RPC services](https://www.qubes-os.org/doc/qrexec3/#qubes-rpc-services), which are called by `srcVM`'s `qvm-open-in-vm` and `qvm-open-in-dvm` shell scripts.
+The `qvm-open-in-vm` and `qvm-open-in-dvm` scripts are invoked in a qube to open files and URLs in another qube. Those scripts make use of the `qubes.OpenInVM` and `qubes.OpenURL` [RPC services](/doc/qrexec/#qubes-rpc-services). Qubes [RPC policies](/doc/rpc-policy/) control which RPC services are allowed between qubes.
 
-Qubes [RPC policies](https://www.qubes-os.org/doc/rpc-policy/) allow to fine tune how those RPC services can be used between VMs.
+Policy files are in `/etc/qubes/policy.d/`.
 
-### The (powerful) `ask` policy ###
+### Using the `ask` action
 
-A very powerful and convenient RPC policy rule is `ask`: in that case a dialog with the list of destination VMs pops up each time the RPC service is called, allowing the user to select a destination VM depending on his work's context (eg. the target URL's level of trust, protocol, file [MIME](https://en.wikipedia.org/wiki/Media_type) type, ...).
+This action displays a confirmation prompt in dom0 with a drop-down list of allowed target qubes each time the associated RPC service is called. This setup makes it possible to always control whether and in which qube a URL or file opened.
 
-It is impossible to overstate how flexible this is and how much security it can add to one's workflow: while opening things in dispVMs is the most secure approach the problem is starting a dispVM for *each* URL/file takes far too much time and resources, leading people to open files/URLs in persistent VMs instead.
+The selected qube will automatically start if it wasn't running. 
 
-The `ask` policy's VM selection dialog allows one to start any type of VM or dispVM (see section "Considerations on dispVMs" below), or send the URL/file to an already running (disp)VM. The first time an URL/file is opened the (disp)VM will start if it wasn't running. The next time another URL/file is sent, there's no need start a new (disp)VM, one can instead select the already running (disp)VM. It is also possible to choose 'cancel' in the dialog and nothing will launch.
+**Note:** When using `ask`, the target qube given as an argument to `qvm-open-in-vm` is ignored if no `allow` rule matches the current RPC service and source/target qubes.
 
-This setup makes it possible to control if and on which network (eg. "clearnet", TOR, VPN) an URL is requested - always. It also effectively mitigates the long starting times of dispVMs.
+### Using the `allow` action
 
-Note: when using the `ask` policy, the destination VM specified in `srcVM` by `qvm-open-in-vm` is ignored if no `allow` match exists for that given `srcVM`/`dstVM` combo.
+This action allows a specified RPC service to be invoked between source and target qubes without displaying a confirmation prompt in dom0.
 
+When an `allow` action is defined for a target other than `@dispvm`, the target qube is the one given as an argument to `qvm-open-in-vm` in `<SOURCE_QUBE>`. The corresponding RPC policies must be configured accordingly.
 
-### The `allow` policy ###
+**Warning:** Since there is no user confirmation with `allow`, applications in `<SOURCE_QUBE>` could leak data through URLs or file names.
 
-If an `allow` policy is configured with a destination other than `$dispvm` it is obviously up to `srcVM` to provide the name of the destination VM. The RPC policies should then be configured accordingly.
+### Using disposables and the `@dispvm` keyword in policies
 
-**Caveat**: even with offline `srcVM`s, `allow` policies allow applications in `srcVM` to leak data through URLs. You might notice that an URL has been open in the destination VM but it would be too late.
+It is possible to further restrict a target disposable qube by specifying the template on which it is based with the `@dispvm:<DISPOSABLE_TEMPLATE>` syntax ([learn more](/doc/how-to-use-disposables/#opening-a-link-in-a-disposable-based-on-a-non-default-disposable-template-from-a-qube)).
 
+**Note:** The keyword `@dispvm` designates any disposable based on the calling qube's default disposable template. It does *not* designate any disposable whatsoever. For example, if you were to run `qvm-open-in-vm @dispvm:<ONLINE_DISPOSABLE_TEMPLATE> https://www.qubes-os.org` in `<SOURCE_QUBE>` while `<ONLINE_DISPOSABLE_TEMPLATE>` is *not* `<SOURCE_QUBE>`'s default disposable template, it wouldn't work if your policy line merely had `@dispvm` as the target. You would have to use `@dispvm:<ONLINE_DISPOSABLE_TEMPLATE>` as the target instead.
 
-### Sample policy ###
+## Sample RPC user policy
 
-In the following example, opening URLs in specific VMs is explicitely forbidden to prevent mistakenly selecting such VM, opening URLs in regular dispVMs is always allowed (see notes below), and the default policy is to have the selection dialog pop up for everything else with the "dispBrowser" VM preselected.
+_See the main document, [RPC policies](/doc/rpc-policy/), for more information._
 
-`/etc/qubes-rpc/policy/qubes.OpenURL`:
-
-~~~
-@anyvm vault deny
-@anyvm private deny
-@anyvm banking deny
-@anyvm @dispvm allow
-@anyvm @anyvm ask,default_target=dispBrowser
-~~~
-
-`/etc/qubes-rpc/policy/qubes.OpenInVM`:
+The following is a partial example of the kinds of `qubes.OpenInVM` and `qubes.OpenURL` rules that you could write in `/etc/qubes/policy.d/30-user.policy`:
 
 ~~~
-@anyvm @anyvm ask
+# Deny opening files or URLs from or in 'vault'
+qubes.OpenInVM   *   @anyvm   vault         deny
+qubes.OpenURL    *   @anyvm   vault         deny
+qubes.OpenInVM   *   vault    @anyvm        deny
+qubes.OpenURL    *   vault    @anyvm        deny
+
+# Allow 'work' to open URLs in disposable qubes without prompting the user
+qubes.OpenURL    *   work     @dispvm       allow
+
+# Allow 'work' to open files in 'untrusted' without prompting the user
+qubes.OpenInVM   *   work     @dispvm       allow target=untrusted
+
+# Allow any qube to open files and URLs in disposables based on the
+# disposable templates 'foo' and 'bar'
+qubes.OpenInVM   *   @anyvm   @dispvm:foo   allow
+qubes.OpenURL    *   @anyvm   @dispvm:bar   allow
+
+# Prompt the user before opening any file or URL in any other qube, but prefill
+# the target with 'personal' for files and 'untrusted' for URLs
+qubes.OpenInVM   *   @anyvm   @anyvm        ask default_target=personal
+qubes.OpenURL    *   @anyvm   @anyvm        ask default_target=untrusted
 ~~~
 
-Notes about the `@dispvm` syntax:
+## Configuring application handlers
 
-- it is possible to further restrict the target dispVM by specifying the template it's based on with the `@dispvm:templatename` syntax. See the [official doc](https://www.qubes-os.org/doc/disposablevm/#opening-a-link-in-a-disposablevm-based-on-a-non-default-disposablevm-template-from-a-qube) for further details. 
-- caveat: `@dispvm` means "DisposableVMs based on the default DisposableVM template of the calling VM", not "*any* DisposableVMs". If you were to run `qvm-open-in-vm @dispvm:web https://www.qubes-os.org` with the policy sample above and `web` wasn't the default dvm template for the calling VM, `@anyvm @dispvm allow` wouldn't be matched and you'd be shown the selection dialog window because of the last `ask` line.
+It is possible to (re)define a default application handler so that it is automatically called by *any* application in `<SOURCE_QUBE>` to open files or URLs provided that the applications adhere to the [freedesktop](https://en.wikipedia.org/wiki/Freedesktop.org) standard (which is almost always the case nowadays).
 
+For application-specific configurations or applications that don't adhere to the freedesktop standard, please refer to the unofficial, external [community documentation](https://github.com/Qubes-Community/Contents/blob/master/docs/common-tasks/opening-urls-in-vms.md).
 
-Considerations on dispVMs
--------------------------
+Defining a new handler simply requires creating a [.desktop](https://specifications.freedesktop.org/desktop-entry-spec/latest/) file and registering it. The following example shows how to open http/https URLs (along with common "web" [media types](https://en.wikipedia.org/wiki/Media_type)) with `qvm-open-in-vm`:
 
-### Re-using dispVMs ###
-
-In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files) to avoid having to wait insane amounts of time for dispVMs to start. However this comes at the price of a loss in compartmentalization. It is thus up to the user to carefully pick destination VMs and to manage the lifecycle of dispVMs, killing it/them when necessary when a clean state is required.
-
-### Managing changes ###
-
-When opening and modifying a document in a dispVM the content is sent back to `srcVM` when the dispVM's process (eg. LibreOffice) closes. The dispVM's private volume is then wiped and any change that was made to the VM are discarded - eg. automatically updated add-ons, blacklists, tweaked browser preferences, ... ; The following ideas show how to cope with those "deliberate" changes:
-
-- inter-VM copy/paste is probably the easiest way to synchronize small amounts of data in text form from the dispVM to `srcVM` (or to another dedicated VM like the oft-used 'vault' VM). Eg.:
-   - passwords: copy/paste from/to KeepassX (or one of its forks).
-   - bookmarks: copy/paste from/to
-      - a plain text file
-      - or an html bookmark file (most browsers can export/import such file)
-      - or a dedicated bookmark manager like [buku](https://github.com/jarun/Buku) (command line manager, available in Fedora 28 repo - `dnf install buku`).
-- other content/changes will have to be copied, usually to the dispVM templateVM. Care must be taken not to replicate compromised files: working with a freshly started dispVM and performing only the required update actions before synchronizing files with the templateVM is a good idea.
-
-### Using "named" dispVMs ###
-
-If for some reason a user needs to have use a dispVM with a given name - which is for instance handy when using `allow` RPC policies - he/she can do like so (replace `fedora-28-dvm` with the dvm template you want to use):
-
-~~~
-qvm-create -C DispVM -t fedora-28-dvm -l red dstVM
-~~~
-
-This VM works like a regular VM, with the difference that its private disk is wiped after it's powered off. However it doesn't "auto power off" like random dispVMs so it's up to the user to power off (and optionaly restart) the VM when he/she deems necessary.
-
-### Sample real-world workflow ###
-
-Here's an example of a real-world, thoroughly used setup/workflow:
-
-Disposable VMs are based on the following templates:
-
-- dvm-offline (many apps, libreoffice, VLC etc. -- no network)
-- dvm-online (minimal with firefox only)
-- dvm-anon (whonix workstation)
-
-AppVMs are highly specialized: vault (offline), documents (offline), media (offline), email (firewalled). Those is where information lives. But files do not get opened nor worked on there ... only on instances of dvm-offline.
-
-
-Configuring `srcVM`
--------------------
-
-The subsections below list various approaches on opening URLs/files from `srcVM` in destination VMs. A hassle-free but very powerful setup is to use the application-independent approach documented in the next subsection with the `ask` RPC policy.
-
-
-### Application-independent setup ###
-
-It is possible to (re)define a *default* handler for programs/URLs so that this handler is automatically called by *all* the applications in `srcVM` - provided that the applications adhere to the [freedesktop](https://en.wikipedia.org/wiki/Freedesktop.org) standard which is most always the case nowadays.
-
-Defining a new handler simply requires creating a [.desktop](https://specifications.freedesktop.org/desktop-entry-spec/latest/) file and registering it. The following example shows how to open http/https URLs (along with some other common "web" Mime types) with `qvm-open-in-vm`:
-
-- create `$HOME/.local/share/applications/browser_vm.desktop` with the following text:
+- Create `$HOME/.local/share/applications/mybrowser.desktop` with the following content:
 
 	~~~
 	[Desktop Entry]
 	Encoding=UTF-8
-	Name=BrowserVM
-	Exec=qvm-open-in-vm dstVM %u
+	Name=MyBrowser
+	Exec=qvm-open-in-vm <TARGET_QUBE> %u
 	Terminal=false
 	X-MultipleArgs=false
 	Type=Application
@@ -130,79 +89,99 @@ Defining a new handler simply requires creating a [.desktop](https://specificati
 	MimeType=x-scheme-handler/unknown;x-scheme-handler/about;text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
 	~~~
 
-- register the .desktop file you've just created with `xdg-settings set default-web-browser browser_vm.desktop`. 
+- Register the `.desktop` file with `xdg-settings set default-web-browser mybrowser.desktop`. 
 
-The same can be done with any Mime type (see `man xdg-mime` and `xdg-settings`); you could either reuse the .desktop created above and add Mime types to the `MimeType=` line, or create and register another .desktop file.
+The same can be done with any other media type (see `man xdg-mime` and `xdg-settings`).
 
-Notes:
+### Notes
 
-- for some reasons some applications may not honor the new xdg application/handler (eg. if you had previously configured default applications), in which case you'd have to manually select the xdg application (see section below).
-- `qvm-open-in-vm dstVM` can be replaced by a user written wrapper with custom logic for selecting a specific `dstVM` depending on the URL/file type, site level of trust, ... ; The RPC policies should be configured accordingly.
-- very security conscious users should consider basing AppVMs on minimal templates; that way, unless the default handler is set, nothing else is usually there to open those files (little risk, plus the VMs are firewalled or offline).
+- Some applications may not use the new XDG application handler (e.g., if you had previously configured default applications), in which case you'd have to manually configure the application to use the XDG handler.
 
+- `qvm-open-in-vm target-qube %u` can be replaced by a user wrapper with custom logic for selecting different target qubes depending on the URL/file type, level of trust, etc. The RPC policies should be configured accordingly.
 
-### Application-specific setup ###
+- Advanced users may wish to consider basing app qubes on [minimal templates](/doc/templates/minimal/). That way, unless a default handler is set, it is unlikely that any other program will be present that can open the URL or file.
+
+<!-- END PR content -->
+
+## Configuring specific applications
 
 Most applications provide a way to select a given program to use for opening specific URL/file (MIME) types. We can use that feature to select the `/usr/bin/qvm-open-in-{vm,dvm}` scripts instead of the default programs.
 
-The subsections below show how to configure popular applications.
+The subsections below show how to configure popular applications in case the "default handler" approach above doesn't work / isn't sufficient.
 
-
-#### Firefox, Chrome/Chromium ####
+### Firefox, Chrome/Chromium
 
 Those browsers have an option to define programs associated to a file (MIME) type. It is pretty straightforward to configure and is outside the scope of this document.
 
 An alternative is to use Raffaele Florio's [qubes-url-redirector](https://github.com/raffaeleflorio/qubes-url-redirector) add-on, which provides a lot of flexibility when opening links without the hassle of having to write custom shell wrappers to `qvm-open-in-vm`. For instance links can be opened with a context menu and the add-on's default behavior can be configured, even with whitelist regexes.
 
 Notes:
+
 - the qubes-url-redirector add-on will likely be included officialy in Qubes (see [this](https://github.com/QubesOS/qubes-issues/issues/3152) issue).
-- the add-on can actually be used with applications other than firefox/chrome/chromium, the only requirement is that URLs open in a browser in `srcVM`. It works like so:
-   - the application in `srcVM` opens an URL in the default browser in `srcVM` (eg. firefox)
-   - firefox starts on `srcVM`, the add-on processes the URL and according to its configuration "sends" the URL to the destination VM with `qubes.OpenURL`
-   - the URL opens in the destination VM's browser
+- the add-on can actually be used with applications other than firefox/chrome/chromium, the only requirement is that URLs open in a browser in `<SOURCE_QUBE>`. It works like so:
+  - the application in `<SOURCE_QUBE>` opens an URL in the default browser in `<SOURCE_QUBE>` (eg. firefox)
+  - firefox starts on `<SOURCE_QUBE>`, the add-on processes the URL and according to its configuration "sends" the URL to `<TARGET_QUBE>` with `qubes.OpenURL`
+  - the URL opens in the `<TARGET_QUBE>`'s browser
 
+### Thunderbird
 
-#### Thunderbird ####
-
-**Opening attachements**: "actions" must be defined, see section "Download Actions" settings" in [this document](http://kb.mozillazine.org/Actions_for_attachment_file_types).
+**Opening attachments**: "actions" must be defined, see section "Download Actions" settings" in [this document](http://kb.mozillazine.org/Actions_for_attachment_file_types).
 
 **Opening URLs**: changing the way http and https URLs are opened requires tweaking configuration options; see [this](http://kb.mozillazine.org/Changing_the_web_browser_invoked_by_Thunderbird) and [this](http://kb.mozillazine.org/Network.protocol-handler.expose-all) document for more information. Those changes can be made in Thunderbird's built-in config editor, or by adding the following lines to `$HOME/.thunderbird/user.js`:
 
-~~~
+```
 user_pref("network.protocol-handler.warn-external.http", true);
 user_pref("network.protocol-handler.warn-external.https", true);
 user_pref("network.protocol-handler.expose-all", true);
-~~~
+```
 
-Thunderbird will then ask which program to use the next time a link is opened. If `dstVM` is a standard (random) dispVM, choose `/usr/bin/qvm-open-in-dvm`. Otherwise you'll have to create a wrapper to `qvm-open-in-vm` since arguments cannot be passed to programs selected in Thunderbird's dialog gui. For instance, put the following text in `$HOME/bin/thunderbird-open-url`, make it executable, and select that program when asked which program to use:
+Thunderbird will then ask which program to use the next time a link is opened. If `<TARGET_QUBE>` is a standard (random) dispVM, choose `/usr/bin/qvm-open-in-dvm`. Otherwise you'll have to create a wrapper to `qvm-open-in-vm` since arguments cannot be passed to programs selected in Thunderbird's dialog gui. For instance, put the following text in `$HOME/bin/thunderbird-open-url`, make it executable, and select that program when asked which program to use:
 
-~~~
+```
 #!/bin/sh
-qvm-open-in-vm dstVM "$@"
-~~~
+qvm-open-in-vm <TARGET_QUBE> "$@"
+```
 
-#### Vi ####
+### Vi
 
 Opening URLs: put the following in `$HOME/.vimrc`:
 
-~~~
-let g:netrw_browsex_viewer = 'qvm-open-in-vm dstVM'
-~~~
+```
+let g:netrw_browsex_viewer = 'qvm-open-in-vm <TARGET_QUBE>'
+```
 
-Typing `gx` when the cursor is over an URL will then open it in `dstVM` (or will trigger a dialog if `ask` policy is configured, ignoring the `dstVM` argument).
-
-
-### Inter-VM copy/paste and file copy ###
-
-This approach is obvious and is the simplest one:
-
-- URLs: [copy/paste](https://www.qubes-os.org/doc/copy-paste/) the link in `dstVM`.
-- Files: [copy](https://www.qubes-os.org/doc/copying-files/) the file to `dstVM` (provided that `qubes.Filecopy` RPC service's policy allows it - it does by default), and open it from there.
+Typing `gx` when the cursor is over an URL will then open it in `<TARGET_QUBE>` (or will trigger a dialog if `ask` policy is configured, ignoring the `<TARGET_QUBE>` argument).
 
 
----
+# Considerations on dispVMs
 
-`Contributors`: @neowutran, @SvenSemmler, @Aekez, @taradiddles
+## Re-using dispVMs
+
+In the section above we've seen how using the 'ask' RPC policy allowed us to start a (disp)VM once and use it for opening subsequent URLs (or files) to avoid having to wait insane amounts of time for dispVMs to start. However this comes at the price of a loss in compartmentalization. It is thus up to the user to carefully pick destination VMs and to manage the lifecycle of dispVMs, killing it/them when necessary when a clean state is required.
+
+## Managing changes
+
+When opening and modifying a document in a dispVM the content is sent back to `<SOURCE_QUBE>` when the dispVM's process (eg. LibreOffice) closes. The dispVM's private volume is then wiped and any change that was made to the VM are discarded - eg. automatically updated add-ons, blacklists, tweaked browser preferences, ... ; The following ideas show how to cope with those "deliberate" changes:
+
+- inter-VM copy/paste is probably the easiest way to synchronize small amounts of data in text form from the dispVM to `<SOURCE_QUBE>` (or to another dedicated VM like the oft-used 'vault' VM). Eg.:
+  - passwords: copy/paste from/to KeepassX (or one of its forks).
+  - bookmarks: copy/paste from/to
+    - a plain text file
+    - or an html bookmark file (most browsers can export/import such file)
+    - or a dedicated bookmark manager like [buku](https://github.com/jarun/Buku) (command line manager, available in Fedora 28 repo - `dnf install buku`).
+- other content/changes will have to be copied, usually to the dispVM templateVM. Care must be taken not to replicate compromised files: working with a freshly started dispVM and performing only the required update actions before synchronizing files with the templateVM is a good idea.
+
+## Using "named" dispVMs
+
+If for some reason a user needs to have use a dispVM with a given name - which is for instance handy when using `allow` RPC policies - he/she can do like so (replace `fedora-28-dvm` with the dvm template you want to use):
+
+```
+qvm-create -C DispVM -t fedora-28-dvm -l red <TARGET_QUBE>
+```
+
+This VM works like a regular VM, with the difference that its private disk is wiped after it's powered off. However it doesn't "auto power off" like random dispVMs so it's up to the user to power off (and optionally restart) the VM when he/she deems necessary.
+
+
+------------------------------------------------------------------------
 
 `Credits:` @raffaeleflorio, [Micah Lee](https://micahflee.com/2016/06/qubes-tip-opening-links-in-your-preferred-appvm/)
-
