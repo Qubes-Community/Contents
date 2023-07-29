@@ -1,6 +1,6 @@
 # Replacing passwordless root with a dom0 prompt
 
-For context, please see [passwordless root](https://www.qubes-os.org/doc/passwordless-root/).
+For context, please see [passwordless root](https://www.qubes-os.org/doc/vm-sudo/)).
 
 Some Qubes users may wish to enable user/root isolation in VMs.
 This is not officially supported, but of course nothing is preventing the user from modifying his or her own system.
