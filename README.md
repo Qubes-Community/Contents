@@ -25,6 +25,7 @@ requests](https://github.com/Qubes-Community/Contents/pulls).
 - [Run wireguard on server and use as VPN for Qubes](/docs/wireguard/README.md)
 - [Exposing Mumble server running in Qubes using Wireguard](/docs/mumble/README.md)
 - [Make an HTTP Filtering Proxy](/docs/configuration/http-proxy.md)
+- [Creating VLESS VM (obfuscation VPN)](/docs/vless/README.md)
 - ![](/_res/l.png) [Ansible Qubes](https://github.com/Rudd-O/ansible-qubes) (see
   Rudd-O's [other repos](https://github.com/Rudd-O?tab=repositories) as well)
 - [shrink VM volumes](/docs/configuration/shrink-volumes.md)
