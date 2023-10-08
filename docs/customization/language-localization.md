@@ -29,6 +29,20 @@ Before logging in, the task panel will show - usually far to the right - the cur
 
 This need only be done once; the selected language survives logging out and reboot.
 
+Set up keyboard and system language/locale separately
+-----------------------------------------------------
+
+If you want a separate setting for dom0 language and time (e.g. to have the week start on Monday in system calendar),
+edit the `/etc/locale.conf` file in dom0.
+
+You can set different variables there, e.g. LANG variable is reponsible for the system language, and LC_TIME for calendar 
+settings. For example, the following settings will have the system in English, but have the calendar week start on Monday.
+
+      LANG="en_US.UTF-8"
+      LC_TIME="en_IE.utf8"
+
+To see the changes, you need to reboot.
+
 Changing the language of Templates and the AppVMs based on them
 ---------------------------------------------------------------
 
