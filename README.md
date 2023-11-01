@@ -1,4 +1,4 @@
-# Qubes-community resources have been moved to the [Qubes OS forum](https://forum.qubes-os.org)!
+# Qubes-community resources have been moved to the [Qubes OS forum](https://forum.qubes-os.org/c/guides/14)!
 
 **August 2023: the migration of qubes-community's resources is complete and qubes-community resources are now "live" in the forum. The content here is now in a (soft) read-only state.**
 
