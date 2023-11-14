@@ -1,1 +1,1 @@
-This content has moved to [Qubes Forum: Community Guides](https://forum.qubes-os.org/c/guides/14). [Learn more.](https://forum.qubes-os.org/t/announcement-qubes-community-project-has-been-migrated-to-the-forum/20367/)
+This content has moved to [Qubes Forum: Community Guides](https://forum.qubes-os.org/t/restoring-r3-2-templates-standalones-to-r4-0/19018). [Learn more.](https://forum.qubes-os.org/t/announcement-qubes-community-project-has-been-migrated-to-the-forum/20367/)
