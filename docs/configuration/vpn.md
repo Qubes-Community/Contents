@@ -1,1 +1,1 @@
-This content has moved to [Qubes Forum: Community Guides](https://forum.qubes-os.org/c/guides/14). [Learn more.](https://forum.qubes-os.org/t/announcement-qubes-community-project-has-been-migrated-to-the-forum/20367/)
+This content has moved to [Qubes Forum: Community Guides](https://forum.qubes-os.org/t/configuring-a-proxyvm-vpn-gateway/19061). [Learn more.](https://forum.qubes-os.org/t/announcement-qubes-community-project-has-been-migrated-to-the-forum/20367/)
